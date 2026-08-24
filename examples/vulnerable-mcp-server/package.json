@@ -1,0 +1,9 @@
+{
+  "name": "vulnerable-file-tools-mcp",
+  "version": "1.0.0",
+  "description": "A sample insecure MCP server demonstrating common vulnerabilities",
+  "main": "server.ts",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  }
+}

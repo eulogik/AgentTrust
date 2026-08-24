@@ -1,0 +1,19 @@
+{
+  "name": "agenttrust-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "web"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "node --test packages/core/dist/tests/*.test.js 2>/dev/null || node packages/cli/dist/index.js scan examples/vulnerable-mcp-server",
+    "scan:vulnerable": "node packages/cli/dist/index.js scan examples/vulnerable-mcp-server",
+    "scan:secure": "node packages/cli/dist/index.js scan examples/secure-agent-skill",
+    "attack:demo": "node packages/cli/dist/index.js attack examples/vulnerable-mcp-server",
+    "eval:demo": "node packages/cli/dist/index.js eval examples/sample-workflow.yaml",
+    "serve:web": "npx serve web/public -p 3000"
+  }
+}

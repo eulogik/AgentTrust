@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgentTrust — The Trust, Reliability & Evidence Layer for Autonomous AI Agents</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: "Plus Jakarta Sans", sans-serif; }
+    .mono { font-family: "JetBrains Mono", monospace; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+  <header class="border-b border-slate-800 bg-slate-950/80 sticky top-0 z-50 p-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 rounded bg-cyan-500 flex items-center justify-center font-bold text-slate-950">AT</div>
+        <span class="font-bold text-lg text-white">AgentTrust</span>
+        <span class="text-xs px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800 mono">v0.1.0</span>
+      </div>
+      <div class="text-xs text-slate-400 mono">EU AI Act & OWASP Agentic AI Ready</div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto p-6 space-y-8">
+    <div class="text-center py-8">
+      <h1 class="text-4xl font-extrabold text-white">AI Agent Trust & Verification Platform</h1>
+      <p class="text-slate-400 mt-2">Scan MCP tools, test adversarial defenses, and generate verifiable Trust Cards.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-slate-900 border border-slate-800 rounded-xl p-6">
+      <div>
+        <h2 class="text-lg font-bold text-white mb-3">Live Capability Inspector</h2>
+        <div class="flex space-x-2 mb-3">
+          <button onclick="loadSample('vuln')" class="px-3 py-1 bg-rose-950 text-rose-300 rounded text-xs border border-rose-800">Sample Insecure MCP</button>
+          <button onclick="loadSample('sec')" class="px-3 py-1 bg-emerald-950 text-emerald-300 rounded text-xs border border-emerald-800">Sample Certified Skill</button>
+        </div>
+        <textarea id="code" class="w-full h-64 bg-slate-950 border border-slate-800 rounded p-3 mono text-xs text-slate-300"></textarea>
+        <button onclick="scan()" class="w-full mt-3 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded text-sm">Run Trust Analysis</button>
+      </div>
+
+      <div class="bg-slate-950 border border-slate-800 rounded p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="text-xs text-slate-500 uppercase">OFFICIAL TRUST CARD</div>
+              <div id="target-name" class="text-xl font-bold text-white">vulnerable-mcp-server</div>
+            </div>
+            <div id="grade-badge" class="px-3 py-1 rounded bg-rose-950 text-rose-400 border border-rose-800 font-bold text-lg">F (32/100)</div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 my-4 text-xs">
+            <div class="bg-slate-900 p-2 rounded border border-slate-800">
+              <span class="text-slate-400">Security Score:</span>
+              <div id="sec-score" class="font-bold text-rose-400 mt-1">25 / 100</div>
+            </div>
+            <div class="bg-slate-900 p-2 rounded border border-slate-800">
+              <span class="text-slate-400">Scope:</span>
+              <div id="scope-score" class="font-bold text-rose-400 mt-1">EXCESSIVE</div>
+            </div>
+          </div>
+
+          <div class="text-xs uppercase text-slate-400 font-semibold mb-2">Findings:</div>
+          <div id="findings" class="space-y-1.5 text-xs mono"></div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800 text-xs text-slate-500">Standard: agenttrust/trust-card/v1</div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const data = {
+      vuln: `server.tool("exec", { cmd: "string" }, async (args) => {
+  exec(args.cmd); // VULN: Shell Execution
+});
+const SECRET = "sk-proj-12345678901234567890"; // VULN: Secret Leak
+`,
+      sec: `---
+name: Secure Data Auditor
+license: Apache-2.0
+permissions:
+  network: ["api.internal"]
+  shell: false
+  humanApprovalRequired: ["delete_item"]
+---`
+    };
+
+    function loadSample(t) {
+      document.getElementById("code").value = data[t];
+      scan();
+    }
+
+    function scan() {
+      const isV = document.getElementById("code").value.includes("exec");
+      document.getElementById("target-name").innerText = isV ? "vulnerable-mcp-server" : "Secure Data Auditor";
+      document.getElementById("grade-badge").innerText = isV ? "F (32/100)" : "A (96/100)";
+      document.getElementById("grade-badge").className = isV ? "px-3 py-1 rounded bg-rose-950 text-rose-400 border border-rose-800 font-bold text-lg" : "px-3 py-1 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 font-bold text-lg";
+      document.getElementById("sec-score").innerText = isV ? "25 / 100" : "98 / 100";
+      document.getElementById("scope-score").innerText = isV ? "EXCESSIVE" : "MINIMAL";
+      document.getElementById("findings").innerHTML = isV ?
+        `<div class="p-2 rounded bg-rose-950/60 border border-rose-800 text-rose-300">[CRITICAL] Unbounded Dynamic Shell Execution (ASI02)</div>
+         <div class="p-2 rounded bg-rose-950/60 border border-rose-800 text-rose-300">[CRITICAL] Hardcoded API Token (LLM08)</div>` :
+        `<div class="p-2 rounded bg-emerald-950/60 border border-emerald-800 text-emerald-300">[PASS] Least privilege execution bounds confirmed</div>`;
+    }
+
+    loadSample("vuln");
+  </script>
+</body>
+</html>

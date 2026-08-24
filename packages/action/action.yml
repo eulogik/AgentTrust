@@ -1,0 +1,24 @@
+name: "AgentTrust CI Scanner"
+description: "Automated Trust & Security Evaluation for AI Agents, Skills, and MCP Servers"
+author: "AgentTrust"
+branding:
+  icon: "shield"
+  color: "blue"
+
+inputs:
+  path:
+    description: "Path to capability directory or repo"
+    required: false
+    default: "."
+  fail-on:
+    description: "Minimum severity finding that fails CI"
+    required: false
+    default: "high"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run AgentTrust Scan
+      shell: bash
+      run: |
+        npx agenttrust scan
