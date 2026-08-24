@@ -2,6 +2,10 @@
 
 Session notes and durable context for future OpenCode sessions.
 
+## User preferences
+
+- **Always commit and push** after completing work (`git push` to `origin/main`). Confirmed 2026-08-24.
+
 ## 2026-08-24 — Repo setup + Phase 0 (honesty & engineering credibility)
 
 **Setup:** Fetched repo from `https://github.com/eulogik/AgentTrust` (`main`, commit `7a1fb62`), remote `origin` configured.
@@ -12,7 +16,7 @@ Session notes and durable context for future OpenCode sessions.
 - The CLI source NEVER compiled: 9 raw newlines inside double-quoted string literals; committed `dist/` was built from different source. Same for two regexes too narrow to fire on their own flagship fixture (AT-SEC-001 missed direct prompt concat; AT-SEC-002 missed `API_SECRET_TOKEN =`).
 - npm name `agenttrust` is unclaimed. Market check: static MCP scanning is commoditized (Cisco mcp-scanner, Snyk agent-scan, Akto, MCPShield, MCPhound); differentiation lives in real attack/eval execution + trust-card/badge/registry flywheel + EU AI Act compliance export.
 
-**Phase 0 shipped (uncommitted):**
+**Phase 0 shipped (committed `50b1204`, pushed):**
 1. Build fixed: root devDeps (`typescript@^7`, `@types/node`), `types:["node"]` in tsconfig.base, explicit core→cli build order in root scripts (workspace-ordering broke module resolution), all 9 broken string literals repaired in cli/src.
 2. dist/ untracked + gitignored. Lockfile generated (`package-lock.json` — needs committing).
 3. Real test suite: `packages/core/src/tests/core.test.ts` (9 node:test cases). Root `npm test` no longer falls back silently.
