@@ -36,8 +36,7 @@ function printBanner() {
   ██║  ██║╚██████╔╝███████╗██║ ╚████║   ██║      ██║   ██║  ██║╚██████╔╝███████║   ██║   
   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝      ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝   ╚═╝   
 `));
-  console.log(bold(magenta("  The Trust, Reliability, and Evidence Layer for Autonomous AI Agents")) + gray(" (v0.1.0)
-"));
+  console.log(bold(magenta("  The Trust, Reliability, and Evidence Layer for Autonomous AI Agents")) + gray(" (v0.1.0)\n"));
 }
 
 async function main() {
@@ -110,8 +109,7 @@ async function handleScan(targetPath: string) {
   fs.writeFileSync("agenttrust-report.md", md, "utf8");
   fs.writeFileSync("trust-card.json", JSON.stringify(trustCard, null, 2), "utf8");
 
-  console.log(gray("
-Generated Artifacts:"));
+  console.log(gray("\nGenerated Artifacts:"));
   console.log(green("  ✓ agenttrust-report.sarif") + gray(" (SARIF 2.1.0 for GitHub Code Scanning)"));
   console.log(green("  ✓ agenttrust-report.md") + gray(" (Evaluation & compliance audit)"));
   console.log(green("  ✓ trust-card.json") + gray(" (Machine-readable Trust Card v1)"));
@@ -120,7 +118,7 @@ Generated Artifacts:"));
 async function handleAttack(targetPath: string) {
   printBanner();
   const absPath = path.resolve(process.cwd(), targetPath);
-  console.log(bold(red("⚡ Launching Adversarial Red-Teaming Suite ⚡")));
+  console.log(bold(red("⚡ Adversarial Attack Analysis (static-heuristic mode) ⚡")));
   console.log(gray(`Target: ${absPath}
 `));
 
@@ -134,8 +132,12 @@ async function handleAttack(targetPath: string) {
     findings
   });
 
-  console.log(bold(`Simulated Attacks: ${report.testsRun} | Passed: ${green(String(report.passed))} | Failed: ${red(String(report.failed))} | Warnings: ${yellow(String(report.warn))}`));
-  console.log(bold(`Resilience Score: ${report.resilienceScore >= 80 ? green(report.resilienceScore + "/100") : red(report.resilienceScore + "/100")}
+  if (report.disclaimer) {
+    console.log(yellow(`ℹ ${report.disclaimer}`));
+    console.log("");
+  }
+  console.log(bold(`Heuristic Checks: ${report.testsRun} | Passed: ${green(String(report.passed))} | Failed: ${red(String(report.failed))} | Warnings: ${yellow(String(report.warn))}`));
+  console.log(bold(`Resilience Score (heuristic): ${report.resilienceScore >= 80 ? green(report.resilienceScore + "/100") : red(report.resilienceScore + "/100")}
 `));
 
   for (const res of report.results) {
@@ -148,14 +150,11 @@ async function handleAttack(targetPath: string) {
   }
 
   fs.writeFileSync("agenttrust-attack-report.json", JSON.stringify(report, null, 2), "utf8");
-  console.log(gray("
-Saved attack trace: ") + green("agenttrust-attack-report.json"));
-}
+  console.log(gray("\nSaved attack trace: ") + green("agenttrust-attack-report.json"));}
 
 async function handleEval(suitePath: string) {
   printBanner();
-  console.log(bold(cyan("🧪 Running Workflow Reliability & Regression Lab 🧪
-")));
+  console.log(bold(cyan("🧪 Workflow Reliability & Regression Lab (simulation mode) 🧪\n")));
   const absPath = path.resolve(process.cwd(), suitePath);
 
   if (!fs.existsSync(absPath)) {
@@ -164,16 +163,21 @@ async function handleEval(suitePath: string) {
   }
 
   const evalRes = await evaluateWorkflow(absPath);
+  if (evalRes.notice) {
+    console.log(yellow(`ℹ ${evalRes.notice}
+`));
+  }
   console.log(bold(`Workflow: ${cyan(evalRes.workflow)} | Agent: ${cyan(evalRes.targetAgent)}`));
-  console.log(bold(`Success Rate: ${green(Math.round(evalRes.successRate * 100) + "%")} | Avg Duration: ${evalRes.avgDurationSec}s | Total Cost: $${evalRes.totalCostUsd}
+  console.log(bold(`Tests Parsed: ${evalRes.totalTests} | Executed: 0 | Regressions: N/A (runtime execution not yet integrated)
 `));
 
   for (const st of evalRes.stepResults) {
-    console.log(`  ${green("✓")} ${bold(st.testName)} → ${gray(st.stepName)} (${st.durationSec}s, $${st.costUsd})`);
+    console.log(`  ${yellow("○")} ${bold(st.testName)} → ${gray(st.stepName)} (${gray("simulated — not executed")})`);
   }
 
-  console.log(green("
-✓ 0 Regressions Detected across monitored trajectories."));
+  if (evalRes.stepResults.length === 0) {
+    console.log(yellow("\n⚠ No steps found in suite."));
+  }
 }
 
 async function handleInit() {
@@ -216,8 +220,8 @@ async function handleBadge(targetPath: string) {
 
 async function handleRegistry() {
   printBanner();
-  console.log(bold("🌐 AgentTrust Public Verified Capabilities Registry (Preview)
-"));
+  console.log(bold("🌐 AgentTrust Public Verified Capabilities Registry (Preview)\n"));
+  console.log(yellow("ℹ Sample data for preview only — not live scan results. Registry backend is not yet deployed.\n"));
   const sampleRegistry = [
     { name: "github-mcp-server", type: "mcp-server", grade: "A", score: 94, downloads: "280K", author: "anthropic" },
     { name: "postgres-mcp-server", type: "mcp-server", grade: "A", score: 91, downloads: "145K", author: "modelcontextprotocol" },
@@ -237,8 +241,7 @@ function renderTrustCardTerminal(card: any) {
   const { subject, trustScore, security, permissions, provenance } = card;
   const gradeColor = trustScore.grade === "A" ? green : trustScore.grade === "B" ? cyan : trustScore.grade === "C" ? yellow : red;
 
-  console.log(bold("
-" + "═".repeat(60)));
+  console.log(bold("\n" + "═".repeat(60)));
   console.log(bold(`  AGENTTRUST CARD: ${subject.name} `) + gray(`(${subject.type})`));
   console.log("═".repeat(60));
   console.log(`  Trust Grade:       ${gradeColor(bold(trustScore.grade))} (${trustScore.overall}/100) `);
@@ -251,8 +254,7 @@ function renderTrustCardTerminal(card: any) {
   console.log(`  Human In The Loop: ${permissions.humanApprovalRequired.length > 0 ? green("ENFORCED") : gray("NONE")}`);
   console.log("─".repeat(60));
   console.log(`  Rationale: ${gray(trustScore.rationale)}`);
-  console.log("═".repeat(60) + "
-");
+  console.log("═".repeat(60) + "\n");
 
   if (security.findings.length > 0) {
     console.log(bold(yellow(`⚠️  Security Findings (${security.totalFindings}):`)));
@@ -273,8 +275,7 @@ function printHelp() {
   console.log("  agenttrust eval <workflow.yaml>   Run workflow reliability & regression tests");
   console.log("  agenttrust badge <path>           Generate embeddable markdown badge");
   console.log("  agenttrust init                   Scaffold agenttrust.yaml configuration");
-  console.log("  agenttrust registry               Browse public verified capability registry
-");
+  console.log("  agenttrust registry               Browse public verified capability registry\n");
 }
 
 main().catch(err => {

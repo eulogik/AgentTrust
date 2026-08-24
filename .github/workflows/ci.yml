@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install (prepare script builds workspaces)
+        run: npm ci || npm install
+
+      - name: Unit tests (node:test)
+        run: npm test
+
+      - name: Demo smoke checks
+        run: node scripts/verify-demos.mjs

@@ -94,7 +94,7 @@ Executes declarative workflow test suites (`sample-workflow.yaml`), measures cos
 From `/Users/gautamkishore/Code/AI-Opportunity-Product/agenttrust`:
 
 ```bash
-# 1. Scan an insecure MCP server (triggers findings & Grade D)
+# 1. Scan an insecure MCP server (triggers findings & Grade F)
 node packages/cli/dist/index.js scan examples/vulnerable-mcp-server
 
 # 2. Scan a certified secure Agent Skill (Grade B/A)

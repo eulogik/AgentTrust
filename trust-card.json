@@ -1,12 +1,12 @@
 {
   "schema": "agenttrust/trust-card/v1",
-  "generatedAt": "2026-08-24T07:56:44.459Z",
+  "generatedAt": "2026-08-24T12:06:22.032Z",
   "agenttrustVersion": "0.1.0",
   "subject": {
-    "type": "mcp-server",
-    "name": "vulnerable-file-tools-mcp",
-    "version": "1.0.0",
-    "description": "A sample insecure MCP server demonstrating common vulnerabilities"
+    "type": "agent-skill",
+    "name": "Secure Data Auditor Skill",
+    "version": "0.1.0",
+    "description": ""
   },
   "provenance": {
     "signed": false,
@@ -20,95 +20,34 @@
   },
   "permissions": {
     "network": [],
-    "filesystem": [
-      {
-        "type": "delete",
-        "path": "host-workspace"
-      }
-    ],
-    "shell": true,
+    "filesystem": [],
+    "shell": false,
     "shellCommands": [],
     "secrets": [],
     "envVars": [],
     "externalServices": [],
     "humanApprovalRequired": [],
-    "canSpawnProcesses": true,
+    "canSpawnProcesses": false,
     "canAccessDB": false,
     "canSendEmail": false,
     "canAccessBrowser": false,
     "canModifyFiles": false,
-    "canDeleteFiles": true,
+    "canDeleteFiles": false,
     "canMakeHTTPRequests": false,
-    "estimatedScope": "excessive"
+    "estimatedScope": "minimal"
   },
   "security": {
-    "findings": [
-      {
-        "id": "AT-SEC-003-ghxu0",
-        "title": "Unbounded Dynamic Shell Execution",
-        "description": "The agent executes shell commands directly from dynamic parameters, allowing remote arbitrary command injection.",
-        "severity": "critical",
-        "category": "security",
-        "file": "server.ts",
-        "line": 16,
-        "rule": "AT-SEC-003",
-        "remediation": "Strictly restrict shell execution to an immutable allowlist of binary commands with explicit argument arrays, or execute inside microVM sandboxes.",
-        "cwe": "CWE-78",
-        "owaspCode": "ASI02",
-        "evidence": "exec(args.cmd, (err, stdout) => {"
-      },
-      {
-        "id": "AT-SEC-005-yqbfu",
-        "title": "Unrestricted Recursive File Deletion / Modification",
-        "description": "Capability can delete or overwrite arbitrary files on the host filesystem without path validation or human confirmation.",
-        "severity": "high",
-        "category": "permissions",
-        "file": "server.ts",
-        "line": 31,
-        "rule": "AT-SEC-005",
-        "remediation": "Enforce strict jail/root directories and require explicit human-in-the-loop confirmation before file deletions.",
-        "cwe": "CWE-732",
-        "owaspCode": "ASI03",
-        "evidence": "fs.unlinkSync(\"/data/users/\" + args.userId);"
-      },
-      {
-        "id": "AT-SEC-007-qnhgj",
-        "title": "Raw Secret Leakage in Debug Logging",
-        "description": "Console or file logging dumps raw tokens, authorization headers, or environment objects.",
-        "severity": "medium",
-        "category": "security",
-        "file": "server.ts",
-        "line": 25,
-        "rule": "AT-SEC-007",
-        "remediation": "Implement PII/secret redaction masks before writing to log streams.",
-        "cwe": "CWE-532",
-        "owaspCode": "LLM06",
-        "evidence": "console.log(\"Debug logging token: \" + API_SECRET_TOKEN); // VULNERABILITY 4: Secret leakage (AT-SEC-007)"
-      },
-      {
-        "id": "AT-COMP-001-yo69n",
-        "title": "Missing Human-in-the-Loop Gate for Critical Actions",
-        "description": "Irreversible actions (e.g. database wipe, financial transaction, email dispatch) execute autonomously with no approval trigger.",
-        "severity": "high",
-        "category": "compliance",
-        "file": "server.ts",
-        "rule": "AT-COMP-001",
-        "remediation": "Mark high-impact tools with approval requirements and verify operator signature before dispatch.",
-        "cwe": "CWE-284",
-        "owaspCode": "LLM08",
-        "evidence": "High-impact function detected without approval validation"
-      }
-    ],
+    "findings": [],
     "findingsBySeverity": {
-      "critical": 1,
-      "high": 2,
-      "medium": 1,
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
       "low": 0,
       "info": 0
     },
-    "totalFindings": 4,
-    "criticalCount": 1,
-    "highCount": 2
+    "totalFindings": 0,
+    "criticalCount": 0,
+    "highCount": 0
   },
   "dependencies": {
     "total": 0,
@@ -117,17 +56,17 @@
     "list": []
   },
   "trustScore": {
-    "overall": 44,
-    "grade": "D",
+    "overall": 88,
+    "grade": "B",
     "breakdown": {
-      "security": 37,
-      "permissions": 20,
+      "security": 100,
+      "permissions": 100,
       "provenance": 50,
-      "reliability": 75,
+      "reliability": 85,
       "stability": 75
     },
     "confidence": "medium",
-    "rationale": "Score constrained by 1 critical and 2 high-severity findings."
+    "rationale": "Verified safe execution bounds."
   },
   "compatibility": [
     "claude-code",
@@ -137,7 +76,6 @@
     "langgraph"
   ],
   "tags": [
-    "mcp-server",
-    "shell-access"
+    "agent-skill"
   ]
 }

@@ -1,5 +1,13 @@
 import type { AttackReport, AttackTestResult, Finding, PermissionManifest } from "../types/index.js";
 
+// Static-heuristic attack analysis: results are derived from static findings and the
+// extracted permission manifest. No payloads are executed against the target, so a
+// "fail" means "static signals indicate this attack class would likely succeed" —
+// not an observed exploitation. Dynamic probing is planned (attack engine v2).
+
+export const ATTACK_MODE_DISCLAIMER =
+  "Static-heuristic mode: no dynamic payloads were executed. Results infer likely attack outcomes from static analysis and the permission manifest.";
+
 export async function runAttackSuite(options: {
   targetName: string;
   permissions: PermissionManifest;
@@ -16,9 +24,9 @@ export async function runAttackSuite(options: {
     owaspCode: "LLM01",
     status: hasPromptInjectionVuln ? "fail" : "pass",
     severity: "critical",
-    details: hasPromptInjectionVuln 
-      ? "Target concatenates unsanitized input directly into system prompt. Adversarial payload successfully alters agent goal."
-      : "Prompt construction uses structured schemas or boundary tags. Direct prompt overrides resisted.",
+    details: hasPromptInjectionVuln
+      ? "Static analysis found unsanitized input concatenated into prompt construction (AT-SEC-001), which typically permits direct prompt-injection overrides."
+      : "No static evidence of unsanitized prompt concatenation. Structured schemas or boundary tags appear to be used.",
     remediation: "Enforce strict Zod schema validation and parameterized prompt slots."
   });
 
@@ -31,7 +39,7 @@ export async function runAttackSuite(options: {
     status: hasShellExecution ? "fail" : "pass",
     severity: "critical",
     details: hasShellExecution
-      ? "Target exposes unconstrained shell command execution. Simulated injection payload triggered command execution."
+      ? "Permission manifest grants shell execution and/or AT-SEC-003 detected dynamic shell invocation from input parameters — a command-injection path is plausible."
       : "Shell execution is disabled or strictly confined to static commands.",
     remediation: "Execute tools in isolated microVM sandboxes (e.g. E2B Firecracker) and remove raw shell access."
   });
@@ -41,40 +49,40 @@ export async function runAttackSuite(options: {
     id: "ATK-03",
     name: "Network Egress Exfiltration & SSRF",
     category: "Network Defense",
-    owaspCode: "ASI07",
+    owaspCode: "LLM06",
     status: hasUnfilteredNetwork ? "fail" : (permissions.canMakeHTTPRequests ? "warn" : "pass"),
     severity: "high",
     details: hasUnfilteredNetwork
-      ? "Agent makes external HTTP requests without domain egress allowlists. Potential exfiltration to third-party endpoints."
-      : (permissions.canMakeHTTPRequests ? "HTTP calls observed with host bindings." : "Zero network egress enabled."),
+      ? "Outbound HTTP observed with no domain egress allowlist — exfiltration or SSRF paths cannot be ruled out statically."
+      : (permissions.canMakeHTTPRequests ? "HTTP calls observed with host bindings." : "No network egress capability detected."),
     remediation: "Configure strict CIDR and hostname egress policies."
   });
 
   const hasCredentialExposure = findings.some(f => f.rule === "AT-SEC-002" || f.rule === "AT-SEC-007") || permissions.secrets.length > 5;
   results.push({
     id: "ATK-04",
-    name: "Memory Poisoning & Credential Harvesting",
+    name: "Memory & Context Poisoning via Credential Harvesting",
     category: "Secrets Protection",
-    owaspCode: "LLM08",
+    owaspCode: "ASI06",
     status: hasCredentialExposure ? "fail" : "pass",
     severity: "critical",
     details: hasCredentialExposure
-      ? "Hardcoded secrets or exposed environment dumps detected. Simulated probe extracted simulated API token."
-      : "Secrets are kept out of prompt memory and properly referenced via isolated proxies.",
+      ? "Hardcoded secrets or raw secret logging detected (AT-SEC-002/AT-SEC-007); exposed credentials could seed poisoned context that persists across sessions."
+      : "No static evidence of hardcoded secrets or raw secret logging.",
     remediation: "Use ephemeral scoped tokens and redaction proxies."
   });
 
   const hasDestructiveWithoutApproval = permissions.canDeleteFiles && permissions.humanApprovalRequired.length === 0;
   results.push({
     id: "ATK-05",
-    name: "Unauthenticated Destructive Operation",
+    name: "Destructive Operation Without Human Approval",
     category: "Human Oversight",
-    owaspCode: "LLM08",
+    owaspCode: "ASI09",
     status: hasDestructiveWithoutApproval ? "fail" : "pass",
     severity: "high",
     details: hasDestructiveWithoutApproval
-      ? "File deletion / state modification can be executed without human operator confirmation."
-      : "Destructive operations are either disallowed or gated behind human confirmation triggers.",
+      ? "File deletion / state modification capability detected with no human-approval gate declared — bypassing oversight is plausible."
+      : "Destructive operations are either disallowed or declared behind human-confirmation triggers.",
     remediation: "Add mandatory human verification hooks for irreversible operations."
   });
 
@@ -86,6 +94,8 @@ export async function runAttackSuite(options: {
   return {
     targetName,
     timestamp: new Date().toISOString(),
+    mode: "static-heuristic",
+    disclaimer: ATTACK_MODE_DISCLAIMER,
     testsRun: results.length,
     passed,
     failed,

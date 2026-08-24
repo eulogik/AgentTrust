@@ -156,6 +156,8 @@ export interface AttackTestResult {
 export interface AttackReport {
   targetName: string;
   timestamp: string;
+  mode: "static-heuristic" | "dynamic";
+  disclaimer?: string;
   testsRun: number;
   passed: number;
   failed: number;
@@ -192,6 +194,8 @@ export interface WorkflowEvalResult {
   workflow: string;
   targetAgent: string;
   timestamp: string;
+  mode: "simulated" | "executed";
+  notice?: string;
   totalTests: number;
   passedTests: number;
   failedTests: number;
@@ -202,7 +206,7 @@ export interface WorkflowEvalResult {
   stepResults: {
     testName: string;
     stepName: string;
-    status: "pass" | "fail";
+    status: "pass" | "fail" | "simulated";
     actualOutcome: string;
     durationSec: number;
     costUsd: number;

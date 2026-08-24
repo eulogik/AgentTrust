@@ -11,7 +11,7 @@ export function generateSarif(card: TrustCard): string {
             name: "AgentTrust",
             version: card.agenttrustVersion,
             informationUri: "https://agenttrust.dev",
-            rules: card.security.findings.map(f => ({
+            rules: [...new Map(card.security.findings.map(f => [f.rule, f])).values()].map(f => ({
               id: f.rule,
               name: f.title,
               shortDescription: { text: f.title },
