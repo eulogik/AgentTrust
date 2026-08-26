@@ -11,12 +11,15 @@ import {
   runAttackSuite,
   evaluateWorkflow,
   generateSarif,
-  generateMarkdownReport
+  generateMarkdownReport,
+  resolveScanTarget,
+  scanDependencies,
+  isSeverity,
+  meetsSeverityThreshold
 } from "@agenttrust/core";
 
 const args = process.argv.slice(2);
 const command = args[0] || "help";
-const target = args[1] || ".";
 
 const red = (s: string) => "[31m" + s + "[0m";
 const green = (s: string) => "[32m" + s + "[0m";
@@ -27,8 +30,7 @@ const cyan = (s: string) => "[36m" + s + "[0m";
 const bold = (s: string) => "[1m" + s + "[0m";
 const gray = (s: string) => "[90m" + s + "[0m";
 
-function printBanner() {
-  console.log(cyan(`
+function printBanner() {  console.log(cyan(`
    █████╗  ██████╗ ███████╗███╗   ██╗████████╗████████╗██████╗ ██╗   ██╗███████╗████████╗
   ██╔══██╗██╔════╝ ██╔════╝████╗  ██║╚══██╔══╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝
   ███████║██║  ███╗█████╗  ██╔██╗ ██║   ██║      ██║   ██████╔╝██║   ██║███████╗   ██║   
@@ -39,10 +41,26 @@ function printBanner() {
   console.log(bold(magenta("  The Trust, Reliability, and Evidence Layer for Autonomous AI Agents")) + gray(" (v0.1.0)\n"));
 }
 
+function parseArgs(argv: string[]): { target: string; flags: Record<string, string | boolean> } {
+  const positional: string[] = [];
+  const flags: Record<string, string | boolean> = {};
+  for (let i = 0; i < argv.length; i++) {
+    if (argv[i] === "--fail-on") {
+      flags["fail-on"] = argv[++i] ?? "high";
+    } else if (argv[i] === "--github" || argv[i] === "--npm") {
+      flags[argv[i].slice(2)] = true;
+    } else {
+      positional.push(argv[i]);
+    }
+  }
+  return { target: positional[0] || ".", flags };
+}
+
 async function main() {
+  const { target, flags } = parseArgs(args.slice(1));
   switch (command) {
     case "scan":
-      await handleScan(target);
+      await handleScan(target, flags);
       break;
     case "attack":
       await handleAttack(target);
@@ -67,15 +85,28 @@ async function main() {
   }
 }
 
-async function handleScan(targetPath: string) {
+async function handleScan(targetPath: string, flags: Record<string, string | boolean> = {}) {
   printBanner();
-  const absPath = path.resolve(process.cwd(), targetPath);
-  console.log(gray(`[1/5] Inspecting target capability at: `) + bold(absPath));
+  let scanTarget;
+  try {
+    scanTarget = await resolveScanTarget(targetPath, flags);
+  } catch (err) {
+    console.error(red(`Error: ${(err as Error).message}`));
+    process.exit(1);
+  }
+  const absPath = scanTarget.resolvedPath;
 
   if (!fs.existsSync(absPath)) {
     console.error(red(`Error: Target path does not exist: ${absPath}`));
     process.exit(1);
   }
+
+  if (scanTarget.type === "github") {
+    console.log(gray("[0/5] Cloned ") + bold(String(scanTarget.url)) + gray(branchSuffix(scanTarget.version)));
+  } else if (scanTarget.type === "npm") {
+    console.log(gray("[0/5] Fetched npm package ") + bold(String(scanTarget.name)) + gray(scanTarget.version ? `@${scanTarget.version}` : ""));
+  }
+  console.log(gray(`[1/5] Inspecting target capability at: `) + bold(absPath));
 
   const detection = await detectCapability(absPath);
   console.log(gray(`[2/5] Detected capability type: `) + cyan(bold(detection.type)) + gray(` (confidence: ${Math.round(detection.confidence * 100)}%)`));
@@ -89,6 +120,7 @@ async function handleScan(targetPath: string) {
 
   console.log(gray(`[5/5] Synthesizing Agent Trust Score...`));
   const trustScore = computeTrustScore(findings, permissions, provenance);
+  const dependencies = await scanDependencies(absPath);
 
   const trustCard = buildTrustCard({
     capabilityType: detection.type,
@@ -98,7 +130,8 @@ async function handleScan(targetPath: string) {
     findings,
     permissions,
     provenance,
-    trustScore
+    trustScore,
+    dependencies
   });
 
   renderTrustCardTerminal(trustCard);
@@ -113,6 +146,29 @@ async function handleScan(targetPath: string) {
   console.log(green("  ✓ agenttrust-report.sarif") + gray(" (SARIF 2.1.0 for GitHub Code Scanning)"));
   console.log(green("  ✓ agenttrust-report.md") + gray(" (Evaluation & compliance audit)"));
   console.log(green("  ✓ trust-card.json") + gray(" (Machine-readable Trust Card v1)"));
+
+  if (dependencies.length > 0) {
+    const withVulns = dependencies.filter(d => d.vulnerabilities.length > 0).length;
+    console.log(gray(`\nDependencies: ${dependencies.length} declared | ${withVulns} with known vulnerabilities`));
+  }
+
+  const failOn = typeof flags["fail-on"] === "string" ? flags["fail-on"] : undefined;
+  if (failOn) {
+    if (!isSeverity(failOn)) {
+      console.error(red(`Error: invalid --fail-on value "${failOn}". Use one of: info, low, medium, high, critical.`));
+      process.exit(2);
+    }
+    const breaching = findings.filter(f => meetsSeverityThreshold(f.severity, failOn));
+    if (breaching.length > 0) {
+      console.error(red(`\n✗ CI gate failed: ${breaching.length} finding(s) at or above severity "${failOn}".`));
+      process.exit(1);
+    }
+    console.log(green(`\n✓ CI gate passed: no findings at or above severity "${failOn}".`));
+  }
+}
+
+function branchSuffix(branch?: string): string {
+  return branch ? ` (branch: ${branch})` : "";
 }
 
 async function handleAttack(targetPath: string) {
@@ -270,9 +326,12 @@ function renderTrustCardTerminal(card: any) {
 
 function printHelp() {
   console.log(bold("USAGE:"));
-  console.log("  agenttrust scan <path-or-repo>    Scan agent capability and generate Trust Card");
-  console.log("  agenttrust attack <path-or-repo>  Run OWASP Agentic Top 10 adversarial attacks");
-  console.log("  agenttrust eval <workflow.yaml>   Run workflow reliability & regression tests");
+  console.log("  agenttrust scan <path|github-url|owner/repo>    Scan agent capability and generate Trust Card");
+  console.log("      --github            Treat <owner/repo> as a GitHub repository (URLs are auto-detected)");
+  console.log("      --npm               Treat target as an npm package name (scans the published tarball)");
+  console.log("      --fail-on <sev>     Exit 1 when findings meet or exceed severity: info|low|medium|high|critical");
+  console.log("  agenttrust attack <path-or-repo>  Run OWASP-aligned adversarial attack analysis (static-heuristic mode)");
+  console.log("  agenttrust eval <workflow.yaml>   Parse & validate workflow suite (simulation mode)");
   console.log("  agenttrust badge <path>           Generate embeddable markdown badge");
   console.log("  agenttrust init                   Scaffold agenttrust.yaml configuration");
   console.log("  agenttrust registry               Browse public verified capability registry\n");

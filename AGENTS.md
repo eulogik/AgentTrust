@@ -33,7 +33,7 @@ AgentTrust — trust/scanning layer for AI agent capabilities and MCP tools. npm
 
 ```bash
 npm i                                    # installs + auto-builds via prepare
-npm test                                 # build + unit tests (9 tests)
+npm test                                 # build + unit tests (14 tests)
 node scripts/verify-demos.mjs            # end-to-end demo assertions (CI parity)
 npm run scan:vulnerable                  # F-grade fixture scan
 npm run scan:secure                      # B-grade fixture
@@ -45,6 +45,6 @@ npx serve web/public -p 3000             # static web UI
 
 ## Known gaps (roadmap context)
 
-- Scanner accepts local paths only (no GitHub URL/npm package input yet); regex-only rules, no dependency scanning, no AST.
-- GitHub Action's `fail-on` input is parsed by nothing; composite step just runs `npx agenttrust scan`.
-- No lockfile committed yet (`package-lock.json` exists locally — commit it), no lint/format config.
+- Dependency scanning runs `npm audit --package-lock-only` only when a lockfile exists; no pip-audit/Trivy yet. Rules remain regex-only, no AST.
+- GitHub Action requires caller workflows to grant `security-events: write` for the SARIF upload step; scan targets must be local paths, full GitHub URLs, or flagged (`--github`, `--npm`) — bare `owner/repo` without a flag is treated as a local path by design.
+- No lint/format config.

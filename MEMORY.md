@@ -27,4 +27,14 @@ Session notes and durable context for future OpenCode sessions.
 
 **Verified:** clean-room `rm -rf node_modules && npm i` → build → 9/9 tests → all smoke checks pass.
 
-**Open items:** commit everything (incl. lockfile); make repo public; register npm name; GitHub URL/npm-package scan targets; dependency scanning; attack engine v2 (real probing) + eval lab v2 (sandboxed execution) are the strategic unlock; EU AI Act compliance export timing-sensitive.
+**Open items:** make repo public; register npm name; attack engine v2 (real probing) + eval lab v2 (sandboxed execution) are the strategic unlock; EU AI Act compliance export timing-sensitive.
+
+## 2026-08-24 — Phase 1 (scanner parity) — committed, pushed
+
+- `--fail-on <sev>` CI gate in CLI (exit 1 on breach, exit 2 on invalid value); `action.yml` now passes `fail-on` through and uploads SARIF via `github/codeql-action/upload-sarif@v3` (callers must grant `security-events: write`).
+- Scan targets: full GitHub URLs auto-detected; bare `owner/repo` needs `--github` (stays local otherwise by design); npm packages via `--npm` (`npm pack` + tar extract — scans what consumers install). GitHub refs support `.git` suffixes and `/tree/<branch>` (branch names with slashes handled).
+- Dependency scanning: `npm audit --package-lock-only` when a lockfile exists (works without node_modules); audit JSON mapped into Trust Card `dependencies` block (moderate→medium normalized, advisory dedupe). No lockfile = no invented vulns.
+- Tests: 14 total (added severity ranking, target classification, github-ref parsing incl. branch-with-slash case caught by tests, audit mapping, lockfile-less dep scan).
+- Live-verified: cloned eulogik/AgentTrust itself and scanned it (9 criticals — repo contains its own vulnerable fixture; expected).
+
+**Next up:** Phase 2 — attack engine v2 (real MCP probing over stdio/HTTP) + eval lab v2 (sandboxed execution). Also: register npm name, make repo public.

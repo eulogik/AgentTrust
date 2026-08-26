@@ -7,18 +7,27 @@ branding:
 
 inputs:
   path:
-    description: "Path to capability directory or repo"
+    description: "Path to capability directory or repo (also accepts a GitHub URL)"
     required: false
     default: "."
   fail-on:
-    description: "Minimum severity finding that fails CI"
+    description: "Minimum severity finding that fails CI: info|low|medium|high|critical"
     required: false
     default: "high"
 
 runs:
   using: "composite"
   steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
     - name: Run AgentTrust Scan
       shell: bash
-      run: |
-        npx agenttrust scan
+      run: npx agenttrust scan "${{ inputs.path }}" --fail-on "${{ inputs.fail-on }}"
+
+    - name: Upload SARIF to GitHub Code Scanning
+      if: always()
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: agenttrust-report.sarif

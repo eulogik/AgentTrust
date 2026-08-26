@@ -1,4 +1,4 @@
-import type { TrustCard, Finding, PermissionManifest, ProvenanceInfo, TrustScore, CapabilityType, Severity } from "../types/index.js";
+import type { TrustCard, Finding, PermissionManifest, ProvenanceInfo, TrustScore, CapabilityType, Severity, DependencyInfo } from "../types/index.js";
 
 export function buildTrustCard(options: {
   capabilityType: CapabilityType;
@@ -11,6 +11,7 @@ export function buildTrustCard(options: {
   permissions: PermissionManifest;
   provenance: ProvenanceInfo;
   trustScore: TrustScore;
+  dependencies?: DependencyInfo[];
 }): TrustCard {
   const findingsBySeverity: Record<Severity, number> = {
     critical: 0,
@@ -30,6 +31,9 @@ export function buildTrustCard(options: {
   if (options.permissions.canAccessBrowser) tags.push("browser-automation");
   if (options.permissions.humanApprovalRequired.length > 0) tags.push("human-in-loop");
   if (options.trustScore.grade === "A") tags.push("gold-certified");
+
+  const depList = options.dependencies ?? [];
+  const vulnerableDeps = depList.filter(d => d.vulnerabilities.length > 0);
 
   return {
     schema: "agenttrust/trust-card/v1",
@@ -53,10 +57,10 @@ export function buildTrustCard(options: {
       highCount: findingsBySeverity.high
     },
     dependencies: {
-      total: 0,
-      vulnerable: 0,
-      critical: 0,
-      list: []
+      total: depList.length,
+      vulnerable: vulnerableDeps.length,
+      critical: vulnerableDeps.filter(d => d.vulnerabilities.some(v => v.severity === "critical")).length,
+      list: depList
     },
     trustScore: options.trustScore,
     compatibility: [

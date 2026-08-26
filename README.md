@@ -31,6 +31,14 @@ Scan any agent capability in under 60 seconds:
 # Scan a local folder, MCP server, or Agent Skill
 npx agenttrust scan ./my-mcp-server
 
+# Scan straight from GitHub or the npm registry
+npx agenttrust scan https://github.com/owner/repo
+npx agenttrust scan owner/repo --github
+npx agenttrust scan some-npm-package --npm
+
+# Fail CI when findings meet a severity threshold
+npx agenttrust scan ./my-mcp-server --fail-on high
+
 # Run the OWASP Agentic Top 10 Adversarial Attack Suite
 npx agenttrust attack ./my-mcp-server
 
