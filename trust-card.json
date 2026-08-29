@@ -1,6 +1,6 @@
 {
   "schema": "agenttrust/trust-card/v1",
-  "generatedAt": "2026-08-26T08:28:33.259Z",
+  "generatedAt": "2026-08-29T07:33:03.569Z",
   "agenttrustVersion": "0.1.0",
   "subject": {
     "type": "agent-skill",

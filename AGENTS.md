@@ -7,10 +7,12 @@ AgentTrust — trust/scanning layer for AI agent capabilities and MCP tools. npm
 - `packages/core` — all engines: capability detectors, OWASP rule suite (`AT-SEC-*`), permission extraction, trust scoring/grades, attack heuristics, workflow eval parser, SARIF/markdown reporters. Public API re-exported from `src/index.ts`. Tests live in `src/tests/` (node:test), compiled into `dist/tests/`.
 - `packages/cli` — `agenttrust` binary; thin dispatcher over core (`import ... from "@agenttrust/core"`).
 - `packages/action` — GitHub Action wrapper; `action.yml` only, no code.
-- `web/public` — single static `index.html`, no build step.
+- `web/public` — landing page (`index.html`), SEO files (`sitemap.xml`, `robots.txt`, `404.html`). Served via GitHub Pages at `agenttrust.dev`.
+- `badges/` — shareable grade badge SVGs (`a.svg` through `f.svg`), shields.io-compatible, hosted at `agenttrust.dev/badge/`.
 - `examples/` — scan fixtures: `vulnerable-mcp-server` (must grade F / fail attack heuristics), `secure-agent-skill`, `sample-workflow.yaml`.
 - `scripts/verify-demos.mjs` — end-to-end smoke checks used by CI and local verification.
 - `docs/` + `walkthrough.md` — product strategy/research prose, not engineering docs (walkthrough has stale absolute paths).
+- License: Apache-2.0.
 
 ## Honesty model (don't regress this)
 
@@ -40,7 +42,9 @@ npm run scan:secure                      # B-grade fixture
 npm run attack:demo                      # static-heuristic attack analysis
 npm run eval:demo                        # simulation-mode workflow eval
 node packages/cli/dist/index.js scan <path-or-dir>   # scan any target directly
-npx serve web/public -p 3000             # static web UI
+npx serve web/public -p 3000             # static web UI (landing page)
+# Badge URLs (after GitHub Pages deploy):
+# https://agenttrust.dev/badge/a.svg  through  https://agenttrust.dev/badge/f.svg
 ```
 
 ## Known gaps (roadmap context)
@@ -48,3 +52,6 @@ npx serve web/public -p 3000             # static web UI
 - Dependency scanning runs `npm audit --package-lock-only` only when a lockfile exists; no pip-audit/Trivy yet. Rules remain regex-only, no AST.
 - GitHub Action requires caller workflows to grant `security-events: write` for the SARIF upload step; scan targets must be local paths, full GitHub URLs, or flagged (`--github`, `--npm`) — bare `owner/repo` without a flag is treated as a local path by design.
 - No lint/format config.
+- npm package is not yet published (`agenttrust` name is unclaimed on npmjs.com).
+- Repo is currently PRIVATE on GitHub — must be made public before npm publish and Pages deploy.
+- agenttrust.dev domain is not yet verified/configured for GitHub Pages.

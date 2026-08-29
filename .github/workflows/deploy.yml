@@ -1,0 +1,55 @@
+name: Deploy Site + Badges to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'web/**'
+      - 'badges/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build site
+        run: |
+          mkdir -p _site
+          # Copy landing page
+          cp web/public/index.html _site/index.html
+          # Copy badges
+          mkdir -p _site/badge
+          cp badges/*.svg _site/badge/
+          # Copy SEO files
+          cp web/public/robots.txt _site/robots.txt 2>/dev/null || true
+          cp web/public/sitemap.xml _site/sitemap.xml 2>/dev/null || true
+          cp web/public/404.html _site/404.html 2>/dev/null || true
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

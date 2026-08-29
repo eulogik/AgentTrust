@@ -2,15 +2,56 @@
   "name": "agenttrust",
   "version": "0.1.0",
   "type": "module",
-  "description": "The neutral trust, reliability, and evidence layer for autonomous AI agents",
+  "description": "Trust & security verification for AI agents and MCP servers — scan, grade, and share a verifiable Trust Card",
   "bin": {
     "agenttrust": "./dist/index.js"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eulogik/AgentTrust.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://agenttrust.dev",
+  "bugs": {
+    "url": "https://github.com/eulogik/AgentTrust/issues"
+  },
+  "keywords": [
+    "ai-agent",
+    "mcp",
+    "model-context-protocol",
+    "security",
+    "trust",
+    "owasp",
+    "owasp-agentic",
+    "owasp-llm",
+    "compliance",
+    "eu-ai-act",
+    "sarif",
+    "trust-card",
+    "agent-security",
+    "mcp-server",
+    "security-audit",
+    "static-analysis",
+    "vulnerability-scanner",
+    "ai-security",
+    "llm-security"
+  ],
+  "author": "Eulogik",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=18"
   },
   "dependencies": {
     "@agenttrust/core": "0.1.0"

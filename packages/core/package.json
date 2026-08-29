@@ -2,10 +2,43 @@
   "name": "@agenttrust/core",
   "version": "0.1.0",
   "type": "module",
+  "description": "Core engines for AI agent trust scoring, OWASP analysis, permission extraction, and attack detection",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eulogik/AgentTrust.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://agenttrust.dev",
+  "bugs": {
+    "url": "https://github.com/eulogik/AgentTrust/issues"
+  },
+  "keywords": [
+    "ai-agent",
+    "mcp",
+    "trust-scoring",
+    "owasp",
+    "security-analysis",
+    "permission-extraction",
+    "sarif",
+    "trust-card",
+    "attack-detection",
+    "static-analysis"
+  ],
+  "author": "Eulogik",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=18"
   }
 }

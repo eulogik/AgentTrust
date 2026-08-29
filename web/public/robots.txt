@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /badge/
+Sitemap: https://agenttrust.dev/sitemap.xml
