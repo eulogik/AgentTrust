@@ -10,7 +10,7 @@ export function generateSarif(card: TrustCard): string {
           driver: {
             name: "AgentTrust",
             version: card.agenttrustVersion,
-            informationUri: "https://agenttrust.dev",
+            informationUri: "https://eulogik.github.io/AgentTrust",
             rules: [...new Map(card.security.findings.map(f => [f.rule, f])).values()].map(f => ({
               id: f.rule,
               name: f.title,
@@ -19,7 +19,7 @@ export function generateSarif(card: TrustCard): string {
               defaultConfiguration: {
                 level: f.severity === "critical" || f.severity === "high" ? "error" : "warning"
               },
-              helpUri: `https://agenttrust.dev/rules/${f.rule}`
+              helpUri: `https://github.com/eulogik/AgentTrust#readme`
             }))
           }
         },

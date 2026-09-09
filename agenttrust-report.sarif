@@ -7,7 +7,7 @@
         "driver": {
           "name": "AgentTrust",
           "version": "0.1.0",
-          "informationUri": "https://agenttrust.dev",
+          "informationUri": "https://eulogik.github.io/AgentTrust",
           "rules": []
         }
       },

@@ -55,6 +55,6 @@ ${ordered.map(f => `| **${f.severity.toUpperCase()}** | \`${f.rule}\` | ${f.titl
 
 ---
 
-*Generated automatically by [AgentTrust](https://agenttrust.dev)*
+*Generated automatically by [AgentTrust](https://eulogik.github.io/AgentTrust)*
 `;
 }

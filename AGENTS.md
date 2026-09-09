@@ -7,8 +7,8 @@ AgentTrust — trust/scanning layer for AI agent capabilities and MCP tools. npm
 - `packages/core` — all engines: capability detectors, OWASP rule suite (8 regex rules: `AT-SEC-001`–`007` + `AT-COMP-001`), permission extraction, trust scoring/grades, attack heuristics, workflow eval parser, SARIF/markdown reporters. Public API re-exported from `src/index.ts`. Tests live in `src/tests/` (node:test), compiled into `dist/tests/`.
 - `packages/cli` — `agenttrust` binary; thin dispatcher over core (`import ... from "@agenttrust/core"`).
 - `packages/action` — GitHub Action wrapper; `action.yml` only, no code.
-- `web/public` — landing page (`index.html`), SEO files (`sitemap.xml`, `robots.txt`, `404.html`). Served via GitHub Pages at `agenttrust.dev`.
-- `badges/` — shareable grade badge SVGs (`a.svg` through `f.svg`), shields.io-compatible, hosted at `agenttrust.dev/badge/`.
+- `web/public` — landing page (`index.html`), SEO files (`sitemap.xml`, `robots.txt`, `404.html`). Served via GitHub Pages at `https://eulogik.github.io/AgentTrust` (`agenttrust.dev` is a parked squatter domain — never point URLs at it).
+- `badges/` — shareable grade badge SVGs (`a.svg` through `f.svg`), shields.io-compatible, hosted at `https://eulogik.github.io/AgentTrust/badge/`.
 - `examples/` — scan fixtures: `vulnerable-mcp-server` (must grade F / fail attack heuristics), `secure-agent-skill`, `sample-workflow.yaml`.
 - `scripts/verify-demos.mjs` — end-to-end smoke checks used by CI and local verification.
 - `docs/` + `walkthrough.md` — product strategy/research prose, not engineering docs (walkthrough has stale absolute paths).
@@ -18,7 +18,7 @@ AgentTrust — trust/scanning layer for AI agent capabilities and MCP tools. npm
 
 - The **attack engine runs in static-heuristic mode**: results derive from static findings + permission manifest; no payloads execute. Reports carry `mode: "static-heuristic"` + a disclaimer. Do not reintroduce fabricated narratives ("payload triggered...") or invented durations/costs/success rates anywhere.
 - **Workflow eval is simulation mode**: suites are parsed and validated (`parseSimpleYamlSuite`), steps are marked `"simulated"`/`not_executed`, costs/durations stay 0. Real execution requires eval lab v2.
-- `registry` command shows sample data (labeled as such). Badge links point at not-yet-deployed `agenttrust.dev`.
+- `registry` command shows sample data (labeled as such). Badges link to the project site until per-repo report pages exist.
 - OWASP codes follow the canonical lists: LLM Top 10 2025 (LLM01–LLM10) and Agentic Top 10 published 2025-12-09 (ASI01 Goal Hijack … ASI10 Rogue Agents). Note LLM08 ≠ "secrets"; ASI03 ≠ file deletion. See comment block atop `RULES` in `packages/core/src/analysis/static-analyzer.ts`.
 - **Marketing must match the engines**: site/README say **8 rules** (never 18), attack is static-heuristic, eval is simulated, Trust Cards are evidence input (never "certified"/"compliant"). The on-site demo is pre-rendered fixture output — never imply a live scan; badges link to the homepage until report pages exist.
 - **Detection integrity**: finding IDs are deterministic hashes (`stableFindingId`) — never `Math.random()`; detector walks recursively (`walkFiles`) and reads `SKILL.md` case-insensitively; code-pattern rules skip prose docs and the scanner's own rule-DSL lines; `AT-COMP-001` requires a real call (paren), not a bare identifier; `compatibility` is inferred per capability type; `provenance.isVerified` means documentary signals present, never "safe".
@@ -47,7 +47,7 @@ node packages/cli/dist/index.js scan <path-or-dir>   # scan any target directly
 node packages/cli/dist/index.js scan <t> --quiet --format json --output-dir ./trust   # CI-friendly: compact stdout, files to ./trust
 npx serve web/public -p 3000             # static web UI (landing page)
 # Badge URLs (after GitHub Pages deploy):
-# https://agenttrust.dev/badge/a.svg  through  https://agenttrust.dev/badge/f.svg
+# https://eulogik.github.io/AgentTrust/badge/a.svg  through  https://eulogik.github.io/AgentTrust/badge/f.svg
 ```
 
 ## Known gaps (roadmap context)
@@ -57,4 +57,4 @@ npx serve web/public -p 3000             # static web UI (landing page)
 - No lint/format config.
 - npm package is not yet published (`agenttrust` name is unclaimed on npmjs.com).
 - Repo is currently PRIVATE on GitHub — must be made public before npm publish and Pages deploy.
-- agenttrust.dev domain is not yet verified/configured for GitHub Pages.
+- No custom domain: `agenttrust.dev` is parked by a squatter. Canonical URLs use `eulogik.github.io/AgentTrust`. Contact is via GitHub issues (no project email exists).

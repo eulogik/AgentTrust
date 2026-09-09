@@ -268,7 +268,7 @@ $ npx agenttrust scan github.com/example/calendar-mcp-server
   MED:  No rate limiting on API calls
 
   Full report: agenttrust-report.sarif
-  Badge: ![Trust Score](https://agenttrust.dev/badge/B)
+  Badge: ![Trust Score](https://eulogik.github.io/AgentTrust/badge/b.svg)
 ```
 
 **Success criterion:** A developer scans any capability in <60 seconds and immediately sees the risk surface.
@@ -287,9 +287,9 @@ $ npx agenttrust scan github.com/example/calendar-mcp-server
    ```
 2. **Trust Badge** — embeddable SVG for READMEs:
    ```markdown
-   [![AgentTrust Score: A](https://agenttrust.dev/badge/owner/repo)](https://agenttrust.dev/report/owner/repo)
+   [![AgentTrust Score: A](https://eulogik.github.io/AgentTrust/badge/a.svg)](https://eulogik.github.io/AgentTrust)
    ```
-3. **Public Registry** — `agenttrust.dev/registry` showing Trust Cards for popular MCP servers and agent skills
+3. **Public Registry** — `<site>/registry` (not built) showing Trust Cards for popular MCP servers and agent skills
 4. Scan the **top 100 most-starred MCP servers and agent skills** proactively and publish results
 
 **Success criterion:** 50+ repos display the AgentTrust badge. The badge becomes a signal of quality.
@@ -382,7 +382,7 @@ async def process_claim(agent, claim_data):
 
 ### Days 76–90: Dashboard + Team Features
 
-**Ship:** Web dashboard at `app.agenttrust.dev`:
+**Ship (future):** Web dashboard (no project domain yet — `agenttrust.dev` is parked by a squatter):
 
 - **Trust Registry** — all scanned capabilities with scores and trends
 - **Execution History** — timeline of all monitored workflows
@@ -422,7 +422,7 @@ async def process_claim(agent, claim_data):
 |---|---|
 | **Build in public** | Daily progress threads on X/Twitter. Show terminal screenshots, architecture decisions, interesting security findings. |
 | **Scan 100 popular MCP servers** | Publish a "State of MCP Security" report. This is your launch content — real data, real vulnerabilities, real headlines. |
-| **Seed the registry** | Have Trust Cards for top 100 skills/servers live on `agenttrust.dev/registry` before anyone uses the CLI. |
+| **Seed the registry** | Have Trust Cards for top 100 skills/servers live on the project-site registry before anyone uses the CLI. |
 | **Developer preview list** | Collect 500+ emails from developers interested in agent security (via the report). |
 | **README = Landing Page** | Clear value prop, 10-minute quickstart, terminal recording (asciinema/VHS), architecture diagram. |
 
@@ -603,7 +603,7 @@ Abandon or pivot if:
 
 If you start today:
 
-1. **Register:** `agenttrust.dev` domain + `@agenttrust` on X/GitHub
+1. **Register:** project domain (NOTE 2026-09-09: `agenttrust.dev` is parked by a squatter — using `eulogik.github.io/AgentTrust`) + `@agenttrust` on X/GitHub
 2. **Init repo:** `github.com/agenttrust/agenttrust` — MIT license, clean README
 3. **Build:** The scanner CLI. Accept a GitHub URL → clone → detect type → run Semgrep → extract permissions → output Trust Card to terminal
 4. **Scan:** The top 20 MCP servers on GitHub. Document every finding.

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /badge/
-Sitemap: https://agenttrust.dev/sitemap.xml
+Sitemap: https://eulogik.github.io/AgentTrust/sitemap.xml

@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://agenttrust.dev">
-    <img src="https://agenttrust.dev/badge/b.svg" alt="AgentTrust Grade B" width="128">
+  <a href="https://eulogik.github.io/AgentTrust">
+    <img src="https://eulogik.github.io/AgentTrust/badge/b.svg" alt="AgentTrust Grade B" width="128">
   </a>
   <br>
   <strong>Trust &amp; Security for AI Agents &amp; MCP Servers</strong>
@@ -12,7 +12,7 @@
   <a href="https://www.npmjs.com/package/agenttrust"><img src="https://img.shields.io/npm/v/agenttrust?color=cyan&label=npm" alt="npm version"></a>
   <a href="https://github.com/eulogik/AgentTrust/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a>
   <a href="https://owasp.org"><img src="https://img.shields.io/badge/OWASP-Agentic%20Top%2010-34d399.svg" alt="OWASP Agentic AI"></a>
-  <a href="https://agenttrust.dev"><img src="https://img.shields.io/badge/EU%20AI%20Act-Article%2050%20Ready-22d3ee.svg" alt="EU AI Act Ready"></a>
+  <a href="https://eulogik.github.io/AgentTrust"><img src="https://img.shields.io/badge/Rules-8%20OWASP--mapped-cyan.svg" alt="8 OWASP-mapped rules"></a>
 </p>
 
 <p align="center">
@@ -57,14 +57,14 @@ npx agenttrust eval ./tests/workflow.yaml
 | **Trust Card** | Machine-readable credential (`agenttrust/trust-card/v1`) with grade, score, findings, and permissions |
 | **SARIF Report** | Industry-standard format for GitHub Security tab integration |
 | **Markdown Report** | Human-readable audit report for compliance and review |
-| **Grade Badge** | Shareable SVG badge for your README ([example](https://agenttrust.dev/badge/a.svg)) |
+| **Grade Badge** | Shareable SVG badge for your README ([example](https://eulogik.github.io/AgentTrust/badge/a.svg)) |
 
 ## Grade Badge
 
 Embed your trust score in your README:
 
 ```markdown
-[![AgentTrust](https://agenttrust.dev/badge/a.svg)](https://agenttrust.dev)
+[![AgentTrust](https://eulogik.github.io/AgentTrust/badge/a.svg)](https://eulogik.github.io/AgentTrust)
 ```
 
 (Public per-repo report pages are not hosted yet — badges link to the homepage for now.)
@@ -98,7 +98,7 @@ This tells buyers, auditors, and AI hosts that your agent has been verified.
 
 ## Expert reviews
 
-Need a human pass over your results? [Request a review](mailto:audit@agenttrust.dev?subject=Expert%20Review%20Request) — manual result triage plus a remediation plan, scoped per target. The CLI stays the product and is free forever.
+Need a human pass over your results? [Request a review](https://github.com/eulogik/AgentTrust/issues/new) — manual result triage plus a remediation plan, scoped per target. The CLI stays the product and is free forever.
 
 | Tier | Price | What You Get |
 |------|-------|-------------|
@@ -141,8 +141,8 @@ node scripts/verify-demos.mjs  # end-to-end smoke checks
 ---
 
 <p align="center">
-  <a href="https://agenttrust.dev">Website</a> ·
+  <a href="https://eulogik.github.io/AgentTrust">Website</a> ·
   <a href="https://github.com/eulogik/AgentTrust">GitHub</a> ·
   <a href="https://www.npmjs.com/package/agenttrust">npm</a> ·
-  <a href="mailto:audit@agenttrust.dev">Get Audited</a>
+  <a href="https://github.com/eulogik/AgentTrust/issues/new">Contact</a>
 </p>
