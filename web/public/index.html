@@ -468,7 +468,7 @@
               </div>
               <div class="text-xs text-slate-400 mb-3">Embed in your README:</div>
               <div class="bg-slate-800/80 rounded-lg p-3 text-left">
-                <code class="mono text-xs text-brand-300 break-all leading-relaxed">[![AgentTrust](https://eulogik.github.io/AgentTrust/badge/a.svg)](https://eulogik.github.io/AgentTrust)</code>
+                <code class="mono text-xs text-brand-300 break-all leading-relaxed">[![AgentTrust](https://eulogik.github.io/AgentTrust/badge/a.svg)](https://eulogik.github.io/AgentTrust/r/)</code>
               </div>
             </div>
 
@@ -1045,8 +1045,8 @@
   // Verified against real CLI runs: `node packages/cli/dist/index.js scan examples/<fixture>`.
   // Secure fixture: B 88/100, 0 findings. Vulnerable fixture: F 33/100, 5 findings.
   const demoScans = {
-    'secure-agent-skill': { grade: 'B', score: '88/100', findings: '0', crit: '0 critical, 0 high', name: 'examples/secure-agent-skill', output: `Trust Grade: B (88/100) | Findings: 0 (0 critical, 0 high) | Scope: minimal\n\n\u2714 trust-card.json\n\u2714 agenttrust-report.sarif\n\u2714 agenttrust-report.md`, badge: 'b' },
-    'vulnerable-mcp-server': { grade: 'F', score: '33/100', findings: '5', crit: '3 critical, 1 high, 1 medium', name: 'examples/vulnerable-mcp-server', output: `Trust Grade: F (33/100) | Findings: 5 (3 critical, 1 high) | Scope: excessive\n\n[CRITICAL] Direct Prompt Concatenation (server.ts:24) AT-SEC-001 LLM01\n[CRITICAL] Hardcoded Credential (server.ts:11) AT-SEC-002 LLM02\n[CRITICAL] Unbounded Shell Execution (server.ts:16) AT-SEC-003 ASI02\n[HIGH] Unrestricted File Deletion (server.ts:31) AT-SEC-005 ASI02\n[MEDIUM] Secret Leakage in Logging (server.ts:25) AT-SEC-007 LLM02`, badge: 'f' }
+    'secure-agent-skill': { grade: 'B', score: '88/100', report: 'self-examples-secure-agent-skill', findings: '0', crit: '0 critical, 0 high', name: 'examples/secure-agent-skill', output: `Trust Grade: B (88/100) | Findings: 0 (0 critical, 0 high) | Scope: minimal\n\n\u2714 trust-card.json\n\u2714 agenttrust-report.sarif\n\u2714 agenttrust-report.md`, badge: 'b' },
+    'vulnerable-mcp-server': { grade: 'F', score: '33/100', report: 'self-examples-vulnerable-mcp-server', findings: '5', crit: '3 critical, 1 high, 1 medium', name: 'examples/vulnerable-mcp-server', output: `Trust Grade: F (33/100) | Findings: 5 (3 critical, 1 high) | Scope: excessive\n\n[CRITICAL] Direct Prompt Concatenation (server.ts:24) AT-SEC-001 LLM01\n[CRITICAL] Hardcoded Credential (server.ts:11) AT-SEC-002 LLM02\n[CRITICAL] Unbounded Shell Execution (server.ts:16) AT-SEC-003 ASI02\n[HIGH] Unrestricted File Deletion (server.ts:31) AT-SEC-005 ASI02\n[MEDIUM] Secret Leakage in Logging (server.ts:25) AT-SEC-007 LLM02`, badge: 'f' }
   };
 
   function runDemoScan(key) {
@@ -1060,7 +1060,7 @@
     const gradeColors = { 'A': 'emerald', 'B': 'emerald', 'C': 'amber', 'D': 'rose', 'F': 'rose' };
     const c = gradeColors[match.grade] || 'slate';
     document.getElementById('result-grade').className = 'px-4 py-2 rounded-xl font-extrabold text-2xl bg-' + c + '-500/10 border border-' + c + '-500/30 text-' + c + '-400';
-    document.getElementById('result-badge-code').textContent = '[![AgentTrust](https://eulogik.github.io/AgentTrust/badge/' + match.badge + '.svg)](https://eulogik.github.io/AgentTrust)';
+    document.getElementById('result-badge-code').textContent = '[![AgentTrust](https://eulogik.github.io/AgentTrust/badge/' + match.badge + '.svg)](https://eulogik.github.io/AgentTrust/r/' + match.report + '.html)';
     resultsDiv.classList.remove('hidden');
     resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }

@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://eulogik.github.io/AgentTrust">
+  <a href="https://eulogik.github.io/AgentTrust/r/self-packages-cli.html">
     <img src="https://eulogik.github.io/AgentTrust/badge/a.svg" alt="AgentTrust Grade A — agenttrust CLI self-scan" width="128">
   </a>
   <br>
@@ -59,17 +59,16 @@ npx agenttrust eval ./tests/workflow.yaml
 | **Trust Card** | Machine-readable credential (`agenttrust/trust-card/v1`) with grade, score, findings, and permissions |
 | **SARIF Report** | Industry-standard format for GitHub Security tab integration |
 | **Markdown Report** | Human-readable audit report for compliance and review |
-| **Grade Badge** | Shareable SVG badge for your README ([example](https://eulogik.github.io/AgentTrust/badge/a.svg)) |
+| **Grade Badge** | Shareable SVG badge linking to a public report page ([example](https://eulogik.github.io/AgentTrust/badge/a.svg), [registry](https://eulogik.github.io/AgentTrust/r/)) |
 
 ## Grade Badge
 
 Embed your trust score in your README:
 
 ```markdown
-[![AgentTrust](https://eulogik.github.io/AgentTrust/badge/a.svg)](https://eulogik.github.io/AgentTrust)
+[![AgentTrust](https://eulogik.github.io/AgentTrust/badge/a.svg)](https://eulogik.github.io/AgentTrust/r/self-packages-cli.html)
 ```
 
-(Public per-repo report pages are not hosted yet — badges link to the homepage for now.)
 
 This tells buyers, auditors, and AI hosts that your agent has been verified.
 

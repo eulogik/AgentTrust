@@ -4,6 +4,8 @@
 (8-rule static suite, OWASP-mapped). Shallow clones at HEAD on 2026-09-09; re-scanned 2026-09-09 with v0.1.0 string-literal permission handling.
 Methodology and target list: `scripts/seed-registry.mjs` (resumable, all work in `/tmp`).
 
+Browse all 50 cards: <https://eulogik.github.io/AgentTrust/r/>
+
 ## Headline numbers
 
 | Metric | Value |

@@ -30,15 +30,11 @@ jobs:
       - name: Build site
         run: |
           mkdir -p _site
-          # Copy landing page
-          cp web/public/index.html _site/index.html
-          # Copy badges
+          # Whole static site, including generated per-repo report pages (web/public/r/)
+          cp -r web/public/. _site/
+          # Grade badges (source of truth: badges/)
           mkdir -p _site/badge
           cp badges/*.svg _site/badge/
-          # Copy SEO files
-          cp web/public/robots.txt _site/robots.txt 2>/dev/null || true
-          cp web/public/sitemap.xml _site/sitemap.xml 2>/dev/null || true
-          cp web/public/404.html _site/404.html 2>/dev/null || true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
