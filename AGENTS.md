@@ -55,6 +55,6 @@ npx serve web/public -p 3000             # static web UI (landing page)
 - Dependency scanning runs `npm audit --package-lock-only` only when a lockfile exists; no pip-audit/Trivy yet. Rules remain regex-only, no AST.
 - GitHub Action requires caller workflows to grant `security-events: write` for the SARIF upload step; scan targets must be local paths, full GitHub URLs, or flagged (`--github`, `--npm`) — bare `owner/repo` without a flag is treated as a local path by design.
 - No lint/format config.
-- npm package is not yet published (`agenttrust` name is unclaimed on npmjs.com).
+- npm packages published at 0.1.0: `@eulogik/agenttrust` (CLI, bin `agenttrust`) + `@eulogik/agenttrust-core` (lib). Unscoped `agenttrust` is permanently blocked (typosquat guard vs real `agent-trust` package) — never reference it as installable.
 - Repo is currently PRIVATE on GitHub — must be made public before npm publish and Pages deploy.
 - No custom domain: `agenttrust.dev` is parked by a squatter. Canonical URLs use `eulogik.github.io/AgentTrust`. Contact is via GitHub issues (no project email exists).

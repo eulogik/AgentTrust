@@ -43,14 +43,14 @@
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Cross-platform",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "downloadUrl": "https://github.com/eulogik/AgentTrust"
+        "downloadUrl": "https://www.npmjs.com/package/@eulogik/agenttrust"
       },
       {
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
           { "@type": "Question", "name": "What is AgentTrust?", "acceptedAnswer": { "@type": "Answer", "text": "AgentTrust is a free, local-first security scanner for AI agents and MCP servers. It runs 8 OWASP-mapped static rules, extracts permission manifests, and issues a Trust Card graded A–F with SARIF output for CI." } },
-          { "@type": "Question", "name": "How do I scan an MCP server?", "acceptedAnswer": { "@type": "Answer", "text": "Run npx @eulogik/agenttrust scan <path-or-github-url> (npm package pending — run from source until then). You get a Trust Card, SARIF and Markdown reports in seconds, with zero data leaving your machine." } },
+          { "@type": "Question", "name": "How do I scan an MCP server?", "acceptedAnswer": { "@type": "Answer", "text": "Run npx @eulogik/agenttrust scan <path-or-github-url>. You get a Trust Card, SARIF and Markdown reports in seconds, with zero data leaving your machine." } },
           { "@type": "Question", "name": "What is a Trust Card?", "acceptedAnswer": { "@type": "Answer", "text": "A Trust Card is a portable, machine-readable credential (agenttrust/trust-card/v1) summarizing an agent's security posture: letter grade, 0–100 score, findings, permissions, provenance, and inferred host compatibility." } },
           { "@type": "Question", "name": "Is AgentTrust a certification?", "acceptedAnswer": { "@type": "Answer", "text": "No. AgentTrust is a static scanner, not a certification body. Attack analysis is heuristic, workflow eval is simulated, and Trust Cards are evidence input for your own review — never a compliance verdict." } },
           { "@type": "Question", "name": "Does my code leave my machine?", "acceptedAnswer": { "@type": "Answer", "text": "No. The CLI runs entirely locally with zero telemetry and zero data retention. GitHub-URL scans clone the public repo to a temp directory on your machine." } },
@@ -91,7 +91,7 @@
           <span class="cmd"><span>npx @eulogik/agenttrust scan .</span><button type="button" data-copy="npx @eulogik/agenttrust scan .">Copy</button></span>
           <a class="btn btn-ghost" href="https://github.com/eulogik/AgentTrust">View on GitHub</a>
         </div>
-        <p class="hero-note">Free forever · No account · Open source (Apache-2.0) · <a href="#install">Install from source while npm lands</a></p>
+        <p class="hero-note">Free forever · No account · Open source (Apache-2.0) · <a href="#install">Install in 60 seconds</a></p>
 
         <div class="proof reveal" aria-label="Registry statistics">
           <div><div class="n">50</div><div class="l">public MCP servers scanned — <a href="r/">browse the registry</a></div></div>
@@ -178,10 +178,9 @@
         <p class="eyebrow reveal">Install</p>
         <h2 id="install-h" class="reveal">Running in 60 seconds.</h2>
         <div class="reveal">
-          <pre>git clone https://github.com/eulogik/AgentTrust.git &amp;&amp; cd AgentTrust
-npm install
-node packages/cli/dist/index.js scan ./examples/vulnerable-mcp-server --quiet</pre>
-          <p class="muted">npm package (<code>agenttrust</code>) follows the release — the CLI will then be one <code>npx</code> away. Enforce it in CI:</p>
+          <pre>npm install -g @eulogik/agenttrust
+agenttrust scan ./my-mcp-server --quiet</pre>
+          <p class="muted">No install? Run it directly with <code>npx @eulogik/agenttrust scan .</code> From source: <code>git clone https://github.com/eulogik/AgentTrust.git &amp;&amp; cd AgentTrust &amp;&amp; npm install</code>. Enforce it in CI:</p>
           <pre>agenttrust scan . --fail-on high --quiet --output-dir ./trust</pre>
           <p class="muted">Or drop in the <a href="https://github.com/eulogik/AgentTrust/tree/main/packages/action">GitHub Action</a> — scan plus SARIF upload to your Security tab.</p>
         </div>
@@ -271,6 +270,7 @@ node packages/cli/dist/index.js scan ./examples/vulnerable-mcp-server --quiet</p
           <h4>Product</h4>
           <ul>
             <li><a href="#install">Install</a></li>
+            <li><a href="https://www.npmjs.com/package/@eulogik/agenttrust">npm package</a></li>
             <li><a href="r/">Registry</a></li>
             <li><a href="methodology.html">Methodology</a></li>
             <li><a href="https://github.com/eulogik/AgentTrust">GitHub</a></li>

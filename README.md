@@ -11,7 +11,7 @@
 <h1 align="center">AgentTrust</h1>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/agenttrust"><img src="https://img.shields.io/npm/v/agenttrust?color=cyan&label=npm" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/@eulogik/agenttrust"><img src="https://img.shields.io/npm/v/@eulogik/agenttrust?color=cyan&label=npm" alt="npm version"></a>
   <a href="https://github.com/eulogik/AgentTrust/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a>
   <a href="https://owasp.org"><img src="https://img.shields.io/badge/OWASP-Agentic%20Top%2010-34d399.svg" alt="OWASP Agentic AI"></a>
   <a href="https://eulogik.github.io/AgentTrust"><img src="https://img.shields.io/badge/Rules-8%20OWASP--mapped-cyan.svg" alt="8 OWASP-mapped rules"></a>
@@ -144,6 +144,6 @@ node scripts/verify-demos.mjs  # end-to-end smoke checks
 <p align="center">
   <a href="https://eulogik.github.io/AgentTrust">Website</a> ·
   <a href="https://github.com/eulogik/AgentTrust">GitHub</a> ·
-  <a href="https://www.npmjs.com/package/agenttrust">npm</a> ·
+  <a href="https://www.npmjs.com/package/@eulogik/agenttrust">npm</a> ·
   <a href="https://github.com/eulogik/AgentTrust/issues/new">Contact</a>
 </p>

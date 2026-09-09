@@ -8,10 +8,485 @@
           "name": "AgentTrust",
           "version": "0.1.0",
           "informationUri": "https://eulogik.github.io/AgentTrust",
-          "rules": []
+          "rules": [
+            {
+              "id": "AT-SEC-001",
+              "name": "Direct Prompt Concatenation (Injection Vulnerability)",
+              "shortDescription": {
+                "text": "Direct Prompt Concatenation (Injection Vulnerability)"
+              },
+              "fullDescription": {
+                "text": "User or tool input is directly concatenated into prompt templates without sanitization or boundary delimitation."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://github.com/eulogik/AgentTrust#readme"
+            },
+            {
+              "id": "AT-SEC-002",
+              "name": "Hardcoded Credential or API Secret",
+              "shortDescription": {
+                "text": "Hardcoded Credential or API Secret"
+              },
+              "fullDescription": {
+                "text": "A hardcoded API key, private token, or secret was identified in source code."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://github.com/eulogik/AgentTrust#readme"
+            },
+            {
+              "id": "AT-SEC-003",
+              "name": "Unbounded Dynamic Shell Execution",
+              "shortDescription": {
+                "text": "Unbounded Dynamic Shell Execution"
+              },
+              "fullDescription": {
+                "text": "The agent executes shell commands directly from dynamic parameters, allowing remote arbitrary command injection."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://github.com/eulogik/AgentTrust#readme"
+            },
+            {
+              "id": "AT-SEC-005",
+              "name": "Unrestricted Recursive File Deletion / Modification",
+              "shortDescription": {
+                "text": "Unrestricted Recursive File Deletion / Modification"
+              },
+              "fullDescription": {
+                "text": "Capability can delete or overwrite arbitrary files on the host filesystem without path validation or human confirmation."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://github.com/eulogik/AgentTrust#readme"
+            },
+            {
+              "id": "AT-SEC-007",
+              "name": "Raw Secret Leakage in Debug Logging",
+              "shortDescription": {
+                "text": "Raw Secret Leakage in Debug Logging"
+              },
+              "fullDescription": {
+                "text": "Console or file logging dumps raw tokens, authorization headers, or environment objects."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://github.com/eulogik/AgentTrust#readme"
+            },
+            {
+              "id": "AT-SEC-004",
+              "name": "eval() / Function Constructor Invocation",
+              "shortDescription": {
+                "text": "eval() / Function Constructor Invocation"
+              },
+              "fullDescription": {
+                "text": "Dangerous eval() or Function constructor used to dynamically execute code strings from LLM or external sources."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://github.com/eulogik/AgentTrust#readme"
+            },
+            {
+              "id": "AT-SEC-006",
+              "name": "Unfiltered SSRF / Arbitrary Network Egress",
+              "shortDescription": {
+                "text": "Unfiltered SSRF / Arbitrary Network Egress"
+              },
+              "fullDescription": {
+                "text": "Network requests accept arbitrary external URLs from agent or user input without host allowlisting."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://github.com/eulogik/AgentTrust#readme"
+            },
+            {
+              "id": "AT-COMP-001",
+              "name": "Missing Human-in-the-Loop Gate for Critical Actions",
+              "shortDescription": {
+                "text": "Missing Human-in-the-Loop Gate for Critical Actions"
+              },
+              "fullDescription": {
+                "text": "Irreversible actions (e.g. database wipe, financial transaction, email dispatch) execute autonomously with no approval trigger."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://github.com/eulogik/AgentTrust#readme"
+            }
+          ]
         }
       },
-      "results": []
+      "results": [
+        {
+          "ruleId": "AT-SEC-001",
+          "level": "error",
+          "message": {
+            "text": "Direct Prompt Concatenation (Injection Vulnerability): User or tool input is directly concatenated into prompt templates without sanitization or boundary delimitation."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/vulnerable-mcp-server/server.ts"
+                },
+                "region": {
+                  "startLine": 24
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-002",
+          "level": "error",
+          "message": {
+            "text": "Hardcoded Credential or API Secret: A hardcoded API key, private token, or secret was identified in source code."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/vulnerable-mcp-server/server.ts"
+                },
+                "region": {
+                  "startLine": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-003",
+          "level": "error",
+          "message": {
+            "text": "Unbounded Dynamic Shell Execution: The agent executes shell commands directly from dynamic parameters, allowing remote arbitrary command injection."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/vulnerable-mcp-server/server.ts"
+                },
+                "region": {
+                  "startLine": 16
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-005",
+          "level": "error",
+          "message": {
+            "text": "Unrestricted Recursive File Deletion / Modification: Capability can delete or overwrite arbitrary files on the host filesystem without path validation or human confirmation."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/vulnerable-mcp-server/server.ts"
+                },
+                "region": {
+                  "startLine": 31
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-007",
+          "level": "warning",
+          "message": {
+            "text": "Raw Secret Leakage in Debug Logging: Console or file logging dumps raw tokens, authorization headers, or environment objects."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "examples/vulnerable-mcp-server/server.ts"
+                },
+                "region": {
+                  "startLine": 25
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-004",
+          "level": "error",
+          "message": {
+            "text": "eval() / Function Constructor Invocation: Dangerous eval() or Function constructor used to dynamically execute code strings from LLM or external sources."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "packages/core/src/tests/core.test.ts"
+                },
+                "region": {
+                  "startLine": 53
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-003",
+          "level": "error",
+          "message": {
+            "text": "Unbounded Dynamic Shell Execution: The agent executes shell commands directly from dynamic parameters, allowing remote arbitrary command injection."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "packages/core/src/tests/integrity.test.ts"
+                },
+                "region": {
+                  "startLine": 159
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-003",
+          "level": "error",
+          "message": {
+            "text": "Unbounded Dynamic Shell Execution: The agent executes shell commands directly from dynamic parameters, allowing remote arbitrary command injection."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "packages/core/src/tests/integrity.test.ts"
+                },
+                "region": {
+                  "startLine": 166
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-004",
+          "level": "error",
+          "message": {
+            "text": "eval() / Function Constructor Invocation: Dangerous eval() or Function constructor used to dynamically execute code strings from LLM or external sources."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "packages/core/src/tests/integrity.test.ts"
+                },
+                "region": {
+                  "startLine": 32
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-004",
+          "level": "error",
+          "message": {
+            "text": "eval() / Function Constructor Invocation: Dangerous eval() or Function constructor used to dynamically execute code strings from LLM or external sources."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "packages/core/src/tests/integrity.test.ts"
+                },
+                "region": {
+                  "startLine": 33
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-004",
+          "level": "error",
+          "message": {
+            "text": "eval() / Function Constructor Invocation: Dangerous eval() or Function constructor used to dynamically execute code strings from LLM or external sources."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "packages/core/src/tests/integrity.test.ts"
+                },
+                "region": {
+                  "startLine": 34
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-004",
+          "level": "error",
+          "message": {
+            "text": "eval() / Function Constructor Invocation: Dangerous eval() or Function constructor used to dynamically execute code strings from LLM or external sources."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "packages/core/src/tests/integrity.test.ts"
+                },
+                "region": {
+                  "startLine": 112
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-004",
+          "level": "error",
+          "message": {
+            "text": "eval() / Function Constructor Invocation: Dangerous eval() or Function constructor used to dynamically execute code strings from LLM or external sources."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "packages/core/src/tests/integrity.test.ts"
+                },
+                "region": {
+                  "startLine": 124
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-004",
+          "level": "error",
+          "message": {
+            "text": "eval() / Function Constructor Invocation: Dangerous eval() or Function constructor used to dynamically execute code strings from LLM or external sources."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "packages/core/src/tests/integrity.test.ts"
+                },
+                "region": {
+                  "startLine": 140
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-006",
+          "level": "error",
+          "message": {
+            "text": "Unfiltered SSRF / Arbitrary Network Egress: Network requests accept arbitrary external URLs from agent or user input without host allowlisting."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "packages/core/src/tests/integrity.test.ts"
+                },
+                "region": {
+                  "startLine": 160
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-006",
+          "level": "error",
+          "message": {
+            "text": "Unfiltered SSRF / Arbitrary Network Egress: Network requests accept arbitrary external URLs from agent or user input without host allowlisting."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "packages/core/src/tests/integrity.test.ts"
+                },
+                "region": {
+                  "startLine": 169
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-COMP-001",
+          "level": "error",
+          "message": {
+            "text": "Missing Human-in-the-Loop Gate for Critical Actions: Irreversible actions (e.g. database wipe, financial transaction, email dispatch) execute autonomously with no approval trigger."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "packages/core/src/tests/integrity.test.ts"
+                },
+                "region": {
+                  "startLine": 99
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-003",
+          "level": "error",
+          "message": {
+            "text": "Unbounded Dynamic Shell Execution: The agent executes shell commands directly from dynamic parameters, allowing remote arbitrary command injection."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "scripts/build-reports.mjs"
+                },
+                "region": {
+                  "startLine": 24
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AT-SEC-003",
+          "level": "error",
+          "message": {
+            "text": "Unbounded Dynamic Shell Execution: The agent executes shell commands directly from dynamic parameters, allowing remote arbitrary command injection."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "scripts/seed-registry.mjs"
+                },
+                "region": {
+                  "startLine": 113
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }
