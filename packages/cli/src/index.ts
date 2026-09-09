@@ -281,7 +281,7 @@ async function handleBadge(targetPath: string) {
   const badgeUrl = `https://img.shields.io/badge/AgentTrust-${score.grade}%20(${score.overall}%2F100)-${color}`;
 
   console.log(bold("Embeddable Markdown Badge:"));
-  console.log(gray("Tip: point the badge at its per-repo report page under https://eulogik.github.io/AgentTrust/r/ for a bound grade."));
+  console.log(gray("Tip: for a bound grade, embed the per-report badge: [![AgentTrust](<site>/r/<slug>.svg)](<site>/r/<slug>.html) — see https://eulogik.github.io/AgentTrust/r/"));
   console.log(cyan(`[![AgentTrust Score](${badgeUrl})](https://eulogik.github.io/AgentTrust)`));
 }
 

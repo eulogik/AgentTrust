@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://eulogik.github.io/AgentTrust/r/self-packages-cli.html">
-    <img src="https://eulogik.github.io/AgentTrust/badge/a.svg" alt="AgentTrust Grade A — agenttrust CLI self-scan" width="128">
+    <img src="https://eulogik.github.io/AgentTrust/r/self-packages-cli.svg" alt="AgentTrust Grade A — agenttrust CLI self-scan" width="120">
   </a>
   <br>
   <sub>Self-scan of <code>packages/cli</code> at HEAD: <strong>A (90/100)</strong>, 0 findings, minimal scope. Reproduce: <code>node packages/cli/dist/index.js scan packages/cli --quiet</code></sub>
@@ -66,7 +66,7 @@ npx agenttrust eval ./tests/workflow.yaml
 Embed your trust score in your README:
 
 ```markdown
-[![AgentTrust](https://eulogik.github.io/AgentTrust/badge/a.svg)](https://eulogik.github.io/AgentTrust/r/self-packages-cli.html)
+[![AgentTrust](https://eulogik.github.io/AgentTrust/r/self-packages-cli.svg)](https://eulogik.github.io/AgentTrust/r/self-packages-cli.html)
 ```
 
 

@@ -1,0 +1,52 @@
+name: Weekly Registry Refresh
+
+# Re-scan the 50 registry targets + self scans, regenerate static report
+# pages/badges, refresh one-pager stats, and push. The Pages deploy workflow
+# picks up the push (web/**) automatically. Nothing here needs a backend.
+on:
+  schedule:
+    - cron: "0 6 * * 1"  # Mondays 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: registry-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install + build
+        run: npm ci --no-audit --no-fund && npm run build
+
+      - name: Engine sanity gate
+        run: npm test 2>&1 | tail -5 && node scripts/verify-demos.mjs 2>&1 | tail -3
+
+      - name: Re-scan sweep
+        run: node scripts/seed-registry.mjs 50
+
+      - name: Rebuild report pages
+        run: node scripts/build-reports.mjs
+
+      - name: Commit + push if changed
+        run: |
+          git config user.name "agenttrust-bot"
+          git config user.email "agenttrust-bot@users.noreply.github.com"
+          git add web/public/r docs/STATE-OF-MCP-2026.md
+          if git diff --cached --quiet; then
+            echo "No registry changes — nothing to push."
+          else
+            DATE=$(date -u +%F)
+            git commit -m "Weekly registry refresh (${DATE})" && git push
+          fi

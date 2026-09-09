@@ -1060,7 +1060,7 @@
     const gradeColors = { 'A': 'emerald', 'B': 'emerald', 'C': 'amber', 'D': 'rose', 'F': 'rose' };
     const c = gradeColors[match.grade] || 'slate';
     document.getElementById('result-grade').className = 'px-4 py-2 rounded-xl font-extrabold text-2xl bg-' + c + '-500/10 border border-' + c + '-500/30 text-' + c + '-400';
-    document.getElementById('result-badge-code').textContent = '[![AgentTrust](https://eulogik.github.io/AgentTrust/badge/' + match.badge + '.svg)](https://eulogik.github.io/AgentTrust/r/' + match.report + '.html)';
+    document.getElementById('result-badge-code').textContent = '[![AgentTrust](https://eulogik.github.io/AgentTrust/r/' + match.report + '.svg)](https://eulogik.github.io/AgentTrust/r/' + match.report + '.html)';
     resultsDiv.classList.remove('hidden');
     resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }

@@ -11,11 +11,11 @@ Browse all 50 cards: <https://eulogik.github.io/AgentTrust/r/>
 | Metric | Value |
 |---|---|
 | Servers scanned | 50 |
-| Average Trust Score | **70.2 / 100 (C)** |
+| Average Trust Score | **70.2 / 100** |
 | Graded D or F | **18 / 50 (36%)** |
 | Total findings | 461 (146 critical) |
 | Excessive permission scope | **20 / 50 (40%)** |
-| Minimal scope | 16 / 50 (14 graded A, 2 graded B) |
+| Minimal scope | 16 / 50 |
 
 Grade distribution: A 15 · B 12 · C 5 · D 14 · F 4.
 
@@ -40,31 +40,44 @@ comes from no longer counting string literals and prose as capabilities.)
 
 | Score | Server | Findings (crit) | Scope |
 |---|---|---|---|
-| 35 | blender-mcp | 9 (3) | excessive |
-| 37 | fastmcp | 49 (22) | excessive |
-| 37 | mcp-use | 52 (22) | excessive |
-| 39 | mongodb-mcp-server | 12 (7) | excessive |
-| 40 | agent-toolkit | 10 (0) | excessive |
-| 40 | context7 | 12 (6) | excessive |
-| 40 | typescript-sdk | 78 (4) | excessive |
-| 40 | inspector | 58 (29) | excessive |
-| 43 | sentry-mcp | 19 (4) | excessive |
-| 43 | cloudflare | 105 (21) | excessive |
+| 35 | ahujasid__blender-mcp | 9 (3) | excessive |
+| 37 | jlowin__fastmcp | 49 (22) | excessive |
+| 37 | mcp-use__mcp-use | 52 (22) | excessive |
+| 39 | mongodb-js__mongodb-mcp-server | 12 (7) | excessive |
+| 40 | stripe__agent-toolkit | 10 (0) | excessive |
+| 40 | upstash__context7 | 12 (6) | excessive |
+| 40 | modelcontextprotocol__typescript-sdk | 78 (4) | excessive |
+| 40 | modelcontextprotocol__inspector | 58 (29) | excessive |
+| 43 | getsentry__sentry-mcp | 19 (4) | excessive |
+| 43 | cloudflare__mcp-server-cloudflare | 105 (21) | excessive |
 
 ## Top 10 (by score)
 
 | Score | Server | Findings | Scope |
 |---|---|---|---|
-| 96 | mcp-cli | 0 | minimal |
-| 95 | pinecone-mcp | 0 | minimal |
-| 94 | tavily-mcp | 0 | minimal |
-| 94 | java-sdk | 0 | minimal |
-| 93 | terraform-mcp-server | 0 | minimal |
-| 93 | csharp-sdk | 0 | moderate |
-| 92 | go-sdk | 0 | minimal |
-| 92 | kotlin-sdk | 0 | minimal |
-| 92 | langchain-mcp-adapters | 0 | minimal |
-| 91 | e2b-dev mcp-server | 0 | moderate |
+| 96 | wong2__mcp-cli | 0 | minimal |
+| 95 | pinecone-io__pinecone-mcp | 0 | minimal |
+| 94 | tavily-ai__tavily-mcp | 0 | minimal |
+| 94 | modelcontextprotocol__java-sdk | 0 | minimal |
+| 93 | hashicorp__terraform-mcp-server | 0 | minimal |
+| 93 | modelcontextprotocol__csharp-sdk | 0 | moderate |
+| 92 | modelcontextprotocol__go-sdk | 0 | minimal |
+| 92 | modelcontextprotocol__kotlin-sdk | 0 | minimal |
+| 92 | langchain-ai__langchain-mcp-adapters | 0 | minimal |
+| 91 | e2b-dev__mcp-server | 0 | moderate |
+
+## Using these grades
+
+Embed a bound badge (image + page ship together, so the grade shown is always
+the grade evidenced):
+
+```markdown
+[![AgentTrust](https://eulogik.github.io/AgentTrust/r/<slug>.svg)](https://eulogik.github.io/AgentTrust/r/<slug>.html)
+```
+
+Browse all cards at <https://eulogik.github.io/AgentTrust/r/>. Pages refresh
+weekly via `.github/workflows/rescan.yml`; a snapshot older than 30 days shows
+a stale banner. Static snapshot — re-scan before relying on any grade.
 
 ## Limitations (read before citing)
 
