@@ -3,7 +3,9 @@
 > **Capability:** `Secure Data Auditor Skill` (agent-skill)  
 > **Trust Grade:** **B** (88/100)  
 > **Confidence:** MEDIUM  
-> **Date:** 2026-08-29T07:33:03.569Z
+> **Date:** 2026-09-09T07:17:24.013Z
+>
+> Static analysis only (8-rule suite, OWASP-mapped). Not a certification or penetration test.
 
 ---
 
@@ -13,15 +15,21 @@
 |---|---|---|
 | **Security** | 100/100 | ✅ Healthy |
 | **Permissions** | 100/100 | Scope: `minimal` |
-| **Provenance** | 50/100 | Unverified |
+| **Provenance** | 50/100 | Unverified origin |
 | **Reliability** | 85/100 | Standard |
 | **Stability** | 75/100 | Lockfile: No |
 
-**Rationale:** Verified safe execution bounds.
+**Rationale:** No critical or high-severity findings; grade reflects permissions and provenance signals.
 
 ---
 
-## 🚨 Security Findings (0 Total)
+## 🎯 Fix this week (0 critical/high)
+
+_No critical or high-severity findings in scope._
+
+---
+
+## 🚨 All Security Findings (0 Total)
 
 | Severity | Rule | Title | Location |
 |---|---|---|---|

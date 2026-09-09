@@ -1,12 +1,13 @@
 {
   "schema": "agenttrust/trust-card/v1",
-  "generatedAt": "2026-08-29T07:33:03.569Z",
+  "generatedAt": "2026-09-09T07:17:24.013Z",
   "agenttrustVersion": "0.1.0",
   "subject": {
     "type": "agent-skill",
     "name": "Secure Data Auditor Skill",
     "version": "0.1.0",
-    "description": ""
+    "description": "",
+    "language": "unknown"
   },
   "provenance": {
     "signed": false,
@@ -66,14 +67,12 @@
       "stability": 75
     },
     "confidence": "medium",
-    "rationale": "Verified safe execution bounds."
+    "rationale": "No critical or high-severity findings; grade reflects permissions and provenance signals."
   },
   "compatibility": [
     "claude-code",
     "cursor",
-    "openclaw",
-    "mcp-host",
-    "langgraph"
+    "codex"
   ],
   "tags": [
     "agent-skill"

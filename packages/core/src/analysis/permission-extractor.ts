@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import path from "node:path";
+import { walkFiles } from "../util/fs-walk.js";
 import type { PermissionManifest } from "../types/index.js";
 
 export async function extractPermissions(dirPath: string): Promise<PermissionManifest> {
@@ -109,23 +109,7 @@ function analyzeFileContent(content: string, manifest: PermissionManifest): void
 }
 
 function collectSourceFiles(dir: string): string[] {
-  const result: string[] = [];
-  const ignored = new Set(["node_modules", ".git", "dist", "build"]);
-
-  function walk(current: string) {
-    try {
-      const entries = fs.readdirSync(current, { withFileTypes: true });
-      for (const entry of entries) {
-        if (ignored.has(entry.name)) continue;
-        const full = path.join(current, entry.name);
-        if (entry.isDirectory()) walk(full);
-        else if (entry.isFile() && [".ts", ".js", ".py", ".json", ".yaml", ".md"].includes(path.extname(entry.name))) {
-          result.push(full);
-        }
-      }
-    } catch {}
-  }
-
-  walk(dir);
-  return result;
+  return walkFiles(dir, {
+    extensions: new Set([".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".py", ".json", ".yaml", ".yml", ".md"])
+  });
 }

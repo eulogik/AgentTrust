@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { walkFiles } from "../util/fs-walk.js";
 import type { CapabilityType } from "../types/index.js";
 
 export interface DetectionResult {
@@ -45,12 +46,18 @@ export async function detectCapability(dirPath: string): Promise<DetectionResult
     language = "Python";
   }
 
-  if (fileSet.has("mcp.json") || fileSet.has("mcp.yaml")) {
+  // Recursive file inventory (capped): detection must see past the top level
+  // (e.g. MCP servers living in src/), not just root-level names.
+  const allFiles = walkFiles(dirPath);
+  const baseLower = new Set(allFiles.map(f => path.basename(f).toLowerCase()));
+  const hasBase = (...names: string[]) => names.some(n => baseLower.has(n));
+
+  if (hasBase("mcp.json", "mcp.yaml", "mcp.yml")) {
     evidence.push("Explicit mcp.json/yaml configuration found");
     return { type: "mcp-server", confidence: 0.98, evidence, name, version, description, language };
   }
 
-  const isMcp = checkHasPattern(dirPath, files, [
+  const isMcp = checkHasPattern(allFiles, [
     "@modelcontextprotocol",
     "McpServer",
     "ListToolsRequestSchema",
@@ -63,11 +70,17 @@ export async function detectCapability(dirPath: string): Promise<DetectionResult
     return { type: "mcp-server", confidence: 0.95, evidence, name, version, description, language };
   }
 
-  if (fileSet.has("skill.md") || fileSet.has("skill.yaml") || fileSet.has("skill.yml")) {
+  const skillFile = allFiles.find(f => {
+    const b = path.basename(f).toLowerCase();
+    return b === "skill.md" || b === "skill.yaml" || b === "skill.yml";
+  });
+  if (skillFile) {
     evidence.push("Standard SKILL.md/yaml specification found");
-    if (fileSet.has("skill.md")) {
+    if (skillFile.toLowerCase().endsWith("skill.md")) {
       try {
-        const content = fs.readFileSync(path.join(dirPath, "skill.md"), "utf8");
+        // Read via the discovered path (not a hardcoded lowercase name) so
+        // SKILL.md works on case-sensitive filesystems.
+        const content = fs.readFileSync(skillFile, "utf8");
         const match = content.match(/^#\s+(.+)$/m);
         if (match) name = match[1].trim();
       } catch {}
@@ -75,17 +88,17 @@ export async function detectCapability(dirPath: string): Promise<DetectionResult
     return { type: "agent-skill", confidence: 0.95, evidence, name, version, description, language };
   }
 
-  if (fileSet.has("claude.md") || fileSet.has(".claude") || fileSet.has("claude_desktop_config.json")) {
+  if (hasBase("claude.md", "claude_desktop_config.json") || fileSet.has(".claude")) {
     evidence.push("Claude Desktop / Claude Code configuration detected");
     return { type: "claude-config", confidence: 0.90, evidence, name, version, description, language };
   }
 
-  if (fileSet.has("openclaw.json") || fileSet.has("claw.json") || fileSet.has("clawhub.json")) {
+  if (hasBase("openclaw.json", "claw.json", "clawhub.json")) {
     evidence.push("OpenClaw plugin metadata detected");
     return { type: "openclaw-plugin", confidence: 0.90, evidence, name, version, description, language };
   }
 
-  const isLangGraph = checkHasPattern(dirPath, files, [
+  const isLangGraph = checkHasPattern(allFiles, [
     "@langchain",
     "langgraph",
     "StateGraph",
@@ -97,7 +110,7 @@ export async function detectCapability(dirPath: string): Promise<DetectionResult
     return { type: "langgraph-agent", confidence: 0.85, evidence, name, version, description, language };
   }
 
-  const isGeneric = checkHasPattern(dirPath, files, [
+  const isGeneric = checkHasPattern(allFiles, [
     "openai",
     "anthropic",
     "system_prompt",
@@ -120,16 +133,17 @@ export async function detectCapability(dirPath: string): Promise<DetectionResult
   };
 }
 
-function checkHasPattern(dir: string, files: string[], patterns: string[]): boolean {
-  for (const file of files) {
-    const full = path.join(dir, file);
+const CONTENT_SCAN_EXTS = new Set([".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".py", ".json", ".md", ".yaml", ".yml"]);
+
+function checkHasPattern(files: string[], patterns: string[]): boolean {
+  for (const full of files) {
+    if (!CONTENT_SCAN_EXTS.has(path.extname(full).toLowerCase())) continue;
     try {
       const st = fs.statSync(full);
-      if (st.isFile() && (file.endsWith(".ts") || file.endsWith(".js") || file.endsWith(".py") || file.endsWith(".json") || file.endsWith(".md"))) {
-        const content = fs.readFileSync(full, "utf8");
-        if (patterns.some(p => content.includes(p))) {
-          return true;
-        }
+      if (!st.isFile() || st.size > 512 * 1024) continue;
+      const content = fs.readFileSync(full, "utf8");
+      if (patterns.some(p => content.includes(p))) {
+        return true;
       }
     } catch {}
   }

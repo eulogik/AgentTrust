@@ -7,13 +7,13 @@ import {
   extractPermissions,
   analyzeProvenance,
   computeTrustScore,
-  buildTrustCard,
+  runScan,
+  loadAgentTrustConfig,
   runAttackSuite,
   evaluateWorkflow,
   generateSarif,
   generateMarkdownReport,
   resolveScanTarget,
-  scanDependencies,
   isSeverity,
   meetsSeverityThreshold
 } from "@agenttrust/core";
@@ -21,16 +21,20 @@ import {
 const args = process.argv.slice(2);
 const command = args[0] || "help";
 
-const red = (s: string) => "[31m" + s + "[0m";
-const green = (s: string) => "[32m" + s + "[0m";
-const yellow = (s: string) => "[33m" + s + "[0m";
-const blue = (s: string) => "[34m" + s + "[0m";
-const magenta = (s: string) => "[35m" + s + "[0m";
-const cyan = (s: string) => "[36m" + s + "[0m";
-const bold = (s: string) => "[1m" + s + "[0m";
-const gray = (s: string) => "[90m" + s + "[0m";
+const USE_COLOR = !!process.stdout.isTTY && !process.env.NO_COLOR && !process.argv.includes("--no-color");
+const wrap = (code: string) => (s: string) => USE_COLOR ? `\x1b[${code}m${s}\x1b[0m` : s;
+const red = wrap("31");
+const green = wrap("32");
+const yellow = wrap("33");
+const blue = wrap("34");
+const magenta = wrap("35");
+const cyan = wrap("36");
+const bold = wrap("1");
+const gray = wrap("90");
 
-function printBanner() {  console.log(cyan(`
+function printBanner() {
+  if (process.argv.includes("--quiet") || process.argv.includes("--no-banner")) return;
+  console.log(cyan(`
    █████╗  ██████╗ ███████╗███╗   ██╗████████╗████████╗██████╗ ██╗   ██╗███████╗████████╗
   ██╔══██╗██╔════╝ ██╔════╝████╗  ██║╚══██╔══╝╚══██╔══╝██╔══██╗██║   ██║██╔════╝╚══██╔══╝
   ███████║██║  ███╗█████╗  ██╔██╗ ██║   ██║      ██║   ██████╔╝██║   ██║███████╗   ██║   
@@ -47,13 +51,21 @@ function parseArgs(argv: string[]): { target: string; flags: Record<string, stri
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--fail-on") {
       flags["fail-on"] = argv[++i] ?? "high";
-    } else if (argv[i] === "--github" || argv[i] === "--npm") {
+    } else if (argv[i] === "--format") {
+      flags["format"] = argv[++i] ?? "terminal";
+    } else if (argv[i] === "--output-dir") {
+      flags["output-dir"] = argv[++i] ?? ".";
+    } else if (argv[i] === "--github" || argv[i] === "--npm" || argv[i] === "--quiet" || argv[i] === "--no-banner" || argv[i] === "--no-color") {
       flags[argv[i].slice(2)] = true;
     } else {
       positional.push(argv[i]);
     }
   }
   return { target: positional[0] || ".", flags };
+}
+
+function shouldBanner(flags: Record<string, string | boolean>): boolean {
+  return !flags["quiet"] && !flags["no-banner"];
 }
 
 async function main() {
@@ -86,7 +98,12 @@ async function main() {
 }
 
 async function handleScan(targetPath: string, flags: Record<string, string | boolean> = {}) {
-  printBanner();
+  // agenttrust.yaml provides defaults; explicit CLI flags always win.
+  const cfg = loadAgentTrustConfig(process.cwd());
+  if (shouldBanner(flags)) printBanner();
+  const quiet = !!flags["quiet"];
+  const log = (...parts: string[]) => { if (!quiet) console.log(parts.join("")); };
+
   let scanTarget;
   try {
     scanTarget = await resolveScanTarget(targetPath, flags);
@@ -102,57 +119,59 @@ async function handleScan(targetPath: string, flags: Record<string, string | boo
   }
 
   if (scanTarget.type === "github") {
-    console.log(gray("[0/5] Cloned ") + bold(String(scanTarget.url)) + gray(branchSuffix(scanTarget.version)));
+    log(gray("[0/5] Cloned ") + bold(String(scanTarget.url)) + gray(branchSuffix(scanTarget.version)));
   } else if (scanTarget.type === "npm") {
-    console.log(gray("[0/5] Fetched npm package ") + bold(String(scanTarget.name)) + gray(scanTarget.version ? `@${scanTarget.version}` : ""));
+    log(gray("[0/5] Fetched npm package ") + bold(String(scanTarget.name)) + gray(scanTarget.version ? `@${scanTarget.version}` : ""));
   }
-  console.log(gray(`[1/5] Inspecting target capability at: `) + bold(absPath));
+  log(gray(`[1/5] Inspecting target capability at: `) + bold(absPath));
 
-  const detection = await detectCapability(absPath);
-  console.log(gray(`[2/5] Detected capability type: `) + cyan(bold(detection.type)) + gray(` (confidence: ${Math.round(detection.confidence * 100)}%)`));
+  const { detection, findings, permissions, provenance, trustScore, dependencies, trustCard } = await runScan(absPath);
+  log(gray(`[2/5] Detected capability type: `) + cyan(bold(detection.type)) + gray(` (confidence: ${Math.round(detection.confidence * 100)}%)`));
+  log(gray(`[3/5] Executed static security & OWASP rule suite (${findings.length} findings).`));
+  log(gray(`[4/5] Extracted permissions and provenance.`));
+  log(gray(`[5/5] Trust score: ${trustScore.grade} (${trustScore.overall}/100).`));
 
-  console.log(gray(`[3/5] Executing static security & OWASP Agentic Top 10 rule suite...`));
-  const findings = await runStaticAnalysis(absPath);
+  const format = typeof flags["format"] === "string" ? flags["format"] : "terminal";
+  if (!["terminal", "json", "sarif", "md"].includes(format)) {
+    console.error(red(`Error: invalid --format "${format}". Use one of: terminal, json, sarif, md.`));
+    process.exit(2);
+  }
+  if (format === "json") {
+    console.log(JSON.stringify(trustCard, null, 2));
+  } else if (format === "sarif") {
+    console.log(generateSarif(trustCard));
+  } else if (format === "md") {
+    console.log(generateMarkdownReport(trustCard));
+  } else {
+    renderTrustCardTerminal(trustCard, quiet);
+  }
 
-  console.log(gray(`[4/5] Extracting runtime permissions and artifact provenance...`));
-  const permissions = await extractPermissions(absPath);
-  const provenance = await analyzeProvenance(absPath);
-
-  console.log(gray(`[5/5] Synthesizing Agent Trust Score...`));
-  const trustScore = computeTrustScore(findings, permissions, provenance);
-  const dependencies = await scanDependencies(absPath);
-
-  const trustCard = buildTrustCard({
-    capabilityType: detection.type,
-    name: detection.name,
-    version: detection.version,
-    description: detection.description,
-    findings,
-    permissions,
-    provenance,
-    trustScore,
-    dependencies
-  });
-
-  renderTrustCardTerminal(trustCard);
-
+  const outDir = typeof flags["output-dir"] === "string" ? String(flags["output-dir"]) : (cfg.outputDir ?? ".");
+  fs.mkdirSync(outDir, { recursive: true });
   const sarif = generateSarif(trustCard);
   const md = generateMarkdownReport(trustCard);
-  fs.writeFileSync("agenttrust-report.sarif", sarif, "utf8");
-  fs.writeFileSync("agenttrust-report.md", md, "utf8");
-  fs.writeFileSync("trust-card.json", JSON.stringify(trustCard, null, 2), "utf8");
+  const sarifPath = path.join(outDir, "agenttrust-report.sarif");
+  const mdPath = path.join(outDir, "agenttrust-report.md");
+  const cardPath = path.join(outDir, "trust-card.json");
+  fs.writeFileSync(sarifPath, sarif, "utf8");
+  fs.writeFileSync(mdPath, md, "utf8");
+  fs.writeFileSync(cardPath, JSON.stringify(trustCard, null, 2), "utf8");
 
-  console.log(gray("\nGenerated Artifacts:"));
-  console.log(green("  ✓ agenttrust-report.sarif") + gray(" (SARIF 2.1.0 for GitHub Code Scanning)"));
-  console.log(green("  ✓ agenttrust-report.md") + gray(" (Evaluation & compliance audit)"));
-  console.log(green("  ✓ trust-card.json") + gray(" (Machine-readable Trust Card v1)"));
+  log(gray("\nGenerated Artifacts:"));
+  log(green(`  ✓ ${sarifPath}`) + gray(" (SARIF 2.1.0 for GitHub Code Scanning)"));
+  log(green(`  ✓ ${mdPath}`) + gray(" (Findings grouped by OWASP code)"));
+  log(green(`  ✓ ${cardPath}`) + gray(" (Machine-readable Trust Card v1)"));
 
   if (dependencies.length > 0) {
-    const withVulns = dependencies.filter(d => d.vulnerabilities.length > 0).length;
-    console.log(gray(`\nDependencies: ${dependencies.length} declared | ${withVulns} with known vulnerabilities`));
+    log(gray(`\nDependencies: ${dependencies.length} declared | ${dependencies.filter(d => d.vulnerabilities.length > 0).length} with known vulnerabilities`));
+  }
+  if (!quiet) {
+    console.log(gray("\nNext: enforce this in CI:"));
+    console.log(cyan(`  agenttrust scan ${targetPath} --fail-on high --quiet --output-dir ./trust`));
   }
 
-  const failOn = typeof flags["fail-on"] === "string" ? flags["fail-on"] : undefined;
+  const rawFailOn = typeof flags["fail-on"] === "string" ? flags["fail-on"] : cfg.failOn;
+  const failOn = rawFailOn;
   if (failOn) {
     if (!isSeverity(failOn)) {
       console.error(red(`Error: invalid --fail-on value "${failOn}". Use one of: info, low, medium, high, critical.`));
@@ -238,22 +257,13 @@ async function handleEval(suitePath: string) {
 
 async function handleInit() {
   printBanner();
-  const config = `# AgentTrust Configuration
+  // Only keys the scanner actually reads (see loadAgentTrustConfig).
+  const config = `# AgentTrust Configuration (read by \`agenttrust scan\`; CLI flags override)
 version: "1.0"
 target: "."
 failOn: "high"
-
-policies:
-  allowlistHosts:
-    - "api.github.com"
-    - "api.openai.com"
-  requireHumanApproval:
-    - "delete_database"
-    - "execute_payment"
-
-evaluations:
-  suites:
-    - "./tests/agent-workflow.yaml"
+outputDir: "."
+writeFiles: true
 `;
   fs.writeFileSync("agenttrust.yaml", config, "utf8");
   console.log(green("✓ Initialized agenttrust.yaml configuration file."));
@@ -271,7 +281,8 @@ async function handleBadge(targetPath: string) {
   const badgeUrl = `https://img.shields.io/badge/AgentTrust-${score.grade}%20(${score.overall}%2F100)-${color}`;
 
   console.log(bold("Embeddable Markdown Badge:"));
-  console.log(cyan(`[![AgentTrust Score](${badgeUrl})](https://agenttrust.dev/card/${detection.name})`));
+  console.log(gray("Public report pages are not hosted yet — the badge links to agenttrust.dev for now."));
+  console.log(cyan(`[![AgentTrust Score](${badgeUrl})](https://agenttrust.dev)`));
 }
 
 async function handleRegistry() {
@@ -293,9 +304,20 @@ async function handleRegistry() {
   }
 }
 
-function renderTrustCardTerminal(card: any) {
+function renderTrustCardTerminal(card: any, quiet = false) {
   const { subject, trustScore, security, permissions, provenance } = card;
   const gradeColor = trustScore.grade === "A" ? green : trustScore.grade === "B" ? cyan : trustScore.grade === "C" ? yellow : red;
+
+  if (quiet) {
+    console.log(`Trust Grade: ${trustScore.grade} (${trustScore.overall}/100) | Findings: ${security.totalFindings} (${security.criticalCount} critical, ${security.highCount} high) | Scope: ${permissions.estimatedScope}`);
+    const top = [...security.findings]
+      .sort((a: any, b: any) => (a.severity === b.severity ? 0 : a.severity === "critical" ? -1 : 1))
+      .slice(0, 5);
+    for (const f of top) {
+      console.log(`  [${String(f.severity).toUpperCase()}] ${f.title} (${f.file || "global"}:${f.line || 1}) ${f.rule} ${f.owaspCode}`);
+    }
+    return;
+  }
 
   console.log(bold("\n" + "═".repeat(60)));
   console.log(bold(`  AGENTTRUST CARD: ${subject.name} `) + gray(`(${subject.type})`));
@@ -304,7 +326,7 @@ function renderTrustCardTerminal(card: any) {
   console.log(`  Confidence:        ${bold(trustScore.confidence.toUpperCase())}`);
   console.log(`  Security Score:    ${trustScore.breakdown.security}/100`);
   console.log(`  Permission Scope:  ${bold(permissions.estimatedScope.toUpperCase())}`);
-  console.log(`  Provenance:        ${provenance.isVerified ? green("Verified Safe") : yellow("Unverified Origin")}`);
+  console.log(`  Provenance:        ${provenance.isVerified ? green("Signals present (license+lockfile+policy)") : yellow("Unverified origin")}`);
   console.log(`  Shell Access:      ${permissions.shell ? red("ENABLED") : green("DISABLED")}`);
   console.log(`  Network Egress:    ${permissions.canMakeHTTPRequests ? yellow("HTTP/HTTPS Outbound") : green("NONE")}`);
   console.log(`  Human In The Loop: ${permissions.humanApprovalRequired.length > 0 ? green("ENFORCED") : gray("NONE")}`);
@@ -313,14 +335,16 @@ function renderTrustCardTerminal(card: any) {
   console.log("═".repeat(60) + "\n");
 
   if (security.findings.length > 0) {
-    console.log(bold(yellow(`⚠️  Security Findings (${security.totalFindings}):`)));
-    for (const f of security.findings) {
+    console.log(bold(yellow(`⚠️  Security Findings (${security.totalFindings}) — fix criticals first:`)));
+    const rank: Record<string, number> = { critical: 0, high: 1, medium: 2, low: 3, info: 4 };
+    const ordered = [...security.findings].sort((a, b) => (rank[a.severity] ?? 5) - (rank[b.severity] ?? 5));
+    for (const f of ordered) {
       const sColor = f.severity === "critical" ? red : f.severity === "high" ? red : yellow;
       console.log(`  ${sColor("[" + f.severity.toUpperCase() + "]")} ${bold(f.title)} ` + gray(`(${f.file || "global"}:${f.line || 1})`));
       console.log(gray(`         Rule: ${f.rule} (${f.owaspCode}) | Remediation: ${f.remediation}`));
     }
   } else {
-    console.log(green("  ✓ No security vulnerabilities or excessive agency detected."));
+    console.log(green("  ✓ No security findings in scope of the 8-rule static suite."));
   }
 }
 
@@ -330,6 +354,11 @@ function printHelp() {
   console.log("      --github            Treat <owner/repo> as a GitHub repository (URLs are auto-detected)");
   console.log("      --npm               Treat target as an npm package name (scans the published tarball)");
   console.log("      --fail-on <sev>     Exit 1 when findings meet or exceed severity: info|low|medium|high|critical");
+  console.log("      --format <fmt>      Stdout rendering: terminal|json|sarif|md (default: terminal)");
+  console.log("      --output-dir <dir>  Where to write trust-card.json + reports (default: ., or agenttrust.yaml outputDir)");
+  console.log("      --quiet             Compact one-line summary, no banner/progress (CI-friendly)");
+  console.log("      --no-banner         Suppress the ASCII banner");
+  console.log("      --no-color          Disable ANSI colors (also auto-disabled when not a TTY)");
   console.log("  agenttrust attack <path-or-repo>  Run OWASP-aligned adversarial attack analysis (static-heuristic mode)");
   console.log("  agenttrust eval <workflow.yaml>   Parse & validate workflow suite (simulation mode)");
   console.log("  agenttrust badge <path>           Generate embeddable markdown badge");

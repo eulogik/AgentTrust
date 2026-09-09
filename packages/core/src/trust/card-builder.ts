@@ -1,4 +1,5 @@
 import type { TrustCard, Finding, PermissionManifest, ProvenanceInfo, TrustScore, CapabilityType, Severity, DependencyInfo } from "../types/index.js";
+import { inferCompatibility } from "./compatibility.js";
 
 export function buildTrustCard(options: {
   capabilityType: CapabilityType;
@@ -63,13 +64,7 @@ export function buildTrustCard(options: {
       list: depList
     },
     trustScore: options.trustScore,
-    compatibility: [
-      "claude-code",
-      "cursor",
-      "openclaw",
-      "mcp-host",
-      "langgraph"
-    ],
+    compatibility: inferCompatibility(options.capabilityType),
     tags
   };
 }

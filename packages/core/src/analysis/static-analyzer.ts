@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { Finding, Severity } from "../types/index.js";
+import { walkFiles } from "../util/fs-walk.js";
+import { stableFindingId } from "../util/finding-id.js";
 
 interface RuleDef {
   rule: string;
@@ -11,8 +13,27 @@ interface RuleDef {
   cwe: string;
   description: string;
   remediation: string;
+  /** "code" (default) = source files only; "codeAndData" = also JSON/YAML. Markdown docs are never pattern-scanned. */
+  scope?: "code" | "codeAndData";
   pattern?: RegExp | RegExp[];
   validator?: (content: string, filePath: string) => { match: boolean; line?: number; evidence?: string };
+}
+
+/** Source extensions eligible for code-pattern rules. */
+const CODE_EXTS = new Set([".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".py"]);
+/** Secret scanning additionally covers structured data files (never prose docs). */
+const SECRET_EXTS = new Set([...CODE_EXTS, ".json", ".yaml", ".yml"]);
+
+/**
+ * Lines shaped like the scanner's own rule DSL (`rule:`, `title:`, `pattern:`,
+ * `remediation:`, … keys whose string values can mention e.g. `eval()`) are
+ * meta, not target code — never flag them. Deliberately NOT based on rule-ID
+ * substrings, so real findings in files that merely mention a rule ID in a
+ * comment are still reported.
+ */
+const RULE_DSL_KEY = /^(?:rule|title|severity|category|owaspCode|cwe|description|remediation|pattern|scope)\s*:/;
+function isRuleMetaLine(trimmed: string): boolean {
+  return RULE_DSL_KEY.test(trimmed);
 }
 
 // owaspCode references the canonical OWASP lists:
@@ -44,6 +65,7 @@ const RULES: RuleDef[] = [
     cwe: "CWE-798",
     description: "A hardcoded API key, private token, or secret was identified in source code.",
     remediation: "Move credentials to secure environment variables or a key vault. Never commit API keys.",
+    scope: "codeAndData",
     pattern: /(?:api_?key|secret|password|bearer|auth_?token)[a-zA-Z0-9_]*\s*=\s*["'][a-zA-Z0-9_\-.]{20,}["']/i
   },
   {
@@ -111,10 +133,15 @@ const RULES: RuleDef[] = [
     description: "Irreversible actions (e.g. database wipe, financial transaction, email dispatch) execute autonomously with no approval trigger.",
     remediation: "Mark high-impact tools with approval requirements and verify operator signature before dispatch.",
     validator: (content: string) => {
-      const hasDestructiveAction = /(?:transferFunds|sendEmail|dropTable|deleteUser|publishArticle|executeTrade)/i.test(content);
-      const hasApproval = /(?:requireApproval|humanInTheLoop|confirmAction|operatorConsent)/i.test(content);
-      if (hasDestructiveAction && !hasApproval) {
-        return { match: true, evidence: "High-impact function detected without approval validation" };
+      // Require an actual call (identifier + paren) so type/field names such as
+      // `canSendEmail` do not self-flag. Previously the bare-substring match
+      // flagged the scanner's own PermissionManifest type as a finding.
+      const call = /\b(transferFunds|sendEmail|dropTable|deleteUser|publishArticle|executeTrade)\s*\(/i.exec(content);
+      if (!call) return { match: false };
+      const hasApproval = /(?:requireApproval|humanInTheLoop|confirmAction|operatorConsent|humanApprovalRequired)/i.test(content);
+      if (!hasApproval) {
+        const line = content.slice(0, call.index).split("\n").length;
+        return { match: true, line, evidence: `High-impact call ${call[1]}(...) detected without approval validation` };
       }
       return { match: false };
     }
@@ -123,10 +150,19 @@ const RULES: RuleDef[] = [
 
 export async function runStaticAnalysis(dirPath: string): Promise<Finding[]> {
   const findings: Finding[] = [];
-  const files = collectScannableFiles(dirPath);
+  const seen = new Set<string>();
+  const push = (f: Finding) => {
+    if (seen.has(f.id)) return;
+    seen.add(f.id);
+    findings.push(f);
+  };
+
+  const files = walkFiles(dirPath, { extensions: SECRET_EXTS });
 
   for (const file of files) {
     const relPath = path.relative(dirPath, file);
+    const ext = path.extname(file).toLowerCase();
+    const isCode = CODE_EXTS.has(ext);
     let content = "";
     try {
       content = fs.readFileSync(file, "utf8");
@@ -137,15 +173,20 @@ export async function runStaticAnalysis(dirPath: string): Promise<Finding[]> {
     const lines = content.split("\n");
 
     for (const rule of RULES) {
+      const inScope = rule.scope === "codeAndData" ? true : isCode;
+      if (!inScope) continue;
       const patterns = rule.pattern ? (Array.isArray(rule.pattern) ? rule.pattern : [rule.pattern]) : [];
       for (const pattern of patterns) {
         lines.forEach((line, index) => {
           const trimmed = line.trim();
           if (trimmed.startsWith("//") || trimmed.startsWith("#") || trimmed.startsWith("*")) return;
+          if (isRuleMetaLine(trimmed)) return;
 
+          pattern.lastIndex = 0;
           if (pattern.test(line)) {
-            findings.push({
-              id: `${rule.rule}-${Math.random().toString(36).slice(2, 7)}`,
+            const evidence = trimmed.slice(0, 140);
+            push({
+              id: stableFindingId(rule.rule, relPath, index + 1, evidence),
               title: rule.title,
               description: rule.description,
               severity: rule.severity,
@@ -156,21 +197,22 @@ export async function runStaticAnalysis(dirPath: string): Promise<Finding[]> {
               remediation: rule.remediation,
               cwe: rule.cwe,
               owaspCode: rule.owaspCode,
-              evidence: trimmed.slice(0, 140)
+              evidence
             });
           }
         });
       }
-      if (rule.validator) {
+      if (rule.validator && isCode) {
         const valRes = rule.validator(content, relPath);
         if (valRes.match) {
-          findings.push({
-            id: `${rule.rule}-${Math.random().toString(36).slice(2, 7)}`,
+          push({
+            id: stableFindingId(rule.rule, relPath, valRes.line, valRes.evidence),
             title: rule.title,
             description: rule.description,
             severity: rule.severity,
             category: rule.category,
             file: relPath,
+            line: valRes.line,
             rule: rule.rule,
             remediation: rule.remediation,
             cwe: rule.cwe,
@@ -183,34 +225,4 @@ export async function runStaticAnalysis(dirPath: string): Promise<Finding[]> {
   }
 
   return findings;
-}
-
-function collectScannableFiles(dir: string): string[] {
-  const result: string[] = [];
-  const ignored = new Set(["node_modules", ".git", "dist", "build", ".venv", "__pycache__"]);
-
-  function walk(current: string) {
-    let entries: fs.Dirent[] = [];
-    try {
-      entries = fs.readdirSync(current, { withFileTypes: true });
-    } catch {
-      return;
-    }
-
-    for (const entry of entries) {
-      if (ignored.has(entry.name)) continue;
-      const full = path.join(current, entry.name);
-      if (entry.isDirectory()) {
-        walk(full);
-      } else if (entry.isFile()) {
-        const ext = path.extname(entry.name).toLowerCase();
-        if ([".ts", ".js", ".mjs", ".cjs", ".py", ".json", ".yaml", ".yml", ".md"].includes(ext)) {
-          result.push(full);
-        }
-      }
-    }
-  }
-
-  walk(dir);
-  return result;
 }

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AgentTrust — Trust & Security Audits for AI Agents & MCP Servers</title>
-  <meta name="description" content="Get a verifiable security audit for your AI agent or MCP server. OWASP Agentic AI compliance, Trust Cards, and a public grade badge. Free instant scan.">
+  <meta name="description" content="Scan your AI agent or MCP server with an 8-rule OWASP-mapped static suite. Get a Trust Card with a letter grade and shareable badge. Free CLI, no account.">
   <meta name="keywords" content="AI agent security, MCP server audit, OWASP agentic AI, trust card, AI compliance, EU AI Act, model context protocol security, agent verification">
   <meta name="author" content="Eulogik">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
@@ -14,7 +14,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://agenttrust.dev/">
   <meta property="og:title" content="AgentTrust — Trust & Security Audits for AI Agents & MCP Servers">
-  <meta property="og:description" content="Get a verifiable security audit for your AI agent or MCP server. OWASP compliance, Trust Cards, and a public grade badge. Free instant scan.">
+  <meta property="og:description" content="Scan your AI agent or MCP server with an 8-rule OWASP-mapped static suite. Get a Trust Card with a letter grade and shareable badge.">
   <meta property="og:image" content="https://agenttrust.dev/og-image.png">
   <meta property="og:site_name" content="AgentTrust">
 
@@ -90,7 +90,7 @@
         "name": "Is AgentTrust compliant with the EU AI Act?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "AgentTrust generates compliance-ready evidence artifacts including permission manifests, human-in-the-loop verification records, and audit trails that map to EU AI Act Article 50 transparency obligations and deployer obligations under Articles 26-27. The Trust Card provides timestamped, versioned evidence suitable for regulatory submissions."
+          "text": "AgentTrust exports permission manifests, human-in-the-loop records, and audit trails that you can attach to an EU AI Act compliance review (e.g. Article 50 transparency records). It is a static scanner, not a certification body — treat the Trust Card as evidence input, not a compliance verdict."
         }
       },
       {
@@ -108,8 +108,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "AgentTrust Professional Audit",
-    "description": "Manual expert security audit of your AI agent or MCP server with detailed remediation plan.",
+    "name": "AgentTrust Expert Review",
+    "description": "Manual expert review of your AI agent or MCP server scan results with remediation guidance. The CLI scanner is the product; reviews are scoped on request.",
     "brand": { "@type": "Brand", "name": "AgentTrust" },
     "offers": {
       "@type": "AggregateOffer",
@@ -235,11 +235,11 @@
       </div>
       <div class="flex items-center gap-3">
         <a href="#free-scan" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-brand-400 hover:text-white transition-colors">
-          Free Scan
+          Sample scan
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <a href="#pricing" class="btn-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white shadow-lg shadow-brand-500/20">
-          Get Audited
+          Pricing
         </a>
       </div>
     </div>
@@ -256,7 +256,7 @@
         <!-- Trust pill -->
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-500/30 bg-brand-500/10 text-brand-300 text-xs font-medium mb-8 badge-pulse">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-          OWASP Agentic AI &amp; LLM Top 10 Compliant
+          OWASP-mapped &middot; Agentic + LLM Top 10
         </div>
 
         <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6">
@@ -271,22 +271,23 @@
         </p>
 
         <!-- CTAs -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-          <a href="#free-scan" class="btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-base font-bold text-white shadow-xl shadow-brand-500/20">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            Scan for Free
-          </a>
-          <a href="#pricing" class="btn-outline w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-base font-semibold text-white">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Get a Professional Audit
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+          <button onclick="copyHeroInstall()" class="btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-base font-bold text-white shadow-xl shadow-brand-500/20">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            <span id="hero-install-label" class="mono text-sm">npx agenttrust scan .</span>
+          </button>
+          <a href="https://github.com/eulogik/AgentTrust" class="btn-outline w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-base font-semibold text-white">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            View on GitHub
           </a>
         </div>
+        <p class="mb-12 text-sm text-slate-500">Click to copy the install command · <a href="#free-scan" class="text-brand-400 hover:text-white transition-colors underline underline-offset-4">or try the interactive sample below</a></p>
 
         <!-- Social proof line -->
         <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-slate-500">
           <span class="flex items-center gap-1.5">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            Free instant scan
+            Free CLI scan
           </span>
           <span class="flex items-center gap-1.5">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -336,7 +337,7 @@
         </div>
         <div class="flex items-center gap-2 text-slate-400">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          <span class="text-sm font-semibold">EU AI Act Article 50</span>
+          <span class="text-sm font-semibold">SARIF 2.1.0 + CI gate</span>
         </div>
         <div class="flex items-center gap-2 text-slate-400">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
@@ -470,7 +471,7 @@
               </div>
               <div class="text-xs text-slate-400 mb-3">Embed in your README:</div>
               <div class="bg-slate-800/80 rounded-lg p-3 text-left">
-                <code class="mono text-xs text-brand-300 break-all leading-relaxed">[![AgentTrust](https://agenttrust.dev/badge/a.svg)](https://agenttrust.dev/report/acme-data-sync)</code>
+                <code class="mono text-xs text-brand-300 break-all leading-relaxed">[![AgentTrust](https://agenttrust.dev/badge/a.svg)](https://agenttrust.dev)</code>
               </div>
             </div>
 
@@ -523,7 +524,7 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
           </div>
           <h3 class="font-bold text-white mb-1.5">Static Analysis</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">18 detection rules across shell injection, secret leaks, prompt injection, tool exploitation, and more.</p>
+          <p class="text-slate-400 text-sm leading-relaxed">8 detection rules across shell injection, secret leaks, prompt injection, tool exploitation, and more.</p>
         </div>
 
         <div class="scroll-fade card-glass rounded-xl p-6 card-glow transition-all duration-300">
@@ -577,21 +578,20 @@
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-10 scroll-fade">
           <h2 id="scan-heading" class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">Try it now — free</h2>
-          <p class="text-slate-400 text-lg">No account. No telemetry. Results in seconds.</p>
+          <p class="text-slate-400 text-lg">Interactive sample from the repo fixtures. No account. No telemetry.</p>
+          <p class="text-slate-500 text-sm mt-2">For live results, run the CLI: <code class="mono text-brand-300 text-xs bg-brand-500/10 px-1.5 py-0.5 rounded">npx agenttrust scan .</code></p>
         </div>
 
         <div class="scroll-fade card-glass rounded-2xl p-6 sm:p-8 border border-slate-700/60">
-          <!-- Scan input -->
+          <!-- Sample picker (outputs are pre-rendered from the repo fixtures, not a live scan) -->
           <div class="flex flex-col sm:flex-row gap-3 mb-6">
-            <div class="flex-1 relative">
-              <div class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              </div>
-              <input id="scan-input" type="text" placeholder="github.com/org/repo or npm package name" class="w-full pl-10 pr-4 py-3.5 bg-slate-800/80 border border-slate-700 rounded-xl text-white placeholder-slate-500 mono text-sm focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500/50 transition-all" value="eulogik/AgentTrust">
-            </div>
-            <button onclick="runDemoScan()" class="btn-primary px-6 py-3.5 rounded-xl text-sm font-bold text-white whitespace-nowrap inline-flex items-center justify-center gap-2">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-              Scan
+            <button onclick="runDemoScan('secure-agent-skill')" class="flex-1 px-4 py-3.5 rounded-xl text-sm font-semibold text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all text-left">
+              <span class="mono text-xs">examples/secure-agent-skill</span>
+              <span class="block text-xs text-slate-400 mt-1">Grade B · 88/100 · 0 findings</span>
+            </button>
+            <button onclick="runDemoScan('vulnerable-mcp-server')" class="flex-1 px-4 py-3.5 rounded-xl text-sm font-semibold text-rose-300 bg-rose-500/10 border border-rose-500/30 hover:bg-rose-500/20 transition-all text-left">
+              <span class="mono text-xs">examples/vulnerable-mcp-server</span>
+              <span class="block text-xs text-slate-400 mt-1">Grade F · 33/100 · 5 findings</span>
             </button>
           </div>
 
@@ -600,8 +600,8 @@
             <div class="border-t border-slate-700/60 pt-6">
               <div class="flex items-center justify-between mb-4">
                 <div>
-                  <div class="text-[10px] uppercase tracking-widest text-slate-500 font-medium">Instant Scan Result</div>
-                  <div class="text-lg font-bold text-white mono" id="result-name">eulogik/AgentTrust</div>
+                  <div class="text-[10px] uppercase tracking-widest text-slate-500 font-medium">Sample result (pre-rendered, not live)</div>
+                  <div class="text-lg font-bold text-white mono" id="result-name">examples/secure-agent-skill</div>
                 </div>
                 <div id="result-grade" class="px-4 py-2 rounded-xl font-extrabold text-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">B</div>
               </div>
@@ -612,7 +612,7 @@
                 </div>
                 <div class="bg-slate-800/60 rounded-lg p-3">
                   <div class="text-slate-500 mb-1">Findings</div>
-                  <div class="font-bold text-white text-base" id="result-findings">3</div>
+                  <div class="font-bold text-white text-base" id="result-findings">0 (0 critical, 0 high)</div>
                 </div>
                 <div class="bg-slate-800/60 rounded-lg p-3">
                   <div class="text-slate-500 mb-1">Critical</div>
@@ -630,7 +630,7 @@
               <div class="flex flex-col sm:flex-row gap-3">
                 <div class="flex-1 bg-slate-800/60 rounded-lg p-3">
                   <div class="text-[10px] text-slate-500 mb-1">Embed badge</div>
-                  <code class="mono text-[11px] text-brand-300 break-all" id="result-badge-code">[![AgentTrust](https://agenttrust.dev/badge/b.svg)](https://agenttrust.dev/report/eulogik/AgentTrust)</code>
+                  <code class="mono text-[11px] text-brand-300 break-all" id="result-badge-code">[![AgentTrust](https://agenttrust.dev/badge/b.svg)](https://agenttrust.dev)</code>
                 </div>
                 <a href="#pricing" class="btn-primary inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-white shrink-0">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -660,8 +660,8 @@
   <section id="pricing" class="py-20 md:py-28" aria-labelledby="pricing-heading">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="text-center mb-16 scroll-fade">
-        <h2 id="pricing-heading" class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">Professional Audits</h2>
-        <p class="text-slate-400 text-lg max-w-xl mx-auto">From free self-serve scans to expert-led security assessments.</p>
+        <h2 id="pricing-heading" class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">Pricing</h2>
+        <p class="text-slate-400 text-lg max-w-xl mx-auto">The CLI is free forever. Expert help is available on request.</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -702,13 +702,13 @@
 
         <!-- Professional (popular) -->
         <div class="scroll-fade pricing-popular rounded-2xl p-8 flex flex-col relative">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-brand-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Most Popular</div>
-          <div class="text-xs font-bold text-brand-400 mono tracking-widest mb-3">PROFESSIONAL AUDIT</div>
+          
+          <div class="text-xs font-bold text-brand-400 mono tracking-widest mb-3">EXPERT REVIEW</div>
           <div class="mb-1">
             <span class="text-4xl font-extrabold text-white">$2,500</span>
             <span class="text-sm text-slate-400 ml-1">per target</span>
           </div>
-          <p class="text-sm text-slate-400 mb-6">2-week engagement. Expert-led assessment.</p>
+          <p class="text-sm text-slate-400 mb-6">Manual review on request. The CLI stays the product.</p>
           <ul class="space-y-3 text-sm text-slate-300 mb-8 flex-1">
             <li class="flex items-start gap-2.5">
               <svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
@@ -724,7 +724,7 @@
             </li>
             <li class="flex items-start gap-2.5">
               <svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-              EU AI Act evidence pack
+              Compliance evidence helpers
             </li>
             <li class="flex items-start gap-2.5">
               <svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
@@ -732,11 +732,11 @@
             </li>
             <li class="flex items-start gap-2.5">
               <svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-              Certified badge (A–F)
+              Grade badge (A–F)
             </li>
           </ul>
           <a href="mailto:audit@agenttrust.dev?subject=Professional%20Audit%20Request" class="btn-primary w-full inline-flex items-center justify-center py-3 rounded-xl text-sm font-bold text-white shadow-lg shadow-brand-500/20">
-            Book Audit
+            Request review
           </a>
         </div>
 
@@ -784,12 +784,12 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
         <div class="scroll-fade">
-          <div class="text-3xl md:text-4xl font-extrabold text-white mb-1 stat-counter">8+</div>
-          <div class="text-sm text-slate-400">OWASP Agentic AI rules</div>
+          <div class="text-3xl md:text-4xl font-extrabold text-white mb-1 stat-counter">8</div>
+          <div class="text-sm text-slate-400">Detection rules</div>
         </div>
         <div class="scroll-fade">
-          <div class="text-3xl md:text-4xl font-extrabold text-white mb-1 stat-counter">18</div>
-          <div class="text-sm text-slate-400">Detection rules total</div>
+          <div class="text-3xl md:text-4xl font-extrabold text-white mb-1 stat-counter">2</div>
+          <div class="text-sm text-slate-400">OWASP lists mapped</div>
         </div>
         <div class="scroll-fade">
           <div class="text-3xl md:text-4xl font-extrabold text-white mb-1 stat-counter">&lt;5s</div>
@@ -859,7 +859,7 @@
             <svg class="shrink-0 text-slate-400 transition-transform duration-200" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-answer px-6 pb-5 text-sm text-slate-400 leading-relaxed">
-            AgentTrust generates compliance-ready evidence artifacts including permission manifests, human-in-the-loop verification records, and audit trails that map to EU AI Act Article 50 transparency obligations and deployer obligations under Articles 26–27. The Trust Card provides timestamped, versioned evidence suitable for regulatory submissions.
+            AgentTrust exports permission manifests, human-in-the-loop records, and audit trails that you can attach to an EU AI Act compliance review (e.g. Article 50 transparency records). It is a static scanner, not a certification body — treat the Trust Card as evidence input, not a compliance verdict.
           </div>
         </div>
 
@@ -915,8 +915,8 @@
         <div>
           <h4 class="font-semibold text-white text-sm mb-3">Product</h4>
           <ul class="space-y-2 text-sm text-slate-400">
-            <li><a href="#free-scan" class="hover:text-white transition-colors">Free Scan</a></li>
-            <li><a href="#pricing" class="hover:text-white transition-colors">Professional Audits</a></li>
+            <li><a href="#free-scan" class="hover:text-white transition-colors">Sample scan</a></li>
+            <li><a href="#pricing" class="hover:text-white transition-colors">Pricing</a></li>
             <li><a href="https://www.npmjs.com/package/agenttrust" class="hover:text-white transition-colors">npm Package</a></li>
             <li><a href="https://github.com/eulogik/AgentTrust" class="hover:text-white transition-colors">GitHub</a></li>
           </ul>
@@ -956,19 +956,19 @@
   <!-- ═══════════════════ SCRIPTS ═══════════════════ -->
   <script>
   // --- Terminal typing animation ---
-  const cmd = 'npx agenttrust scan eulogik/AgentTrust';
+  const cmd = 'npx agenttrust scan examples/secure-agent-skill';
   const results = [
     { text: '', delay: 600 },
     { text: '  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510', delay: 100 },
     { text: '  \u2502 AgentTrust v0.1.0                  ', delay: 50 },
-    { text: '  \u2502 Scanning: eulogik/AgentTrust (GitHub) ', delay: 50 },
+    { text: '  \u2502 Sample: examples/secure-agent-skill               ', delay: 50 },
     { text: '  \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500', delay: 50 },
     { text: '  \u2502 Trust Score:    88 / 100', delay: 80 },
     { text: '  \u2502 Grade:          \x1b[32mB\x1b[0m', delay: 80 },
-    { text: '  \u2502 Findings:       3 (0 critical, 0 high)', delay: 80 },
-    { text: '  \u2502 OWASP Agentic:  ASI01 \u2713  ASI02 \u2713  ASI03 \u2713', delay: 80 },
-    { text: '  \u2502 OWASP LLM:      LLM01 \u2713  LLM08 \u2713  LLM10 \u2713', delay: 80 },
-    { text: '  \u2502 Dependencies:   0 vulnerabilities', delay: 80 },
+    { text: '  \u2502 Findings:       0 (0 critical, 0 high)', delay: 80 },
+    { text: '  \u2502 Scope:           MINIMAL', delay: 80 },
+    { text: '  \u2502 Provenance:      signals present', delay: 80 },
+    { text: '  \u2502 Rules:           8 static (OWASP-mapped)', delay: 80 },
     { text: '  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500', delay: 50 },
     { text: '', delay: 100 },
     { text: '  \u2714 trust-card.json', delay: 50 },
@@ -1044,62 +1044,39 @@
   }
 
 
-  // --- Free scan demo ---
+  // --- Sample scan demo (pre-rendered outputs from the repo fixtures) ---
+  // Verified against real CLI runs: `node packages/cli/dist/index.js scan examples/<fixture>`.
+  // Secure fixture: B 88/100, 0 findings. Vulnerable fixture: F 33/100, 5 findings.
   const demoScans = {
-    'eulogik/AgentTrust': { grade: 'B', score: '88/100', findings: '3', name: 'eulogik/AgentTrust', output: `\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510
-\u2502 Trust Score:    88 / 100
-\u2502 Grade:          B
-\u2502 Findings:       3 (0 critical, 0 high)
-\u2502 OWASP Agentic:  ASI01 \u2713  ASI02 \u2713  ASI03 \u2713
-\u2502 Dependencies:   0 vulnerabilities
-\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
-
-\u2714 trust-card.json
-\u2714 agenttrust-report.sarif`, badge: 'b' },
-    'vulnerable-mcp-server': { grade: 'F', score: '32/100', findings: '11', name: 'vulnerable-mcp-server', output: `\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510
-\u2502 Trust Score:    32 / 100
-\u2502 Grade:          F
-\u2502 Findings:       11 (4 critical, 3 high)
-\u2502 OWASP Agentic:  ASI02 \u2717  ASI03 \u2717
-\u2502 OWASP LLM:      LLM01 \u2717  LLM08 \u2717
-\u2502 Dependencies:   3 vulnerabilities
-\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
-
-\u2718 CRITICAL  Shell injection (ASI02)
-\u2718 CRITICAL  Hardcoded secrets (LLM08)
-\u2718 CRITICAL  Goal hijack (ASI01)`, badge: 'f' },
-    'secure-agent-skill': { grade: 'A', score: '96/100', findings: '1', name: 'secure-agent-skill', output: `\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510
-\u2502 Trust Score:    96 / 100
-\u2502 Grade:          A
-\u2502 Findings:       1 (0 critical, 0 high)
-\u2502 OWASP Agentic:  ASI01 \u2713  ASI02 \u2713  ASI03 \u2713
-\u2502 Dependencies:   0 vulnerabilities
-\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
-
-\u2714 trust-card.json
-\u2714 agenttrust-report.sarif`, badge: 'a' }
+    'secure-agent-skill': { grade: 'B', score: '88/100', findings: '0', crit: '0 critical, 0 high', name: 'examples/secure-agent-skill', output: `Trust Grade: B (88/100) | Findings: 0 (0 critical, 0 high) | Scope: minimal\n\n\u2714 trust-card.json\n\u2714 agenttrust-report.sarif\n\u2714 agenttrust-report.md`, badge: 'b' },
+    'vulnerable-mcp-server': { grade: 'F', score: '33/100', findings: '5', crit: '3 critical, 1 high, 1 medium', name: 'examples/vulnerable-mcp-server', output: `Trust Grade: F (33/100) | Findings: 5 (3 critical, 1 high) | Scope: excessive\n\n[CRITICAL] Direct Prompt Concatenation (server.ts:24) AT-SEC-001 LLM01\n[CRITICAL] Hardcoded Credential (server.ts:11) AT-SEC-002 LLM02\n[CRITICAL] Unbounded Shell Execution (server.ts:16) AT-SEC-003 ASI02\n[HIGH] Unrestricted File Deletion (server.ts:31) AT-SEC-005 ASI02\n[MEDIUM] Secret Leakage in Logging (server.ts:25) AT-SEC-007 LLM02`, badge: 'f' }
   };
 
-  function runDemoScan() {
-    const input = document.getElementById('scan-input').value.trim().toLowerCase();
+  function runDemoScan(key) {
     const resultsDiv = document.getElementById('scan-results');
-    let match = demoScans['eulogik/AgentTrust'];
-    for (const [k, v] of Object.entries(demoScans)) {
-      if (input.includes(k.toLowerCase()) || input.includes(k.replace('/', '').toLowerCase())) { match = v; break; }
-    }
+    const match = demoScans[key] || demoScans['secure-agent-skill'];
     document.getElementById('result-name').textContent = match.name;
     document.getElementById('result-score').textContent = match.score;
-    document.getElementById('result-findings').textContent = match.findings;
+    document.getElementById('result-findings').textContent = match.findings + ' (' + match.crit + ')';
     document.getElementById('result-grade').textContent = match.grade;
     document.getElementById('result-output').textContent = match.output;
     const gradeColors = { 'A': 'emerald', 'B': 'emerald', 'C': 'amber', 'D': 'rose', 'F': 'rose' };
     const c = gradeColors[match.grade] || 'slate';
     document.getElementById('result-grade').className = 'px-4 py-2 rounded-xl font-extrabold text-2xl bg-' + c + '-500/10 border border-' + c + '-500/30 text-' + c + '-400';
-    document.getElementById('result-badge-code').textContent = '[![AgentTrust](https://agenttrust.dev/badge/' + match.badge + '.svg)](https://agenttrust.dev/report/' + match.name + ')';
+    document.getElementById('result-badge-code').textContent = '[![AgentTrust](https://agenttrust.dev/badge/' + match.badge + '.svg)](https://agenttrust.dev)';
     resultsDiv.classList.remove('hidden');
     resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
+
+  // --- Copy install command (hero + local) ---
+  function copyHeroInstall() {
+    navigator.clipboard.writeText('npx agenttrust scan .').then(() => {
+      const label = document.getElementById('hero-install-label');
+      label.textContent = 'Copied — paste into your terminal';
+      setTimeout(() => { label.textContent = 'npx agenttrust scan .'; }, 2000);
+    });
+  }
 
   // --- Copy install command ---
   function copyInstall() {

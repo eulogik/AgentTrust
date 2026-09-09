@@ -64,8 +64,10 @@ npx agenttrust eval ./tests/workflow.yaml
 Embed your trust score in your README:
 
 ```markdown
-[![AgentTrust](https://agenttrust.dev/badge/a.svg)](https://agenttrust.dev/report/your-org/your-repo)
+[![AgentTrust](https://agenttrust.dev/badge/a.svg)](https://agenttrust.dev)
 ```
+
+(Public per-repo report pages are not hosted yet — badges link to the homepage for now.)
 
 This tells buyers, auditors, and AI hosts that your agent has been verified.
 
@@ -85,19 +87,24 @@ This tells buyers, auditors, and AI hosts that your agent has been verified.
 - **CI integration** — `--fail-on` severity gate for pipeline enforcement
 - **GitHub Action** — Drop-in composite action for workflows
 - **GitHub URL detection** — Scan any public repo by URL
-- **EU AI Act evidence** — Timestamped, versioned artifacts for Article 50 compliance
+- **Compliance helpers** — Permission manifests and audit trails to attach to an EU AI Act review (evidence input, not a certification)
 
-## Professional Audits
+## What the scanner is (and isn't)
 
-Need a deeper assessment? [Get a professional audit](mailto:audit@agenttrust.dev?subject=Professional%20Audit%20Request) with manual code review, custom remediation plan, and EU AI Act evidence pack.
+- **8-rule static suite**, OWASP-mapped (Agentic ASI01–ASI10, LLM LLM01–LLM10). Regex-based today — no AST yet.
+- **`attack` is static-heuristic**: it re-analyzes scan findings + permissions. No payloads execute.
+- **`eval` is simulation mode**: suites are parsed and validated; nothing runs, costs/durations stay 0.
+- **Not a certification.** The Trust Card is a CI-grade credential, not a pentest or legal verdict.
+
+## Expert reviews
+
+Need a human pass over your results? [Request a review](mailto:audit@agenttrust.dev?subject=Expert%20Review%20Request) — manual result triage plus a remediation plan, scoped per target. The CLI stays the product and is free forever.
 
 | Tier | Price | What You Get |
 |------|-------|-------------|
-| **Self-Serve** | Free | Unlimited local scans, Trust Card, badge, OWASP findings, SARIF |
-| **Professional** | $2,500/target | Everything in Free + manual review, remediation plan, EU AI Act pack, debrief call |
-| **Enterprise** | Custom | Everything in Professional + continuous monitoring, custom rules, SLA |
-
-[Book an audit →](mailto:audit@agenttrust.dev?subject=Audit%20Request)
+| **CLI** | Free | Unlimited local scans, Trust Card, badge, OWASP findings, SARIF, CI gate |
+| **Expert review** | Scoped per target | Everything in CLI + manual triage, remediation plan, debrief call |
+| **Enterprise** | Custom | Everything above + custom rules, evidence helpers, priority support |
 
 ## Monorepo Structure
 

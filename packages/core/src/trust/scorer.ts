@@ -69,7 +69,7 @@ export function computeTrustScore(
   const criticals = findings.filter(f => f.severity === "critical").length;
   const highs = findings.filter(f => f.severity === "high").length;
   
-  let rationale = "Verified safe execution bounds.";
+  let rationale = "No critical or high-severity findings; grade reflects permissions and provenance signals.";
   if (criticals > 0 || highs > 0) {
     rationale = `Score constrained by ${criticals} critical and ${highs} high-severity findings.`;
   } else if (permissions.estimatedScope === "broad" || permissions.estimatedScope === "excessive") {

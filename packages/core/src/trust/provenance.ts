@@ -43,6 +43,9 @@ export async function analyzeProvenance(dirPath: string): Promise<ProvenanceInfo
     } catch {}
   }
 
+  // "Verified" here means documentary provenance signals are present
+  // (license + lockfile + policy/changelog) — it is NOT a safety verdict.
+  // Display layers must not render this as "Verified Safe".
   const isVerified = hasLicense && hasLockfile && (hasSecurityPolicy || hasChangelog);
 
   return {
