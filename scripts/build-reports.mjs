@@ -53,80 +53,149 @@ function badgeSvg(grade, score) {
 
 function breakdownBars(b) {
   return Object.entries(b).map(([k, v]) => `
-    <div style="margin:6px 0"><span style="display:inline-block;width:130px;color:#94a3b8">${esc(k)}</span>
-    <span style="display:inline-block;width:220px;max-width:50vw;background:#1e293b;border-radius:4px;overflow:hidden;vertical-align:middle"><span style="display:block;height:10px;width:${Math.max(0, Math.min(100, v))}%;background:#22d3ee"></span></span>
-    <span style="color:#e2e8f0"> ${v}/100</span></div>`).join("");
+    <div style="display:flex;align-items:center;gap:12px;margin:10px 0"><span style="width:130px;color:var(--muted);font-size:14px">${esc(k)}</span>
+    <span class="bar" style="flex:1"><span style="width:${Math.max(0, Math.min(100, v))}%"></span></span>
+    <span class="mono" style="width:64px;text-align:right">${v}</span></div>`).join("");
 }
 
 function findingsTable(findings) {
   if (!findings.length) return "<p>No findings in scope of the 8-rule static suite.</p>";
   const rank = { critical: 0, high: 1, medium: 2, low: 3, info: 4 };
+  const sevColor = { critical: "var(--bad)", high: "var(--orange)", medium: "var(--warn)", low: "var(--muted)", info: "var(--faint)" };
   const rows = [...findings]
     .sort((a, b) => (rank[a.severity] ?? 5) - (rank[b.severity] ?? 5))
-    .map(f => `<tr><td><strong style="color:${SEV_COLOR[f.severity] || "#94a3b8"}">${esc(String(f.severity).toUpperCase())}</strong></td><td><code>${esc(f.rule)}</code> (${esc(f.owaspCode || "")})</td><td>${esc(f.title)}<br><code style="color:#94a3b8">${esc(f.file || "global")}:${esc(f.line ?? 1)}</code><br><span style="color:#94a3b8">Evidence: </span><code>${esc(f.evidence || "")}</code></td><td>${esc(f.remediation || "")}</td></tr>`)
+    .map(f => `<tr><td><strong style="color:${sevColor[f.severity] || "var(--muted)"}">${esc(String(f.severity).toUpperCase())}</strong></td><td><code>${esc(f.rule)}</code> (${esc(f.owaspCode || "")})</td><td>${esc(f.title)}<br><code class="muted">${esc(f.file || "global")}:${esc(f.line ?? 1)}</code><br><span class="muted">Evidence: </span><code>${esc(f.evidence || "")}</code></td><td>${esc(f.remediation || "")}</td></tr>`)
     .join("");
-  return `<table><thead><tr><th>Severity</th><th>Rule</th><th>Finding</th><th>Remediation</th></tr></thead><tbody>${rows}</tbody></table>`;
+  return `<table class="data"><thead><tr><th>Severity</th><th>Rule</th><th>Finding</th><th>Remediation</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-function reportPage({ slug: sl, title, repoUrl, upstream, card }) {
+function reportPage({ slug: sl, title, repoUrl, upstream, card, rankLine }) {
   const g = card.trustScore.grade;
+  const gc = { A: "gA", B: "gB", C: "gC", D: "gD", F: "gF" }[g] || "";
   const canon = `${SITE}/r/${sl}.html`;
-  const jsonLd = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: `${title} — AgentTrust Grade ${g} (${card.trustScore.overall}/100)`,
-    description: `Static security scan of ${title}: ${card.security.totalFindings} findings (${card.security.criticalCount} critical), permission scope ${card.permissions.estimatedScope}.`,
-    datePublished: SCAN_DATE,
-    author: { "@type": "Organization", name: "AgentTrust", url: SITE }
-  });
+  const fixN = card.security.findings.filter(f => f.severity === "critical" || f.severity === "high").length;
+  const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@graph": [
+    { "@type": "Organization", "@id": `${SITE}/#org`, name: "AgentTrust", url: `${SITE}/`, sameAs: ["https://github.com/eulogik/AgentTrust"] },
+    { "@type": "Article",
+      headline: `${title} — AgentTrust Grade ${g} (${card.trustScore.overall}/100)`,
+      description: `Static security scan of ${title}: ${card.security.totalFindings} findings (${card.security.criticalCount} critical), permission scope ${card.permissions.estimatedScope}.`,
+      datePublished: SCAN_DATE, dateModified: SCAN_DATE,
+      author: { "@id": `${SITE}/#org` }, publisher: { "@id": `${SITE}/#org` },
+      mainEntityOfPage: canon }
+  ]});
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${esc(title)} — Trust Card (Grade ${esc(g)}) · AgentTrust</title>
-<meta name="description" content="Static security scan of ${esc(title)}: grade ${esc(g)} (${card.trustScore.overall}/100), ${card.security.totalFindings} findings, scope ${esc(card.permissions.estimatedScope)}.">
+<meta name="description" content="Static security scan of ${esc(title)}: grade ${esc(g)} (${card.trustScore.overall}/100), ${card.security.totalFindings} findings, scope ${esc(card.permissions.estimatedScope)}. ${esc(rankLine)}.">
 <link rel="canonical" href="${canon}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="${esc(title)} — AgentTrust Grade ${esc(g)}">
 <meta property="og:url" content="${canon}">
 <script type="application/ld+json">${jsonLd}</script>
-<style>body{font-family:system-ui,-apple-system,sans-serif;background:#020617;color:#e2e8f0;margin:0;padding:24px;line-height:1.55}main{max-width:960px;margin:0 auto}a{color:#22d3ee}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:8px;border-bottom:1px solid #1e293b;vertical-align:top}code{font-family:ui-monospace,monospace;font-size:12.5px}.pill{display:inline-block;padding:6px 18px;border-radius:12px;font-size:28px;font-weight:800;border:1px solid}.card{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:20px;margin:16px 0}</style>
+<link rel="preload" href="../assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
 </head>
-<body data-scan="${esc(SCAN_DATE)}"><main>
-<p><a href="${SITE}/r/">← All scanned servers</a> · <a href="${SITE}/">AgentTrust</a></p>
-<p id="stale" hidden style="background:#451a1a;border:1px solid #fb7185;border-radius:8px;padding:10px 14px">⚠️ This snapshot is over 30 days old — treat the grade as stale until the next refresh. Re-scan locally to verify.</p>
+<body data-scan="${esc(SCAN_DATE)}">
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Main"><div class="nav-inner">
+<a class="brand" href="../"><span class="brand-mark">A</span>AgentTrust</a>
+<div class="nav-links" id="nav-links"><a href="../#how">How it works</a><a href="./">Registry</a><a href="../methodology.html">Methodology</a></div>
+<div class="nav-cta"><a class="btn btn-ghost btn-sm" href="https://github.com/eulogik/AgentTrust">GitHub</a><button class="burger" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button></div>
+</div></nav>
+<main id="main"><div class="report-wrap">
+<p class="muted small"><a href="./">← All scanned servers</a></p>
+<p id="stale" hidden class="callout warn">⚠️ This snapshot is over 30 days old — treat the grade as stale until the next refresh. Re-scan locally to verify.</p>
 <script>try{var d=new Date(document.body.dataset.scan);if((Date.now()-d.getTime())/864e5>30){document.getElementById('stale').hidden=false;}}catch(_){}</script>
-<h1>${esc(title)} <span class="pill" style="color:${GRADE_COLOR[g] || "#94a3b8"};border-color:${GRADE_COLOR[g] || "#94a3b8"}">${esc(g)} ${card.trustScore.overall}</span></h1>
-<p>Static Trust Card <code>agenttrust/trust-card/v1</code> · scanned ${esc(SCAN_DATE)} · engine v${esc(CORE_PKG.version)} (8 regex rules, OWASP-mapped) · upstream ${esc(upstream)}</p>
-<div class="card"><h2>Score breakdown</h2>${breakdownBars(card.trustScore.breakdown)}<p style="color:#94a3b8">${esc(card.trustScore.rationale || "")}</p></div>
-<div class="card"><h2>Fix first (${card.security.findings.filter(f => f.severity === "critical" || f.severity === "high").length} critical/high)</h2>${findingsTable(card.security.findings)}</div>
-<div class="card"><h2>Permissions</h2><p>Scope: <strong>${esc(card.permissions.estimatedScope)}</strong> · Shell: ${card.permissions.shell ? "enabled" : "disabled"} · Network egress: ${card.permissions.canMakeHTTPRequests ? "yes" : "no"} · File deletion: ${card.permissions.canDeleteFiles ? "enabled" : "none"} · Human approval: ${(card.permissions.humanApprovalRequired || []).length ? esc(card.permissions.humanApprovalRequired.join(", ")) : "none"}</p>
-<h2>Provenance</h2><p>License: ${esc(card.provenance.license || "none detected")} · Lockfile: ${card.provenance.hasLockfile ? "yes" : "no"} · Security policy: ${card.provenance.hasSecurityPolicy ? "yes" : "no"} · Signals: ${card.provenance.isVerified ? "present (documentary, not a safety verdict)" : "unverified origin"}</p></div>
-<div class="card"><h2>Methodology &amp; limits</h2><p><strong>Independently scanned by the AgentTrust registry</strong> (not self-reported by the project). Static analysis only — no code executed, findings need human triage, counts may include test/example code. <strong>Static snapshot; re-scan before relying on it:</strong> <code>npx agenttrust scan ${esc(repoUrl)}</code>. Scores move with every upstream commit; pages refresh weekly.</p></div>
-</main></body></html>
+<p class="eyebrow">Trust Card · Static snapshot</p>
+<h1>${esc(title)} <span class="grade ${gc}">${esc(g)}</span></h1>
+<p class="lede"><strong style="color:var(--text)">${card.trustScore.overall}/100</strong> · ${card.security.totalFindings} findings (${card.security.criticalCount} critical) · scope ${esc(card.permissions.estimatedScope)} · ${esc(rankLine)}.</p>
+<p class="muted">Scanned ${esc(SCAN_DATE)} · engine v${esc(CORE_PKG.version)} (8 regex rules, OWASP-mapped) · upstream ${esc(upstream)}</p>
+<h2>Score breakdown</h2>
+${breakdownBars(card.trustScore.breakdown)}
+<p class="muted">${esc(card.trustScore.rationale || "")}</p>
+<h2>Fix first (${fixN} critical/high)</h2>
+${findingsTable(card.security.findings)}
+<h2>Permissions</h2>
+<p>Scope: <strong>${esc(card.permissions.estimatedScope)}</strong> · Shell: ${card.permissions.shell ? "enabled" : "disabled"} · Network egress: ${card.permissions.canMakeHTTPRequests ? "yes" : "no"} · File deletion: ${card.permissions.canDeleteFiles ? "enabled" : "none"} · Human approval: ${(card.permissions.humanApprovalRequired || []).length ? esc(card.permissions.humanApprovalRequired.join(", ")) : "none"}</p>
+<h2>Provenance</h2>
+<p>License: ${esc(card.provenance.license || "none detected")} · Lockfile: ${card.provenance.hasLockfile ? "yes" : "no"} · Security policy: ${card.provenance.hasSecurityPolicy ? "yes" : "no"} · Signals: ${card.provenance.isVerified ? "present (documentary, not a safety verdict)" : "unverified origin"}</p>
+<div class="callout"><p><strong>Independently scanned by the AgentTrust registry</strong> (not self-reported by the project). Static analysis only — no code executed, findings need human triage, counts may include test/example code. <strong>Static snapshot; re-scan before relying on it:</strong> <code>npx agenttrust scan ${esc(repoUrl)}</code>. Scores move with every upstream commit; pages refresh weekly. <a href="../methodology.html">How scoring works</a>.</p></div>
+</div></main>
+<footer><div class="wrap"><div class="foot-base" style="border-top:none;padding-top:0"><span>© 2026 AgentTrust · Apache-2.0</span><span><a href="../">Home</a> · <a href="./">Registry</a></span></div></div></footer>
+<script src="../assets/site.js" defer></script>
+</body></html>
 `;
 }
 
+function explorerJson(rows) {
+  return rows.map(r => ({ title: r.title, grade: r.grade, overall: r.overall, total: r.total, crit: r.crit, scope: r.scope, url: "./" + r.slug + ".html", badge: "./" + r.slug + ".svg" }));
+}
+
+function adoptionLine() {
+  try {
+    const a = JSON.parse(fs.readFileSync(path.join(OUT_DIR, "adoption.json"), "utf8"));
+    return `<p class="muted">Badge adoption: <strong style="color:var(--text)">${a.displaying} of ${a.checked}</strong> scanned repos display their grade (checked ${esc(a.date)}).</p>`;
+  } catch { return ""; }
+}
+
 function indexPage(rows) {
-  const trs = [...rows].sort((a, b) => b.overall - a.overall).map(r =>
-    `<tr><td><a href="${SITE}/r/${r.slug}.html" style="color:${GRADE_COLOR[r.grade]};font-weight:800">${r.grade}</a></td><td><a href="${SITE}/r/${r.slug}.html">${esc(r.title)}</a></td><td>${r.overall}</td><td>${r.total} (${r.crit} crit)</td><td>${esc(r.scope)}</td><td style="color:#94a3b8">${esc(r.upstreamShort)}</td><td><a href="${SITE}/r/${r.slug}.html"><img src="./${r.slug}.svg" alt="AgentTrust ${r.grade}"></a></td></tr>`).join("");
+  const sorted = [...rows].sort((a, b) => b.overall - a.overall);
+  const counts = { all: rows.length, A: 0, B: 0, C: 0, D: 0, F: 0 };
+  rows.forEach(r => { counts[r.grade] = (counts[r.grade] || 0) + 1; });
+  const chips = ["all", "A", "B", "C", "D", "F"].map(g =>
+    `<button class="chip" data-grade="${g}" aria-pressed="${g === "all" ? "true" : "false"}">${g === "all" ? "All" : "Grade " + g} (${counts[g] || 0})</button>`).join("");
+  const trs = sorted.map(r =>
+    `<tr><td><span class="grade g${r.grade}">${r.grade}</span></td><td><a href="./${r.slug}.html">${esc(r.title)}</a></td><td class="mono">${r.overall}</td><td>${r.total} (${r.crit} crit)</td><td>${esc(r.scope)}</td><td><a href="./${r.slug}.html"><img src="./${r.slug}.svg" alt="AgentTrust ${r.grade}" loading="lazy"></a></td></tr>`).join("");
+  const items = sorted.map((r, i) => ({ "@type": "ListItem", position: i + 1, name: `${r.title} — AgentTrust Grade ${r.grade} (${r.overall}/100)`, url: `${SITE}/r/${r.slug}.html` }));
+  const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@graph": [
+    { "@type": "Organization", "@id": `${SITE}/#org`, name: "AgentTrust", url: `${SITE}/`, sameAs: ["https://github.com/eulogik/AgentTrust"] },
+    { "@type": "ItemList", name: "AgentTrust registry: Trust Cards for public MCP servers",
+      description: `Static Trust Cards for ${rows.length} public MCP servers and SDKs, ranked by score.`,
+      numberOfItems: rows.length, itemListElement: items }
+  ]});
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scanned MCP servers — Trust Card registry · AgentTrust</title>
-<meta name="description" content="Static Trust Cards for ${rows.length} public MCP servers and SDKs: grades, scores, findings, permission scope. Dated snapshot, re-scanned periodically.">
+<title>Registry — Trust Cards for ${rows.length} MCP servers · AgentTrust</title>
+<meta name="description" content="Searchable registry of static Trust Cards for ${rows.length} public MCP servers and SDKs: grades A–F, scores, findings, permission scope. Re-scanned weekly.">
 <link rel="canonical" href="${SITE}/r/">
-<style>body{font-family:system-ui,-apple-system,sans-serif;background:#020617;color:#e2e8f0;margin:0;padding:24px}main{max-width:960px;margin:0 auto}a{color:#22d3ee}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:8px;border-bottom:1px solid #1e293b}</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="AgentTrust registry — Trust Cards for ${rows.length} MCP servers">
+<meta property="og:url" content="${SITE}/r/">
+<script type="application/ld+json">${jsonLd}</script>
+<link rel="preload" href="../assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
 </head>
-<body><main>
-<p><a href="${SITE}/">← AgentTrust</a></p>
-<h1>Scanned servers (${rows.length})</h1>
-<p>Dated snapshot (${esc(SCAN_DATE)}), engine v${esc(CORE_PKG.version)}. Static analysis only — findings need triage. Pages refresh weekly; a snapshot older than 30 days shows a stale banner. Methodology: <a href="https://github.com/eulogik/AgentTrust/blob/main/docs/STATE-OF-MCP-2026.md">State of MCP Permissions</a>.</p>
-<table><thead><tr><th>Grade</th><th>Server</th><th>Score</th><th>Findings</th><th>Scope</th><th>Upstream</th><th>Badge</th></tr></thead><tbody>${trs}</tbody></table>
-</main></body></html>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Main"><div class="nav-inner">
+<a class="brand" href="../"><span class="brand-mark">A</span>AgentTrust</a>
+<div class="nav-links" id="nav-links"><a href="../#how">How it works</a><a href="./">Registry</a><a href="../methodology.html">Methodology</a></div>
+<div class="nav-cta"><a class="btn btn-ghost btn-sm" href="https://github.com/eulogik/AgentTrust">GitHub</a><button class="burger" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button></div>
+</div></nav>
+<main id="main"><div class="wrap" style="padding-top:calc(68px + 64px)">
+<p class="eyebrow">Registry · Re-scanned weekly</p>
+<h1>Every grade, one page.</h1>
+<p class="lede"><strong style="color:var(--text)">The registry is a set of static Trust Cards for public MCP servers</strong> — independently scanned snapshots, not self-reports. Search, filter, and open any card for file:line evidence.</p>
+<div class="explorer-bar" role="group" aria-label="Filter by grade">${chips}
+<input class="search" id="registry-search" type="search" placeholder="Search servers…" aria-label="Search servers">
+<select class="sortsel" id="registry-sort" aria-label="Sort servers"><option value="score-desc">Top scored</option><option value="score-asc">Lowest scored</option><option value="findings-desc">Most findings</option><option value="grade">Grade A→F</option></select>
+</div>
+<div class="hist" id="grade-hist" aria-hidden="true"></div>
+<p class="count-line" id="registry-count"></p>
+<table class="data" id="registry-table"><thead><tr><th>Grade</th><th>Server</th><th>Score</th><th>Findings</th><th>Scope</th><th>Badge</th></tr></thead><tbody>${trs}</tbody></table>
+<script type="application/json" id="registry-data">${JSON.stringify(explorerJson(rows)).replace(/</g, "\\u003c")}</script>
+${adoptionLine()}
+<div class="callout"><p>Dated snapshot (${esc(SCAN_DATE)}), engine v${esc(CORE_PKG.version)}. Static analysis only — findings need triage. <a href="../methodology.html">How scoring works</a> · <a href="https://github.com/eulogik/AgentTrust/blob/main/docs/STATE-OF-MCP-2026.md">State of MCP report</a>.</p></div>
+</div></main>
+<footer><div class="wrap"><div class="foot-base" style="border-top:none;padding-top:0"><span>© 2026 AgentTrust · Apache-2.0</span><span><a href="../">Home</a> · <a href="../methodology.html">Methodology</a></span></div></div></footer>
+<script src="../assets/site.js" defer></script>
+</body></html>
 `;
 }
 
@@ -189,6 +258,7 @@ function main() {
   fs.mkdirSync(OUT, { recursive: true });
   fs.mkdirSync(OUT_DIR, { recursive: true });
   const rows = [];
+  const pending = [];
   let failed = 0;
 
   const monoDir = path.join(CLONES, "monorepo-servers");
@@ -221,10 +291,8 @@ function main() {
         upstream = `${repo} @ ${sha} (${date})`;
       }
       const card = scanTarget(target, path.join(OUT, sl));
-      fs.writeFileSync(path.join(OUT_DIR, `${sl}.html`), reportPage({ slug: sl, title: r.name, repoUrl, upstream, card }));
-      fs.writeFileSync(path.join(OUT_DIR, `${sl}.svg`), badgeSvg(card.trustScore.grade, card.trustScore.overall));
-      rows.push({ slug: sl, title: r.name, grade: card.trustScore.grade, overall: card.trustScore.overall, total: card.security.totalFindings, crit: card.security.criticalCount, scope: card.permissions.estimatedScope, upstreamShort: upstream.split(" (")[0], self: false });
-      console.log(`OK ${r.name} -> r/${sl}.html`);
+      pending.push({ sl, title: r.name, repoUrl, upstream, card, self: false });
+      console.log(`OK ${r.name} (collected)`);
     } catch (e) {
       failed++;
       console.log(`FAIL ${r.name}: ${String(e.message || e).split("\n")[0]}`);
@@ -242,16 +310,24 @@ function main() {
     try {
       const card = scanTarget(target, path.join(OUT, sl));
       const upstream = `eulogik/AgentTrust @ ${selfSha} (${SCAN_DATE})`;
-      fs.writeFileSync(path.join(OUT_DIR, `${sl}.html`), reportPage({ slug: sl, title, repoUrl: "https://github.com/eulogik/AgentTrust", upstream, card }));
-      fs.writeFileSync(path.join(OUT_DIR, `${sl}.svg`), badgeSvg(card.trustScore.grade, card.trustScore.overall));
-      rows.push({ slug: sl, title, grade: card.trustScore.grade, overall: card.trustScore.overall, total: card.security.totalFindings, crit: card.security.criticalCount, scope: card.permissions.estimatedScope, upstreamShort: `eulogik/AgentTrust @ ${selfSha}`, self: true });
-      console.log(`OK ${title} -> r/${sl}.html`);
+      pending.push({ sl, title, repoUrl: "https://github.com/eulogik/AgentTrust", upstream, card, self: true });
+      console.log(`OK ${title} (collected)`);
     } catch (e) {
       failed++;
       console.log(`FAIL ${title}: ${String(e.message || e).split("\n")[0]}`);
     }
   }
 
+  // Emit with percentile rank computed across everything collected.
+  const ranked = [...pending].sort((a, b) => b.card.trustScore.overall - a.card.trustScore.overall);
+  for (const e of pending) {
+    const rank = ranked.findIndex(x => x.sl === e.sl) + 1;
+    const rankLine = `Ranked #${rank} of ${pending.length} scanned`;
+    fs.writeFileSync(path.join(OUT_DIR, `${e.sl}.html`), reportPage({ slug: e.sl, title: e.title, repoUrl: e.repoUrl, upstream: e.upstream, card: e.card, rankLine }));
+    fs.writeFileSync(path.join(OUT_DIR, `${e.sl}.svg`), badgeSvg(e.card.trustScore.grade, e.card.trustScore.overall));
+    rows.push({ slug: e.sl, title: e.title, grade: e.card.trustScore.grade, overall: e.card.trustScore.overall, total: e.card.security.totalFindings, crit: e.card.security.criticalCount, scope: e.card.permissions.estimatedScope, upstreamShort: e.upstream.split(" (")[0], self: e.self });
+    console.log(`OK ${e.title} -> r/${e.sl}.html`);
+  }
   fs.writeFileSync(path.join(OUT_DIR, "index.html"), indexPage(rows));
   refreshOnePager(rows.filter(r => !r.self));
   const files = fs.readdirSync(OUT_DIR).filter(f => f.endsWith(".html"));

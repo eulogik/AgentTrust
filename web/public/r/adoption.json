@@ -1,0 +1,188 @@
+{
+  "date": "2026-09-09",
+  "displaying": 0,
+  "checked": 44,
+  "repos": [
+    {
+      "repo": "modelcontextprotocol/servers",
+      "badge": false
+    },
+    {
+      "repo": "github/github-mcp-server",
+      "badge": false
+    },
+    {
+      "repo": "microsoft/playwright-mcp",
+      "badge": false
+    },
+    {
+      "repo": "getsentry/sentry-mcp",
+      "badge": false
+    },
+    {
+      "repo": "stripe/agent-toolkit",
+      "badge": false,
+      "error": "GitHub API 301 for /repos/stripe/agent-toolkit/readme"
+    },
+    {
+      "repo": "mongodb-js/mongodb-mcp-server",
+      "badge": false
+    },
+    {
+      "repo": "grafana/mcp-grafana",
+      "badge": false
+    },
+    {
+      "repo": "elastic/mcp-server-elasticsearch",
+      "badge": false
+    },
+    {
+      "repo": "supabase-community/supabase-mcp",
+      "badge": false,
+      "error": "GitHub API 301 for /repos/supabase-community/supabase-mcp/readme"
+    },
+    {
+      "repo": "ClickHouse/mcp-clickhouse",
+      "badge": false
+    },
+    {
+      "repo": "hashicorp/terraform-mcp-server",
+      "badge": false
+    },
+    {
+      "repo": "exa-labs/exa-mcp-server",
+      "badge": false
+    },
+    {
+      "repo": "mendableai/firecrawl-mcp-server",
+      "badge": false,
+      "error": "GitHub API 301 for /repos/mendableai/firecrawl-mcp-server/readme"
+    },
+    {
+      "repo": "tavily-ai/tavily-mcp",
+      "badge": false
+    },
+    {
+      "repo": "upstash/context7",
+      "badge": false
+    },
+    {
+      "repo": "browserbase/mcp-server-browserbase",
+      "badge": false
+    },
+    {
+      "repo": "e2b-dev/mcp-server",
+      "badge": false
+    },
+    {
+      "repo": "qdrant/mcp-server-qdrant",
+      "badge": false
+    },
+    {
+      "repo": "sooperset/mcp-atlassian",
+      "badge": false
+    },
+    {
+      "repo": "korotovsky/slack-mcp-server",
+      "badge": false
+    },
+    {
+      "repo": "ahujasid/blender-mcp",
+      "badge": false
+    },
+    {
+      "repo": "Flux159/mcp-server-kubernetes",
+      "badge": false
+    },
+    {
+      "repo": "makenotion/notion-mcp-server",
+      "badge": false
+    },
+    {
+      "repo": "apify/actors-mcp-server",
+      "badge": false,
+      "error": "GitHub API 301 for /repos/apify/actors-mcp-server/readme"
+    },
+    {
+      "repo": "neondatabase/mcp-server-neon",
+      "badge": false
+    },
+    {
+      "repo": "jlowin/fastmcp",
+      "badge": false,
+      "error": "GitHub API 301 for /repos/jlowin/fastmcp/readme"
+    },
+    {
+      "repo": "modelcontextprotocol/typescript-sdk",
+      "badge": false
+    },
+    {
+      "repo": "modelcontextprotocol/python-sdk",
+      "badge": false
+    },
+    {
+      "repo": "GongRzhe/Gmail-MCP-Server",
+      "badge": false
+    },
+    {
+      "repo": "wong2/mcp-cli",
+      "badge": false
+    },
+    {
+      "repo": "redis/mcp-redis",
+      "badge": false
+    },
+    {
+      "repo": "cloudflare/mcp-server-cloudflare",
+      "badge": false
+    },
+    {
+      "repo": "motherduckdb/mcp-server-motherduck",
+      "badge": false
+    },
+    {
+      "repo": "pinecone-io/pinecone-mcp",
+      "badge": false
+    },
+    {
+      "repo": "PrefectHQ/prefect-mcp-server",
+      "badge": false
+    },
+    {
+      "repo": "modelcontextprotocol/csharp-sdk",
+      "badge": false
+    },
+    {
+      "repo": "modelcontextprotocol/java-sdk",
+      "badge": false
+    },
+    {
+      "repo": "modelcontextprotocol/go-sdk",
+      "badge": false
+    },
+    {
+      "repo": "modelcontextprotocol/kotlin-sdk",
+      "badge": false
+    },
+    {
+      "repo": "modelcontextprotocol/registry",
+      "badge": false
+    },
+    {
+      "repo": "modelcontextprotocol/inspector",
+      "badge": false
+    },
+    {
+      "repo": "langchain-ai/langchain-mcp-adapters",
+      "badge": false
+    },
+    {
+      "repo": "mcp-use/mcp-use",
+      "badge": false
+    },
+    {
+      "repo": "sparfenyuk/mcp-proxy",
+      "badge": false
+    }
+  ]
+}

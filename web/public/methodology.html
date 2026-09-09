@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methodology — How AgentTrust scoring works</title>
+  <meta name="description" content="AgentTrust methodology: 8 static detection rules mapped to OWASP Agentic and LLM Top 10, Trust Card scoring weights, permission analysis, and stated limitations.">
+  <link rel="canonical" href="https://eulogik.github.io/AgentTrust/methodology.html">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Methodology — How AgentTrust scoring works">
+  <meta property="og:url" content="https://eulogik.github.io/AgentTrust/methodology.html">
+  <meta property="og:description" content="8 static rules, OWASP-mapped. How grades are computed, what the scanner cannot see, and how to reproduce any result.">
+  <link rel="preload" href="assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://eulogik.github.io/AgentTrust/#org",
+        "name": "AgentTrust",
+        "url": "https://eulogik.github.io/AgentTrust/",
+        "sameAs": ["https://github.com/eulogik/AgentTrust"]
+      },
+      {
+        "@type": "Article",
+        "headline": "AgentTrust methodology: how Trust Card scoring works",
+        "description": "The 8-rule static suite, OWASP mappings, scoring weights, and limitations behind every AgentTrust grade.",
+        "datePublished": "2026-09-09",
+        "dateModified": "2026-09-09",
+        "author": { "@id": "https://eulogik.github.io/AgentTrust/#org" },
+        "publisher": { "@id": "https://eulogik.github.io/AgentTrust/#org" },
+        "mainEntityOfPage": "https://eulogik.github.io/AgentTrust/methodology.html"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "How is the Trust Card grade computed?", "acceptedAnswer": { "@type": "Answer", "text": "Five weighted dimensions: security findings (35%), permission scope (25%), provenance signals (15%), reliability (15%), stability (10%). A is 90+, B 75+, C 60+, D 40+, F below 40." } },
+          { "@type": "Question", "name": "What can't AgentTrust see?", "acceptedAnswer": { "@type": "Answer", "text": "Runtime behavior, prompt-injection payloads in the wild, supply-chain compromises after scan time, and anything requiring execution. It is regex-based static analysis — no AST yet." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <nav class="nav" aria-label="Main">
+    <div class="nav-inner">
+      <a class="brand" href="./"><span class="brand-mark">A</span>AgentTrust</a>
+      <div class="nav-links" id="nav-links">
+        <a href="./#how">How it works</a>
+        <a href="r/">Registry</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="./#faq">FAQ</a>
+      </div>
+      <div class="nav-cta">
+        <a class="btn btn-ghost btn-sm" href="https://github.com/eulogik/AgentTrust">GitHub</a>
+        <button class="burger" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </nav>
+  <main id="main">
+    <section class="hero" style="padding-bottom:0">
+      <div class="wrap">
+        <p class="eyebrow">Methodology · v0.1.0 · Updated 2026-09-09</p>
+        <h1>How every grade is computed.</h1>
+        <p class="lede"><strong style="color:var(--text)">AgentTrust grades come from 8 static rules, a permission manifest, and documentary provenance — nothing else.</strong> No ML, no black box, no hidden signals. Everything below is reproducible with one command.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="rules-h">
+      <div class="wrap">
+        <p class="eyebrow">The rule suite</p>
+        <h2 id="rules-h">Eight rules, two OWASP lists.</h2>
+        <p class="muted">Each finding carries a rule ID, a CWE, a remediation, and file:line evidence. Capability checks evaluate de-stringed code, so string literals and prose never confer capabilities.</p>
+        <table class="data" style="margin-top:32px">
+          <thead><tr><th>Rule</th><th>What it detects</th><th>Severity</th><th>OWASP</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">AT-SEC-001</td><td>Direct prompt concatenation (injection via template)</td><td>Critical</td><td>LLM01</td></tr>
+            <tr><td class="mono">AT-SEC-002</td><td>Hardcoded credential or API secret</td><td>Critical</td><td>LLM02</td></tr>
+            <tr><td class="mono">AT-SEC-003</td><td>Unbounded dynamic shell execution</td><td>Critical</td><td>ASI02</td></tr>
+            <tr><td class="mono">AT-SEC-004</td><td><code>eval()</code> / Function constructor invocation</td><td>Critical</td><td>ASI05</td></tr>
+            <tr><td class="mono">AT-SEC-005</td><td>Unrestricted recursive file deletion</td><td>High</td><td>ASI02</td></tr>
+            <tr><td class="mono">AT-SEC-006</td><td>Unfiltered SSRF / arbitrary network egress</td><td>High</td><td>LLM06</td></tr>
+            <tr><td class="mono">AT-SEC-007</td><td>Raw secret leakage in debug logging</td><td>Medium</td><td>LLM02</td></tr>
+            <tr><td class="mono">AT-COMP-001</td><td>Missing human-in-the-loop gate for critical actions</td><td>High</td><td>ASI09</td></tr>
+          </tbody>
+        </table>
+        <p class="muted small">OWASP references: LLM Top 10 2025 (LLM01–LLM10) and Agentic Top 10 published 2025-12-09 (ASI01–ASI10).</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="score-h" style="padding-top:0">
+      <div class="wrap">
+        <p class="eyebrow">Scoring</p>
+        <h2 id="score-h">Five dimensions, fixed weights.</h2>
+        <table class="data" style="margin-top:32px">
+          <thead><tr><th>Dimension</th><th>Weight</th><th>What moves it</th></tr></thead>
+          <tbody>
+            <tr><td>Security</td><td class="mono">35%</td><td>Critical −25, high −15, medium −8, low −3 per finding</td></tr>
+            <tr><td>Permissions</td><td class="mono">25%</td><td>Excessive −45, broad −25, moderate −10; shell, deletion, unapproved email subtract; enforced human approval adds</td></tr>
+            <tr><td>Provenance</td><td class="mono">15%</td><td>License, lockfile, security policy, changelog, signatures add documentary points</td></tr>
+            <tr><td>Reliability</td><td class="mono">15%</td><td>Reliability/compliance findings subtract; human gates add</td></tr>
+            <tr><td>Stability</td><td class="mono">10%</td><td>Lockfile and changelog presence</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:24px">Grades: <strong>A</strong> 90+ · <strong>B</strong> 75+ · <strong>C</strong> 60+ · <strong>D</strong> 40+ · <strong>F</strong> below 40. Finding IDs are deterministic hashes, so repeat scans produce byte-stable SARIF.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="limits-h" style="padding-top:0">
+      <div class="wrap">
+        <p class="eyebrow">Limits</p>
+        <h2 id="limits-h">What the scanner cannot see.</h2>
+        <div class="callout warn">
+          <p><strong>Static analysis only.</strong> No code executes, no payloads fire, no runtime behavior is observed. Findings need human triage; counts may include test and example code. Attack analysis is heuristic relabeling of findings; workflow eval parses suites without executing them. Trust Cards are evidence input — never a certification, audit, or compliance verdict.</p>
+        </div>
+        <h3>Reproduce any grade</h3>
+        <pre>npx agenttrust scan https://github.com/owner/repo --quiet</pre>
+        <p class="muted">Registry snapshots record the upstream commit sha, so any historical grade can be re-verified exactly.</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">
+      <div class="foot-base" style="border-top:none;padding-top:0">
+        <span>© 2026 AgentTrust · Apache-2.0</span>
+        <span><a href="./">Home</a> · <a href="r/">Registry</a></span>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/site.js" defer></script>
+</body>
+</html>

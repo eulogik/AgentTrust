@@ -1,0 +1,41 @@
+# AgentTrust
+
+> Free, local-first trust and security scanner for AI agents and MCP servers.
+> Static analysis only — not a certification. Open source (Apache-2.0).
+
+AgentTrust answers three questions about any agent, skill, or MCP server:
+can I trust this, what is it allowed to do, and can I prove it.
+
+## What it does
+
+- Scans a local directory, GitHub repo, or npm package (`agenttrust scan <target>`)
+- Runs 8 OWASP-mapped static rules (AT-SEC-001–007, AT-COMP-001)
+- Extracts a permission manifest (shell, network, filesystem, browser, email, DB, human approval)
+- Issues a Trust Card graded A–F (`agenttrust/trust-card/v1`) with SARIF + Markdown reports
+- Enforces a CI gate (`--fail-on high`); ships a GitHub Action
+- Runs 100% locally: zero telemetry, zero data retention
+
+## Key pages
+
+- Homepage: https://eulogik.github.io/AgentTrust/
+- Methodology (rules, scoring, limits): https://eulogik.github.io/AgentTrust/methodology.html
+- Registry of 50 scanned MCP servers: https://eulogik.github.io/AgentTrust/r/
+- State of MCP Permissions report: https://github.com/eulogik/AgentTrust/blob/main/docs/STATE-OF-MCP-2026.md
+- FAQ: https://eulogik.github.io/AgentTrust/#faq
+- Install: https://eulogik.github.io/AgentTrust/#install
+- Source: https://github.com/eulogik/AgentTrust
+
+## Key facts (quotable)
+
+- 8 detection rules mapped to OWASP Agentic Top 10 (ASI) and OWASP LLM Top 10 2025.
+- Trust Card grades: A (90+), B (75+), C (60+), D (40+), F (below 40).
+- Across 50 public MCP servers (Sep 2026): average 70.2 (C); 36% grade D or F; 40% request excessive permission scope.
+- The shipped CLI self-scans at A (90/100) with 0 findings.
+- Attack analysis is static-heuristic (no payloads execute); workflow eval is simulated (nothing runs).
+- Trust Cards are evidence input, never a certification or compliance verdict.
+
+## Limitations
+
+- Regex-based static analysis (no AST yet); findings need human triage.
+- Counts may include test/example code inside scanned repos.
+- Registry pages are dated snapshots refreshed weekly; re-scan before relying on a grade.

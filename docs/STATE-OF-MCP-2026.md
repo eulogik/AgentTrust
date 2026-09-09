@@ -66,19 +66,6 @@ comes from no longer counting string literals and prose as capabilities.)
 | 92 | langchain-ai__langchain-mcp-adapters | 0 | minimal |
 | 91 | e2b-dev__mcp-server | 0 | moderate |
 
-## Using these grades
-
-Embed a bound badge (image + page ship together, so the grade shown is always
-the grade evidenced):
-
-```markdown
-[![AgentTrust](https://eulogik.github.io/AgentTrust/r/<slug>.svg)](https://eulogik.github.io/AgentTrust/r/<slug>.html)
-```
-
-Browse all cards at <https://eulogik.github.io/AgentTrust/r/>. Pages refresh
-weekly via `.github/workflows/rescan.yml`; a snapshot older than 30 days shows
-a stale banner. Static snapshot — re-scan before relying on any grade.
-
 ## Limitations (read before citing)
 
 - **Static regex only.** No runtime verification; findings need human triage.

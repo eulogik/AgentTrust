@@ -4,38 +4,56 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>sooperset__mcp-atlassian — Trust Card (Grade C) · AgentTrust</title>
-<meta name="description" content="Static security scan of sooperset__mcp-atlassian: grade C (64/100), 2 findings, scope broad.">
+<meta name="description" content="Static security scan of sooperset__mcp-atlassian: grade C (64/100), 2 findings, scope broad. Ranked #32 of 53 scanned.">
 <link rel="canonical" href="https://eulogik.github.io/AgentTrust/r/sooperset-mcp-atlassian.html">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sooperset__mcp-atlassian — AgentTrust Grade C">
 <meta property="og:url" content="https://eulogik.github.io/AgentTrust/r/sooperset-mcp-atlassian.html">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"sooperset__mcp-atlassian — AgentTrust Grade C (64/100)","description":"Static security scan of sooperset__mcp-atlassian: 2 findings (2 critical), permission scope broad.","datePublished":"2026-09-09","author":{"@type":"Organization","name":"AgentTrust","url":"https://eulogik.github.io/AgentTrust"}}</script>
-<style>body{font-family:system-ui,-apple-system,sans-serif;background:#020617;color:#e2e8f0;margin:0;padding:24px;line-height:1.55}main{max-width:960px;margin:0 auto}a{color:#22d3ee}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:8px;border-bottom:1px solid #1e293b;vertical-align:top}code{font-family:ui-monospace,monospace;font-size:12.5px}.pill{display:inline-block;padding:6px 18px;border-radius:12px;font-size:28px;font-weight:800;border:1px solid}.card{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:20px;margin:16px 0}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://eulogik.github.io/AgentTrust/#org","name":"AgentTrust","url":"https://eulogik.github.io/AgentTrust/","sameAs":["https://github.com/eulogik/AgentTrust"]},{"@type":"Article","headline":"sooperset__mcp-atlassian — AgentTrust Grade C (64/100)","description":"Static security scan of sooperset__mcp-atlassian: 2 findings (2 critical), permission scope broad.","datePublished":"2026-09-09","dateModified":"2026-09-09","author":{"@id":"https://eulogik.github.io/AgentTrust/#org"},"publisher":{"@id":"https://eulogik.github.io/AgentTrust/#org"},"mainEntityOfPage":"https://eulogik.github.io/AgentTrust/r/sooperset-mcp-atlassian.html"}]}</script>
+<link rel="preload" href="../assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/site.css">
 </head>
-<body data-scan="2026-09-09"><main>
-<p><a href="https://eulogik.github.io/AgentTrust/r/">← All scanned servers</a> · <a href="https://eulogik.github.io/AgentTrust/">AgentTrust</a></p>
-<p id="stale" hidden style="background:#451a1a;border:1px solid #fb7185;border-radius:8px;padding:10px 14px">⚠️ This snapshot is over 30 days old — treat the grade as stale until the next refresh. Re-scan locally to verify.</p>
+<body data-scan="2026-09-09">
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Main"><div class="nav-inner">
+<a class="brand" href="../"><span class="brand-mark">A</span>AgentTrust</a>
+<div class="nav-links" id="nav-links"><a href="../#how">How it works</a><a href="./">Registry</a><a href="../methodology.html">Methodology</a></div>
+<div class="nav-cta"><a class="btn btn-ghost btn-sm" href="https://github.com/eulogik/AgentTrust">GitHub</a><button class="burger" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button></div>
+</div></nav>
+<main id="main"><div class="report-wrap">
+<p class="muted small"><a href="./">← All scanned servers</a></p>
+<p id="stale" hidden class="callout warn">⚠️ This snapshot is over 30 days old — treat the grade as stale until the next refresh. Re-scan locally to verify.</p>
 <script>try{var d=new Date(document.body.dataset.scan);if((Date.now()-d.getTime())/864e5>30){document.getElementById('stale').hidden=false;}}catch(_){}</script>
-<h1>sooperset__mcp-atlassian <span class="pill" style="color:#fbbf24;border-color:#fbbf24">C 64</span></h1>
-<p>Static Trust Card <code>agenttrust/trust-card/v1</code> · scanned 2026-09-09 · engine v0.1.0 (8 regex rules, OWASP-mapped) · upstream sooperset/mcp-atlassian @ 74bdaa8 (2026-09-05)</p>
-<div class="card"><h2>Score breakdown</h2>
-    <div style="margin:6px 0"><span style="display:inline-block;width:130px;color:#94a3b8">security</span>
-    <span style="display:inline-block;width:220px;max-width:50vw;background:#1e293b;border-radius:4px;overflow:hidden;vertical-align:middle"><span style="display:block;height:10px;width:50%;background:#22d3ee"></span></span>
-    <span style="color:#e2e8f0"> 50/100</span></div>
-    <div style="margin:6px 0"><span style="display:inline-block;width:130px;color:#94a3b8">permissions</span>
-    <span style="display:inline-block;width:220px;max-width:50vw;background:#1e293b;border-radius:4px;overflow:hidden;vertical-align:middle"><span style="display:block;height:10px;width:60%;background:#22d3ee"></span></span>
-    <span style="color:#e2e8f0"> 60/100</span></div>
-    <div style="margin:6px 0"><span style="display:inline-block;width:130px;color:#94a3b8">provenance</span>
-    <span style="display:inline-block;width:220px;max-width:50vw;background:#1e293b;border-radius:4px;overflow:hidden;vertical-align:middle"><span style="display:block;height:10px;width:75%;background:#22d3ee"></span></span>
-    <span style="color:#e2e8f0"> 75/100</span></div>
-    <div style="margin:6px 0"><span style="display:inline-block;width:130px;color:#94a3b8">reliability</span>
-    <span style="display:inline-block;width:220px;max-width:50vw;background:#1e293b;border-radius:4px;overflow:hidden;vertical-align:middle"><span style="display:block;height:10px;width:85%;background:#22d3ee"></span></span>
-    <span style="color:#e2e8f0"> 85/100</span></div>
-    <div style="margin:6px 0"><span style="display:inline-block;width:130px;color:#94a3b8">stability</span>
-    <span style="display:inline-block;width:220px;max-width:50vw;background:#1e293b;border-radius:4px;overflow:hidden;vertical-align:middle"><span style="display:block;height:10px;width:75%;background:#22d3ee"></span></span>
-    <span style="color:#e2e8f0"> 75/100</span></div><p style="color:#94a3b8">Score constrained by 2 critical and 0 high-severity findings.</p></div>
-<div class="card"><h2>Fix first (2 critical/high)</h2><table><thead><tr><th>Severity</th><th>Rule</th><th>Finding</th><th>Remediation</th></tr></thead><tbody><tr><td><strong style="color:#fb7185">CRITICAL</strong></td><td><code>AT-SEC-002</code> (LLM02)</td><td>Hardcoded Credential or API Secret<br><code style="color:#94a3b8">tests/unit/servers/test_confluence_server.py:216</code><br><span style="color:#94a3b8">Evidence: </span><code>client_secret=&quot;server_client_secret&quot;,</code></td><td>Move credentials to secure environment variables or a key vault. Never commit API keys.</td></tr><tr><td><strong style="color:#fb7185">CRITICAL</strong></td><td><code>AT-SEC-002</code> (LLM02)</td><td>Hardcoded Credential or API Secret<br><code style="color:#94a3b8">tests/unit/servers/test_jira_server.py:427</code><br><span style="color:#94a3b8">Evidence: </span><code>client_secret=&quot;server_client_secret&quot;,</code></td><td>Move credentials to secure environment variables or a key vault. Never commit API keys.</td></tr></tbody></table></div>
-<div class="card"><h2>Permissions</h2><p>Scope: <strong>broad</strong> · Shell: disabled · Network egress: yes · File deletion: enabled · Human approval: none</p>
-<h2>Provenance</h2><p>License: MIT · Lockfile: no · Security policy: yes · Signals: unverified origin</p></div>
-<div class="card"><h2>Methodology &amp; limits</h2><p><strong>Independently scanned by the AgentTrust registry</strong> (not self-reported by the project). Static analysis only — no code executed, findings need human triage, counts may include test/example code. <strong>Static snapshot; re-scan before relying on it:</strong> <code>npx agenttrust scan https://github.com/sooperset/mcp-atlassian</code>. Scores move with every upstream commit; pages refresh weekly.</p></div>
-</main></body></html>
+<p class="eyebrow">Trust Card · Static snapshot</p>
+<h1>sooperset__mcp-atlassian <span class="grade gC">C</span></h1>
+<p class="lede"><strong style="color:var(--text)">64/100</strong> · 2 findings (2 critical) · scope broad · Ranked #32 of 53 scanned.</p>
+<p class="muted">Scanned 2026-09-09 · engine v0.1.0 (8 regex rules, OWASP-mapped) · upstream sooperset/mcp-atlassian @ 74bdaa8 (2026-09-05)</p>
+<h2>Score breakdown</h2>
+
+    <div style="display:flex;align-items:center;gap:12px;margin:10px 0"><span style="width:130px;color:var(--muted);font-size:14px">security</span>
+    <span class="bar" style="flex:1"><span style="width:50%"></span></span>
+    <span class="mono" style="width:64px;text-align:right">50</span></div>
+    <div style="display:flex;align-items:center;gap:12px;margin:10px 0"><span style="width:130px;color:var(--muted);font-size:14px">permissions</span>
+    <span class="bar" style="flex:1"><span style="width:60%"></span></span>
+    <span class="mono" style="width:64px;text-align:right">60</span></div>
+    <div style="display:flex;align-items:center;gap:12px;margin:10px 0"><span style="width:130px;color:var(--muted);font-size:14px">provenance</span>
+    <span class="bar" style="flex:1"><span style="width:75%"></span></span>
+    <span class="mono" style="width:64px;text-align:right">75</span></div>
+    <div style="display:flex;align-items:center;gap:12px;margin:10px 0"><span style="width:130px;color:var(--muted);font-size:14px">reliability</span>
+    <span class="bar" style="flex:1"><span style="width:85%"></span></span>
+    <span class="mono" style="width:64px;text-align:right">85</span></div>
+    <div style="display:flex;align-items:center;gap:12px;margin:10px 0"><span style="width:130px;color:var(--muted);font-size:14px">stability</span>
+    <span class="bar" style="flex:1"><span style="width:75%"></span></span>
+    <span class="mono" style="width:64px;text-align:right">75</span></div>
+<p class="muted">Score constrained by 2 critical and 0 high-severity findings.</p>
+<h2>Fix first (2 critical/high)</h2>
+<table class="data"><thead><tr><th>Severity</th><th>Rule</th><th>Finding</th><th>Remediation</th></tr></thead><tbody><tr><td><strong style="color:var(--bad)">CRITICAL</strong></td><td><code>AT-SEC-002</code> (LLM02)</td><td>Hardcoded Credential or API Secret<br><code class="muted">tests/unit/servers/test_confluence_server.py:216</code><br><span class="muted">Evidence: </span><code>client_secret=&quot;server_client_secret&quot;,</code></td><td>Move credentials to secure environment variables or a key vault. Never commit API keys.</td></tr><tr><td><strong style="color:var(--bad)">CRITICAL</strong></td><td><code>AT-SEC-002</code> (LLM02)</td><td>Hardcoded Credential or API Secret<br><code class="muted">tests/unit/servers/test_jira_server.py:427</code><br><span class="muted">Evidence: </span><code>client_secret=&quot;server_client_secret&quot;,</code></td><td>Move credentials to secure environment variables or a key vault. Never commit API keys.</td></tr></tbody></table>
+<h2>Permissions</h2>
+<p>Scope: <strong>broad</strong> · Shell: disabled · Network egress: yes · File deletion: enabled · Human approval: none</p>
+<h2>Provenance</h2>
+<p>License: MIT · Lockfile: no · Security policy: yes · Signals: unverified origin</p>
+<div class="callout"><p><strong>Independently scanned by the AgentTrust registry</strong> (not self-reported by the project). Static analysis only — no code executed, findings need human triage, counts may include test/example code. <strong>Static snapshot; re-scan before relying on it:</strong> <code>npx agenttrust scan https://github.com/sooperset/mcp-atlassian</code>. Scores move with every upstream commit; pages refresh weekly. <a href="../methodology.html">How scoring works</a>.</p></div>
+</div></main>
+<footer><div class="wrap"><div class="foot-base" style="border-top:none;padding-top:0"><span>© 2026 AgentTrust · Apache-2.0</span><span><a href="../">Home</a> · <a href="./">Registry</a></span></div></div></footer>
+<script src="../assets/site.js" defer></script>
+</body></html>

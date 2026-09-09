@@ -1,0 +1,6 @@
+AgentTrust — free, local-first trust and security scanner for AI agents and MCP servers.
+Site: https://eulogik.github.io/AgentTrust/
+Methodology: https://eulogik.github.io/AgentTrust/methodology.html
+Registry: https://eulogik.github.io/AgentTrust/r/
+Machine-readable index: https://eulogik.github.io/AgentTrust/llms.txt
+Static analysis only; not a certification. Contact via GitHub issues.

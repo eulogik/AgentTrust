@@ -39,6 +39,11 @@ jobs:
       - name: Rebuild report pages
         run: node scripts/build-reports.mjs
 
+      - name: Check badge adoption (kill metric)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/check-badges.mjs
+
       - name: Commit + push if changed
         run: |
           git config user.name "agenttrust-bot"
