@@ -16,7 +16,7 @@ import {
   resolveScanTarget,
   isSeverity,
   meetsSeverityThreshold
-} from "@agenttrust/core";
+} from "agenttrust-core";
 
 const args = process.argv.slice(2);
 const command = args[0] || "help";

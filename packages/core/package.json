@@ -1,5 +1,5 @@
 {
-  "name": "@agenttrust/core",
+  "name": "agenttrust-core",
   "version": "0.1.0",
   "type": "module",
   "description": "Core engines for AI agent trust scoring, OWASP analysis, permission extraction, and attack detection",

@@ -5,7 +5,7 @@
 AgentTrust — trust/scanning layer for AI agent capabilities and MCP tools. npm workspaces monorepo, TypeScript, pure ESM (`"type": "module"`, NodeNext resolution, strict).
 
 - `packages/core` — all engines: capability detectors, OWASP rule suite (8 regex rules: `AT-SEC-001`–`007` + `AT-COMP-001`), permission extraction, trust scoring/grades, attack heuristics, workflow eval parser, SARIF/markdown reporters. Public API re-exported from `src/index.ts`. Tests live in `src/tests/` (node:test), compiled into `dist/tests/`.
-- `packages/cli` — `agenttrust` binary; thin dispatcher over core (`import ... from "@agenttrust/core"`).
+- `packages/cli` — `agenttrust` binary; thin dispatcher over core (`import ... from "agenttrust-core"`).
 - `packages/action` — GitHub Action wrapper; `action.yml` only, no code.
 - `web/public` — site v3 (no frameworks): `index.html`, `methodology.html`, `r/` (54 generated report pages + registry explorer), `assets/` (`site.css` tokens, `site.js` vanilla, self-hosted Inter + JetBrains Mono woff2), `llms.txt`, `.well-known/ai.txt`, `feed.xml`, SEO files (`sitemap.xml`, `robots.txt`, `404.html`). Served via GitHub Pages at `https://eulogik.github.io/AgentTrust` (`agenttrust.dev` is a parked squatter domain — never point URLs at it). Internal links are relative (work at root locally and under `/AgentTrust/` on Pages); only canonical/OG use absolute URLs. `404.html` must keep absolute `/AgentTrust/` asset paths (it serves at arbitrary depths).
 - `badges/` — shareable grade badge SVGs (`a.svg` through `f.svg`), shields.io-compatible, hosted at `https://eulogik.github.io/AgentTrust/badge/`.
@@ -25,7 +25,7 @@ AgentTrust — trust/scanning layer for AI agent capabilities and MCP tools. npm
 
 ## Build & test reality
 
-- `npm i` triggers root `prepare` → builds core then cli (order pinned explicitly in root scripts; do NOT use `--workspaces` for build ordering — npm ran cli before core and broke resolution of `@agenttrust/core`, which needs core's `dist/index.d.ts` to exist).
+- `npm i` triggers root `prepare` → builds core then cli (order pinned explicitly in root scripts; do NOT use `--workspaces` for build ordering — npm ran cli before core and broke resolution of `agenttrust-core`, which needs core's `dist/index.d.ts` to exist).
 - `typescript` + `@types/node` are root devDependencies. `types: ["node"]` is set in `tsconfig.base.json`.
 - `dist/` is gitignored and untracked. Fresh clone: `npm i` builds everything automatically.
 - `npm test` = build + real node:test suite (`packages/core/dist/tests/*.test.js`). No silent fallbacks — failures fail loudly.
