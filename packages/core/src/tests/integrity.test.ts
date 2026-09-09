@@ -7,6 +7,7 @@ import path from "node:path";
 import {
   detectCapability,
   runStaticAnalysis,
+  extractPermissions,
   stableFindingId,
   inferCompatibility,
   parseAgentTrustConfig,
@@ -128,6 +129,56 @@ test("scanner rule definitions do not flag themselves", async () => {
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }
+});
+
+test("string literals do not confer capabilities", async () => {
+  const dir = tmpDir({
+    "sample.ts": [
+      'const a = "openclaw-shell-exec";',
+      'const b = "postgres-mcp-server";',
+      "// please resend the report when ready",
+      "const note = 'uses eval() for docs';"
+    ].join("\n")
+  });
+  try {
+    const perms = await extractPermissions(dir);
+    assert.equal(perms.shell, false, "sample string must not flag shell");
+    assert.equal(perms.canSpawnProcesses, false);
+    assert.equal(perms.canAccessDB, false, "sample string must not flag database");
+    assert.equal(perms.canSendEmail, false, "prose must not flag email");
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("real calls and imports still confer capabilities", async () => {
+  const dir = tmpDir({
+    "srv.ts": [
+      "import pg from 'pg';",
+      "import { chromium } from 'playwright';",
+      "export function run(cmd: string) { exec(cmd); }",
+      "export function load(url: string) { return fetch(url); }",
+      "const key = process.env.API_KEY;"
+    ].join("\n")
+  });
+  try {
+    const perms = await extractPermissions(dir);
+    assert.equal(perms.shell, true, "exec(cmd) must flag shell");
+    assert.equal(perms.canAccessDB, true, "import pg must flag database");
+    assert.equal(perms.canAccessBrowser, true, "playwright import must flag browser");
+    assert.equal(perms.canMakeHTTPRequests, true, "fetch(url) must flag network");
+    assert.ok(perms.secrets.includes("API_KEY"), "process.env.API_KEY must register a secret");
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("shipped CLI self-scan has no phantom shell/database flags", async () => {
+  const cliDir = path.join(REPO_ROOT, "packages", "cli");
+  const perms = await extractPermissions(cliDir);
+  assert.equal(perms.shell, false, "CLI sample strings must not flag shell");
+  assert.equal(perms.canAccessDB, false, "CLI sample strings must not flag database");
+  assert.equal(perms.canSendEmail, false);
 });
 
 test("agenttrust.yaml config parses the keys the scanner reads", () => {

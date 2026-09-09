@@ -1,7 +1,9 @@
 <p align="center">
   <a href="https://eulogik.github.io/AgentTrust">
-    <img src="https://eulogik.github.io/AgentTrust/badge/b.svg" alt="AgentTrust Grade B" width="128">
+    <img src="https://eulogik.github.io/AgentTrust/badge/a.svg" alt="AgentTrust Grade A — agenttrust CLI self-scan" width="128">
   </a>
+  <br>
+  <sub>Self-scan of <code>packages/cli</code> at HEAD: <strong>A (90/100)</strong>, 0 findings, minimal scope. Reproduce: <code>node packages/cli/dist/index.js scan packages/cli --quiet</code></sub>
   <br>
   <strong>Trust &amp; Security for AI Agents &amp; MCP Servers</strong>
 </p>

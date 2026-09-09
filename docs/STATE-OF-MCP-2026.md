@@ -1,7 +1,7 @@
 # State of MCP Permissions — September 2026
 
 50 popular public MCP servers and SDKs scanned with **AgentTrust v0.1.0**
-(8-rule static suite, OWASP-mapped). Shallow clones at HEAD on 2026-09-09.
+(8-rule static suite, OWASP-mapped). Shallow clones at HEAD on 2026-09-09; re-scanned 2026-09-09 with v0.1.0 string-literal permission handling.
 Methodology and target list: `scripts/seed-registry.mjs` (resumable, all work in `/tmp`).
 
 ## Headline numbers
@@ -9,29 +9,30 @@ Methodology and target list: `scripts/seed-registry.mjs` (resumable, all work in
 | Metric | Value |
 |---|---|
 | Servers scanned | 50 |
-| Average Trust Score | **64.6 / 100 (C)** |
-| Graded D or F | **19 / 50 (38%)** |
+| Average Trust Score | **70.2 / 100 (C)** |
+| Graded D or F | **18 / 50 (36%)** |
 | Total findings | 461 (146 critical) |
-| Excessive permission scope | **35 / 50 (70%)** |
-| Minimal scope | 6 / 50 (all graded A) |
+| Excessive permission scope | **20 / 50 (40%)** |
+| Minimal scope | 16 / 50 (14 graded A, 2 graded B) |
 
-Grade distribution: A 5 · B 16 · C 10 · D 12 · F 7.
+Grade distribution: A 15 · B 12 · C 5 · D 14 · F 4.
 
 This converges with published research: Liu et al. (2026) found 26.1% of
 42,447 skills vulnerable; Snyk (Feb 2026) found flaws in 36.8% of 3,984
-published skills. Static analysis keeps landing in the same third.
+published skills. Our 36% D/F lands in the same band.
 
 ## The pattern: scope is the story
 
-Every A-grade server shares the same shape — **zero findings and minimal
-permission scope** (`terraform-mcp-server`, `langchain-mcp-adapters`,
-`fetch`, `sequentialthinking`, `mcp-server-qdrant`). No A-grade server has
-broad or excessive scope. Conversely, all 19 D/F servers are excessive-scope.
-Findings matter, but **permission breadth predicts the grade**.
+Every A-grade server shares the same shape — **zero findings and
+minimal-or-moderate scope**. Conversely, all 18 D/F servers are
+excessive-scope except two broad ones. Findings matter, but **permission
+breadth predicts the grade**.
 
-70% of scanned servers request excessive scope (shell + network + filesystem
-deletion combined). For a tool the user installs with one command, that is the
-supply-chain risk: a compromised or malicious update inherits host privileges.
+40% of scanned servers still request excessive scope (shell + network +
+filesystem deletion combined). For a tool the user installs with one command,
+that is the supply-chain risk: a compromised or malicious update inherits
+host privileges. (An earlier engine revision read 70% excessive — the drop
+comes from no longer counting string literals and prose as capabilities.)
 
 ## Bottom 10 (by score)
 
@@ -39,29 +40,29 @@ supply-chain risk: a compromised or malicious update inherits host privileges.
 |---|---|---|---|
 | 35 | blender-mcp | 9 (3) | excessive |
 | 37 | fastmcp | 49 (22) | excessive |
-| 37 | python-sdk | 7 (6) | excessive |
 | 37 | mcp-use | 52 (22) | excessive |
-| 38 | agent-toolkit | 10 (0) | excessive |
-| 38 | typescript-sdk | 78 (4) | excessive |
 | 39 | mongodb-mcp-server | 12 (7) | excessive |
-| 40 | sentry-mcp | 19 (4) | excessive |
+| 40 | agent-toolkit | 10 (0) | excessive |
 | 40 | context7 | 12 (6) | excessive |
+| 40 | typescript-sdk | 78 (4) | excessive |
 | 40 | inspector | 58 (29) | excessive |
+| 43 | sentry-mcp | 19 (4) | excessive |
+| 43 | cloudflare | 105 (21) | excessive |
 
 ## Top 10 (by score)
 
 | Score | Server | Findings | Scope |
 |---|---|---|---|
+| 96 | mcp-cli | 0 | minimal |
+| 95 | pinecone-mcp | 0 | minimal |
+| 94 | tavily-mcp | 0 | minimal |
+| 94 | java-sdk | 0 | minimal |
 | 93 | terraform-mcp-server | 0 | minimal |
+| 93 | csharp-sdk | 0 | moderate |
+| 92 | go-sdk | 0 | minimal |
+| 92 | kotlin-sdk | 0 | minimal |
 | 92 | langchain-mcp-adapters | 0 | minimal |
-| 90 | fetch | 0 | minimal |
-| 90 | sequentialthinking | 0 | minimal |
-| 90 | mcp-server-qdrant | 0 | minimal |
-| 88 | time | 0 | minimal |
-| 85 | mcp-cli | 0 | broad |
-| 84 | csharp-sdk | 0 | broad |
-| 83 | java-sdk | 0 | broad |
-| 82 | everything | 1 | moderate |
+| 91 | e2b-dev mcp-server | 0 | moderate |
 
 ## Limitations (read before citing)
 
@@ -89,4 +90,6 @@ supply-chain risk: a compromised or malicious update inherits host privileges.
    attenuation so framework scores reflect shipped code.
 
 *Generated with `node scripts/seed-registry.mjs 50`. Raw per-server
-grade/score/counts were recorded at scan time; re-run the script to refresh.*
+grade/score/counts were recorded at scan time; re-run the script to refresh.
+Engine note: permission capabilities are evaluated on de-stringed code, so
+string literals and prose never confer capabilities.*

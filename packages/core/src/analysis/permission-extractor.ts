@@ -49,52 +49,89 @@ export async function extractPermissions(dirPath: string): Promise<PermissionMan
   return manifest;
 }
 
+/**
+ * Capability booleans are evaluated on de-stringed code, not raw text.
+ * Rationale: string literals (sample data, docs, prose) must not confer
+ * capabilities — e.g. the sample string "openclaw-shell-exec" used to flag
+ * shell access, "postgres-mcp-server" flagged database access, and prose like
+ * "please resend the report" flagged email. Import specifiers are extracted
+ * from raw content first, since module names live inside quotes.
+ */
+function stripStringsAndComments(content: string): string {
+  return content
+    .replace(/`(?:\\.|[^`\\])*`/g, "``")
+    .replace(/'(?:\\.|[^'\\])*'/g, "''")
+    .replace(/"(?:\\.|[^"\\])*"/g, '""')
+    .replace(/\/\/[^\n]*/g, "")
+    .replace(/(^|[ \t])#[^\n]*/gm, "$1");
+}
+
+function importSpecifiers(content: string): string[] {
+  const out: string[] = [];
+  for (const m of content.matchAll(/(?:from\s+|require\(\s*|import\(\s*)["']([^"']+)["']/g)) {
+    out.push(m[1].toLowerCase());
+  }
+  return out;
+}
+
+const DB_NAME_HINT = /^(pg|postgres|mysql2?|mariadb|sqlite3?|better-sqlite3|postgres\.js)$/;
+const DB_SPEC_HINT = /(prisma|drizzle|mongoose|redis|typeorm|sequelize|knex|pg-promise|node-postgres)/;
+const BROWSER_SPEC_HINT = /(playwright|puppeteer|selenium)/;
+const EMAIL_SPEC_HINT = /(nodemailer|sendgrid|mailgun|postmark|resend|smtp|client-ses)/;
+const NETWORK_SPEC_HINT = /(axios|node-fetch|undici|got|ky|superagent|requests|httpx|urllib3|aiohttp)/;
+
 function analyzeFileContent(content: string, manifest: PermissionManifest): void {
-  if (/\b(?:exec|execSync|spawn|child_process|subprocess\.Popen|os\.system)\b/.test(content)) {
+  // Raw-content extractions (these live inside string literals by nature).
+  const urlMatches = content.matchAll(/https?:\/\/([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g);
+  for (const m of urlMatches) {
+    const host = m[1];
+    if (!manifest.externalServices.includes(host)) {
+      manifest.externalServices.push(host);
+      manifest.network.push({ type: "outbound", host, protocol: "https" });
+    }
+  }
+  const cmdMatches = content.matchAll(/(?:exec|spawn)\s*\(\s*["']([^"'\s]+)/g);
+  for (const m of cmdMatches) {
+    if (!manifest.shellCommands.includes(m[1])) {
+      manifest.shellCommands.push(m[1]);
+    }
+  }
+  const specs = importSpecifiers(content);
+  const specHit = (re: RegExp) => specs.some(s => re.test(s.split("/").pop() ?? s) || re.test(s));
+
+  const code = stripStringsAndComments(content);
+
+  if (/\b(?:exec|execSync|spawn)\s*\(/.test(code) || specs.some(s => s === "child_process" || s === "node:child_process")) {
     manifest.shell = true;
     manifest.canSpawnProcesses = true;
-    const matches = content.matchAll(/(?:exec|spawn)\s*\(\s*["']([^"'\s]+)/g);
-    for (const m of matches) {
-      if (!manifest.shellCommands.includes(m[1])) {
-        manifest.shellCommands.push(m[1]);
-      }
-    }
   }
 
-  if (/\b(?:fetch|axios|requests|http\.get|https\.request)\b/.test(content)) {
+  if (/\b(?:fetch\s*\(|axios\s*\.|requests\s*\.|https?\s*\.\s*(?:get|request)\s*\()/.test(code) || specHit(NETWORK_SPEC_HINT)) {
     manifest.canMakeHTTPRequests = true;
-    const urlMatches = content.matchAll(/https?:\/\/([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g);
-    for (const m of urlMatches) {
-      const host = m[1];
-      if (!manifest.externalServices.includes(host)) {
-        manifest.externalServices.push(host);
-        manifest.network.push({ type: "outbound", host, protocol: "https" });
-      }
-    }
   }
 
-  if (/\b(?:writeFileSync|writeFile|appendFileSync|createWriteStream)\b/.test(content)) {
+  if (/\b(?:writeFileSync|writeFile|appendFileSync|createWriteStream)\b/.test(code)) {
     manifest.canModifyFiles = true;
     manifest.filesystem.push({ type: "write", path: "host-workspace" });
   }
-  if (/\b(?:unlinkSync|unlink|rmSync|rmdirSync|shutil\.rmtree)\b/.test(content)) {
+  if (/\b(?:unlinkSync|unlink|rmSync|rmdirSync|shutil\.rmtree)\b/.test(code)) {
     manifest.canDeleteFiles = true;
     manifest.filesystem.push({ type: "delete", path: "host-workspace" });
   }
 
-  if (/\b(?:playwright|puppeteer|selenium|browser\.launch|page\.goto)\b/.test(content)) {
+  if (/\b(?:playwright|puppeteer|selenium|browser\.launch|page\.goto)\b/.test(code) || specHit(BROWSER_SPEC_HINT)) {
     manifest.canAccessBrowser = true;
   }
 
-  if (/\b(?:nodemailer|sendgrid|resend|sesClient|smtpClient)\b/.test(content)) {
+  if (/\b(?:nodemailer|sendgrid|resend|smtp)\b/.test(code) || specHit(EMAIL_SPEC_HINT)) {
     manifest.canSendEmail = true;
   }
 
-  if (/\b(?:pg|postgres|mysql|sqlite3|prisma|drizzle|mongoose|redis)\b/.test(content)) {
+  if (/\b(?:pg|postgres|mysql|sqlite3|prisma|drizzle|mongoose|redis)\b/.test(code) || specHit(DB_NAME_HINT) || specHit(DB_SPEC_HINT)) {
     manifest.canAccessDB = true;
   }
 
-  const envMatches = content.matchAll(/process\.env\.([A-Z0-9_]+)/g);
+  const envMatches = code.matchAll(/process\.env\.([A-Z0-9_]+)/g);
   for (const m of envMatches) {
     const varName = m[1];
     if (!manifest.envVars.includes(varName)) manifest.envVars.push(varName);
@@ -103,8 +140,10 @@ function analyzeFileContent(content: string, manifest: PermissionManifest): void
     }
   }
 
-  if (/\b(?:requireApproval|confirmPrompt|askHumanConsent|operatorApproval)\b/.test(content)) {
-    manifest.humanApprovalRequired.push("operator-confirmation-gate");
+  if (/\b(?:requireApproval|confirmPrompt|askHumanConsent|operatorApproval)\b/.test(code)) {
+    if (!manifest.humanApprovalRequired.includes("operator-confirmation-gate")) {
+      manifest.humanApprovalRequired.push("operator-confirmation-gate");
+    }
   }
 }
 
