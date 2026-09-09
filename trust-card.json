@@ -1,482 +1,54 @@
 {
   "schema": "agenttrust/trust-card/v1",
-  "generatedAt": "2026-09-09T09:35:35.240Z",
+  "generatedAt": "2026-09-09T09:51:50.784Z",
   "agenttrustVersion": "0.1.0",
   "subject": {
-    "type": "mcp-server",
-    "name": "agenttrust-monorepo",
+    "type": "agent-skill",
+    "name": "Secure Data Auditor Skill",
     "version": "0.1.0",
     "description": "",
-    "language": "JavaScript"
+    "language": "unknown"
   },
   "provenance": {
     "signed": false,
-    "buildReproducible": true,
-    "hasLockfile": true,
+    "buildReproducible": false,
+    "hasLockfile": false,
     "hasSBOM": false,
-    "hasLicense": true,
-    "license": "Apache-2.0",
-    "hasSecurityPolicy": true,
+    "hasLicense": false,
+    "hasSecurityPolicy": false,
     "hasChangelog": false,
-    "isVerified": true
+    "isVerified": false
   },
   "permissions": {
-    "network": [
-      {
-        "type": "outbound",
-        "host": "eulogik.github.io",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "github.com",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "www.npmjs.com",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "img.shields.io",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "owasp.org",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "eulogik.com",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "openai.com",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "arxiv.org",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "huggingface.co",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "agentskills.io",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "docs.nvidia.com",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "www.axios.com",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "registry.npmjs.org",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "raw.githubusercontent.com",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "example.com",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "www.w3.org",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "schema.org",
-        "protocol": "https"
-      },
-      {
-        "type": "outbound",
-        "host": "api.github.com",
-        "protocol": "https"
-      }
-    ],
-    "filesystem": [
-      {
-        "type": "delete",
-        "path": "host-workspace"
-      },
-      {
-        "type": "write",
-        "path": "host-workspace"
-      },
-      {
-        "type": "write",
-        "path": "host-workspace"
-      },
-      {
-        "type": "delete",
-        "path": "host-workspace"
-      },
-      {
-        "type": "write",
-        "path": "host-workspace"
-      },
-      {
-        "type": "delete",
-        "path": "host-workspace"
-      },
-      {
-        "type": "write",
-        "path": "host-workspace"
-      },
-      {
-        "type": "delete",
-        "path": "host-workspace"
-      },
-      {
-        "type": "write",
-        "path": "host-workspace"
-      },
-      {
-        "type": "write",
-        "path": "host-workspace"
-      },
-      {
-        "type": "delete",
-        "path": "host-workspace"
-      }
-    ],
-    "shell": true,
+    "network": [],
+    "filesystem": [],
+    "shell": false,
     "shellCommands": [],
-    "secrets": [
-      "GITHUB_TOKEN"
-    ],
-    "envVars": [
-      "NO_COLOR",
-      "GITHUB_TOKEN"
-    ],
-    "externalServices": [
-      "eulogik.github.io",
-      "github.com",
-      "www.npmjs.com",
-      "img.shields.io",
-      "owasp.org",
-      "eulogik.com",
-      "openai.com",
-      "arxiv.org",
-      "huggingface.co",
-      "agentskills.io",
-      "docs.nvidia.com",
-      "www.axios.com",
-      "registry.npmjs.org",
-      "raw.githubusercontent.com",
-      "example.com",
-      "www.w3.org",
-      "schema.org",
-      "api.github.com"
-    ],
+    "secrets": [],
+    "envVars": [],
+    "externalServices": [],
     "humanApprovalRequired": [],
-    "canSpawnProcesses": true,
-    "canAccessDB": true,
-    "canSendEmail": true,
-    "canAccessBrowser": true,
-    "canModifyFiles": true,
-    "canDeleteFiles": true,
-    "canMakeHTTPRequests": true,
-    "estimatedScope": "excessive"
+    "canSpawnProcesses": false,
+    "canAccessDB": false,
+    "canSendEmail": false,
+    "canAccessBrowser": false,
+    "canModifyFiles": false,
+    "canDeleteFiles": false,
+    "canMakeHTTPRequests": false,
+    "estimatedScope": "minimal"
   },
   "security": {
-    "findings": [
-      {
-        "id": "AT-SEC-001-d039f82ff928",
-        "title": "Direct Prompt Concatenation (Injection Vulnerability)",
-        "description": "User or tool input is directly concatenated into prompt templates without sanitization or boundary delimitation.",
-        "severity": "critical",
-        "category": "security",
-        "file": "examples/vulnerable-mcp-server/server.ts",
-        "line": 24,
-        "rule": "AT-SEC-001",
-        "remediation": "Use parameterized messages, structured schema validation (Zod), and clear boundary delimiters.",
-        "cwe": "CWE-20",
-        "owaspCode": "LLM01",
-        "evidence": "const systemPrompt = \"You are an assistant. \" + args.userInput;"
-      },
-      {
-        "id": "AT-SEC-002-808cc54632d3",
-        "title": "Hardcoded Credential or API Secret",
-        "description": "A hardcoded API key, private token, or secret was identified in source code.",
-        "severity": "critical",
-        "category": "security",
-        "file": "examples/vulnerable-mcp-server/server.ts",
-        "line": 11,
-        "rule": "AT-SEC-002",
-        "remediation": "Move credentials to secure environment variables or a key vault. Never commit API keys.",
-        "cwe": "CWE-798",
-        "owaspCode": "LLM02",
-        "evidence": "const API_SECRET_TOKEN = \"sk-proj-abc123456789012345678901234567890\";"
-      },
-      {
-        "id": "AT-SEC-003-1f78ca019960",
-        "title": "Unbounded Dynamic Shell Execution",
-        "description": "The agent executes shell commands directly from dynamic parameters, allowing remote arbitrary command injection.",
-        "severity": "critical",
-        "category": "security",
-        "file": "examples/vulnerable-mcp-server/server.ts",
-        "line": 16,
-        "rule": "AT-SEC-003",
-        "remediation": "Strictly restrict shell execution to an immutable allowlist of binary commands with explicit argument arrays, or execute inside microVM sandboxes.",
-        "cwe": "CWE-78",
-        "owaspCode": "ASI02",
-        "evidence": "exec(args.cmd, (err, stdout) => {"
-      },
-      {
-        "id": "AT-SEC-005-56c22158e354",
-        "title": "Unrestricted Recursive File Deletion / Modification",
-        "description": "Capability can delete or overwrite arbitrary files on the host filesystem without path validation or human confirmation.",
-        "severity": "high",
-        "category": "permissions",
-        "file": "examples/vulnerable-mcp-server/server.ts",
-        "line": 31,
-        "rule": "AT-SEC-005",
-        "remediation": "Enforce strict jail/root directories and require explicit human-in-the-loop confirmation before file deletions.",
-        "cwe": "CWE-732",
-        "owaspCode": "ASI02",
-        "evidence": "fs.unlinkSync(\"/data/users/\" + args.userId);"
-      },
-      {
-        "id": "AT-SEC-007-ac399fa95cc1",
-        "title": "Raw Secret Leakage in Debug Logging",
-        "description": "Console or file logging dumps raw tokens, authorization headers, or environment objects.",
-        "severity": "medium",
-        "category": "security",
-        "file": "examples/vulnerable-mcp-server/server.ts",
-        "line": 25,
-        "rule": "AT-SEC-007",
-        "remediation": "Implement PII/secret redaction masks before writing to log streams.",
-        "cwe": "CWE-532",
-        "owaspCode": "LLM02",
-        "evidence": "console.log(\"Debug logging token: \" + API_SECRET_TOKEN); // VULNERABILITY 4: Secret leakage (AT-SEC-007)"
-      },
-      {
-        "id": "AT-SEC-004-7dc97d6ee2ab",
-        "title": "eval() / Function Constructor Invocation",
-        "description": "Dangerous eval() or Function constructor used to dynamically execute code strings from LLM or external sources.",
-        "severity": "critical",
-        "category": "security",
-        "file": "packages/core/src/tests/core.test.ts",
-        "line": 53,
-        "rule": "AT-SEC-004",
-        "remediation": "Eliminate eval(). Use safe AST parsers or isolated sandboxes (e.g. E2B Firecracker microVMs).",
-        "cwe": "CWE-94",
-        "owaspCode": "ASI05",
-        "evidence": "\"const code = eval(userInput);\","
-      },
-      {
-        "id": "AT-SEC-003-9b2dac99a79b",
-        "title": "Unbounded Dynamic Shell Execution",
-        "description": "The agent executes shell commands directly from dynamic parameters, allowing remote arbitrary command injection.",
-        "severity": "critical",
-        "category": "security",
-        "file": "packages/core/src/tests/integrity.test.ts",
-        "line": 159,
-        "rule": "AT-SEC-003",
-        "remediation": "Strictly restrict shell execution to an immutable allowlist of binary commands with explicit argument arrays, or execute inside microVM sandboxes.",
-        "cwe": "CWE-78",
-        "owaspCode": "ASI02",
-        "evidence": "\"export function run(cmd: string) { exec(cmd); }\","
-      },
-      {
-        "id": "AT-SEC-003-0d96e32b6b80",
-        "title": "Unbounded Dynamic Shell Execution",
-        "description": "The agent executes shell commands directly from dynamic parameters, allowing remote arbitrary command injection.",
-        "severity": "critical",
-        "category": "security",
-        "file": "packages/core/src/tests/integrity.test.ts",
-        "line": 166,
-        "rule": "AT-SEC-003",
-        "remediation": "Strictly restrict shell execution to an immutable allowlist of binary commands with explicit argument arrays, or execute inside microVM sandboxes.",
-        "cwe": "CWE-78",
-        "owaspCode": "ASI02",
-        "evidence": "assert.equal(perms.shell, true, \"exec(cmd) must flag shell\");"
-      },
-      {
-        "id": "AT-SEC-004-b96a190fff76",
-        "title": "eval() / Function Constructor Invocation",
-        "description": "Dangerous eval() or Function constructor used to dynamically execute code strings from LLM or external sources.",
-        "severity": "critical",
-        "category": "security",
-        "file": "packages/core/src/tests/integrity.test.ts",
-        "line": 32,
-        "rule": "AT-SEC-004",
-        "remediation": "Eliminate eval(). Use safe AST parsers or isolated sandboxes (e.g. E2B Firecracker microVMs).",
-        "cwe": "CWE-94",
-        "owaspCode": "ASI05",
-        "evidence": "const a = stableFindingId(\"AT-SEC-004\", \"a.ts\", 3, \"eval(x)\");"
-      },
-      {
-        "id": "AT-SEC-004-f2911c5babc1",
-        "title": "eval() / Function Constructor Invocation",
-        "description": "Dangerous eval() or Function constructor used to dynamically execute code strings from LLM or external sources.",
-        "severity": "critical",
-        "category": "security",
-        "file": "packages/core/src/tests/integrity.test.ts",
-        "line": 33,
-        "rule": "AT-SEC-004",
-        "remediation": "Eliminate eval(). Use safe AST parsers or isolated sandboxes (e.g. E2B Firecracker microVMs).",
-        "cwe": "CWE-94",
-        "owaspCode": "ASI05",
-        "evidence": "const b = stableFindingId(\"AT-SEC-004\", \"a.ts\", 3, \"eval(x)\");"
-      },
-      {
-        "id": "AT-SEC-004-2e47ee2b9cc7",
-        "title": "eval() / Function Constructor Invocation",
-        "description": "Dangerous eval() or Function constructor used to dynamically execute code strings from LLM or external sources.",
-        "severity": "critical",
-        "category": "security",
-        "file": "packages/core/src/tests/integrity.test.ts",
-        "line": 34,
-        "rule": "AT-SEC-004",
-        "remediation": "Eliminate eval(). Use safe AST parsers or isolated sandboxes (e.g. E2B Firecracker microVMs).",
-        "cwe": "CWE-94",
-        "owaspCode": "ASI05",
-        "evidence": "const c = stableFindingId(\"AT-SEC-004\", \"a.ts\", 4, \"eval(x)\");"
-      },
-      {
-        "id": "AT-SEC-004-316f62584f70",
-        "title": "eval() / Function Constructor Invocation",
-        "description": "Dangerous eval() or Function constructor used to dynamically execute code strings from LLM or external sources.",
-        "severity": "critical",
-        "category": "security",
-        "file": "packages/core/src/tests/integrity.test.ts",
-        "line": 112,
-        "rule": "AT-SEC-004",
-        "remediation": "Eliminate eval(). Use safe AST parsers or isolated sandboxes (e.g. E2B Firecracker microVMs).",
-        "cwe": "CWE-94",
-        "owaspCode": "ASI05",
-        "evidence": "\"notes.md\": \"# Design notes\\n\\nWe considered eval(userInput) but rejected it.\\nExample key sk-proj-abc123456789012345678901234567890 (do not"
-      },
-      {
-        "id": "AT-SEC-004-71b84011428c",
-        "title": "eval() / Function Constructor Invocation",
-        "description": "Dangerous eval() or Function constructor used to dynamically execute code strings from LLM or external sources.",
-        "severity": "critical",
-        "category": "security",
-        "file": "packages/core/src/tests/integrity.test.ts",
-        "line": 124,
-        "rule": "AT-SEC-004",
-        "remediation": "Eliminate eval(). Use safe AST parsers or isolated sandboxes (e.g. E2B Firecracker microVMs).",
-        "cwe": "CWE-94",
-        "owaspCode": "ASI05",
-        "evidence": "\"rules.ts\": \"pattern: /\\\\beval\\\\s*\\\\(|new\\\\s+Function\\\\s*\\\\(/\\nremediation: \\\"Eliminate eval() fast\\\"\\n\""
-      },
-      {
-        "id": "AT-SEC-004-a3e9d3698da4",
-        "title": "eval() / Function Constructor Invocation",
-        "description": "Dangerous eval() or Function constructor used to dynamically execute code strings from LLM or external sources.",
-        "severity": "critical",
-        "category": "security",
-        "file": "packages/core/src/tests/integrity.test.ts",
-        "line": 140,
-        "rule": "AT-SEC-004",
-        "remediation": "Eliminate eval(). Use safe AST parsers or isolated sandboxes (e.g. E2B Firecracker microVMs).",
-        "cwe": "CWE-94",
-        "owaspCode": "ASI05",
-        "evidence": "\"const note = 'uses eval() for docs';\""
-      },
-      {
-        "id": "AT-SEC-006-f6ea0c8aa5df",
-        "title": "Unfiltered SSRF / Arbitrary Network Egress",
-        "description": "Network requests accept arbitrary external URLs from agent or user input without host allowlisting.",
-        "severity": "high",
-        "category": "permissions",
-        "file": "packages/core/src/tests/integrity.test.ts",
-        "line": 160,
-        "rule": "AT-SEC-006",
-        "remediation": "Define an explicit egress domain allowlist and block private IP ranges (127.0.0.1, 10.0.0.0/8, 169.254.169.254).",
-        "cwe": "CWE-918",
-        "owaspCode": "LLM06",
-        "evidence": "\"export function load(url: string) { return fetch(url); }\","
-      },
-      {
-        "id": "AT-SEC-006-665644e351be",
-        "title": "Unfiltered SSRF / Arbitrary Network Egress",
-        "description": "Network requests accept arbitrary external URLs from agent or user input without host allowlisting.",
-        "severity": "high",
-        "category": "permissions",
-        "file": "packages/core/src/tests/integrity.test.ts",
-        "line": 169,
-        "rule": "AT-SEC-006",
-        "remediation": "Define an explicit egress domain allowlist and block private IP ranges (127.0.0.1, 10.0.0.0/8, 169.254.169.254).",
-        "cwe": "CWE-918",
-        "owaspCode": "LLM06",
-        "evidence": "assert.equal(perms.canMakeHTTPRequests, true, \"fetch(url) must flag network\");"
-      },
-      {
-        "id": "AT-COMP-001-3bf1f99e354f",
-        "title": "Missing Human-in-the-Loop Gate for Critical Actions",
-        "description": "Irreversible actions (e.g. database wipe, financial transaction, email dispatch) execute autonomously with no approval trigger.",
-        "severity": "high",
-        "category": "compliance",
-        "file": "packages/core/src/tests/integrity.test.ts",
-        "line": 99,
-        "rule": "AT-COMP-001",
-        "remediation": "Mark high-impact tools with approval requirements and verify operator signature before dispatch.",
-        "cwe": "CWE-284",
-        "owaspCode": "ASI09",
-        "evidence": "High-impact call transferFunds(...) detected without approval validation"
-      },
-      {
-        "id": "AT-SEC-003-e5e27f41747f",
-        "title": "Unbounded Dynamic Shell Execution",
-        "description": "The agent executes shell commands directly from dynamic parameters, allowing remote arbitrary command injection.",
-        "severity": "critical",
-        "category": "security",
-        "file": "scripts/build-reports.mjs",
-        "line": 24,
-        "rule": "AT-SEC-003",
-        "remediation": "Strictly restrict shell execution to an immutable allowlist of binary commands with explicit argument arrays, or execute inside microVM sandboxes.",
-        "cwe": "CWE-78",
-        "owaspCode": "ASI02",
-        "evidence": "return execSync(cmd, { stdio: \"pipe\", encoding: \"utf8\", timeout: 180000, ...opts }).trim();"
-      },
-      {
-        "id": "AT-SEC-003-0a7a8d46277d",
-        "title": "Unbounded Dynamic Shell Execution",
-        "description": "The agent executes shell commands directly from dynamic parameters, allowing remote arbitrary command injection.",
-        "severity": "critical",
-        "category": "security",
-        "file": "scripts/seed-registry.mjs",
-        "line": 113,
-        "rule": "AT-SEC-003",
-        "remediation": "Strictly restrict shell execution to an immutable allowlist of binary commands with explicit argument arrays, or execute inside microVM sandboxes.",
-        "cwe": "CWE-78",
-        "owaspCode": "ASI02",
-        "evidence": "return execSync(cmd, { stdio: \"pipe\", encoding: \"utf8\", timeout: 120000, ...opts }).trim();"
-      }
-    ],
+    "findings": [],
     "findingsBySeverity": {
-      "critical": 14,
-      "high": 4,
-      "medium": 1,
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
       "low": 0,
       "info": 0
     },
-    "totalFindings": 19,
-    "criticalCount": 14,
-    "highCount": 4
+    "totalFindings": 0,
+    "criticalCount": 0,
+    "highCount": 0
   },
   "dependencies": {
     "total": 0,
@@ -485,25 +57,24 @@
     "list": []
   },
   "trustScore": {
-    "overall": 36,
-    "grade": "F",
+    "overall": 88,
+    "grade": "B",
     "breakdown": {
-      "security": 0,
-      "permissions": 10,
-      "provenance": 90,
-      "reliability": 75,
-      "stability": 90
+      "security": 100,
+      "permissions": 100,
+      "provenance": 50,
+      "reliability": 85,
+      "stability": 75
     },
-    "confidence": "high",
-    "rationale": "Score constrained by 14 critical and 4 high-severity findings."
+    "confidence": "medium",
+    "rationale": "No critical or high-severity findings; grade reflects permissions and provenance signals."
   },
   "compatibility": [
-    "mcp-host"
+    "claude-code",
+    "cursor",
+    "codex"
   ],
   "tags": [
-    "mcp-server",
-    "shell-access",
-    "network-egress",
-    "browser-automation"
+    "agent-skill"
   ]
 }
