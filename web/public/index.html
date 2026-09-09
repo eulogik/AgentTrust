@@ -58,7 +58,8 @@
           { "@type": "Question", "name": "What is a Trust Card?", "acceptedAnswer": { "@type": "Answer", "text": "A Trust Card is a portable, machine-readable credential (agenttrust/trust-card/v1) summarizing an agent's security posture: letter grade, 0–100 score, findings, permissions, provenance, and inferred host compatibility." } },
           { "@type": "Question", "name": "Is AgentTrust a certification?", "acceptedAnswer": { "@type": "Answer", "text": "No. AgentTrust is a static scanner, not a certification body. Attack analysis is heuristic, workflow eval is simulated, and Trust Cards are evidence input for your own review — never a compliance verdict." } },
           { "@type": "Question", "name": "Does my code leave my machine?", "acceptedAnswer": { "@type": "Answer", "text": "No. The CLI runs entirely locally with zero telemetry and zero data retention. GitHub-URL scans clone the public repo to a temp directory on your machine." } },
-          { "@type": "Question", "name": "What do the grades mean?", "acceptedAnswer": { "@type": "Answer", "text": "A (90+) through F (below 40), computed from security findings, permission scope, provenance signals, reliability and stability. Across 50 public MCP servers, the average is 70.2 (C) and 36% grade D or F." } }
+          { "@type": "Question", "name": "What do the grades mean?", "acceptedAnswer": { "@type": "Answer", "text": "A (90+) through F (below 40), computed from security findings, permission scope, provenance signals, reliability and stability. Across 50 public MCP servers, the average is 70.2 (C) and 36% grade D or F." } },
+          { "@type": "Question", "name": "Why does the AgentTrust repo itself grade F?", "acceptedAnswer": { "@type": "Answer", "text": "Because it contains its own test ammunition: a deliberately vulnerable example fixture, unit tests that must contain eval( and exec( strings to prove the detector catches them, and automation scripts that legitimately shell out to git and npm. The shipped CLI (packages/cli) self-scans at A (90/100) — that is what the README badge grades. Grade the artifact you ship, not the monorepo that tests it." } }
         ]
       }
     ]
@@ -245,6 +246,10 @@ agenttrust scan ./my-mcp-server --quiet</pre>
           <details class="faq">
             <summary>What do the grades mean?</summary>
             <div class="a"><p>A (90+) through F (below 40), weighted across security findings, permission scope, provenance, reliability and stability. Across 50 public MCP servers the average is 70.2 (C); 36% grade D or F. <a href="methodology.html">Full scoring methodology</a>.</p></div>
+          </details>
+          <details class="faq">
+            <summary>Why does the AgentTrust repo itself grade F?</summary>
+            <div class="a"><p>Because it contains its own test ammunition — and a scanner that <em>didn't</em> flag it would be the real scandal. The F comes from three intentional sources: (1) <code>examples/vulnerable-mcp-server</code>, a deliberately vulnerable fixture; (2) our unit tests, which must contain <code>eval(</code>, <code>exec(</code> and <code>transferFunds(</code> strings to prove the detector catches them; (3) our automation scripts, which legitimately shell out to <code>git</code> and <code>npm</code> with hardcoded local arguments. The shipped product (<code>packages/cli</code>) self-scans at <a href="r/self-packages-cli.html">A (90/100)</a> — that is what the README badge grades. Rule of thumb: grade the artifact you ship, not the monorepo that tests it.</p></div>
           </details>
         </div>
       </div>
