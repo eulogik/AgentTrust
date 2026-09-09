@@ -94,6 +94,9 @@ function reportPage({ slug: sl, title, repoUrl, upstream, card, rankLine }) {
 <meta property="og:type" content="article">
 <meta property="og:title" content="${esc(title)} — AgentTrust Grade ${esc(g)}">
 <meta property="og:url" content="${canon}">
+<meta property="og:image" content="https://eulogik.github.io/AgentTrust/og-image.png">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="640">
 <script type="application/ld+json">${jsonLd}</script>
 <link rel="preload" href="../assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/site.css">
@@ -167,6 +170,9 @@ function indexPage(rows) {
 <meta property="og:type" content="website">
 <meta property="og:title" content="AgentTrust registry — Trust Cards for ${rows.length} MCP servers">
 <meta property="og:url" content="${SITE}/r/">
+<meta property="og:image" content="https://eulogik.github.io/AgentTrust/og-image.png">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="640">
 <script type="application/ld+json">${jsonLd}</script>
 <link rel="preload" href="../assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/site.css">
