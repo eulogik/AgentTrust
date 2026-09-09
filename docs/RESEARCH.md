@@ -444,7 +444,7 @@ Do not optimize early pricing around token volume; optimize around **business ri
 Ship:
 
 ```bash
-npx agenttrust scan <repo-or-skill>
+npx @eulogik/agenttrust scan <repo-or-skill>
 ```
 
 Supported first:

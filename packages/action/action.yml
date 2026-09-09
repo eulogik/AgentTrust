@@ -25,7 +25,7 @@ runs:
     # Requires the published `agenttrust` npm package.
     - name: Run AgentTrust Scan
       shell: bash
-      run: npx -y agenttrust@0.1.0 scan "${{ inputs.path }}" --fail-on "${{ inputs.fail-on }}" --quiet --no-banner
+      run: npx -y @eulogik/agenttrust@0.1.0 scan "${{ inputs.path }}" --fail-on "${{ inputs.fail-on }}" --quiet --no-banner
 
     - name: Upload SARIF to GitHub Code Scanning
       if: always()

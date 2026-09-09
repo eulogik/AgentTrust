@@ -76,7 +76,7 @@ AgentTrust          ██████         ██████         ██
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │                     DEVELOPER EXPERIENCE                      │
-│  CLI (npx agenttrust)  │  GitHub Action  │  Web Dashboard     │
+│  CLI (npx @eulogik/agenttrust)  │  GitHub Action  │  Web Dashboard     │
 └──────────────┬───────────────────┬───────────────┬───────────┘
                │                   │               │
 ┌──────────────▼───────────────────▼───────────────▼───────────┐
@@ -107,7 +107,7 @@ AgentTrust          ██████         ██████         ██
 | Layer | Technology | Why This |
 |---|---|---|
 | **Language** | TypeScript (CLI + API) + Python (analysis engines) | TS for dev tooling distribution (npx); Python for ML/security ecosystem |
-| **CLI** | Node.js + Commander.js | `npx agenttrust scan` — zero-install distribution |
+| **CLI** | Node.js + Commander.js | `npx @eulogik/agenttrust scan` — zero-install distribution |
 | **API** | Hono (edge-first) or Fastify | Lightweight, fast, deploys to Cloudflare Workers or containers |
 | **Database** | PostgreSQL + JSONB | Relational for structure + flexible JSON for traces. pgvector for semantic search |
 | **Object Store** | S3 / Cloudflare R2 | Artifact storage (scan reports, execution recordings) |
@@ -227,7 +227,7 @@ Generated for each evaluated workflow run:
 
 ### Days 1–14: The Scanner CLI (the "Hello World")
 
-**Ship:** `npx agenttrust scan <path-or-url>`
+**Ship:** `npx @eulogik/agenttrust scan <path-or-url>`
 
 **What it does on day 14:**
 1. Accepts a local directory, GitHub URL, or npm package name
@@ -241,7 +241,7 @@ Generated for each evaluated workflow run:
 
 **Example output:**
 ```
-$ npx agenttrust scan github.com/example/calendar-mcp-server
+$ npx @eulogik/agenttrust scan github.com/example/calendar-mcp-server
 
   AgentTrust v0.1.0 — Scanning MCP Server
 
@@ -461,7 +461,7 @@ async def process_claim(agent, claim_data):
 
 | Tactic | Details |
 |---|---|
-| **Land with free scanner** | Enterprise security teams run `npx agenttrust scan` on their agent repos. Free. |
+| **Land with free scanner** | Enterprise security teams run `npx @eulogik/agenttrust scan` on their agent repos. Free. |
 | **Expand with "Agent Discovery"** | "Did you know you have 47 AI agents running in production? Here's what they can access." |
 | **Sell the workflow** | "We test and continuously prove that your AI agents can safely perform the jobs you gave them." |
 | **Compliance hook** | "EU AI Act Article 50 audit package — one click, complete evidence trail." |
@@ -608,7 +608,7 @@ If you start today:
 3. **Build:** The scanner CLI. Accept a GitHub URL → clone → detect type → run Semgrep → extract permissions → output Trust Card to terminal
 4. **Scan:** The top 20 MCP servers on GitHub. Document every finding.
 5. **Write:** The first blog post draft based on what you find
-6. **Ship:** By end of week 2, `npx agenttrust scan` should work on any MCP server
+6. **Ship:** By end of week 2, `npx @eulogik/agenttrust scan` should work on any MCP server
 
 **The first 60 seconds of user experience define everything.** Make the scan fast, the output beautiful, and the findings real.
 

@@ -1,5 +1,5 @@
 {
-  "name": "agenttrust",
+  "name": "@eulogik/agenttrust",
   "version": "0.1.0",
   "type": "module",
   "description": "Trust & security verification for AI agents and MCP servers \u2014 scan, grade, and share a verifiable Trust Card",

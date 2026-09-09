@@ -50,7 +50,7 @@
         "@type": "FAQPage",
         "mainEntity": [
           { "@type": "Question", "name": "What is AgentTrust?", "acceptedAnswer": { "@type": "Answer", "text": "AgentTrust is a free, local-first security scanner for AI agents and MCP servers. It runs 8 OWASP-mapped static rules, extracts permission manifests, and issues a Trust Card graded A–F with SARIF output for CI." } },
-          { "@type": "Question", "name": "How do I scan an MCP server?", "acceptedAnswer": { "@type": "Answer", "text": "Run npx agenttrust scan <path-or-github-url> (npm package pending — run from source until then). You get a Trust Card, SARIF and Markdown reports in seconds, with zero data leaving your machine." } },
+          { "@type": "Question", "name": "How do I scan an MCP server?", "acceptedAnswer": { "@type": "Answer", "text": "Run npx @eulogik/agenttrust scan <path-or-github-url> (npm package pending — run from source until then). You get a Trust Card, SARIF and Markdown reports in seconds, with zero data leaving your machine." } },
           { "@type": "Question", "name": "What is a Trust Card?", "acceptedAnswer": { "@type": "Answer", "text": "A Trust Card is a portable, machine-readable credential (agenttrust/trust-card/v1) summarizing an agent's security posture: letter grade, 0–100 score, findings, permissions, provenance, and inferred host compatibility." } },
           { "@type": "Question", "name": "Is AgentTrust a certification?", "acceptedAnswer": { "@type": "Answer", "text": "No. AgentTrust is a static scanner, not a certification body. Attack analysis is heuristic, workflow eval is simulated, and Trust Cards are evidence input for your own review — never a compliance verdict." } },
           { "@type": "Question", "name": "Does my code leave my machine?", "acceptedAnswer": { "@type": "Answer", "text": "No. The CLI runs entirely locally with zero telemetry and zero data retention. GitHub-URL scans clone the public repo to a temp directory on your machine." } },
@@ -88,7 +88,7 @@
         <h1 id="hero-h">A trust score for every AI agent.</h1>
         <p class="lede"><strong style="color:var(--text)">AgentTrust is a free, local-first security scanner for AI agents and MCP servers.</strong> Eight static rules, a permission manifest, and a Trust Card graded A–F — in seconds, with zero data leaving your machine.</p>
         <div class="hero-ctas">
-          <span class="cmd"><span>npx agenttrust scan .</span><button type="button" data-copy="npx agenttrust scan .">Copy</button></span>
+          <span class="cmd"><span>npx @eulogik/agenttrust scan .</span><button type="button" data-copy="npx @eulogik/agenttrust scan .">Copy</button></span>
           <a class="btn btn-ghost" href="https://github.com/eulogik/AgentTrust">View on GitHub</a>
         </div>
         <p class="hero-note">Free forever · No account · Open source (Apache-2.0) · <a href="#install">Install from source while npm lands</a></p>
@@ -100,7 +100,7 @@
           <div><div class="n">0</div><div class="l">bytes of your code ever transmitted</div></div>
         </div>
 
-        <div class="term reveal" id="term" data-lines="$ npx agenttrust scan examples/secure-agent-skill&#10;Trust Grade: [G]B (88/100)[/G] · Findings: 0 · Scope: minimal&#10;Provenance: signals present · Rules: 8 static (OWASP-mapped)&#10;[C]✔ trust-card.json[/C] [D](Trust Card v1)[/D]&#10;[C]✔ agenttrust-report.sarif[/C] [D](GitHub Code Scanning)[/D]&#10;[C]✔ agenttrust-report.md[/C]" aria-label="Sample scan output">
+        <div class="term reveal" id="term" data-lines="$ npx @eulogik/agenttrust scan examples/secure-agent-skill&#10;Trust Grade: [G]B (88/100)[/G] · Findings: 0 · Scope: minimal&#10;Provenance: signals present · Rules: 8 static (OWASP-mapped)&#10;[C]✔ trust-card.json[/C] [D](Trust Card v1)[/D]&#10;[C]✔ agenttrust-report.sarif[/C] [D](GitHub Code Scanning)[/D]&#10;[C]✔ agenttrust-report.md[/C]" aria-label="Sample scan output">
           <div class="term-bar"><i></i><i></i><i></i><span>terminal — sample output, secure fixture</span></div>
           <div class="term-body"></div>
         </div>
@@ -253,7 +253,7 @@ node packages/cli/dist/index.js scan ./examples/vulnerable-mcp-server --quiet</p
         <h2 class="reveal">Ship agents you can defend.</h2>
         <p class="lede reveal" style="margin-left:auto;margin-right:auto">One command. Thirty seconds. A grade you can show your auditor.</p>
         <div class="hero-ctas reveal" style="justify-content:center">
-          <span class="cmd"><span>npx agenttrust scan .</span><button type="button" data-copy="npx agenttrust scan .">Copy</button></span>
+          <span class="cmd"><span>npx @eulogik/agenttrust scan .</span><button type="button" data-copy="npx @eulogik/agenttrust scan .">Copy</button></span>
           <a class="btn btn-ghost" href="r/">Browse the registry</a>
         </div>
       </div>

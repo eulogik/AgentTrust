@@ -35,7 +35,7 @@ agenttrust/
 │   │
 │   ├── cli/                         # Developer CLI & Terminal Interface
 │   │   ├── src/index.ts             # CLI command dispatcher
-│   │   └── dist/index.js            # Executable `npx agenttrust` binary
+│   │   └── dist/index.js            # Executable `@eulogik/agenttrust` binary (`agenttrust` on PATH)
 │   │
 │   └── action/                      # Drop-in CI/CD GitHub Action
 │       └── action.yml               # Reusable GitHub Action step

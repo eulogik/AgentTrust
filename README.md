@@ -34,22 +34,22 @@ AgentTrust is a trust and security verification platform for autonomous AI agent
 
 ```bash
 # Scan a local folder, MCP server, or Agent Skill
-npx agenttrust scan ./my-mcp-server
+npx @eulogik/agenttrust scan ./my-mcp-server
 
 # Scan a GitHub repository
-npx agenttrust scan https://github.com/owner/repo
+npx @eulogik/agenttrust scan https://github.com/owner/repo
 
 # Scan an npm package
-npx agenttrust scan some-npm-package --npm
+npx @eulogik/agenttrust scan some-npm-package --npm
 
 # Fail CI when findings meet a severity threshold
-npx agenttrust scan ./my-mcp-server --fail-on high
+npx @eulogik/agenttrust scan ./my-mcp-server --fail-on high
 
 # Run the OWASP Agentic Top 10 Adversarial Attack Suite
-npx agenttrust attack ./my-mcp-server
+npx @eulogik/agenttrust attack ./my-mcp-server
 
 # Evaluate workflow reliability
-npx agenttrust eval ./tests/workflow.yaml
+npx @eulogik/agenttrust eval ./tests/workflow.yaml
 ```
 
 ## What You Get
