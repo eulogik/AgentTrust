@@ -1,8 +1,5 @@
 name: "OpenTrustBench CI Scanner"
-description: >
-  Static security and trust evaluation for AI agents, skills, and MCP tool
-  servers. Scans local paths or directories, produces SARIF / JSON / Markdown
-  reports, and uploads results to GitHub Code Scanning.
+description: "Scan AI agents and MCP servers for security flaws. A-F Trust Cards, SARIF reports, severity gates for CI."
 author: "OpenTrustBench"
 branding:
   icon: "shield"
