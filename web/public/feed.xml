@@ -2,12 +2,12 @@
 <rss version="2.0">
   <channel>
     <title>OpenTrustBench changelog</title>
-    <link>https://eulogik.github.io/OpenTrustBench/</link>
+    <link>https://www.opentrustbench.com/</link>
     <description>Releases, registry refreshes, and methodology updates for the OpenTrustBench agent trust scanner.</description>
     <language>en</language>
     <item>
       <title>Weekly registry refresh goes automatic</title>
-      <link>https://eulogik.github.io/OpenTrustBench/r/</link>
+      <link>https://www.opentrustbench.com/r/</link>
       <pubDate>Tue, 09 Sep 2026 00:00:00 GMT</pubDate>
       <description>50 MCP servers re-scanned on schedule; per-report badges bound to evidence pages; stale banners past 30 days.</description>
     </item>

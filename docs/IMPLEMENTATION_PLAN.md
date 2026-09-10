@@ -268,7 +268,7 @@ $ npx @opentrustbench/cli scan github.com/example/calendar-mcp-server
   MED:  No rate limiting on API calls
 
   Full report: opentrustbench-report.sarif
-  Badge: ![Trust Score](https://eulogik.github.io/OpenTrustBench/badge/b.svg)
+  Badge: ![Trust Score](https://www.opentrustbench.com/badge/b.svg)
 ```
 
 **Success criterion:** A developer scans any capability in <60 seconds and immediately sees the risk surface.
@@ -287,7 +287,7 @@ $ npx @opentrustbench/cli scan github.com/example/calendar-mcp-server
    ```
 2. **Trust Badge** — embeddable SVG for READMEs:
    ```markdown
-   [![OpenTrustBench Score: A](https://eulogik.github.io/OpenTrustBench/badge/a.svg)](https://eulogik.github.io/OpenTrustBench)
+   [![OpenTrustBench Score: A](https://www.opentrustbench.com/badge/a.svg)](https://www.opentrustbench.com)
    ```
 3. **Public Registry** — `<site>/registry` (not built) showing Trust Cards for popular MCP servers and agent skills
 4. Scan the **top 100 most-starred MCP servers and agent skills** proactively and publish results
@@ -382,7 +382,7 @@ async def process_claim(agent, claim_data):
 
 ### Days 76–90: Dashboard + Team Features
 
-**Ship (future):** Web dashboard (no project domain yet — `opentrustbench.dev` is parked by a squatter):
+**Ship (future):** Web dashboard (live at `www.opentrustbench.com` — `opentrustbench.dev` is parked by a squatter):
 
 - **Trust Registry** — all scanned capabilities with scores and trends
 - **Execution History** — timeline of all monitored workflows
@@ -603,7 +603,7 @@ Abandon or pivot if:
 
 If you start today:
 
-1. **Register:** project domain (NOTE 2026-09-09: `opentrustbench.dev` is parked by a squatter — using `eulogik.github.io/OpenTrustBench`) + `@opentrustbench` on X/GitHub
+1. **Register:** project domain (NOTE 2026-09-09: `opentrustbench.dev` is parked by a squatter — using `www.opentrustbench.com`; UPDATE 2026-09-10: `opentrustbench.com` acquired, live via GitHub Pages) + `@opentrustbench` on X/GitHub
 2. **Init repo:** `github.com/opentrustbench/opentrustbench` — MIT license, clean README
 3. **Build:** The scanner CLI. Accept a GitHub URL → clone → detect type → run Semgrep → extract permissions → output Trust Card to terminal
 4. **Scan:** The top 20 MCP servers on GitHub. Document every finding.

@@ -10,7 +10,7 @@ export function generateSarif(card: TrustCard): string {
           driver: {
             name: "OpenTrustBench",
             version: card.opentrustbenchVersion,
-            informationUri: "https://eulogik.github.io/OpenTrustBench",
+            informationUri: "https://www.opentrustbench.com",
             rules: [...new Map(card.security.findings.map(f => [f.rule, f])).values()].map(f => ({
               id: f.rule,
               name: f.title,

@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://eulogik.github.io/OpenTrustBench/r/self-packages-cli.html">
-    <img src="https://eulogik.github.io/OpenTrustBench/r/self-packages-cli.svg" alt="OpenTrustBench Grade A — opentrustbench CLI self-scan" width="120">
+  <a href="https://www.opentrustbench.com/r/self-packages-cli.html">
+    <img src="https://www.opentrustbench.com/r/self-packages-cli.svg" alt="OpenTrustBench Grade A — opentrustbench CLI self-scan" width="120">
   </a>
   <br>
   <sub>Self-scan of <code>packages/cli</code> at HEAD: <strong>A (90/100)</strong>, 0 findings, minimal scope. Reproduce: <code>node packages/cli/dist/index.js scan packages/cli --quiet</code></sub>
@@ -14,7 +14,7 @@
   <a href="https://www.npmjs.com/package/@opentrustbench/cli"><img src="https://img.shields.io/npm/v/@opentrustbench/cli?color=cyan&label=npm" alt="npm version"></a>
   <a href="https://github.com/eulogik/OpenTrustBench/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a>
   <a href="https://owasp.org"><img src="https://img.shields.io/badge/OWASP-Agentic%20Top%2010-34d399.svg" alt="OWASP Agentic AI"></a>
-  <a href="https://eulogik.github.io/OpenTrustBench"><img src="https://img.shields.io/badge/Rules-8%20OWASP--mapped-cyan.svg" alt="8 OWASP-mapped rules"></a>
+  <a href="https://www.opentrustbench.com"><img src="https://img.shields.io/badge/Rules-8%20OWASP--mapped-cyan.svg" alt="8 OWASP-mapped rules"></a>
 </p>
 
 <p align="center">
@@ -59,14 +59,14 @@ npx @opentrustbench/cli eval ./tests/workflow.yaml
 | **Trust Card** | Machine-readable credential (`opentrustbench/trust-card/v1`) with grade, score, findings, and permissions |
 | **SARIF Report** | Industry-standard format for GitHub Security tab integration |
 | **Markdown Report** | Human-readable audit report for compliance and review |
-| **Grade Badge** | Shareable SVG badge linking to a public report page ([example](https://eulogik.github.io/OpenTrustBench/badge/a.svg), [registry](https://eulogik.github.io/OpenTrustBench/r/)) |
+| **Grade Badge** | Shareable SVG badge linking to a public report page ([example](https://www.opentrustbench.com/badge/a.svg), [registry](https://www.opentrustbench.com/r/)) |
 
 ## Grade Badge
 
 Embed your trust score in your README:
 
 ```markdown
-[![OpenTrustBench](https://eulogik.github.io/OpenTrustBench/r/self-packages-cli.svg)](https://eulogik.github.io/OpenTrustBench/r/self-packages-cli.html)
+[![OpenTrustBench](https://www.opentrustbench.com/r/self-packages-cli.svg)](https://www.opentrustbench.com/r/self-packages-cli.html)
 ```
 
 
@@ -142,7 +142,7 @@ node scripts/verify-demos.mjs  # end-to-end smoke checks
 ---
 
 <p align="center">
-  <a href="https://eulogik.github.io/OpenTrustBench">Website</a> ·
+  <a href="https://www.opentrustbench.com">Website</a> ·
   <a href="https://github.com/eulogik/OpenTrustBench">GitHub</a> ·
   <a href="https://www.npmjs.com/package/@opentrustbench/cli">npm</a> ·
   <a href="https://github.com/eulogik/OpenTrustBench/issues/new">Contact</a>

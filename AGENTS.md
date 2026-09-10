@@ -7,8 +7,8 @@ OpenTrustBench — trust/scanning layer for AI agent capabilities and MCP tools.
 - `packages/core` — all engines: capability detectors, OWASP rule suite (8 regex rules: `AT-SEC-001`–`007` + `AT-COMP-001`), permission extraction, trust scoring/grades, attack heuristics, workflow eval parser, SARIF/markdown reporters. Public API re-exported from `src/index.ts`. Tests live in `src/tests/` (node:test), compiled into `dist/tests/`.
 - `packages/cli` — `opentrustbench` binary; thin dispatcher over core (`import ... from "@opentrustbench/core"`).
 - `packages/action` — GitHub Action wrapper; `action.yml` only, no code.
-- `web/public` — site v3 (no frameworks): `index.html`, `methodology.html`, `r/` (54 generated report pages + registry explorer), `assets/` (`site.css` tokens, `site.js` vanilla, self-hosted Inter + JetBrains Mono woff2), `llms.txt`, `.well-known/ai.txt`, `feed.xml`, SEO files (`sitemap.xml`, `robots.txt`, `404.html`). Served via GitHub Pages at `https://eulogik.github.io/OpenTrustBench` (`opentrustbench.dev` is a parked squatter domain — never point URLs at it). Internal links are relative (work at root locally and under `/OpenTrustBench/` on Pages); only canonical/OG use absolute URLs. `404.html` must keep absolute `/OpenTrustBench/` asset paths (it serves at arbitrary depths).
-- `badges/` — shareable grade badge SVGs (`a.svg` through `f.svg`), shields.io-compatible, hosted at `https://eulogik.github.io/OpenTrustBench/badge/`.
+- `web/public` — site v3 (no frameworks): `index.html`, `methodology.html`, `r/` (54 generated report pages + registry explorer), `assets/` (`site.css` tokens, `site.js` vanilla, self-hosted Inter + JetBrains Mono woff2), `llms.txt`, `.well-known/ai.txt`, `feed.xml`, SEO files (`sitemap.xml`, `robots.txt`, `404.html`). Served via GitHub Pages at `https://www.opentrustbench.com` (`opentrustbench.dev` is a parked squatter domain — never point URLs at it). Internal links are relative (work at root locally and on the custom domain); only canonical/OG use absolute URLs. `404.html` must keep root-absolute `/assets/` paths (it serves at arbitrary depths).
+- `badges/` — shareable grade badge SVGs (`a.svg` through `f.svg`), shields.io-compatible, hosted at `https://www.opentrustbench.com/badge/`.
 - `examples/` — scan fixtures: `vulnerable-mcp-server` (must grade F / fail attack heuristics), `secure-agent-skill`, `sample-workflow.yaml`.
 - `scripts/verify-demos.mjs` — end-to-end smoke checks used by CI and local verification.
 - `docs/` + `walkthrough.md` — product strategy/research prose, not engineering docs (walkthrough has stale absolute paths).
@@ -47,7 +47,7 @@ node packages/cli/dist/index.js scan <path-or-dir>   # scan any target directly
 node packages/cli/dist/index.js scan <t> --quiet --format json --output-dir ./trust   # CI-friendly: compact stdout, files to ./trust
 npx serve web/public -p 3000             # static web UI (landing page)
 # Badge URLs (after GitHub Pages deploy):
-# https://eulogik.github.io/OpenTrustBench/badge/a.svg  through  https://eulogik.github.io/OpenTrustBench/badge/f.svg
+# https://www.opentrustbench.com/badge/a.svg  through  https://www.opentrustbench.com/badge/f.svg
 ```
 
 ## Known gaps (roadmap context)
@@ -57,4 +57,4 @@ npx serve web/public -p 3000             # static web UI (landing page)
 - No lint/format config.
 - npm packages published at 0.1.0: `@opentrustbench/cli` (CLI, bin `opentrustbench`) + `@opentrustbench/core` (lib). Unscoped `opentrustbench` is permanently blocked (typosquat guard vs real `agent-trust` package) — never reference it as installable.
 - Repo is currently PRIVATE on GitHub — must be made public before npm publish and Pages deploy.
-- No custom domain: `opentrustbench.dev` is parked by a squatter. Canonical URLs use `eulogik.github.io/OpenTrustBench`. Contact is via GitHub issues (no project email exists).
+- Custom domain `www.opentrustbench.com` (apex redirects to www) via GitHub Pages + `web/public/CNAME`. `opentrustbench.dev` is parked by a squatter — never use it. Canonical URLs use `https://www.opentrustbench.com`. Contact is via GitHub issues (no project email exists).

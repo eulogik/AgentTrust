@@ -7,7 +7,7 @@
         "driver": {
           "name": "OpenTrustBench",
           "version": "0.1.0",
-          "informationUri": "https://eulogik.github.io/OpenTrustBench",
+          "informationUri": "https://www.opentrustbench.com",
           "rules": []
         }
       },

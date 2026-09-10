@@ -17,12 +17,12 @@ can I trust this, what is it allowed to do, and can I prove it.
 
 ## Key pages
 
-- Homepage: https://eulogik.github.io/OpenTrustBench/
-- Methodology (rules, scoring, limits): https://eulogik.github.io/OpenTrustBench/methodology.html
-- Registry of 50 scanned MCP servers: https://eulogik.github.io/OpenTrustBench/r/
+- Homepage: https://www.opentrustbench.com/
+- Methodology (rules, scoring, limits): https://www.opentrustbench.com/methodology.html
+- Registry of 50 scanned MCP servers: https://www.opentrustbench.com/r/
 - State of MCP Permissions report: https://github.com/eulogik/OpenTrustBench/blob/main/docs/STATE-OF-MCP-2026.md
-- FAQ: https://eulogik.github.io/OpenTrustBench/#faq
-- Install: https://eulogik.github.io/OpenTrustBench/#install
+- FAQ: https://www.opentrustbench.com/#faq
+- Install: https://www.opentrustbench.com/#install
 - Source: https://github.com/eulogik/OpenTrustBench
 
 ## Key facts (quotable)

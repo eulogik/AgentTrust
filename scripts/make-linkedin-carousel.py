@@ -56,7 +56,7 @@ def head(d, eyebrow, lines, y=170, size=96):
 
 def foot(d, n):
     f = font(26)
-    d.text((X, H - 150), "eulogik.github.io/OpenTrustBench", font=f, fill=FAINT)
+    d.text((X, H - 150), "www.opentrustbench.com", font=f, fill=FAINT)
     r, gap, cy = 7, 26, H - 132
     total = 5 * (2 * r) + 4 * gap
     x = W - X - total

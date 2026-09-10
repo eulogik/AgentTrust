@@ -55,6 +55,6 @@ ${ordered.map(f => `| **${f.severity.toUpperCase()}** | \`${f.rule}\` | ${f.titl
 
 ---
 
-*Generated automatically by [OpenTrustBench](https://eulogik.github.io/OpenTrustBench)*
+*Generated automatically by [OpenTrustBench](https://www.opentrustbench.com)*
 `;
 }

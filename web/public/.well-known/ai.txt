@@ -1,6 +1,6 @@
 OpenTrustBench — free, local-first trust and security scanner for AI agents and MCP servers.
-Site: https://eulogik.github.io/OpenTrustBench/
-Methodology: https://eulogik.github.io/OpenTrustBench/methodology.html
-Registry: https://eulogik.github.io/OpenTrustBench/r/
-Machine-readable index: https://eulogik.github.io/OpenTrustBench/llms.txt
+Site: https://www.opentrustbench.com/
+Methodology: https://www.opentrustbench.com/methodology.html
+Registry: https://www.opentrustbench.com/r/
+Machine-readable index: https://www.opentrustbench.com/llms.txt
 Static analysis only; not a certification. Contact via GitHub issues.

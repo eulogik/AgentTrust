@@ -11,7 +11,7 @@ import path from "node:path";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const CLI = path.join(ROOT, "packages", "cli", "dist", "index.js");
 const CORE_PKG = JSON.parse(fs.readFileSync(path.join(ROOT, "packages", "core", "package.json"), "utf8"));
-const SITE = "https://eulogik.github.io/OpenTrustBench";
+const SITE = "https://www.opentrustbench.com";
 const OUT_DIR = path.join(ROOT, "web", "public", "r");
 const WORK = "/tmp/at-reports";
 const CLONES = path.join(WORK, "clones");
@@ -94,7 +94,7 @@ function reportPage({ slug: sl, title, repoUrl, upstream, card, rankLine }) {
 <meta property="og:type" content="article">
 <meta property="og:title" content="${esc(title)} — OpenTrustBench Grade ${esc(g)}">
 <meta property="og:url" content="${canon}">
-<meta property="og:image" content="https://eulogik.github.io/OpenTrustBench/og-image.png">
+<meta property="og:image" content="https://www.opentrustbench.com/og-image.png">
   <meta property="og:image:width" content="1280">
   <meta property="og:image:height" content="640">
 <script type="application/ld+json">${jsonLd}</script>
@@ -170,7 +170,7 @@ function indexPage(rows) {
 <meta property="og:type" content="website">
 <meta property="og:title" content="OpenTrustBench registry — Trust Cards for ${rows.length} MCP servers">
 <meta property="og:url" content="${SITE}/r/">
-<meta property="og:image" content="https://eulogik.github.io/OpenTrustBench/og-image.png">
+<meta property="og:image" content="https://www.opentrustbench.com/og-image.png">
   <meta property="og:image:width" content="1280">
   <meta property="og:image:height" content="640">
 <script type="application/ld+json">${jsonLd}</script>

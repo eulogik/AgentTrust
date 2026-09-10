@@ -3,7 +3,7 @@
 > **Capability:** `Secure Data Auditor Skill` (agent-skill)  
 > **Trust Grade:** **B** (88/100)  
 > **Confidence:** MEDIUM  
-> **Date:** 2026-09-10T06:36:47.162Z
+> **Date:** 2026-09-10T08:05:41.462Z
 >
 > Static analysis only (8-rule suite, OWASP-mapped). Not a certification or penetration test.
 
@@ -47,4 +47,4 @@ _No critical or high-severity findings in scope._
 
 ---
 
-*Generated automatically by [OpenTrustBench](https://eulogik.github.io/OpenTrustBench)*
+*Generated automatically by [OpenTrustBench](https://www.opentrustbench.com)*

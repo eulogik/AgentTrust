@@ -23,7 +23,7 @@
     "url": "https://github.com/eulogik/OpenTrustBench.git",
     "directory": "packages/cli"
   },
-  "homepage": "https://eulogik.github.io/OpenTrustBench",
+  "homepage": "https://www.opentrustbench.com",
   "bugs": {
     "url": "https://github.com/eulogik/OpenTrustBench/issues"
   },

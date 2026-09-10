@@ -281,8 +281,8 @@ async function handleBadge(targetPath: string) {
   const badgeUrl = `https://img.shields.io/badge/OpenTrustBench-${score.grade}%20(${score.overall}%2F100)-${color}`;
 
   console.log(bold("Embeddable Markdown Badge:"));
-  console.log(gray("Tip: for a bound grade, embed the per-report badge: [![OpenTrustBench](<site>/r/<slug>.svg)](<site>/r/<slug>.html) — see https://eulogik.github.io/OpenTrustBench/r/"));
-  console.log(cyan(`[![OpenTrustBench Score](${badgeUrl})](https://eulogik.github.io/OpenTrustBench)`));
+  console.log(gray("Tip: for a bound grade, embed the per-report badge: [![OpenTrustBench](<site>/r/<slug>.svg)](<site>/r/<slug>.html) — see https://www.opentrustbench.com/r/"));
+  console.log(cyan(`[![OpenTrustBench Score](${badgeUrl})](https://www.opentrustbench.com)`));
 }
 
 async function handleRegistry() {

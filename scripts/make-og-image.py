@@ -50,7 +50,7 @@ def main():
 
     d.text((90, 408), "Free CLI  ·  8 rules  ·  Trust Cards A–F  ·  50 servers graded",
            font=font(30), fill=MUTED)
-    d.text((90, 540), "eulogik.github.io/OpenTrustBench", font=font(30), fill=FAINT)
+    d.text((90, 540), "www.opentrustbench.com", font=font(30), fill=FAINT)
 
     # Grade card, right side
     cx0, cy0, cx1, cy1 = 948, 128, 1190, 512
