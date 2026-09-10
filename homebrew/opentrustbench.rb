@@ -1,7 +1,7 @@
 class Opentrustbench < Formula
   desc "Open-source AI agent and MCP server security scanner"
   homepage "https://www.opentrustbench.com"
-  url "https://github.com/eulogik/OpenTrustBench/archive/refs/tags/v0.1.1.tar.gz"
+  url "https://github.com/eulogik/OpenTrustBench/archive/refs/tags/v0.1.2.tar.gz"
   sha256 "891653485a4bf0f0f0d305be97224d44cc96889296ba5b83887c1220a7b6ef15"
   license "Apache-2.0"
 

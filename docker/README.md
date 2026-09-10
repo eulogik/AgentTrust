@@ -29,7 +29,7 @@ docker compose -f docker/docker-compose.yml run eval
 
 ```bash
 docker login
-docker build -f docker/Dockerfile -t eulogik/opentrustbench:0.1.1 -t eulogik/opentrustbench:latest .
+docker build -f docker/Dockerfile -t eulogik/opentrustbench:0.1.2 -t eulogik/opentrustbench:latest .
 docker push eulogik/opentrustbench --all-tags
 ```
 

@@ -55,5 +55,5 @@ npx serve web/public -p 3000             # static web UI (landing page)
 - Dependency scanning runs `npm audit --package-lock-only` only when a lockfile exists; no pip-audit/Trivy yet. Rules remain regex-only, no AST.
 - GitHub Action requires caller workflows to grant `security-events: write` for the SARIF upload step; scan targets must be local paths, full GitHub URLs, or flagged (`--github`, `--npm`) — bare `owner/repo` without a flag is treated as a local path by design.
 - No lint/format config.
-- npm packages published at 0.1.1: `@opentrustbench/cli` (CLI, bin `opentrustbench`) + `@opentrustbench/core` (lib). Unscoped `opentrustbench` is permanently blocked (typosquat guard vs real `agent-trust` package) — never reference it as installable.
+- npm packages published at 0.1.2: `@opentrustbench/cli` (CLI, bin `opentrustbench`) + `@opentrustbench/core` (lib). Unscoped `opentrustbench` is permanently blocked (typosquat guard vs real `agent-trust` package) — never reference it as installable.
 - Repo is PUBLIC on GitHub: `eulogik/OpenTrustBench`. Custom domain `www.opentrustbench.com` (apex redirects to www) via GitHub Pages + `web/public/CNAME`. `opentrustbench.dev` is parked by a squatter — never use it. Canonical URLs use `https://www.opentrustbench.com`. Contact is via GitHub issues (no project email exists).

@@ -18,6 +18,12 @@
       <description>Average 70.2 (C); 36% grade D or F; permission scope predicts the grade. Full methodology and tables.</description>
     </item>
     <item>
+      <title>v0.1.2: ASCII banner rebrand + npm READMEs</title>
+      <link>https://github.com/eulogik/OpenTrustBench/releases/tag/v0.1.2</link>
+      <pubDate>Thu, 10 Sep 2026 00:00:00 GMT</pubDate>
+      <description>CLI banner now reads OpenTrustBench; @opentrustbench/cli and @opentrustbench/core ship package READMEs.</description>
+    </item>
+    <item>
       <title>v0.1.1: Trust Cards for AI agents and MCP servers</title>
       <link>https://github.com/eulogik/OpenTrustBench/releases/tag/v0.1.1</link>
       <pubDate>Wed, 10 Sep 2026 00:00:00 GMT</pubDate>

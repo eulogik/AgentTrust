@@ -42,7 +42,7 @@ function printBanner() {
 ╚██████╔╝███████╗   ██║   ██║  ██║╚██████╔╝   ██║   ███████╗██║  ██║██║ ╚═╝ ██║
  ╚═════╝ ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝
 `));
-  console.log(bold(magenta("  The Trust, Reliability, and Evidence Layer for Autonomous AI Agents")) + gray(" (v0.1.1)\n"));
+  console.log(bold(magenta("  The Trust, Reliability, and Evidence Layer for Autonomous AI Agents")) + gray(" (v0.1.2)\n"));
 }
 
 function parseArgs(argv: string[]): { target: string; flags: Record<string, string | boolean> } {

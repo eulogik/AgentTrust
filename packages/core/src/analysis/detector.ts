@@ -30,7 +30,7 @@ export async function detectCapability(dirPath: string): Promise<DetectionResult
 
   const fileSet = new Set(files.map(f => f.toLowerCase()));
   let name = path.basename(dirPath);
-  let version = "0.1.1";
+  let version = "0.1.2";
   let description = "";
   let language = "unknown";
 
