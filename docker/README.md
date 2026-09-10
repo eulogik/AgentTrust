@@ -6,8 +6,8 @@ Run OpenTrustBench in a container. Replace `NS` with the Docker Hub namespace
 ## From Docker Hub (once published)
 
 ```bash
-docker run --rm -v $(pwd):/workspace NS/opentrustbench scan .
-docker run --rm -v $(pwd):/workspace NS/opentrustbench attack .
+docker run --rm -v $(pwd):/workspace eulogik/opentrustbench scan .
+docker run --rm -v $(pwd):/workspace eulogik/opentrustbench attack .
 ```
 
 ## Build locally (from the repo root)
@@ -29,8 +29,8 @@ docker compose -f docker/docker-compose.yml run eval
 
 ```bash
 docker login
-docker build -f docker/Dockerfile -t NS/opentrustbench:0.1.1 -t NS/opentrustbench:latest .
-docker push NS/opentrustbench --all-tags
+docker build -f docker/Dockerfile -t eulogik/opentrustbench:0.1.1 -t eulogik/opentrustbench:latest .
+docker push eulogik/opentrustbench --all-tags
 ```
 
 Bump `@opentrustbench/cli@x.y.z` in `docker/Dockerfile` on each release.

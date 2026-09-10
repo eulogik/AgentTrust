@@ -210,9 +210,9 @@ opentrustbench scan ./my-mcp-server --quiet</pre>
               <div class="tab-meta"><button class="btn btn-ghost btn-sm" data-copy-target="#cmd-brew">Copy</button><a href="https://github.com/eulogik/homebrew-opentrustbench">Tap repo →</a></div>
             </div>
             <div role="tabpanel" id="panel-docker" aria-labelledby="tab-docker" data-panel="docker" hidden>
-              <pre id="cmd-docker">docker build -t opentrustbench .
-docker run --rm -v $(pwd):/workspace opentrustbench scan .</pre>
-              <div class="tab-meta"><button class="btn btn-ghost btn-sm" data-copy-target="#cmd-docker">Copy</button><span class="muted">From repo root · Hub image coming soon</span></div>
+              <pre id="cmd-docker">docker pull eulogik/opentrustbench
+docker run --rm -v $(pwd):/workspace eulogik/opentrustbench scan .</pre>
+              <div class="tab-meta"><button class="btn btn-ghost btn-sm" data-copy-target="#cmd-docker">Copy</button><a href="https://hub.docker.com/r/eulogik/opentrustbench">Docker Hub →</a></div>
             </div>
             <div role="tabpanel" id="panel-vscode" aria-labelledby="tab-vscode" data-panel="vscode" hidden>
               <pre id="cmd-vscode">code --install-extension opentrustbench-0.1.1.vsix</pre>
