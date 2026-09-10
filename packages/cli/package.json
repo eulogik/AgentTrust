@@ -1,6 +1,6 @@
 {
   "name": "@opentrustbench/cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "Trust & security verification for AI agents and MCP servers \u2014 scan, grade, and share a verifiable Trust Card",
   "bin": {
@@ -54,6 +54,6 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@opentrustbench/core": "0.1.0"
+    "@opentrustbench/core": "0.1.1"
   }
 }

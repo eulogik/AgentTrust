@@ -2,7 +2,7 @@
   "name": "opentrustbench",
   "displayName": "OpenTrustBench",
   "description": "AI agent and MCP server security scanner for VS Code",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "eulogik",
   "license": "Apache-2.0",
   "engines": {"vscode": "^1.85.0"},
