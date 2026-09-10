@@ -9,7 +9,7 @@
   "homepage": "https://www.opentrustbench.com",
   "repository": {"type": "git", "url": "https://github.com/eulogik/OpenTrustBench.git"},
   "engines": {"vscode": "^1.85.0"},
-  "categories": ["Other", "Security"],
+  "categories": ["Linters", "Other"],
   "keywords": ["ai", "agent", "mcp", "security", "scanner", "trust"],
   "activationEvents": [],
   "main": "./out/extension.js",
