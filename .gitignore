@@ -3,7 +3,9 @@
 .env
 .env.*
 dist/
+build/
 node_modules/
 package-lock.json.bak
 *.vsix
+*.egg-info/
 packages/vscode/out/
