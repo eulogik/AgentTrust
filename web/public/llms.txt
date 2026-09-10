@@ -1,29 +1,29 @@
-# AgentTrust
+# OpenTrustBench
 
 > Free, local-first trust and security scanner for AI agents and MCP servers.
 > Static analysis only — not a certification. Open source (Apache-2.0).
 
-AgentTrust answers three questions about any agent, skill, or MCP server:
+OpenTrustBench answers three questions about any agent, skill, or MCP server:
 can I trust this, what is it allowed to do, and can I prove it.
 
 ## What it does
 
-- Scans a local directory, GitHub repo, or npm package (`agenttrust scan <target>`)
+- Scans a local directory, GitHub repo, or npm package (`opentrustbench scan <target>`)
 - Runs 8 OWASP-mapped static rules (AT-SEC-001–007, AT-COMP-001)
 - Extracts a permission manifest (shell, network, filesystem, browser, email, DB, human approval)
-- Issues a Trust Card graded A–F (`agenttrust/trust-card/v1`) with SARIF + Markdown reports
+- Issues a Trust Card graded A–F (`opentrustbench/trust-card/v1`) with SARIF + Markdown reports
 - Enforces a CI gate (`--fail-on high`); ships a GitHub Action
 - Runs 100% locally: zero telemetry, zero data retention
 
 ## Key pages
 
-- Homepage: https://eulogik.github.io/AgentTrust/
-- Methodology (rules, scoring, limits): https://eulogik.github.io/AgentTrust/methodology.html
-- Registry of 50 scanned MCP servers: https://eulogik.github.io/AgentTrust/r/
-- State of MCP Permissions report: https://github.com/eulogik/AgentTrust/blob/main/docs/STATE-OF-MCP-2026.md
-- FAQ: https://eulogik.github.io/AgentTrust/#faq
-- Install: https://eulogik.github.io/AgentTrust/#install
-- Source: https://github.com/eulogik/AgentTrust
+- Homepage: https://eulogik.github.io/OpenTrustBench/
+- Methodology (rules, scoring, limits): https://eulogik.github.io/OpenTrustBench/methodology.html
+- Registry of 50 scanned MCP servers: https://eulogik.github.io/OpenTrustBench/r/
+- State of MCP Permissions report: https://github.com/eulogik/OpenTrustBench/blob/main/docs/STATE-OF-MCP-2026.md
+- FAQ: https://eulogik.github.io/OpenTrustBench/#faq
+- Install: https://eulogik.github.io/OpenTrustBench/#install
+- Source: https://github.com/eulogik/OpenTrustBench
 
 ## Key facts (quotable)
 

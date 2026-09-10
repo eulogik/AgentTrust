@@ -8,7 +8,7 @@ import {
   analyzeProvenance,
   computeTrustScore,
   runScan,
-  loadAgentTrustConfig,
+  loadOpenTrustBenchConfig,
   runAttackSuite,
   evaluateWorkflow,
   generateSarif,
@@ -16,7 +16,7 @@ import {
   resolveScanTarget,
   isSeverity,
   meetsSeverityThreshold
-} from "@eulogik/agenttrust-core";
+} from "@opentrustbench/core";
 
 const args = process.argv.slice(2);
 const command = args[0] || "help";
@@ -98,8 +98,8 @@ async function main() {
 }
 
 async function handleScan(targetPath: string, flags: Record<string, string | boolean> = {}) {
-  // agenttrust.yaml provides defaults; explicit CLI flags always win.
-  const cfg = loadAgentTrustConfig(process.cwd());
+  // opentrustbench.yaml provides defaults; explicit CLI flags always win.
+  const cfg = loadOpenTrustBenchConfig(process.cwd());
   if (shouldBanner(flags)) printBanner();
   const quiet = !!flags["quiet"];
   const log = (...parts: string[]) => { if (!quiet) console.log(parts.join("")); };
@@ -150,8 +150,8 @@ async function handleScan(targetPath: string, flags: Record<string, string | boo
   fs.mkdirSync(outDir, { recursive: true });
   const sarif = generateSarif(trustCard);
   const md = generateMarkdownReport(trustCard);
-  const sarifPath = path.join(outDir, "agenttrust-report.sarif");
-  const mdPath = path.join(outDir, "agenttrust-report.md");
+  const sarifPath = path.join(outDir, "opentrustbench-report.sarif");
+  const mdPath = path.join(outDir, "opentrustbench-report.md");
   const cardPath = path.join(outDir, "trust-card.json");
   fs.writeFileSync(sarifPath, sarif, "utf8");
   fs.writeFileSync(mdPath, md, "utf8");
@@ -167,7 +167,7 @@ async function handleScan(targetPath: string, flags: Record<string, string | boo
   }
   if (!quiet) {
     console.log(gray("\nNext: enforce this in CI:"));
-    console.log(cyan(`  agenttrust scan ${targetPath} --fail-on high --quiet --output-dir ./trust`));
+    console.log(cyan(`  opentrustbench scan ${targetPath} --fail-on high --quiet --output-dir ./trust`));
   }
 
   const rawFailOn = typeof flags["fail-on"] === "string" ? flags["fail-on"] : cfg.failOn;
@@ -224,9 +224,9 @@ async function handleAttack(targetPath: string) {
     }
   }
 
-  fs.writeFileSync("agenttrust-attack-report.json", JSON.stringify(report, null, 2), "utf8");
-  console.log(gray("\nSaved attack trace: ") + green("agenttrust-attack-report.json"));}
-
+  fs.writeFileSync("opentrustbench-attack-report.json", JSON.stringify(report, null, 2), "utf8");
+  console.log(gray("\nSaved attack trace: ") + green("opentrustbench-attack-report.json"));
+}
 async function handleEval(suitePath: string) {
   printBanner();
   console.log(bold(cyan("🧪 Workflow Reliability & Regression Lab (simulation mode) 🧪\n")));
@@ -257,16 +257,16 @@ async function handleEval(suitePath: string) {
 
 async function handleInit() {
   printBanner();
-  // Only keys the scanner actually reads (see loadAgentTrustConfig).
-  const config = `# AgentTrust Configuration (read by \`agenttrust scan\`; CLI flags override)
+  // Only keys the scanner actually reads (see loadOpenTrustBenchConfig).
+  const config = `# OpenTrustBench Configuration (read by \`opentrustbench scan\`; CLI flags override)
 version: "1.0"
 target: "."
 failOn: "high"
 outputDir: "."
 writeFiles: true
 `;
-  fs.writeFileSync("agenttrust.yaml", config, "utf8");
-  console.log(green("✓ Initialized agenttrust.yaml configuration file."));
+  fs.writeFileSync("opentrustbench.yaml", config, "utf8");
+  console.log(green("✓ Initialized opentrustbench.yaml configuration file."));
 }
 
 async function handleBadge(targetPath: string) {
@@ -278,16 +278,16 @@ async function handleBadge(targetPath: string) {
   const score = computeTrustScore(findings, permissions, provenance);
 
   const color = score.grade === "A" ? "brightgreen" : score.grade === "B" ? "green" : score.grade === "C" ? "yellow" : "red";
-  const badgeUrl = `https://img.shields.io/badge/AgentTrust-${score.grade}%20(${score.overall}%2F100)-${color}`;
+  const badgeUrl = `https://img.shields.io/badge/OpenTrustBench-${score.grade}%20(${score.overall}%2F100)-${color}`;
 
   console.log(bold("Embeddable Markdown Badge:"));
-  console.log(gray("Tip: for a bound grade, embed the per-report badge: [![AgentTrust](<site>/r/<slug>.svg)](<site>/r/<slug>.html) — see https://eulogik.github.io/AgentTrust/r/"));
-  console.log(cyan(`[![AgentTrust Score](${badgeUrl})](https://eulogik.github.io/AgentTrust)`));
+  console.log(gray("Tip: for a bound grade, embed the per-report badge: [![OpenTrustBench](<site>/r/<slug>.svg)](<site>/r/<slug>.html) — see https://eulogik.github.io/OpenTrustBench/r/"));
+  console.log(cyan(`[![OpenTrustBench Score](${badgeUrl})](https://eulogik.github.io/OpenTrustBench)`));
 }
 
 async function handleRegistry() {
   printBanner();
-  console.log(bold("🌐 AgentTrust Public Verified Capabilities Registry (Preview)\n"));
+  console.log(bold("🌐 OpenTrustBench Public Verified Capabilities Registry (Preview)\n"));
   console.log(yellow("ℹ Sample data for preview only — not live scan results. Registry backend is not yet deployed.\n"));
   const sampleRegistry = [
     { name: "github-mcp-server", type: "mcp-server", grade: "A", score: 94, downloads: "280K", author: "anthropic" },
@@ -320,7 +320,7 @@ function renderTrustCardTerminal(card: any, quiet = false) {
   }
 
   console.log(bold("\n" + "═".repeat(60)));
-  console.log(bold(`  AGENTTRUST CARD: ${subject.name} `) + gray(`(${subject.type})`));
+  console.log(bold(`  OPENTRUSTBENCH CARD: ${subject.name} `) + gray(`(${subject.type})`));
   console.log("═".repeat(60));
   console.log(`  Trust Grade:       ${gradeColor(bold(trustScore.grade))} (${trustScore.overall}/100) `);
   console.log(`  Confidence:        ${bold(trustScore.confidence.toUpperCase())}`);
@@ -350,20 +350,20 @@ function renderTrustCardTerminal(card: any, quiet = false) {
 
 function printHelp() {
   console.log(bold("USAGE:"));
-  console.log("  agenttrust scan <path|github-url|owner/repo>    Scan agent capability and generate Trust Card");
+  console.log("  opentrustbench scan <path|github-url|owner/repo>    Scan agent capability and generate Trust Card");
   console.log("      --github            Treat <owner/repo> as a GitHub repository (URLs are auto-detected)");
   console.log("      --npm               Treat target as an npm package name (scans the published tarball)");
   console.log("      --fail-on <sev>     Exit 1 when findings meet or exceed severity: info|low|medium|high|critical");
   console.log("      --format <fmt>      Stdout rendering: terminal|json|sarif|md (default: terminal)");
-  console.log("      --output-dir <dir>  Where to write trust-card.json + reports (default: ., or agenttrust.yaml outputDir)");
+  console.log("      --output-dir <dir>  Where to write trust-card.json + reports (default: ., or opentrustbench.yaml outputDir)");
   console.log("      --quiet             Compact one-line summary, no banner/progress (CI-friendly)");
   console.log("      --no-banner         Suppress the ASCII banner");
   console.log("      --no-color          Disable ANSI colors (also auto-disabled when not a TTY)");
-  console.log("  agenttrust attack <path-or-repo>  Run OWASP-aligned adversarial attack analysis (static-heuristic mode)");
-  console.log("  agenttrust eval <workflow.yaml>   Parse & validate workflow suite (simulation mode)");
-  console.log("  agenttrust badge <path>           Generate embeddable markdown badge");
-  console.log("  agenttrust init                   Scaffold agenttrust.yaml configuration");
-  console.log("  agenttrust registry               Browse public verified capability registry\n");
+  console.log("  opentrustbench attack <path-or-repo>  Run OWASP-aligned adversarial attack analysis (static-heuristic mode)");
+  console.log("  opentrustbench eval <workflow.yaml>   Parse & validate workflow suite (simulation mode)");
+  console.log("  opentrustbench badge <path>           Generate embeddable markdown badge");
+  console.log("  opentrustbench init                   Scaffold opentrustbench.yaml configuration");
+  console.log("  opentrustbench registry               Browse public verified capability registry\n");
 }
 
 main().catch(err => {

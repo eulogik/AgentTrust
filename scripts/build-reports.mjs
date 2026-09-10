@@ -11,7 +11,7 @@ import path from "node:path";
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const CLI = path.join(ROOT, "packages", "cli", "dist", "index.js");
 const CORE_PKG = JSON.parse(fs.readFileSync(path.join(ROOT, "packages", "core", "package.json"), "utf8"));
-const SITE = "https://eulogik.github.io/AgentTrust";
+const SITE = "https://eulogik.github.io/OpenTrustBench";
 const OUT_DIR = path.join(ROOT, "web", "public", "r");
 const WORK = "/tmp/at-reports";
 const CLONES = path.join(WORK, "clones");
@@ -42,13 +42,13 @@ const SEV_COLOR = { critical: "#fb7185", high: "#fb923c", medium: "#fbbf24", low
 /**
  * Bound badge for one report: the image and the page ship together, so the
  * grade shown is always the grade evidenced. Embed form:
- * [![AgentTrust](<site>/r/<slug>.svg)](<site>/r/<slug>.html)
+ * [![OpenTrustBench](<site>/r/<slug>.svg)](<site>/r/<slug>.html)
  */
 function badgeSvg(grade, score) {
   const color = GRADE_COLOR[grade] || "#94a3b8";
   const right = `${grade} ${score}`;
   const leftW = 78, rightW = right.length * 7 + 14, W = leftW + rightW;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="20" role="img" aria-label="AgentTrust ${grade} ${score}/100"><title>AgentTrust ${grade} (${score}/100)</title><rect width="${leftW}" height="20" fill="#0f172a"/><rect x="${leftW}" width="${rightW}" height="20" fill="${color}"/><text x="${leftW / 2}" y="14" text-anchor="middle" fill="#a5f3fc" font-family="Verdana,system-ui,sans-serif" font-size="11" textLength="${leftW - 12}" lengthAdjust="spacingAndGlyphs">agenttrust</text><text x="${leftW + rightW / 2}" y="14" text-anchor="middle" fill="#020617" font-family="Verdana,system-ui,sans-serif" font-size="11" font-weight="bold" textLength="${rightW - 10}" lengthAdjust="spacingAndGlyphs">${esc(right)}</text></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="20" role="img" aria-label="OpenTrustBench ${grade} ${score}/100"><title>OpenTrustBench ${grade} (${score}/100)</title><rect width="${leftW}" height="20" fill="#0f172a"/><rect x="${leftW}" width="${rightW}" height="20" fill="${color}"/><text x="${leftW / 2}" y="14" text-anchor="middle" fill="#a5f3fc" font-family="Verdana,system-ui,sans-serif" font-size="11" textLength="${leftW - 12}" lengthAdjust="spacingAndGlyphs">opentrustbench</text><text x="${leftW + rightW / 2}" y="14" text-anchor="middle" fill="#020617" font-family="Verdana,system-ui,sans-serif" font-size="11" font-weight="bold" textLength="${rightW - 10}" lengthAdjust="spacingAndGlyphs">${esc(right)}</text></svg>`;
 }
 
 function breakdownBars(b) {
@@ -75,9 +75,9 @@ function reportPage({ slug: sl, title, repoUrl, upstream, card, rankLine }) {
   const canon = `${SITE}/r/${sl}.html`;
   const fixN = card.security.findings.filter(f => f.severity === "critical" || f.severity === "high").length;
   const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@graph": [
-    { "@type": "Organization", "@id": `${SITE}/#org`, name: "AgentTrust", url: `${SITE}/`, sameAs: ["https://github.com/eulogik/AgentTrust"] },
+    { "@type": "Organization", "@id": `${SITE}/#org`, name: "OpenTrustBench", url: `${SITE}/`, sameAs: ["https://github.com/eulogik/OpenTrustBench"] },
     { "@type": "Article",
-      headline: `${title} — AgentTrust Grade ${g} (${card.trustScore.overall}/100)`,
+      headline: `${title} — OpenTrustBench Grade ${g} (${card.trustScore.overall}/100)`,
       description: `Static security scan of ${title}: ${card.security.totalFindings} findings (${card.security.criticalCount} critical), permission scope ${card.permissions.estimatedScope}.`,
       datePublished: SCAN_DATE, dateModified: SCAN_DATE,
       author: { "@id": `${SITE}/#org` }, publisher: { "@id": `${SITE}/#org` },
@@ -88,13 +88,13 @@ function reportPage({ slug: sl, title, repoUrl, upstream, card, rankLine }) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${esc(title)} — Trust Card (Grade ${esc(g)}) · AgentTrust</title>
+<title>${esc(title)} — Trust Card (Grade ${esc(g)}) · OpenTrustBench</title>
 <meta name="description" content="Static security scan of ${esc(title)}: grade ${esc(g)} (${card.trustScore.overall}/100), ${card.security.totalFindings} findings, scope ${esc(card.permissions.estimatedScope)}. ${esc(rankLine)}.">
 <link rel="canonical" href="${canon}">
 <meta property="og:type" content="article">
-<meta property="og:title" content="${esc(title)} — AgentTrust Grade ${esc(g)}">
+<meta property="og:title" content="${esc(title)} — OpenTrustBench Grade ${esc(g)}">
 <meta property="og:url" content="${canon}">
-<meta property="og:image" content="https://eulogik.github.io/AgentTrust/og-image.png">
+<meta property="og:image" content="https://eulogik.github.io/OpenTrustBench/og-image.png">
   <meta property="og:image:width" content="1280">
   <meta property="og:image:height" content="640">
 <script type="application/ld+json">${jsonLd}</script>
@@ -104,9 +104,9 @@ function reportPage({ slug: sl, title, repoUrl, upstream, card, rankLine }) {
 <body data-scan="${esc(SCAN_DATE)}">
 <a class="skip" href="#main">Skip to content</a>
 <nav class="nav" aria-label="Main"><div class="nav-inner">
-<a class="brand" href="../"><span class="brand-mark">A</span>AgentTrust</a>
+<a class="brand" href="../"><span class="brand-mark">O</span>OpenTrustBench</a>
 <div class="nav-links" id="nav-links"><a href="../#how">How it works</a><a href="./">Registry</a><a href="../methodology.html">Methodology</a></div>
-<div class="nav-cta"><a class="btn btn-ghost btn-sm" href="https://github.com/eulogik/AgentTrust">GitHub</a><button class="burger" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button></div>
+<div class="nav-cta"><a class="btn btn-ghost btn-sm" href="https://github.com/eulogik/OpenTrustBench">GitHub</a><button class="burger" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button></div>
 </div></nav>
 <main id="main"><div class="report-wrap">
 <p class="muted small"><a href="./">← All scanned servers</a></p>
@@ -125,9 +125,9 @@ ${findingsTable(card.security.findings)}
 <p>Scope: <strong>${esc(card.permissions.estimatedScope)}</strong> · Shell: ${card.permissions.shell ? "enabled" : "disabled"} · Network egress: ${card.permissions.canMakeHTTPRequests ? "yes" : "no"} · File deletion: ${card.permissions.canDeleteFiles ? "enabled" : "none"} · Human approval: ${(card.permissions.humanApprovalRequired || []).length ? esc(card.permissions.humanApprovalRequired.join(", ")) : "none"}</p>
 <h2>Provenance</h2>
 <p>License: ${esc(card.provenance.license || "none detected")} · Lockfile: ${card.provenance.hasLockfile ? "yes" : "no"} · Security policy: ${card.provenance.hasSecurityPolicy ? "yes" : "no"} · Signals: ${card.provenance.isVerified ? "present (documentary, not a safety verdict)" : "unverified origin"}</p>
-<div class="callout"><p><strong>Independently scanned by the AgentTrust registry</strong> (not self-reported by the project). Static analysis only — no code executed, findings need human triage, counts may include test/example code. <strong>Static snapshot; re-scan before relying on it:</strong> <code>npx @eulogik/agenttrust scan ${esc(repoUrl)}</code>. Scores move with every upstream commit; pages refresh weekly. <a href="../methodology.html">How scoring works</a>.</p></div>
+<div class="callout"><p><strong>Independently scanned by the OpenTrustBench registry</strong> (not self-reported by the project). Static analysis only — no code executed, findings need human triage, counts may include test/example code. <strong>Static snapshot; re-scan before relying on it:</strong> <code>npx @opentrustbench/cli scan ${esc(repoUrl)}</code>. Scores move with every upstream commit; pages refresh weekly. <a href="../methodology.html">How scoring works</a>.</p></div>
 </div></main>
-<footer><div class="wrap"><div class="foot-base" style="border-top:none;padding-top:0"><span>© 2026 AgentTrust · Apache-2.0</span><span><a href="../">Home</a> · <a href="./">Registry</a></span></div></div></footer>
+<footer><div class="wrap"><div class="foot-base" style="border-top:none;padding-top:0"><span>© 2026 OpenTrustBench · Apache-2.0</span><span><a href="../">Home</a> · <a href="./">Registry</a></span></div></div></footer>
 <script src="../assets/site.js" defer></script>
 </body></html>
 `;
@@ -151,11 +151,11 @@ function indexPage(rows) {
   const chips = ["all", "A", "B", "C", "D", "F"].map(g =>
     `<button class="chip" data-grade="${g}" aria-pressed="${g === "all" ? "true" : "false"}">${g === "all" ? "All" : "Grade " + g} (${counts[g] || 0})</button>`).join("");
   const trs = sorted.map(r =>
-    `<tr><td><span class="grade g${r.grade}">${r.grade}</span></td><td><a href="./${r.slug}.html">${esc(r.title)}</a></td><td class="mono">${r.overall}</td><td>${r.total} (${r.crit} crit)</td><td>${esc(r.scope)}</td><td><a href="./${r.slug}.html"><img src="./${r.slug}.svg" alt="AgentTrust ${r.grade}" loading="lazy"></a></td></tr>`).join("");
-  const items = sorted.map((r, i) => ({ "@type": "ListItem", position: i + 1, name: `${r.title} — AgentTrust Grade ${r.grade} (${r.overall}/100)`, url: `${SITE}/r/${r.slug}.html` }));
+    `<tr><td><span class="grade g${r.grade}">${r.grade}</span></td><td><a href="./${r.slug}.html">${esc(r.title)}</a></td><td class="mono">${r.overall}</td><td>${r.total} (${r.crit} crit)</td><td>${esc(r.scope)}</td><td><a href="./${r.slug}.html"><img src="./${r.slug}.svg" alt="OpenTrustBench ${r.grade}" loading="lazy"></a></td></tr>`).join("");
+  const items = sorted.map((r, i) => ({ "@type": "ListItem", position: i + 1, name: `${r.title} — OpenTrustBench Grade ${r.grade} (${r.overall}/100)`, url: `${SITE}/r/${r.slug}.html` }));
   const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@graph": [
-    { "@type": "Organization", "@id": `${SITE}/#org`, name: "AgentTrust", url: `${SITE}/`, sameAs: ["https://github.com/eulogik/AgentTrust"] },
-    { "@type": "ItemList", name: "AgentTrust registry: Trust Cards for public MCP servers",
+    { "@type": "Organization", "@id": `${SITE}/#org`, name: "OpenTrustBench", url: `${SITE}/`, sameAs: ["https://github.com/eulogik/OpenTrustBench"] },
+    { "@type": "ItemList", name: "OpenTrustBench registry: Trust Cards for public MCP servers",
       description: `Static Trust Cards for ${rows.length} public MCP servers and SDKs, ranked by score.`,
       numberOfItems: rows.length, itemListElement: items }
   ]});
@@ -164,13 +164,13 @@ function indexPage(rows) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Registry — Trust Cards for ${rows.length} MCP servers · AgentTrust</title>
+<title>Registry — Trust Cards for ${rows.length} MCP servers · OpenTrustBench</title>
 <meta name="description" content="Searchable registry of static Trust Cards for ${rows.length} public MCP servers and SDKs: grades A–F, scores, findings, permission scope. Re-scanned weekly.">
 <link rel="canonical" href="${SITE}/r/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="AgentTrust registry — Trust Cards for ${rows.length} MCP servers">
+<meta property="og:title" content="OpenTrustBench registry — Trust Cards for ${rows.length} MCP servers">
 <meta property="og:url" content="${SITE}/r/">
-<meta property="og:image" content="https://eulogik.github.io/AgentTrust/og-image.png">
+<meta property="og:image" content="https://eulogik.github.io/OpenTrustBench/og-image.png">
   <meta property="og:image:width" content="1280">
   <meta property="og:image:height" content="640">
 <script type="application/ld+json">${jsonLd}</script>
@@ -180,9 +180,9 @@ function indexPage(rows) {
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <nav class="nav" aria-label="Main"><div class="nav-inner">
-<a class="brand" href="../"><span class="brand-mark">A</span>AgentTrust</a>
+<a class="brand" href="../"><span class="brand-mark">O</span>OpenTrustBench</a>
 <div class="nav-links" id="nav-links"><a href="../#how">How it works</a><a href="./">Registry</a><a href="../methodology.html">Methodology</a></div>
-<div class="nav-cta"><a class="btn btn-ghost btn-sm" href="https://github.com/eulogik/AgentTrust">GitHub</a><button class="burger" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button></div>
+<div class="nav-cta"><a class="btn btn-ghost btn-sm" href="https://github.com/eulogik/OpenTrustBench">GitHub</a><button class="burger" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button></div>
 </div></nav>
 <main id="main"><div class="wrap" style="padding-top:calc(68px + 64px)">
 <p class="eyebrow">Registry · Re-scanned weekly</p>
@@ -197,9 +197,9 @@ function indexPage(rows) {
 <table class="data" id="registry-table"><thead><tr><th>Grade</th><th>Server</th><th>Score</th><th>Findings</th><th>Scope</th><th>Badge</th></tr></thead><tbody>${trs}</tbody></table>
 <script type="application/json" id="registry-data">${JSON.stringify(explorerJson(rows)).replace(/</g, "\\u003c")}</script>
 ${adoptionLine()}
-<div class="callout"><p>Dated snapshot (${esc(SCAN_DATE)}), engine v${esc(CORE_PKG.version)}. Static analysis only — findings need triage. <a href="../methodology.html">How scoring works</a> · <a href="https://github.com/eulogik/AgentTrust/blob/main/docs/STATE-OF-MCP-2026.md">State of MCP report</a>.</p></div>
+<div class="callout"><p>Dated snapshot (${esc(SCAN_DATE)}), engine v${esc(CORE_PKG.version)}. Static analysis only — findings need triage. <a href="../methodology.html">How scoring works</a> · <a href="https://github.com/eulogik/OpenTrustBench/blob/main/docs/STATE-OF-MCP-2026.md">State of MCP report</a>.</p></div>
 </div></main>
-<footer><div class="wrap"><div class="foot-base" style="border-top:none;padding-top:0"><span>© 2026 AgentTrust · Apache-2.0</span><span><a href="../">Home</a> · <a href="../methodology.html">Methodology</a></span></div></div></footer>
+<footer><div class="wrap"><div class="foot-base" style="border-top:none;padding-top:0"><span>© 2026 OpenTrustBench · Apache-2.0</span><span><a href="../">Home</a> · <a href="../methodology.html">Methodology</a></span></div></div></footer>
 <script src="../assets/site.js" defer></script>
 </body></html>
 `;
@@ -308,15 +308,15 @@ function main() {
   // Self scans (local tree, bound to our own commit).
   const selfSha = sh(`git -C "${ROOT}" rev-parse --short HEAD`);
   const self = [
-    ["self-packages-cli", "agenttrust CLI (packages/cli)", path.join(ROOT, "packages", "cli")],
+    ["self-packages-cli", "opentrustbench CLI (packages/cli)", path.join(ROOT, "packages", "cli")],
     ["self-examples-secure-agent-skill", "examples/secure-agent-skill", path.join(ROOT, "examples", "secure-agent-skill")],
     ["self-examples-vulnerable-mcp-server", "examples/vulnerable-mcp-server", path.join(ROOT, "examples", "vulnerable-mcp-server")]
   ];
   for (const [sl, title, target] of self) {
     try {
       const card = scanTarget(target, path.join(OUT, sl));
-      const upstream = `eulogik/AgentTrust @ ${selfSha} (${SCAN_DATE})`;
-      pending.push({ sl, title, repoUrl: "https://github.com/eulogik/AgentTrust", upstream, card, self: true });
+      const upstream = `eulogik/OpenTrustBench @ ${selfSha} (${SCAN_DATE})`;
+      pending.push({ sl, title, repoUrl: "https://github.com/eulogik/OpenTrustBench", upstream, card, self: true });
       console.log(`OK ${title} (collected)`);
     } catch (e) {
       failed++;

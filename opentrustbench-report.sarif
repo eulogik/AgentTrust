@@ -5,9 +5,9 @@
     {
       "tool": {
         "driver": {
-          "name": "AgentTrust",
+          "name": "OpenTrustBench",
           "version": "0.1.0",
-          "informationUri": "https://eulogik.github.io/AgentTrust",
+          "informationUri": "https://eulogik.github.io/OpenTrustBench",
           "rules": []
         }
       },

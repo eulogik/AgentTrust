@@ -8,13 +8,13 @@ Session notes and durable context for future OpenCode sessions.
 
 ## 2026-08-24 — Repo setup + Phase 0 (honesty & engineering credibility)
 
-**Setup:** Fetched repo from `https://github.com/eulogik/AgentTrust` (`main`, commit `7a1fb62`), remote `origin` configured.
+**Setup:** Fetched repo from `https://github.com/eulogik/OpenTrustBench` (`main`, commit `7a1fb62`), remote `origin` configured.
 
 **Deep research findings (drove the work):**
 - Attack engine and eval lab were fully fabricated: attack results derived from static findings with invented "payload triggered" narratives; eval hardcoded `status = "pass"` + `Math.random()` costs/durations and ignored YAML content entirely.
 - OWASP mappings were from a stale Feb-2025 draft taxonomy (e.g. file deletion labeled ASI03, SSRF labeled ASI07 — both wrong vs canonical Dec-2025 list).
 - The CLI source NEVER compiled: 9 raw newlines inside double-quoted string literals; committed `dist/` was built from different source. Same for two regexes too narrow to fire on their own flagship fixture (AT-SEC-001 missed direct prompt concat; AT-SEC-002 missed `API_SECRET_TOKEN =`).
-- npm name `agenttrust` is unclaimed. Market check: static MCP scanning is commoditized (Cisco mcp-scanner, Snyk agent-scan, Akto, MCPShield, MCPhound); differentiation lives in real attack/eval execution + trust-card/badge/registry flywheel + EU AI Act compliance export.
+- npm name `opentrustbench` is unclaimed. Market check: static MCP scanning is commoditized (Cisco mcp-scanner, Snyk agent-scan, Akto, MCPShield, MCPhound); differentiation lives in real attack/eval execution + trust-card/badge/registry flywheel + EU AI Act compliance export.
 
 **Phase 0 shipped (committed `50b1204`, pushed):**
 1. Build fixed: root devDeps (`typescript@^7`, `@types/node`), `types:["node"]` in tsconfig.base, explicit core→cli build order in root scripts (workspace-ordering broke module resolution), all 9 broken string literals repaired in cli/src.
@@ -35,6 +35,6 @@ Session notes and durable context for future OpenCode sessions.
 - Scan targets: full GitHub URLs auto-detected; bare `owner/repo` needs `--github` (stays local otherwise by design); npm packages via `--npm` (`npm pack` + tar extract — scans what consumers install). GitHub refs support `.git` suffixes and `/tree/<branch>` (branch names with slashes handled).
 - Dependency scanning: `npm audit --package-lock-only` when a lockfile exists (works without node_modules); audit JSON mapped into Trust Card `dependencies` block (moderate→medium normalized, advisory dedupe). No lockfile = no invented vulns.
 - Tests: 14 total (added severity ranking, target classification, github-ref parsing incl. branch-with-slash case caught by tests, audit mapping, lockfile-less dep scan).
-- Live-verified: cloned eulogik/AgentTrust itself and scanned it (9 criticals — repo contains its own vulnerable fixture; expected).
+- Live-verified: cloned eulogik/OpenTrustBench itself and scanned it (9 criticals — repo contains its own vulnerable fixture; expected).
 
 **Next up:** Phase 2 — attack engine v2 (real MCP probing over stdio/HTTP) + eval lab v2 (sandboxed execution). Also: register npm name, make repo public.

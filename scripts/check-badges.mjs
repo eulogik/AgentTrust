@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-// Kill-metric check: how many of the 50 swept servers display an AgentTrust
+// Kill-metric check: how many of the 50 swept servers display an OpenTrustBench
 // badge in their README? Fetches each repo's README via the GitHub API and
-// looks for an agenttrust badge reference. Writes web/public/r/adoption.json
+// looks for an opentrustbench badge reference. Writes web/public/r/adoption.json
 // (consumed by nothing yet — reported in refresh commits and the one-pager).
 // Usage: node scripts/check-badges.mjs  (uses GITHUB_TOKEN if set; works
 // unauthenticated at low volume, 60 req/hr)
@@ -15,7 +15,7 @@ const MONOREPO = "modelcontextprotocol/servers";
 
 function api(urlPath) {
   return new Promise((resolve, reject) => {
-    const headers = { "User-Agent": "agenttrust-badge-check", Accept: "application/vnd.github+json" };
+    const headers = { "User-Agent": "opentrustbench-badge-check", Accept: "application/vnd.github+json" };
     if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
     import("node:https").then(({ default: https }) => {
       https.get("https://api.github.com" + urlPath, { headers }, (res) => {
@@ -46,7 +46,7 @@ async function main() {
     try {
       const meta = await api(`/repos/${repo}/readme`);
       const content = meta ? Buffer.from(meta.content, "base64").toString("utf8") : "";
-      const has = /agenttrust/i.test(content);
+      const has = /opentrustbench/i.test(content);
       adoption.push({ repo, badge: has });
       console.log(`${has ? "BADGE " : "nobadge"} ${repo}`);
     } catch (e) {
@@ -61,7 +61,7 @@ async function main() {
     checked: adoption.length,
     repos: adoption
   }, null, 2));
-  console.log(`\n${count}/${adoption.length} repos display an AgentTrust badge. -> web/public/r/adoption.json`);
+  console.log(`\n${count}/${adoption.length} repos display an OpenTrustBench badge. -> web/public/r/adoption.json`);
 }
 
 main();

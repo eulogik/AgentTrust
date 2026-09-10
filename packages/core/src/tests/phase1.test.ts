@@ -84,7 +84,7 @@ test("audit report mapping normalizes severities and dedupes advisories", () => 
 test("dependency scanner reads manifests without lockfile or network", async () => {
   assert.deepEqual(await scanDependencies(os.tmpdir()), []);
 
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "agenttrust-deps-"));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "otb-deps-"));
   fs.writeFileSync(
     path.join(dir, "package.json"),
     JSON.stringify({ name: "x", dependencies: { lodash: "^4.17.20" } }),

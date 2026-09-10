@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://eulogik.github.io/AgentTrust/r/self-packages-cli.html">
-    <img src="https://eulogik.github.io/AgentTrust/r/self-packages-cli.svg" alt="AgentTrust Grade A — agenttrust CLI self-scan" width="120">
+  <a href="https://eulogik.github.io/OpenTrustBench/r/self-packages-cli.html">
+    <img src="https://eulogik.github.io/OpenTrustBench/r/self-packages-cli.svg" alt="OpenTrustBench Grade A — opentrustbench CLI self-scan" width="120">
   </a>
   <br>
   <sub>Self-scan of <code>packages/cli</code> at HEAD: <strong>A (90/100)</strong>, 0 findings, minimal scope. Reproduce: <code>node packages/cli/dist/index.js scan packages/cli --quiet</code></sub>
@@ -8,13 +8,13 @@
   <strong>Trust &amp; Security for AI Agents &amp; MCP Servers</strong>
 </p>
 
-<h1 align="center">AgentTrust</h1>
+<h1 align="center">OpenTrustBench</h1>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@eulogik/agenttrust"><img src="https://img.shields.io/npm/v/@eulogik/agenttrust?color=cyan&label=npm" alt="npm version"></a>
-  <a href="https://github.com/eulogik/AgentTrust/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a>
+  <a href="https://www.npmjs.com/package/@opentrustbench/cli"><img src="https://img.shields.io/npm/v/@opentrustbench/cli?color=cyan&label=npm" alt="npm version"></a>
+  <a href="https://github.com/eulogik/OpenTrustBench/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a>
   <a href="https://owasp.org"><img src="https://img.shields.io/badge/OWASP-Agentic%20Top%2010-34d399.svg" alt="OWASP Agentic AI"></a>
-  <a href="https://eulogik.github.io/AgentTrust"><img src="https://img.shields.io/badge/Rules-8%20OWASP--mapped-cyan.svg" alt="8 OWASP-mapped rules"></a>
+  <a href="https://eulogik.github.io/OpenTrustBench"><img src="https://img.shields.io/badge/Rules-8%20OWASP--mapped-cyan.svg" alt="8 OWASP-mapped rules"></a>
 </p>
 
 <p align="center">
@@ -24,9 +24,9 @@
 
 ---
 
-## What is AgentTrust?
+## What is OpenTrustBench?
 
-AgentTrust is a trust and security verification platform for autonomous AI agents and MCP (Model Context Protocol) servers. It scans your codebase for vulnerabilities, maps findings to [OWASP Agentic AI Top 10](https://owasp.org/) and [OWASP LLM Top 10 2025](https://owasp.org/), generates a verifiable **Trust Card** with a letter grade, and provides a **shareable badge** for your README.
+OpenTrustBench is a trust and security verification platform for autonomous AI agents and MCP (Model Context Protocol) servers. It scans your codebase for vulnerabilities, maps findings to [OWASP Agentic AI Top 10](https://owasp.org/) and [OWASP LLM Top 10 2025](https://owasp.org/), generates a verifiable **Trust Card** with a letter grade, and provides a **shareable badge** for your README.
 
 **Zero data retention.** Everything runs locally on your machine. No telemetry. No account required.
 
@@ -34,39 +34,39 @@ AgentTrust is a trust and security verification platform for autonomous AI agent
 
 ```bash
 # Scan a local folder, MCP server, or Agent Skill
-npx @eulogik/agenttrust scan ./my-mcp-server
+npx @opentrustbench/cli scan ./my-mcp-server
 
 # Scan a GitHub repository
-npx @eulogik/agenttrust scan https://github.com/owner/repo
+npx @opentrustbench/cli scan https://github.com/owner/repo
 
 # Scan an npm package
-npx @eulogik/agenttrust scan some-npm-package --npm
+npx @opentrustbench/cli scan some-npm-package --npm
 
 # Fail CI when findings meet a severity threshold
-npx @eulogik/agenttrust scan ./my-mcp-server --fail-on high
+npx @opentrustbench/cli scan ./my-mcp-server --fail-on high
 
 # Run the OWASP Agentic Top 10 Adversarial Attack Suite
-npx @eulogik/agenttrust attack ./my-mcp-server
+npx @opentrustbench/cli attack ./my-mcp-server
 
 # Evaluate workflow reliability
-npx @eulogik/agenttrust eval ./tests/workflow.yaml
+npx @opentrustbench/cli eval ./tests/workflow.yaml
 ```
 
 ## What You Get
 
 | Output | Description |
 |--------|-------------|
-| **Trust Card** | Machine-readable credential (`agenttrust/trust-card/v1`) with grade, score, findings, and permissions |
+| **Trust Card** | Machine-readable credential (`opentrustbench/trust-card/v1`) with grade, score, findings, and permissions |
 | **SARIF Report** | Industry-standard format for GitHub Security tab integration |
 | **Markdown Report** | Human-readable audit report for compliance and review |
-| **Grade Badge** | Shareable SVG badge linking to a public report page ([example](https://eulogik.github.io/AgentTrust/badge/a.svg), [registry](https://eulogik.github.io/AgentTrust/r/)) |
+| **Grade Badge** | Shareable SVG badge linking to a public report page ([example](https://eulogik.github.io/OpenTrustBench/badge/a.svg), [registry](https://eulogik.github.io/OpenTrustBench/r/)) |
 
 ## Grade Badge
 
 Embed your trust score in your README:
 
 ```markdown
-[![AgentTrust](https://eulogik.github.io/AgentTrust/r/self-packages-cli.svg)](https://eulogik.github.io/AgentTrust/r/self-packages-cli.html)
+[![OpenTrustBench](https://eulogik.github.io/OpenTrustBench/r/self-packages-cli.svg)](https://eulogik.github.io/OpenTrustBench/r/self-packages-cli.html)
 ```
 
 
@@ -74,7 +74,7 @@ This tells buyers, auditors, and AI hosts that your agent has been verified.
 
 ## How It Works
 
-1. **Scan** — Point `agenttrust` at a local directory, GitHub repo, or npm package
+1. **Scan** — Point `opentrustbench` at a local directory, GitHub repo, or npm package
 2. **Grade** — Receive a Trust Card with a letter grade (A–F) and security score (0–100)
 3. **Share** — Embed your badge and link to the detailed report
 
@@ -99,7 +99,7 @@ This tells buyers, auditors, and AI hosts that your agent has been verified.
 
 ## Expert reviews
 
-Need a human pass over your results? [Request a review](https://github.com/eulogik/AgentTrust/issues/new) — manual result triage plus a remediation plan, scoped per target. The CLI stays the product and is free forever.
+Need a human pass over your results? [Request a review](https://github.com/eulogik/OpenTrustBench/issues/new) — manual result triage plus a remediation plan, scoped per target. The CLI stays the product and is free forever.
 
 | Tier | Price | What You Get |
 |------|-------|-------------|
@@ -142,8 +142,8 @@ node scripts/verify-demos.mjs  # end-to-end smoke checks
 ---
 
 <p align="center">
-  <a href="https://eulogik.github.io/AgentTrust">Website</a> ·
-  <a href="https://github.com/eulogik/AgentTrust">GitHub</a> ·
-  <a href="https://www.npmjs.com/package/@eulogik/agenttrust">npm</a> ·
-  <a href="https://github.com/eulogik/AgentTrust/issues/new">Contact</a>
+  <a href="https://eulogik.github.io/OpenTrustBench">Website</a> ·
+  <a href="https://github.com/eulogik/OpenTrustBench">GitHub</a> ·
+  <a href="https://www.npmjs.com/package/@opentrustbench/cli">npm</a> ·
+  <a href="https://github.com/eulogik/OpenTrustBench/issues/new">Contact</a>
 </p>

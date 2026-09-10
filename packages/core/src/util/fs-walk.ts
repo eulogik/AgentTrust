@@ -9,7 +9,7 @@ export const IGNORE_DIRS = new Set([
   ".venv",
   "venv",
   "__pycache__",
-  ".agenttrust",
+  ".opentrustbench",
   "coverage",
   ".next",
   ".turbo"

@@ -32,7 +32,7 @@ if (vuln.security.criticalCount < 1) {
 }
 console.log(`ok: vulnerable fixture grade ${vuln.trustScore.grade} (${vuln.trustScore.overall}/100)`);
 
-const sarif = readJson("agenttrust-report.sarif");
+const sarif = readJson("opentrustbench-report.sarif");
 if (sarif.version !== "2.1.0" || !sarif.runs?.[0]?.results?.length) {
   fail("SARIF report missing or malformed");
 }
@@ -49,7 +49,7 @@ if (secure.security.criticalCount !== 0) {
 console.log(`ok: secure fixture grade ${secure.trustScore.grade} (${secure.trustScore.overall}/100)`);
 
 run(["attack", "examples/vulnerable-mcp-server"]);
-const attack = readJson("agenttrust-attack-report.json");
+const attack = readJson("opentrustbench-attack-report.json");
 if (attack.mode !== "static-heuristic") {
   fail("attack report must declare static-heuristic mode");
 }

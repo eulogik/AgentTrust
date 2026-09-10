@@ -1,4 +1,4 @@
-# AgentTrust — Product Implementation & Promotion Plan
+# OpenTrustBench — Product Implementation & Promotion Plan
 
 > The neutral trust, reliability, and evidence layer for autonomous AI agents.
 
@@ -19,13 +19,13 @@
 - EU AI Act Article 50 enforcement began **August 2, 2026**
 
 ### The Position
-AgentTrust is NOT:
+OpenTrustBench is NOT:
 - ❌ Another agent framework (LangGraph, CrewAI own this)
 - ❌ Another observability dashboard (LangSmith, Langfuse own this)
 - ❌ Another MCP gateway (Agentgateway owns this)
 - ❌ Another skill scanner (NVIDIA SkillSpector owns this)
 
-AgentTrust IS:
+OpenTrustBench IS:
 - ✅ The **trust intelligence layer** that sits across all of them
 - ✅ Vendor-neutral, model-neutral, framework-neutral
 - ✅ The place where provenance + security + evaluation + reputation converge
@@ -36,7 +36,7 @@ AgentTrust IS:
 
 ### Direct Competitors & Their Gaps
 
-| Player | What They Do | Pricing | Gap AgentTrust Targets |
+| Player | What They Do | Pricing | Gap OpenTrustBench Targets |
 |---|---|---|---|
 | **LangSmith** | Tracing, evals, observability | Free (5K traces), $39/seat/mo | LangChain-locked; no security, no trust scoring |
 | **Langfuse** | Open-source LLM observability | Free → $29 → $199 → $2,499/mo | Complex unit pricing; no attack simulation, no provenance |
@@ -62,10 +62,10 @@ LangSmith           ░░░░░░         ████░░         ░░
 Patronus AI         ████░░         ░░░░░░         ░░░░░░
 Promptfoo           ████░░         ░░░░░░         ░░░░░░
                     ────────       ──────────     ────────────
-AgentTrust          ██████         ██████         ██████  ← THE GAP
+OpenTrustBench          ██████         ██████         ██████  ← THE GAP
 ```
 
-**AgentTrust is the only product that spans all three: pre-deployment scanning + runtime monitoring + historical trust intelligence.**
+**OpenTrustBench is the only product that spans all three: pre-deployment scanning + runtime monitoring + historical trust intelligence.**
 
 ---
 
@@ -76,7 +76,7 @@ AgentTrust          ██████         ██████         ██
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │                     DEVELOPER EXPERIENCE                      │
-│  CLI (npx @eulogik/agenttrust)  │  GitHub Action  │  Web Dashboard     │
+│  CLI (npx @opentrustbench/cli)  │  GitHub Action  │  Web Dashboard     │
 └──────────────┬───────────────────┬───────────────┬───────────┘
                │                   │               │
 ┌──────────────▼───────────────────▼───────────────▼───────────┐
@@ -107,7 +107,7 @@ AgentTrust          ██████         ██████         ██
 | Layer | Technology | Why This |
 |---|---|---|
 | **Language** | TypeScript (CLI + API) + Python (analysis engines) | TS for dev tooling distribution (npx); Python for ML/security ecosystem |
-| **CLI** | Node.js + Commander.js | `npx @eulogik/agenttrust scan` — zero-install distribution |
+| **CLI** | Node.js + Commander.js | `npx @opentrustbench/cli scan` — zero-install distribution |
 | **API** | Hono (edge-first) or Fastify | Lightweight, fast, deploys to Cloudflare Workers or containers |
 | **Database** | PostgreSQL + JSONB | Relational for structure + flexible JSON for traces. pgvector for semantic search |
 | **Object Store** | S3 / Cloudflare R2 | Artifact storage (scan reports, execution recordings) |
@@ -128,7 +128,7 @@ AgentTrust          ██████         ██████         ██
 
 ## 4. Core Product: Two Primitives
 
-Everything in AgentTrust produces one of two things:
+Everything in OpenTrustBench produces one of two things:
 
 ### 4.1 Trust Card (for capabilities)
 
@@ -136,7 +136,7 @@ Generated for any agent, skill, MCP server, or tool:
 
 ```json
 {
-  "schema": "agenttrust/trust-card/v1",
+  "schema": "opentrustbench/trust-card/v1",
   "subject": {
     "type": "mcp-server",
     "name": "github-mcp-server",
@@ -201,7 +201,7 @@ Generated for each evaluated workflow run:
 
 ```json
 {
-  "schema": "agenttrust/execution-record/v1",
+  "schema": "opentrustbench/execution-record/v1",
   "workflow": "process-insurance-claim",
   "actor": "agent:claims-processor-v3",
   "model": "claude-3.5-sonnet-20260801",
@@ -217,7 +217,7 @@ Generated for each evaluated workflow run:
   "cost": "$0.23",
   "latency": "18.4s",
   "humanApprovals": ["send_fax_to_payer"],
-  "evidence": "s3://agenttrust/records/exec-2026-08-18-abc123.json"
+  "evidence": "s3://opentrustbench/records/exec-2026-08-18-abc123.json"
 }
 ```
 
@@ -227,7 +227,7 @@ Generated for each evaluated workflow run:
 
 ### Days 1–14: The Scanner CLI (the "Hello World")
 
-**Ship:** `npx @eulogik/agenttrust scan <path-or-url>`
+**Ship:** `npx @opentrustbench/cli scan <path-or-url>`
 
 **What it does on day 14:**
 1. Accepts a local directory, GitHub URL, or npm package name
@@ -241,9 +241,9 @@ Generated for each evaluated workflow run:
 
 **Example output:**
 ```
-$ npx @eulogik/agenttrust scan github.com/example/calendar-mcp-server
+$ npx @opentrustbench/cli scan github.com/example/calendar-mcp-server
 
-  AgentTrust v0.1.0 — Scanning MCP Server
+  OpenTrustBench v0.1.0 — Scanning MCP Server
 
   ✓ Repository cloned
   ✓ Type detected: MCP Server (TypeScript)
@@ -267,8 +267,8 @@ $ npx @eulogik/agenttrust scan github.com/example/calendar-mcp-server
   HIGH: Overly broad OAuth scope (calendar.readonly → calendar)
   MED:  No rate limiting on API calls
 
-  Full report: agenttrust-report.sarif
-  Badge: ![Trust Score](https://eulogik.github.io/AgentTrust/badge/b.svg)
+  Full report: opentrustbench-report.sarif
+  Badge: ![Trust Score](https://eulogik.github.io/OpenTrustBench/badge/b.svg)
 ```
 
 **Success criterion:** A developer scans any capability in <60 seconds and immediately sees the risk surface.
@@ -280,25 +280,25 @@ $ npx @eulogik/agenttrust scan github.com/example/calendar-mcp-server
 **Ship:**
 1. **GitHub Action** — one-line YAML to add to any CI pipeline:
    ```yaml
-   - uses: agenttrust/scan-action@v1
+   - uses: opentrustbench/scan-action@v1
      with:
        path: ./my-mcp-server
        fail-on: high  # Block PRs with high-severity findings
    ```
 2. **Trust Badge** — embeddable SVG for READMEs:
    ```markdown
-   [![AgentTrust Score: A](https://eulogik.github.io/AgentTrust/badge/a.svg)](https://eulogik.github.io/AgentTrust)
+   [![OpenTrustBench Score: A](https://eulogik.github.io/OpenTrustBench/badge/a.svg)](https://eulogik.github.io/OpenTrustBench)
    ```
 3. **Public Registry** — `<site>/registry` (not built) showing Trust Cards for popular MCP servers and agent skills
 4. Scan the **top 100 most-starred MCP servers and agent skills** proactively and publish results
 
-**Success criterion:** 50+ repos display the AgentTrust badge. The badge becomes a signal of quality.
+**Success criterion:** 50+ repos display the OpenTrustBench badge. The badge becomes a signal of quality.
 
 ---
 
 ### Days 31–45: Attack Engine ("Attack My Agent")
 
-**Ship:** `agenttrust attack <path-or-url>`
+**Ship:** `opentrustbench attack <path-or-url>`
 
 **Attack vectors (aligned to OWASP Agentic AI Top 10 2026):**
 
@@ -327,7 +327,7 @@ $ npx @eulogik/agenttrust scan github.com/example/calendar-mcp-server
 
 ### Days 46–60: Workflow Evaluation Lab
 
-**Ship:** `agenttrust eval <workflow-config>`
+**Ship:** `opentrustbench eval <workflow-config>`
 
 **What it does:**
 1. Define a workflow as a YAML test suite:
@@ -360,7 +360,7 @@ $ npx @eulogik/agenttrust scan github.com/example/calendar-mcp-server
 **Ship:** Lightweight SDK that wraps existing agent frameworks:
 
 ```python
-from agenttrust import monitor
+from opentrustbench import monitor
 
 @monitor(policy="production-v2")
 async def process_claim(agent, claim_data):
@@ -368,7 +368,7 @@ async def process_claim(agent, claim_data):
     return result
 
 # Or as a proxy:
-# agenttrust proxy --upstream localhost:8080 --policy production-v2
+# opentrustbench proxy --upstream localhost:8080 --policy production-v2
 ```
 
 **What it does at runtime:**
@@ -382,7 +382,7 @@ async def process_claim(agent, claim_data):
 
 ### Days 76–90: Dashboard + Team Features
 
-**Ship (future):** Web dashboard (no project domain yet — `agenttrust.dev` is parked by a squatter):
+**Ship (future):** Web dashboard (no project domain yet — `opentrustbench.dev` is parked by a squatter):
 
 - **Trust Registry** — all scanned capabilities with scores and trends
 - **Execution History** — timeline of all monitored workflows
@@ -435,7 +435,7 @@ async def process_claim(agent, claim_data):
 - Target: Top 5 Product of the Day
 
 **Day 3 — Hacker News ("Show HN")**
-- Title: `Show HN: AgentTrust – open-source scanner for AI agent skills and MCP servers`
+- Title: `Show HN: OpenTrustBench – open-source scanner for AI agent skills and MCP servers`
 - Strip ALL marketing language. Pure technical description.
 - Link directly to the GitHub repo, not a landing page.
 - Be in the comments answering technical questions for 8+ hours.
@@ -450,9 +450,9 @@ async def process_claim(agent, claim_data):
 | Channel | Tactic | Expected Impact |
 |---|---|---|
 | **GitHub Action virality** | Every repo that adds the action = badge in README = free advertising | Primary growth loop |
-| **Badge social proof** | "Scanned by AgentTrust" badge becomes a quality signal (like "Snyk Monitored") | Trust flywheel |
+| **Badge social proof** | "Scanned by OpenTrustBench" badge becomes a quality signal (like "Snyk Monitored") | Trust flywheel |
 | **Blog / SEO** | Weekly posts: "MCP Security Alert: [specific finding]", "How to Secure Your OpenClaw Skills" | Organic traffic |
-| **YouTube sponsorships** | Sponsor 3-5 technical creators (Fireship, ThePrimeagen-tier) to use AgentTrust in a real project | Dev awareness |
+| **YouTube sponsorships** | Sponsor 3-5 technical creators (Fireship, ThePrimeagen-tier) to use OpenTrustBench in a real project | Dev awareness |
 | **Conference workshops** | AI DevCon, RSAC, DevRelCon — hands-on "Hack Your Agent" workshop | Enterprise leads |
 | **Integration partnerships** | Build plugins for Cursor, Claude Code, Codex — scan before install | Distribution via platforms |
 | **Open-source contributions** | Submit PRs to popular agent repos fixing issues your scanner found | Credibility + backlinks |
@@ -461,7 +461,7 @@ async def process_claim(agent, claim_data):
 
 | Tactic | Details |
 |---|---|
-| **Land with free scanner** | Enterprise security teams run `npx @eulogik/agenttrust scan` on their agent repos. Free. |
+| **Land with free scanner** | Enterprise security teams run `npx @opentrustbench/cli scan` on their agent repos. Free. |
 | **Expand with "Agent Discovery"** | "Did you know you have 47 AI agents running in production? Here's what they can access." |
 | **Sell the workflow** | "We test and continuously prove that your AI agents can safely perform the jobs you gave them." |
 | **Compliance hook** | "EU AI Act Article 50 audit package — one click, complete evidence trail." |
@@ -476,9 +476,9 @@ async def process_claim(agent, claim_data):
 Every week:
 1. Scan a category of popular tools (e.g., "All GitHub MCP servers with >1K stars")
 2. Publish findings as a blog post with responsible disclosure
-3. Submit fixes to affected repos as PRs (credit: "Found by AgentTrust")
+3. Submit fixes to affected repos as PRs (credit: "Found by OpenTrustBench")
 4. Post on X, HN, Reddit with real data
-5. Affected repo maintainers adopt AgentTrust → badge → more visibility
+5. Affected repo maintainers adopt OpenTrustBench → badge → more visibility
 
 This is **exactly the Snyk playbook** — find real vulnerabilities, fix them publicly, build credibility through action, not marketing.
 
@@ -494,7 +494,7 @@ This is **exactly the Snyk playbook** — find real vulnerabilities, fix them pu
 | 6 | "EU AI Act Article 50: What Developers Need to Do Now" | Blog, LinkedIn |
 | 7 | "Benchmark: Claude vs GPT vs Gemini on Enterprise Workflow Reliability" | Blog, HN, X |
 | 8 | "We Red-Teamed 50 OpenClaw Skills. Here's What Broke." | Blog, HN, Reddit |
-| 9 | Case study: "How [Company X] Uses AgentTrust in CI/CD" | Blog, LinkedIn |
+| 9 | Case study: "How [Company X] Uses OpenTrustBench in CI/CD" | Blog, LinkedIn |
 | 10 | "Building Deterministic Tests for Non-Deterministic AI" (technical deep-dive) | Blog, HN |
 | 11 | "Agent Memory Poisoning: The Attack Vector Nobody's Talking About" | Blog, X |
 | 12 | Quarterly "State of Agent Trust" report (trend data from registry) | Blog, all channels |
@@ -516,7 +516,7 @@ This is **exactly the Snyk playbook** — find real vulnerabilities, fix them pu
 | **Revenue** | Paying customers | 5 | 50 | 200 |
 | **Revenue** | MRR | $500 | $10K | $75K |
 | **Enterprise** | Enterprise pilots | 0 | 3 | 10 |
-| **Ecosystem** | Repos with AgentTrust badge | 50 | 500 | 3,000 |
+| **Ecosystem** | Repos with OpenTrustBench badge | 50 | 500 | 3,000 |
 
 ### Key Ratio
 **Time to First Scan < 3 minutes.** If this takes longer, nothing else matters.
@@ -580,7 +580,7 @@ Abandon or pivot if:
 5. **No repo displays the badge after 90 days** — the social proof loop isn't working
 6. **Attack engine produces too many false positives** — erodes credibility
 
-**The acid test:** Are customers making **deployment, procurement, or release decisions** using AgentTrust? If not after 6 months, the product isn't strategic enough.
+**The acid test:** Are customers making **deployment, procurement, or release decisions** using OpenTrustBench? If not after 6 months, the product isn't strategic enough.
 
 ---
 
@@ -603,12 +603,12 @@ Abandon or pivot if:
 
 If you start today:
 
-1. **Register:** project domain (NOTE 2026-09-09: `agenttrust.dev` is parked by a squatter — using `eulogik.github.io/AgentTrust`) + `@agenttrust` on X/GitHub
-2. **Init repo:** `github.com/agenttrust/agenttrust` — MIT license, clean README
+1. **Register:** project domain (NOTE 2026-09-09: `opentrustbench.dev` is parked by a squatter — using `eulogik.github.io/OpenTrustBench`) + `@opentrustbench` on X/GitHub
+2. **Init repo:** `github.com/opentrustbench/opentrustbench` — MIT license, clean README
 3. **Build:** The scanner CLI. Accept a GitHub URL → clone → detect type → run Semgrep → extract permissions → output Trust Card to terminal
 4. **Scan:** The top 20 MCP servers on GitHub. Document every finding.
 5. **Write:** The first blog post draft based on what you find
-6. **Ship:** By end of week 2, `npx @eulogik/agenttrust scan` should work on any MCP server
+6. **Ship:** By end of week 2, `npx @opentrustbench/cli scan` should work on any MCP server
 
 **The first 60 seconds of user experience define everything.** Make the scan fast, the output beautiful, and the findings real.
 

@@ -37,9 +37,9 @@ export function buildTrustCard(options: {
   const vulnerableDeps = depList.filter(d => d.vulnerabilities.length > 0);
 
   return {
-    schema: "agenttrust/trust-card/v1",
+    schema: "opentrustbench/trust-card/v1",
     generatedAt: new Date().toISOString(),
-    agenttrustVersion: "0.1.0",
+    opentrustbenchVersion: "0.1.0",
     subject: {
       type: options.capabilityType,
       name: options.name,

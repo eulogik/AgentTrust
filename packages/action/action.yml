@@ -1,6 +1,6 @@
-name: "AgentTrust CI Scanner"
+name: "OpenTrustBench CI Scanner"
 description: "Automated Trust & Security Evaluation for AI Agents, Skills, and MCP Servers"
-author: "AgentTrust"
+author: "OpenTrustBench"
 branding:
   icon: "shield"
   color: "blue"
@@ -22,13 +22,13 @@ runs:
       with:
         node-version: 20
 
-    # Requires the published `agenttrust` npm package.
-    - name: Run AgentTrust Scan
+    # Requires the published `@opentrustbench/cli` npm package.
+    - name: Run OpenTrustBench Scan
       shell: bash
-      run: npx -y @eulogik/agenttrust@0.1.0 scan "${{ inputs.path }}" --fail-on "${{ inputs.fail-on }}" --quiet --no-banner
+      run: npx -y @opentrustbench/cli@0.1.0 scan "${{ inputs.path }}" --fail-on "${{ inputs.fail-on }}" --quiet --no-banner
 
     - name: Upload SARIF to GitHub Code Scanning
       if: always()
       uses: github/codeql-action/upload-sarif@v3
       with:
-        sarif_file: agenttrust-report.sarif
+        sarif_file: opentrustbench-report.sarif

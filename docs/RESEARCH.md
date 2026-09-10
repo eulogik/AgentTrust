@@ -4,7 +4,7 @@
 
 **Best opportunity: build an AI Agent Trust & Reliability Network, not another agent framework or generic agent security gateway.**
 
-Working name: **AgentTrust**.
+Working name: **OpenTrustBench**.
 
 The product should become the neutral layer that answers, for any agent, skill, MCP server, tool, workflow or model:
 
@@ -173,7 +173,7 @@ This layer should be **vendor-neutral** and **model-neutral**.
 
 ---
 
-# 5. Product definition: AgentTrust
+# 5. Product definition: OpenTrustBench
 
 ## 5.1 Core product
 
@@ -444,7 +444,7 @@ Do not optimize early pricing around token volume; optimize around **business ri
 Ship:
 
 ```bash
-npx @eulogik/agenttrust scan <repo-or-skill>
+npx @opentrustbench/cli scan <repo-or-skill>
 ```
 
 Supported first:
@@ -579,7 +579,7 @@ Do not introduce a graph database on day one. Store relationships in relational 
 
 Build:
 
-1. AgentTrust CLI.
+1. OpenTrustBench CLI.
 2. Skill/MCP repository ingestion.
 3. Static analysis engine.
 4. capability manifest.
@@ -622,7 +622,7 @@ Add:
 
 Success criterion:
 
-> One company uses AgentTrust as a release gate for a production agent.
+> One company uses OpenTrustBench as a release gate for a production agent.
 
 ---
 
@@ -655,7 +655,7 @@ Agent certification / signing / reputation network.
 Longer-term:
 
 ```text
-AgentTrust
+OpenTrustBench
    |
    +-- Agent identity
    +-- Capability identity
@@ -680,7 +680,7 @@ As agent ecosystems mature, users and enterprises will need to know:
 Possible future primitive:
 
 ```text
-AgentTrust Card
+OpenTrustBench Card
 
 Identity: verified
 Owner: verified
@@ -816,7 +816,7 @@ Create a trust badge that becomes meaningful to enterprises and skill publishers
 
 ## Build this:
 
-> **AgentTrust — the neutral trust, reliability and evidence layer for autonomous AI agents.**
+> **OpenTrustBench — the neutral trust, reliability and evidence layer for autonomous AI agents.**
 
 Start with:
 

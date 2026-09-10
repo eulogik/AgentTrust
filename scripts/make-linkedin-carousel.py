@@ -56,7 +56,7 @@ def head(d, eyebrow, lines, y=170, size=96):
 
 def foot(d, n):
     f = font(26)
-    d.text((X, H - 150), "eulogik.github.io/AgentTrust", font=f, fill=FAINT)
+    d.text((X, H - 150), "eulogik.github.io/OpenTrustBench", font=f, fill=FAINT)
     r, gap, cy = 7, 26, H - 132
     total = 5 * (2 * r) + 4 * gap
     x = W - X - total
@@ -75,7 +75,7 @@ def save(img, n):
 def slide1():
     img = base()
     d = ImageDraw.Draw(img)
-    y = head(d, "AGENTTRUST  ·  MCP SECURITY REPORT", ["I scanned 50", "MCP servers."], size=100)
+    y = head(d, "OPENTRUSTBENCH  ·  MCP SECURITY REPORT", ["I scanned 50", "MCP servers."], size=100)
     d.text((X, y + 30), "Average grade: C", font=font(44, bold=True), fill=CYAN)
     y += 130
     d.line([(X, y), (X + CONTENT_W, y)], fill=(38, 48, 56), width=2)
@@ -152,7 +152,7 @@ def slide5():
     d = ImageDraw.Draw(img)
     y = head(d, "THE TOOL  ·  FREE  ·  OPEN SOURCE", ["Scan before", "you install."], size=92)
     y += 50
-    cmd = "npx @eulogik/agenttrust scan ."
+    cmd = "npx @opentrustbench/cli scan ."
     cf = font(34)
     pad = 28
     bw = d.textlength(cmd, font=cf) + pad * 2

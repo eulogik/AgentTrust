@@ -1,7 +1,7 @@
 {
-  "schema": "agenttrust/trust-card/v1",
-  "generatedAt": "2026-09-09T09:51:50.784Z",
-  "agenttrustVersion": "0.1.0",
+  "schema": "opentrustbench/trust-card/v1",
+  "generatedAt": "2026-09-10T06:36:47.162Z",
+  "opentrustbenchVersion": "0.1.0",
   "subject": {
     "type": "agent-skill",
     "name": "Secure Data Auditor Skill",

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>AgentTrust changelog</title>
-    <link>https://eulogik.github.io/AgentTrust/</link>
-    <description>Releases, registry refreshes, and methodology updates for the AgentTrust agent trust scanner.</description>
+    <title>OpenTrustBench changelog</title>
+    <link>https://eulogik.github.io/OpenTrustBench/</link>
+    <description>Releases, registry refreshes, and methodology updates for the OpenTrustBench agent trust scanner.</description>
     <language>en</language>
     <item>
       <title>Weekly registry refresh goes automatic</title>
-      <link>https://eulogik.github.io/AgentTrust/r/</link>
+      <link>https://eulogik.github.io/OpenTrustBench/r/</link>
       <pubDate>Tue, 09 Sep 2026 00:00:00 GMT</pubDate>
       <description>50 MCP servers re-scanned on schedule; per-report badges bound to evidence pages; stale banners past 30 days.</description>
     </item>
     <item>
       <title>State of MCP Permissions: 50 servers scanned</title>
-      <link>https://github.com/eulogik/AgentTrust/blob/main/docs/STATE-OF-MCP-2026.md</link>
+      <link>https://github.com/eulogik/OpenTrustBench/blob/main/docs/STATE-OF-MCP-2026.md</link>
       <pubDate>Mon, 08 Sep 2026 00:00:00 GMT</pubDate>
       <description>Average 70.2 (C); 36% grade D or F; permission scope predicts the grade. Full methodology and tables.</description>
     </item>
     <item>
       <title>v0.1.0: Trust Cards for AI agents and MCP servers</title>
-      <link>https://github.com/eulogik/AgentTrust/releases/tag/v0.1.0</link>
+      <link>https://github.com/eulogik/OpenTrustBench/releases/tag/v0.1.0</link>
       <pubDate>Mon, 08 Sep 2026 00:00:00 GMT</pubDate>
       <description>8-rule OWASP-mapped static suite, Trust Cards A–F, SARIF output, CI gate, GitHub Action, deterministic finding IDs.</description>
     </item>

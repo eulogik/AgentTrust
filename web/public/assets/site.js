@@ -1,4 +1,4 @@
-/* AgentTrust site.js — vanilla, no dependencies. */
+/* OpenTrustBench site.js — vanilla, no dependencies. */
 (function () {
   "use strict";
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -123,7 +123,7 @@
         return "<tr><td><span class=\"grade " + (gradeClass[r.grade] || "") + "\">" + r.grade +
           "</span></td><td><a href=\"" + r.url + "\">" + r.title.replace(/&/g, "&amp;").replace(/</g, "&lt;") +
           "</a></td><td>" + r.overall + "</td><td>" + r.total + " (" + r.crit + " crit)</td><td>" + r.scope +
-          '</td><td><a href="' + r.url + '"><img src="' + r.badge + '" alt="AgentTrust ' + r.grade + '" loading="lazy"></a></td></tr>';
+          '</td><td><a href="' + r.url + '"><img src="' + r.badge + '" alt="OpenTrustBench ' + r.grade + '" loading="lazy"></a></td></tr>';
       }).join("");
       document.getElementById("registry-count").textContent =
         "Showing " + list.length + " of " + rows.length + " scanned servers";

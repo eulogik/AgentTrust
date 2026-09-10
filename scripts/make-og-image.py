@@ -42,7 +42,7 @@ def main():
     img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
     d = ImageDraw.Draw(img)
 
-    tracked(d, (90, 116), "AGENTTRUST  ·  OWASP-MAPPED AGENT SECURITY", font(24), CYAN, ls=3)
+    tracked(d, (90, 116), "OPENTRUSTBENCH  ·  OWASP-MAPPED AGENT SECURITY", font(24), CYAN, ls=3)
 
     fb, sb = font(82, bold=True), font(82, bold=True)
     d.text((86, 178), "A trust score", font=fb, fill=WHITE)
@@ -50,7 +50,7 @@ def main():
 
     d.text((90, 408), "Free CLI  ·  8 rules  ·  Trust Cards A–F  ·  50 servers graded",
            font=font(30), fill=MUTED)
-    d.text((90, 540), "eulogik.github.io/AgentTrust", font=font(30), fill=FAINT)
+    d.text((90, 540), "eulogik.github.io/OpenTrustBench", font=font(30), fill=FAINT)
 
     # Grade card, right side
     cx0, cy0, cx1, cy1 = 948, 128, 1190, 512

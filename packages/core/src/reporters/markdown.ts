@@ -6,7 +6,7 @@ export function generateMarkdownReport(card: TrustCard): string {
   const ordered = [...security.findings].sort((a, b) => (rank[a.severity] ?? 5) - (rank[b.severity] ?? 5));
   const fixFirst = ordered.filter(f => f.severity === "critical" || f.severity === "high");
 
-  return `# AgentTrust Evaluation Report
+  return `# OpenTrustBench Evaluation Report
 
 > **Capability:** \`${subject.name}\` (${subject.type})  
 > **Trust Grade:** **${trustScore.grade}** (${trustScore.overall}/100)  
@@ -55,6 +55,6 @@ ${ordered.map(f => `| **${f.severity.toUpperCase()}** | \`${f.rule}\` | ${f.titl
 
 ---
 
-*Generated automatically by [AgentTrust](https://eulogik.github.io/AgentTrust)*
+*Generated automatically by [OpenTrustBench](https://eulogik.github.io/OpenTrustBench)*
 `;
 }

@@ -3,7 +3,7 @@ import path from "node:path";
 import type { Severity } from "../types/index.js";
 import { isSeverity } from "../util/severity.js";
 
-export interface AgentTrustConfig {
+export interface OpenTrustBenchConfig {
   version?: string;
   target?: string;
   failOn?: Severity;
@@ -12,16 +12,16 @@ export interface AgentTrustConfig {
 }
 
 export function findConfigPath(cwd: string): string | undefined {
-  const yaml = path.join(cwd, "agenttrust.yaml");
-  const yml = path.join(cwd, "agenttrust.yml");
+  const yaml = path.join(cwd, "opentrustbench.yaml");
+  const yml = path.join(cwd, "opentrustbench.yml");
   if (fs.existsSync(yaml)) return yaml;
   if (fs.existsSync(yml)) return yml;
   return undefined;
 }
 
-/** Minimal key: value parser for the subset written by `agenttrust init`. */
-export function parseAgentTrustConfig(raw: string): AgentTrustConfig {
-  const cfg: AgentTrustConfig = {};
+/** Minimal key: value parser for the subset written by `opentrustbench init`. */
+export function parseOpenTrustBenchConfig(raw: string): OpenTrustBenchConfig {
+  const cfg: OpenTrustBenchConfig = {};
   for (const rawLine of raw.split(/\r?\n/)) {
     const line = rawLine.replace(/\s+#.*$/, "").trim();
     if (!line || line.startsWith("#")) continue;
@@ -38,11 +38,11 @@ export function parseAgentTrustConfig(raw: string): AgentTrustConfig {
   return cfg;
 }
 
-export function loadAgentTrustConfig(cwd: string): AgentTrustConfig {
+export function loadOpenTrustBenchConfig(cwd: string): OpenTrustBenchConfig {
   const file = findConfigPath(cwd);
   if (!file) return {};
   try {
-    return parseAgentTrustConfig(fs.readFileSync(file, "utf8"));
+    return parseOpenTrustBenchConfig(fs.readFileSync(file, "utf8"));
   } catch {
     return {};
   }

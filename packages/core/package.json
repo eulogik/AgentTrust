@@ -1,5 +1,5 @@
 {
-  "name": "@eulogik/agenttrust-core",
+  "name": "@opentrustbench/core",
   "version": "0.1.0",
   "type": "module",
   "description": "Core engines for AI agent trust scoring, OWASP analysis, permission extraction, and attack detection",
@@ -17,12 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/eulogik/AgentTrust.git",
+    "url": "https://github.com/eulogik/OpenTrustBench.git",
     "directory": "packages/core"
   },
-  "homepage": "https://eulogik.github.io/AgentTrust",
+  "homepage": "https://eulogik.github.io/OpenTrustBench",
   "bugs": {
-    "url": "https://github.com/eulogik/AgentTrust/issues"
+    "url": "https://github.com/eulogik/OpenTrustBench/issues"
   },
   "keywords": [
     "ai-agent",

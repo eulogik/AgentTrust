@@ -1,10 +1,10 @@
 {
-  "name": "@eulogik/agenttrust",
+  "name": "@opentrustbench/cli",
   "version": "0.1.0",
   "type": "module",
   "description": "Trust & security verification for AI agents and MCP servers \u2014 scan, grade, and share a verifiable Trust Card",
   "bin": {
-    "agenttrust": "./dist/index.js"
+    "opentrustbench": "./dist/index.js"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/eulogik/AgentTrust.git",
+    "url": "https://github.com/eulogik/OpenTrustBench.git",
     "directory": "packages/cli"
   },
-  "homepage": "https://eulogik.github.io/AgentTrust",
+  "homepage": "https://eulogik.github.io/OpenTrustBench",
   "bugs": {
-    "url": "https://github.com/eulogik/AgentTrust/issues"
+    "url": "https://github.com/eulogik/OpenTrustBench/issues"
   },
   "keywords": [
     "ai-agent",
@@ -54,6 +54,6 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@eulogik/agenttrust-core": "0.1.0"
+    "@opentrustbench/core": "0.1.0"
   }
 }

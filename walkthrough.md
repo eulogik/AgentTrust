@@ -1,4 +1,4 @@
-# AgentTrust — Product Walkthrough & Launch Summary
+# OpenTrustBench — Product Walkthrough & Launch Summary
 
 > **The neutral trust, reliability, and evidence layer for autonomous AI agents.**
 
@@ -6,12 +6,12 @@
 
 ## 1. What Was Built
 
-We created and deployed the full production codebase for **AgentTrust** inside [`/Users/gautamkishore/Code/AI-Opportunity-Product/agenttrust`](file:///Users/gautamkishore/Code/AI-Opportunity-Product/agenttrust).
+We created and deployed the full production codebase for **OpenTrustBench** inside [`/Users/gautamkishore/Code/AI-Opportunity-Product/opentrustbench`](file:///Users/gautamkishore/Code/AI-Opportunity-Product/opentrustbench).
 
 ### Monorepo Architecture
 
 ```
-agenttrust/
+opentrustbench/
 ├── packages/
 │   ├── core/                        # Engine & Analysis Plane
 │   │   ├── src/
@@ -23,7 +23,7 @@ agenttrust/
 │   │   │   ├── trust/               # Scoring & Trust Card generation
 │   │   │   │   ├── scorer.ts        # Weighted multi-dimensional scoring
 │   │   │   │   ├── provenance.ts    # Signatures, SBOM, Lockfile checks
-│   │   │   │   └── card-builder.ts  # agenttrust/trust-card/v1 builder
+│   │   │   │   └── card-builder.ts  # opentrustbench/trust-card/v1 builder
 │   │   │   ├── attacks/             # Adversarial red-team simulator
 │   │   │   │   └── attack-engine.ts # Prompt injection, Shell escape, SSRF probes
 │   │   │   ├── eval/                # Workflow reliability & regressions
@@ -35,7 +35,7 @@ agenttrust/
 │   │
 │   ├── cli/                         # Developer CLI & Terminal Interface
 │   │   ├── src/index.ts             # CLI command dispatcher
-│   │   └── dist/index.js            # Executable `@eulogik/agenttrust` binary (`agenttrust` on PATH)
+│   │   └── dist/index.js            # Executable `@opentrustbench/cli` binary (`opentrustbench` on PATH)
 │   │
 │   └── action/                      # Drop-in CI/CD GitHub Action
 │       └── action.yml               # Reusable GitHub Action step
@@ -68,7 +68,7 @@ agenttrust/
   - `AT-SEC-007` (LLM06): Secret leakage in debug logging
   - `AT-COMP-001` (LLM08): Missing human-in-the-loop approval triggers
 
-### 🏷️ 2. Official Trust Card (`agenttrust/trust-card/v1`)
+### 🏷️ 2. Official Trust Card (`opentrustbench/trust-card/v1`)
 Computes an objective, explainable score (0–100) and letter grade (**A**, **B**, **C**, **D**, **F**) across 5 weighted dimensions:
 - **Security (35%)**
 - **Permissions Scope (25%)**
@@ -91,7 +91,7 @@ Executes declarative workflow test suites (`sample-workflow.yaml`), measures cos
 
 ## 3. How to Run and Test
 
-From `/Users/gautamkishore/Code/AI-Opportunity-Product/agenttrust`:
+From `/Users/gautamkishore/Code/AI-Opportunity-Product/opentrustbench`:
 
 ```bash
 # 1. Scan an insecure MCP server (triggers findings & Grade F)
@@ -117,6 +117,6 @@ node packages/cli/dist/index.js badge examples/secure-agent-skill
 
 ## 4. Output Artifacts Generated on Every Scan
 
-1. **`agenttrust-report.sarif`** — Native SARIF 2.1.0 format that automatically populates the GitHub Security tab and PR annotations.
-2. **`agenttrust-report.md`** — Markdown evaluation summary ready for EU AI Act Article 50 compliance audits.
+1. **`opentrustbench-report.sarif`** — Native SARIF 2.1.0 format that automatically populates the GitHub Security tab and PR annotations.
+2. **`opentrustbench-report.md`** — Markdown evaluation summary ready for EU AI Act Article 50 compliance audits.
 3. **`trust-card.json`** — Machine-readable Trust Card for programmatic gating in deployment pipelines.

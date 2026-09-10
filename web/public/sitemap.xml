@@ -1,361 +1,361 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/#how-it-works</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/#how-it-works</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/#features</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/#features</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/#pricing</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/#pricing</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/#faq</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/#faq</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/methodology.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/methodology.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/ahujasid-blender-mcp.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/ahujasid-blender-mcp.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/apify-actors-mcp-server.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/apify-actors-mcp-server.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/browserbase-mcp-server-browserbase.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/browserbase-mcp-server-browserbase.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/clickhouse-mcp-clickhouse.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/clickhouse-mcp-clickhouse.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/cloudflare-mcp-server-cloudflare.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/cloudflare-mcp-server-cloudflare.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/e2b-dev-mcp-server.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/e2b-dev-mcp-server.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/elastic-mcp-server-elasticsearch.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/elastic-mcp-server-elasticsearch.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/exa-labs-exa-mcp-server.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/exa-labs-exa-mcp-server.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/flux159-mcp-server-kubernetes.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/flux159-mcp-server-kubernetes.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/getsentry-sentry-mcp.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/getsentry-sentry-mcp.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/github-github-mcp-server.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/github-github-mcp-server.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/gongrzhe-gmail-mcp-server.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/gongrzhe-gmail-mcp-server.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/grafana-mcp-grafana.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/grafana-mcp-grafana.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/hashicorp-terraform-mcp-server.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/hashicorp-terraform-mcp-server.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/jlowin-fastmcp.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/jlowin-fastmcp.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/korotovsky-slack-mcp-server.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/korotovsky-slack-mcp-server.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/langchain-ai-langchain-mcp-adapters.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/langchain-ai-langchain-mcp-adapters.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/makenotion-notion-mcp-server.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/makenotion-notion-mcp-server.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/mcp-everything.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/mcp-everything.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/mcp-fetch.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/mcp-fetch.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/mcp-filesystem.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/mcp-filesystem.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/mcp-git.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/mcp-git.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/mcp-memory.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/mcp-memory.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/mcp-sequentialthinking.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/mcp-sequentialthinking.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/mcp-time.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/mcp-time.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/mcp-use-mcp-use.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/mcp-use-mcp-use.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/mendableai-firecrawl-mcp-server.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/mendableai-firecrawl-mcp-server.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/microsoft-playwright-mcp.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/microsoft-playwright-mcp.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/modelcontextprotocol-csharp-sdk.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/modelcontextprotocol-csharp-sdk.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/modelcontextprotocol-go-sdk.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/modelcontextprotocol-go-sdk.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/modelcontextprotocol-inspector.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/modelcontextprotocol-inspector.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/modelcontextprotocol-java-sdk.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/modelcontextprotocol-java-sdk.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/modelcontextprotocol-kotlin-sdk.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/modelcontextprotocol-kotlin-sdk.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/modelcontextprotocol-python-sdk.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/modelcontextprotocol-python-sdk.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/modelcontextprotocol-registry.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/modelcontextprotocol-registry.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/modelcontextprotocol-typescript-sdk.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/modelcontextprotocol-typescript-sdk.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/mongodb-js-mongodb-mcp-server.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/mongodb-js-mongodb-mcp-server.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/motherduckdb-mcp-server-motherduck.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/motherduckdb-mcp-server-motherduck.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/neondatabase-mcp-server-neon.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/neondatabase-mcp-server-neon.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/pinecone-io-pinecone-mcp.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/pinecone-io-pinecone-mcp.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/prefecthq-prefect-mcp-server.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/prefecthq-prefect-mcp-server.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/qdrant-mcp-server-qdrant.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/qdrant-mcp-server-qdrant.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/redis-mcp-redis.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/redis-mcp-redis.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/self-examples-secure-agent-skill.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/self-examples-secure-agent-skill.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/self-examples-vulnerable-mcp-server.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/self-examples-vulnerable-mcp-server.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/self-packages-cli.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/self-packages-cli.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/sooperset-mcp-atlassian.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/sooperset-mcp-atlassian.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/sparfenyuk-mcp-proxy.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/sparfenyuk-mcp-proxy.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/stripe-agent-toolkit.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/stripe-agent-toolkit.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/supabase-community-supabase-mcp.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/supabase-community-supabase-mcp.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/tavily-ai-tavily-mcp.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/tavily-ai-tavily-mcp.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/upstash-context7.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/upstash-context7.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eulogik.github.io/AgentTrust/r/wong2-mcp-cli.html</loc>
+    <loc>https://eulogik.github.io/OpenTrustBench/r/wong2-mcp-cli.html</loc>
     <lastmod>2026-09-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

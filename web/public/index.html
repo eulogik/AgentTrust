@@ -3,63 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgentTrust — A trust score for every AI agent</title>
-  <meta name="description" content="AgentTrust is a free, local-first security scanner for AI agents and MCP servers. 8 OWASP-mapped rules, Trust Cards graded A–F, SARIF output, and a public registry of 50 scanned servers.">
-  <link rel="canonical" href="https://eulogik.github.io/AgentTrust/">
+  <title>OpenTrustBench — A trust score for every AI agent</title>
+  <meta name="description" content="OpenTrustBench is a free, local-first security scanner for AI agents and MCP servers. 8 OWASP-mapped rules, Trust Cards graded A–F, SARIF output, and a public registry of 50 scanned servers.">
+  <link rel="canonical" href="https://eulogik.github.io/OpenTrustBench/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="AgentTrust">
-  <meta property="og:url" content="https://eulogik.github.io/AgentTrust/">
-  <meta property="og:title" content="AgentTrust — A trust score for every AI agent">
+  <meta property="og:site_name" content="OpenTrustBench">
+  <meta property="og:url" content="https://eulogik.github.io/OpenTrustBench/">
+  <meta property="og:title" content="OpenTrustBench — A trust score for every AI agent">
   <meta property="og:description" content="Free, local-first scanner: 8 OWASP-mapped rules, Trust Cards graded A–F, and a public registry of 50 scanned MCP servers.">
-  <meta property="og:image" content="https://eulogik.github.io/AgentTrust/og-image.png">
+  <meta property="og:image" content="https://eulogik.github.io/OpenTrustBench/og-image.png">
   <meta property="og:image:width" content="1280">
   <meta property="og:image:height" content="640">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://eulogik.github.io/AgentTrust/og-image.png">
-  <meta name="twitter:title" content="AgentTrust — A trust score for every AI agent">
+  <meta name="twitter:image" content="https://eulogik.github.io/OpenTrustBench/og-image.png">
+  <meta name="twitter:title" content="OpenTrustBench — A trust score for every AI agent">
   <meta name="twitter:description" content="Free, local-first scanner: 8 OWASP-mapped rules, Trust Cards graded A–F, and a public registry of 50 scanned MCP servers.">
   <link rel="preload" href="assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/jetbrains-mono-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/site.css">
-  <link rel="alternate" type="application/rss+xml" title="AgentTrust changelog" href="feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="OpenTrustBench changelog" href="feed.xml">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://eulogik.github.io/AgentTrust/#org",
-        "name": "AgentTrust",
-        "url": "https://eulogik.github.io/AgentTrust/",
+        "@id": "https://eulogik.github.io/OpenTrustBench/#org",
+        "name": "OpenTrustBench",
+        "url": "https://eulogik.github.io/OpenTrustBench/",
         "description": "Free, local-first trust and security scanner for AI agents and MCP servers.",
-        "sameAs": ["https://github.com/eulogik/AgentTrust"]
+        "sameAs": ["https://github.com/eulogik/OpenTrustBench"]
       },
       {
         "@type": "WebSite",
-        "url": "https://eulogik.github.io/AgentTrust/",
-        "name": "AgentTrust",
-        "publisher": { "@id": "https://eulogik.github.io/AgentTrust/#org" }
+        "url": "https://eulogik.github.io/OpenTrustBench/",
+        "name": "OpenTrustBench",
+        "publisher": { "@id": "https://eulogik.github.io/OpenTrustBench/#org" }
       },
       {
         "@type": "SoftwareApplication",
-        "name": "AgentTrust CLI",
+        "name": "OpenTrustBench CLI",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Cross-platform",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "downloadUrl": "https://www.npmjs.com/package/@eulogik/agenttrust"
+        "downloadUrl": "https://www.npmjs.com/package/@opentrustbench/cli"
       },
       {
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
-          { "@type": "Question", "name": "What is AgentTrust?", "acceptedAnswer": { "@type": "Answer", "text": "AgentTrust is a free, local-first security scanner for AI agents and MCP servers. It runs 8 OWASP-mapped static rules, extracts permission manifests, and issues a Trust Card graded A–F with SARIF output for CI." } },
-          { "@type": "Question", "name": "How do I scan an MCP server?", "acceptedAnswer": { "@type": "Answer", "text": "Run npx @eulogik/agenttrust scan <path-or-github-url>. You get a Trust Card, SARIF and Markdown reports in seconds, with zero data leaving your machine." } },
-          { "@type": "Question", "name": "What is a Trust Card?", "acceptedAnswer": { "@type": "Answer", "text": "A Trust Card is a portable, machine-readable credential (agenttrust/trust-card/v1) summarizing an agent's security posture: letter grade, 0–100 score, findings, permissions, provenance, and inferred host compatibility." } },
-          { "@type": "Question", "name": "Is AgentTrust a certification?", "acceptedAnswer": { "@type": "Answer", "text": "No. AgentTrust is a static scanner, not a certification body. Attack analysis is heuristic, workflow eval is simulated, and Trust Cards are evidence input for your own review — never a compliance verdict." } },
+          { "@type": "Question", "name": "What is OpenTrustBench?", "acceptedAnswer": { "@type": "Answer", "text": "OpenTrustBench is a free, local-first security scanner for AI agents and MCP servers. It runs 8 OWASP-mapped static rules, extracts permission manifests, and issues a Trust Card graded A–F with SARIF output for CI." } },
+          { "@type": "Question", "name": "How do I scan an MCP server?", "acceptedAnswer": { "@type": "Answer", "text": "Run npx @opentrustbench/cli scan <path-or-github-url>. You get a Trust Card, SARIF and Markdown reports in seconds, with zero data leaving your machine." } },
+          { "@type": "Question", "name": "What is a Trust Card?", "acceptedAnswer": { "@type": "Answer", "text": "A Trust Card is a portable, machine-readable credential (opentrustbench/trust-card/v1) summarizing an agent's security posture: letter grade, 0–100 score, findings, permissions, provenance, and inferred host compatibility." } },
+          { "@type": "Question", "name": "Is OpenTrustBench a certification?", "acceptedAnswer": { "@type": "Answer", "text": "No. OpenTrustBench is a static scanner, not a certification body. Attack analysis is heuristic, workflow eval is simulated, and Trust Cards are evidence input for your own review — never a compliance verdict." } },
           { "@type": "Question", "name": "Does my code leave my machine?", "acceptedAnswer": { "@type": "Answer", "text": "No. The CLI runs entirely locally with zero telemetry and zero data retention. GitHub-URL scans clone the public repo to a temp directory on your machine." } },
           { "@type": "Question", "name": "What do the grades mean?", "acceptedAnswer": { "@type": "Answer", "text": "A (90+) through F (below 40), computed from security findings, permission scope, provenance signals, reliability and stability. Across 50 public MCP servers, the average is 70.2 (C) and 36% grade D or F." } },
-          { "@type": "Question", "name": "Why does the AgentTrust repo itself grade F?", "acceptedAnswer": { "@type": "Answer", "text": "Because it contains its own test ammunition: a deliberately vulnerable example fixture, unit tests that must contain eval( and exec( strings to prove the detector catches them, and automation scripts that legitimately shell out to git and npm. The shipped CLI (packages/cli) self-scans at A (90/100) — that is what the README badge grades. Grade the artifact you ship, not the monorepo that tests it." } }
+          { "@type": "Question", "name": "Why does the OpenTrustBench repo itself grade F?", "acceptedAnswer": { "@type": "Answer", "text": "Because it contains its own test ammunition: a deliberately vulnerable example fixture, unit tests that must contain eval( and exec( strings to prove the detector catches them, and automation scripts that legitimately shell out to git and npm. The shipped CLI (packages/cli) self-scans at A (90/100) — that is what the README badge grades. Grade the artifact you ship, not the monorepo that tests it." } }
         ]
       }
     ]
@@ -71,7 +71,7 @@
 
   <nav class="nav" aria-label="Main">
     <div class="nav-inner">
-      <a class="brand" href="./" aria-label="AgentTrust home"><span class="brand-mark">A</span>AgentTrust</a>
+      <a class="brand" href="./" aria-label="OpenTrustBench home"><span class="brand-mark">O</span>OpenTrustBench</a>
       <div class="nav-links" id="nav-links">
         <a href="#how">How it works</a>
         <a href="r/">Registry</a>
@@ -79,7 +79,7 @@
         <a href="#faq">FAQ</a>
       </div>
       <div class="nav-cta">
-        <a class="btn btn-ghost btn-sm" href="https://github.com/eulogik/AgentTrust">GitHub</a>
+        <a class="btn btn-ghost btn-sm" href="https://github.com/eulogik/OpenTrustBench">GitHub</a>
         <button class="burger" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">☰</button>
       </div>
     </div>
@@ -91,10 +91,10 @@
       <div class="wrap">
         <p class="eyebrow">OWASP-mapped · Agentic + LLM Top 10</p>
         <h1 id="hero-h">A trust score for every AI agent.</h1>
-        <p class="lede"><strong style="color:var(--text)">AgentTrust is a free, local-first security scanner for AI agents and MCP servers.</strong> Eight static rules, a permission manifest, and a Trust Card graded A–F — in seconds, with zero data leaving your machine.</p>
+        <p class="lede"><strong style="color:var(--text)">OpenTrustBench is a free, local-first security scanner for AI agents and MCP servers.</strong> Eight static rules, a permission manifest, and a Trust Card graded A–F — in seconds, with zero data leaving your machine.</p>
         <div class="hero-ctas">
-          <span class="cmd"><span>npx @eulogik/agenttrust scan .</span><button type="button" data-copy="npx @eulogik/agenttrust scan .">Copy</button></span>
-          <a class="btn btn-ghost" href="https://github.com/eulogik/AgentTrust">View on GitHub</a>
+          <span class="cmd"><span>npx @opentrustbench/cli scan .</span><button type="button" data-copy="npx @opentrustbench/cli scan .">Copy</button></span>
+          <a class="btn btn-ghost" href="https://github.com/eulogik/OpenTrustBench">View on GitHub</a>
         </div>
         <p class="hero-note">Free forever · No account · Open source (Apache-2.0) · <a href="#install">Install in 60 seconds</a></p>
 
@@ -105,7 +105,7 @@
           <div><div class="n">0</div><div class="l">bytes of your code ever transmitted</div></div>
         </div>
 
-        <div class="term reveal" id="term" data-lines="$ npx @eulogik/agenttrust scan examples/secure-agent-skill&#10;Trust Grade: [G]B (88/100)[/G] · Findings: 0 · Scope: minimal&#10;Provenance: signals present · Rules: 8 static (OWASP-mapped)&#10;[C]✔ trust-card.json[/C] [D](Trust Card v1)[/D]&#10;[C]✔ agenttrust-report.sarif[/C] [D](GitHub Code Scanning)[/D]&#10;[C]✔ agenttrust-report.md[/C]" aria-label="Sample scan output">
+        <div class="term reveal" id="term" data-lines="$ npx @opentrustbench/cli scan examples/secure-agent-skill&#10;Trust Grade: [G]B (88/100)[/G] · Findings: 0 · Scope: minimal&#10;Provenance: signals present · Rules: 8 static (OWASP-mapped)&#10;[C]✔ trust-card.json[/C] [D](Trust Card v1)[/D]&#10;[C]✔ opentrustbench-report.sarif[/C] [D](GitHub Code Scanning)[/D]&#10;[C]✔ opentrustbench-report.md[/C]" aria-label="Sample scan output">
           <div class="term-bar"><i></i><i></i><i></i><span>terminal — sample output, secure fixture</span></div>
           <div class="term-body"></div>
         </div>
@@ -183,11 +183,11 @@
         <p class="eyebrow reveal">Install</p>
         <h2 id="install-h" class="reveal">Running in 60 seconds.</h2>
         <div class="reveal">
-          <pre>npm install -g @eulogik/agenttrust
-agenttrust scan ./my-mcp-server --quiet</pre>
-          <p class="muted">No install? Run it directly with <code>npx @eulogik/agenttrust scan .</code> From source: <code>git clone https://github.com/eulogik/AgentTrust.git &amp;&amp; cd AgentTrust &amp;&amp; npm install</code>. Enforce it in CI:</p>
-          <pre>agenttrust scan . --fail-on high --quiet --output-dir ./trust</pre>
-          <p class="muted">Or drop in the <a href="https://github.com/eulogik/AgentTrust/tree/main/packages/action">GitHub Action</a> — scan plus SARIF upload to your Security tab.</p>
+          <pre>npm install -g @opentrustbench/cli
+opentrustbench scan ./my-mcp-server --quiet</pre>
+          <p class="muted">No install? Run it directly with <code>npx @opentrustbench/cli scan .</code> From source: <code>git clone https://github.com/eulogik/OpenTrustBench.git &amp;&amp; cd OpenTrustBench &amp;&amp; npm install</code>. Enforce it in CI:</p>
+          <pre>opentrustbench scan . --fail-on high --quiet --output-dir ./trust</pre>
+          <p class="muted">Or drop in the <a href="https://github.com/eulogik/OpenTrustBench/tree/main/packages/action">GitHub Action</a> — scan plus SARIF upload to your Security tab.</p>
         </div>
       </div>
     </section>
@@ -206,12 +206,12 @@ agenttrust scan ./my-mcp-server --quiet</pre>
           <div class="step reveal">
             <div class="k">EXPERT REVIEW</div>
             <h3>Scoped per target</h3>
-            <p>Manual triage of your results plus a remediation plan, on request. <a href="https://github.com/eulogik/AgentTrust/issues/new">Contact us</a>.</p>
+            <p>Manual triage of your results plus a remediation plan, on request. <a href="https://github.com/eulogik/OpenTrustBench/issues/new">Contact us</a>.</p>
           </div>
           <div class="step reveal">
             <div class="k">ENTERPRISE</div>
             <h3>Custom</h3>
-            <p>Custom rules, evidence helpers, priority support. <a href="https://github.com/eulogik/AgentTrust/issues/new">Contact us</a>.</p>
+            <p>Custom rules, evidence helpers, priority support. <a href="https://github.com/eulogik/OpenTrustBench/issues/new">Contact us</a>.</p>
           </div>
         </div>
       </div>
@@ -224,8 +224,8 @@ agenttrust scan ./my-mcp-server --quiet</pre>
         <h2 id="faq-h" class="reveal">Asked, answered.</h2>
         <div class="reveal">
           <details class="faq" open>
-            <summary>What is AgentTrust?</summary>
-            <div class="a"><p>AgentTrust is a free, local-first security scanner for AI agents and MCP servers. It runs 8 OWASP-mapped static rules, extracts a permission manifest, and issues a Trust Card graded A–F — with SARIF output for CI. It answers: can I trust this agent, what may it do, and can I prove it?</p></div>
+            <summary>What is OpenTrustBench?</summary>
+            <div class="a"><p>OpenTrustBench is a free, local-first security scanner for AI agents and MCP servers. It runs 8 OWASP-mapped static rules, extracts a permission manifest, and issues a Trust Card graded A–F — with SARIF output for CI. It answers: can I trust this agent, what may it do, and can I prove it?</p></div>
           </details>
           <details class="faq">
             <summary>How do I scan an MCP server?</summary>
@@ -233,11 +233,11 @@ agenttrust scan ./my-mcp-server --quiet</pre>
           </details>
           <details class="faq">
             <summary>What is a Trust Card?</summary>
-            <div class="a"><p>A portable, machine-readable credential (<code>agenttrust/trust-card/v1</code>): letter grade, 0–100 score, findings with file:line evidence, permission scope, provenance signals, and inferred host compatibility. Bound badges link each grade to its public evidence page.</p></div>
+            <div class="a"><p>A portable, machine-readable credential (<code>opentrustbench/trust-card/v1</code>): letter grade, 0–100 score, findings with file:line evidence, permission scope, provenance signals, and inferred host compatibility. Bound badges link each grade to its public evidence page.</p></div>
           </details>
           <details class="faq">
-            <summary>Is AgentTrust a certification?</summary>
-            <div class="a"><p>No. AgentTrust is a static scanner, not a certification body. Attack analysis is heuristic (no payloads execute), workflow eval is simulated (nothing runs), and Trust Cards are evidence input for your own review — never a compliance verdict.</p></div>
+            <summary>Is OpenTrustBench a certification?</summary>
+            <div class="a"><p>No. OpenTrustBench is a static scanner, not a certification body. Attack analysis is heuristic (no payloads execute), workflow eval is simulated (nothing runs), and Trust Cards are evidence input for your own review — never a compliance verdict.</p></div>
           </details>
           <details class="faq">
             <summary>Does my code leave my machine?</summary>
@@ -248,7 +248,7 @@ agenttrust scan ./my-mcp-server --quiet</pre>
             <div class="a"><p>A (90+) through F (below 40), weighted across security findings, permission scope, provenance, reliability and stability. Across 50 public MCP servers the average is 70.2 (C); 36% grade D or F. <a href="methodology.html">Full scoring methodology</a>.</p></div>
           </details>
           <details class="faq">
-            <summary>Why does the AgentTrust repo itself grade F?</summary>
+            <summary>Why does the OpenTrustBench repo itself grade F?</summary>
             <div class="a"><p>Because it contains its own test ammunition — and a scanner that <em>didn't</em> flag it would be the real scandal. The F comes from three intentional sources: (1) <code>examples/vulnerable-mcp-server</code>, a deliberately vulnerable fixture; (2) our unit tests, which must contain <code>eval(</code>, <code>exec(</code> and <code>transferFunds(</code> strings to prove the detector catches them; (3) our automation scripts, which legitimately shell out to <code>git</code> and <code>npm</code> with hardcoded local arguments. The shipped product (<code>packages/cli</code>) self-scans at <a href="r/self-packages-cli.html">A (90/100)</a> — that is what the README badge grades. Rule of thumb: grade the artifact you ship, not the monorepo that tests it.</p></div>
           </details>
         </div>
@@ -261,7 +261,7 @@ agenttrust scan ./my-mcp-server --quiet</pre>
         <h2 class="reveal">Ship agents you can defend.</h2>
         <p class="lede reveal" style="margin-left:auto;margin-right:auto">One command. Thirty seconds. A grade you can show your auditor.</p>
         <div class="hero-ctas reveal" style="justify-content:center">
-          <span class="cmd"><span>npx @eulogik/agenttrust scan .</span><button type="button" data-copy="npx @eulogik/agenttrust scan .">Copy</button></span>
+          <span class="cmd"><span>npx @opentrustbench/cli scan .</span><button type="button" data-copy="npx @opentrustbench/cli scan .">Copy</button></span>
           <a class="btn btn-ghost" href="r/">Browse the registry</a>
         </div>
       </div>
@@ -272,17 +272,17 @@ agenttrust scan ./my-mcp-server --quiet</pre>
     <div class="wrap">
       <div class="foot-grid">
         <div>
-          <a class="brand" href="./" style="margin-bottom:14px"><span class="brand-mark">A</span>AgentTrust</a>
+          <a class="brand" href="./" style="margin-bottom:14px"><span class="brand-mark">O</span>OpenTrustBench</a>
           <p style="margin-top:14px">Trust and security verification for autonomous AI agents and MCP servers. Open source, local-first.</p>
         </div>
         <div>
           <h4>Product</h4>
           <ul>
             <li><a href="#install">Install</a></li>
-            <li><a href="https://www.npmjs.com/package/@eulogik/agenttrust">npm package</a></li>
+            <li><a href="https://www.npmjs.com/package/@opentrustbench/cli">npm package</a></li>
             <li><a href="r/">Registry</a></li>
             <li><a href="methodology.html">Methodology</a></li>
-            <li><a href="https://github.com/eulogik/AgentTrust">GitHub</a></li>
+            <li><a href="https://github.com/eulogik/OpenTrustBench">GitHub</a></li>
           </ul>
         </div>
         <div>
@@ -290,21 +290,21 @@ agenttrust scan ./my-mcp-server --quiet</pre>
           <ul>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="feed.xml">Changelog feed</a></li>
-            <li><a href="https://github.com/eulogik/AgentTrust/blob/main/docs/STATE-OF-MCP-2026.md">State of MCP report</a></li>
+            <li><a href="https://github.com/eulogik/OpenTrustBench/blob/main/docs/STATE-OF-MCP-2026.md">State of MCP report</a></li>
             <li><a href="llms.txt">llms.txt</a></li>
           </ul>
         </div>
         <div>
           <h4>Project</h4>
           <ul>
-            <li><a href="https://github.com/eulogik/AgentTrust/issues/new">Contact</a></li>
-            <li><a href="https://github.com/eulogik/AgentTrust/blob/main/LICENSE">License (Apache-2.0)</a></li>
-            <li><a href="https://github.com/eulogik/AgentTrust/security/policy">Security policy</a></li>
+            <li><a href="https://github.com/eulogik/OpenTrustBench/issues/new">Contact</a></li>
+            <li><a href="https://github.com/eulogik/OpenTrustBench/blob/main/LICENSE">License (Apache-2.0)</a></li>
+            <li><a href="https://github.com/eulogik/OpenTrustBench/security/policy">Security policy</a></li>
           </ul>
         </div>
       </div>
       <div class="foot-base">
-        <span>© 2026 AgentTrust · Apache-2.0 · Refreshed weekly from 50 public scans</span>
+        <span>© 2026 OpenTrustBench · Apache-2.0 · Refreshed weekly from 50 public scans</span>
         <span>Static site · No cookies · No tracking</span>
       </div>
     </div>

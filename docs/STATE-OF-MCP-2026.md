@@ -1,10 +1,10 @@
 # State of MCP Permissions — September 2026
 
-50 popular public MCP servers and SDKs scanned with **AgentTrust v0.1.0**
+50 popular public MCP servers and SDKs scanned with **OpenTrustBench v0.1.0**
 (8-rule static suite, OWASP-mapped). Shallow clones at HEAD on 2026-09-09; re-scanned 2026-09-09 with v0.1.0 string-literal permission handling.
 Methodology and target list: `scripts/seed-registry.mjs` (resumable, all work in `/tmp`).
 
-Browse all 50 cards: <https://eulogik.github.io/AgentTrust/r/>
+Browse all 50 cards: <https://eulogik.github.io/OpenTrustBench/r/>
 
 ## Headline numbers
 
@@ -80,7 +80,7 @@ comes from no longer counting string literals and prose as capabilities.)
 - **No vendor coordination.** Findings were not pre-disclosed; severities are
   scanner heuristics, not confirmed vulnerabilities.
 
-## What this means for AgentTrust
+## What this means for OpenTrustBench
 
 1. The credential thesis holds: the spread (93 → 35) is wide enough that a
    grade is informative, and the scope signal is simple enough to explain.

@@ -32,7 +32,7 @@ export async function resolveScanTarget(input: string, flags: ScanFlags = {}): P
 
   if (type === "github") {
     const { url, repo, branch } = parseGitHubRef(input);
-    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "agenttrust-scan-github-"));
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "otb-scan-github-"));
     const dest = path.join(dir, repo);
     const args = ["clone", "--depth", "1"];
     if (branch) args.push("--branch", branch);
@@ -53,7 +53,7 @@ export async function resolveScanTarget(input: string, flags: ScanFlags = {}): P
   }
 
   // npm: fetch the published tarball — that is what consumers actually install.
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "agenttrust-scan-npm-"));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "otb-scan-npm-"));
   let packedFile: string;
   try {
     const out = execFileSync("npm", ["pack", input, "--pack-destination", dir], { cwd: os.tmpdir(), encoding: "utf8" });

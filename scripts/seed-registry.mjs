@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Seed-registry sweep: shallow-clone popular public MCP servers into /tmp,
-// scan each with the local AgentTrust CLI, and record grade/score/counts.
+// scan each with the local OpenTrustBench CLI, and record grade/score/counts.
 // - Resumable: skips names already present in results.json
 // - Never writes into the repo; all work happens under /tmp/at-sweep
 // - Usage: node scripts/seed-registry.mjs [maxScans]

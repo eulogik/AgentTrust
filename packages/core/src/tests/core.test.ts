@@ -25,7 +25,7 @@ const SECURE_FIXTURE = path.join(REPO_ROOT, "examples", "secure-agent-skill");
 const WORKFLOW_FIXTURE = path.join(REPO_ROOT, "examples", "sample-workflow.yaml");
 
 function tmpDir(files: Record<string, string>): string {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "agenttrust-test-"));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "otb-test-"));
   for (const [name, content] of Object.entries(files)) {
     fs.writeFileSync(path.join(dir, name), content, "utf8");
   }
@@ -173,7 +173,7 @@ test("workflow parser ignores unrelated yaml and errors on empty suites", async 
   const empty = parseSimpleYamlSuite("workflow: x\ntargetAgent: y\n");
   assert.equal(empty.tests.length, 0);
 
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "agenttrust-eval-"));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "otb-eval-"));
   const file = path.join(dir, "suite.json");
   fs.writeFileSync(file, JSON.stringify({ workflow: "w", targetAgent: "a", tests: [] }), "utf8");
   try {

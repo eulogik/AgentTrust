@@ -110,9 +110,9 @@ export interface TrustScore {
 }
 
 export interface TrustCard {
-  schema: "agenttrust/trust-card/v1";
+  schema: "opentrustbench/trust-card/v1";
   generatedAt: string;
-  agenttrustVersion: string;
+  opentrustbenchVersion: string;
   subject: {
     type: CapabilityType;
     name: string;

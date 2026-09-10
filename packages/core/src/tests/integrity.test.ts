@@ -10,7 +10,7 @@ import {
   extractPermissions,
   stableFindingId,
   inferCompatibility,
-  parseAgentTrustConfig,
+  parseOpenTrustBenchConfig,
   runScan
 } from "../index.js";
 import { fileURLToPath } from "node:url";
@@ -19,7 +19,7 @@ const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..
 const VULNERABLE_FIXTURE = path.join(REPO_ROOT, "examples", "vulnerable-mcp-server");
 
 function tmpDir(files: Record<string, string>): string {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "agenttrust-integrity-"));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "otb-integrity-"));
   for (const [name, content] of Object.entries(files)) {
     const full = path.join(dir, name);
     fs.mkdirSync(path.dirname(full), { recursive: true });
@@ -181,8 +181,8 @@ test("shipped CLI self-scan has no phantom shell/database flags", async () => {
   assert.equal(perms.canSendEmail, false);
 });
 
-test("agenttrust.yaml config parses the keys the scanner reads", () => {
-  const cfg = parseAgentTrustConfig([
+test("opentrustbench.yaml config parses the keys the scanner reads", () => {
+  const cfg = parseOpenTrustBenchConfig([
     "# comment",
     'version: "1.0"',
     'target: "."',

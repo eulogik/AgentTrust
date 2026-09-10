@@ -46,8 +46,8 @@ jobs:
 
       - name: Commit + push if changed
         run: |
-          git config user.name "agenttrust-bot"
-          git config user.email "agenttrust-bot@users.noreply.github.com"
+          git config user.name "opentrustbench-bot"
+          git config user.email "opentrustbench-bot@users.noreply.github.com"
           git add web/public/r docs/STATE-OF-MCP-2026.md
           if git diff --cached --quiet; then
             echo "No registry changes — nothing to push."

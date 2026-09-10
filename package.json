@@ -1,5 +1,5 @@
 {
-  "name": "agenttrust-monorepo",
+  "name": "opentrustbench-monorepo",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "prepare": "npm run build",
-    "build": "npm run build -w @eulogik/agenttrust-core && npm run build -w @eulogik/agenttrust",
+    "build": "npm run build -w @opentrustbench/core && npm run build -w @opentrustbench/cli",
     "test": "npm run build && node --test packages/core/dist/tests/*.test.js",
     "scan:vulnerable": "node packages/cli/dist/index.js scan examples/vulnerable-mcp-server",
     "scan:secure": "node packages/cli/dist/index.js scan examples/secure-agent-skill",
