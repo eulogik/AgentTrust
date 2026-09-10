@@ -1,19 +1,25 @@
-version: "3.8"
+# Run from the repo root: docker compose -f docker/docker-compose.yml run scan
 services:
   scan:
-    build: .
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
     volumes:
-      - .:/workspace
-    command: ["scan", "."]
-  
-  trust:
-    build: .
-    volumes:
-      - .:/workspace
-    command: ["trust", "."]
-  
+      - ../:/workspace
+    command: ["scan", ".", "--quiet"]
+
   attack:
-    build: .
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
     volumes:
-      - .:/workspace
-    command: ["attack", "."]
+      - ../:/workspace
+    command: ["attack", ".", "--quiet"]
+
+  eval:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ../:/workspace
+    command: ["eval", "examples/sample-workflow.yaml"]
