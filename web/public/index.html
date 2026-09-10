@@ -4,21 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OpenTrustBench — A trust score for every AI agent</title>
-  <meta name="description" content="OpenTrustBench is a free, local-first security scanner for AI agents and MCP servers. 8 OWASP-mapped rules, Trust Cards graded A–F, SARIF output, and a public registry of 50 scanned servers.">
+        <meta name="description" content="OpenTrustBench is a free, local-first security scanner for AI agents and MCP servers. 8 OWASP-mapped rules, Trust Cards graded A–F, SARIF output, and a public registry of 53 scanned servers.">
   <link rel="canonical" href="https://www.opentrustbench.com/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="OpenTrustBench">
   <meta property="og:url" content="https://www.opentrustbench.com/">
   <meta property="og:title" content="OpenTrustBench — A trust score for every AI agent">
-  <meta property="og:description" content="Free, local-first scanner: 8 OWASP-mapped rules, Trust Cards graded A–F, and a public registry of 50 scanned MCP servers.">
+  <meta property="og:description" content="Free, local-first scanner: 8 OWASP-mapped rules, Trust Cards graded A–F, and a public registry of 53 scanned MCP servers.">
   <meta property="og:image" content="https://www.opentrustbench.com/og-image.png">
   <meta property="og:image:width" content="1280">
   <meta property="og:image:height" content="640">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://www.opentrustbench.com/og-image.png">
   <meta name="twitter:title" content="OpenTrustBench — A trust score for every AI agent">
-  <meta name="twitter:description" content="Free, local-first scanner: 8 OWASP-mapped rules, Trust Cards graded A–F, and a public registry of 50 scanned MCP servers.">
+  <meta name="twitter:description" content="Free, local-first scanner: 8 OWASP-mapped rules, Trust Cards graded A–F, and a public registry of 53 scanned MCP servers.">
   <link rel="preload" href="assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/jetbrains-mono-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/site.css">
@@ -58,7 +58,7 @@
           { "@type": "Question", "name": "What is a Trust Card?", "acceptedAnswer": { "@type": "Answer", "text": "A Trust Card is a portable, machine-readable credential (opentrustbench/trust-card/v1) summarizing an agent's security posture: letter grade, 0–100 score, findings, permissions, provenance, and inferred host compatibility." } },
           { "@type": "Question", "name": "Is OpenTrustBench a certification?", "acceptedAnswer": { "@type": "Answer", "text": "No. OpenTrustBench is a static scanner, not a certification body. Attack analysis is heuristic, workflow eval is simulated, and Trust Cards are evidence input for your own review — never a compliance verdict." } },
           { "@type": "Question", "name": "Does my code leave my machine?", "acceptedAnswer": { "@type": "Answer", "text": "No. The CLI runs entirely locally with zero telemetry and zero data retention. GitHub-URL scans clone the public repo to a temp directory on your machine." } },
-          { "@type": "Question", "name": "What do the grades mean?", "acceptedAnswer": { "@type": "Answer", "text": "A (90+) through F (below 40), computed from security findings, permission scope, provenance signals, reliability and stability. Across 50 public MCP servers, the average is 70.2 (C) and 36% grade D or F." } },
+          { "@type": "Question", "name": "What do the grades mean?", "acceptedAnswer": { "@type": "Answer", "text": "A (90+) through F (below 40), computed from security findings, permission scope, provenance signals, reliability and stability. Across 53 public MCP servers, the average is 70.2 (C) and 36% grade D or F." } },
           { "@type": "Question", "name": "Why does the OpenTrustBench repo itself grade F?", "acceptedAnswer": { "@type": "Answer", "text": "Because it contains its own test ammunition: a deliberately vulnerable example fixture, unit tests that must contain eval( and exec( strings to prove the detector catches them, and automation scripts that legitimately shell out to git and npm. The shipped CLI (packages/cli) self-scans at A (90/100) — that is what the README badge grades. Grade the artifact you ship, not the monorepo that tests it." } }
         ]
       }
@@ -99,7 +99,7 @@
         <p class="hero-note">Free forever · No account · Open source (Apache-2.0) · <a href="#install">Install in 60 seconds</a></p>
 
         <div class="proof reveal" aria-label="Registry statistics">
-          <div><div class="n">50</div><div class="l">public MCP servers scanned — <a href="r/">browse the registry</a></div></div>
+          <div><div class="n">53</div><div class="l">public MCP servers scanned — <a href="r/">browse the registry</a></div></div>
           <div><div class="n">70.2</div><div class="l">average score (C) across the ecosystem</div></div>
           <div><div class="n">36%</div><div class="l">grade D or F — findings need triage, not panic</div></div>
           <div><div class="n">0</div><div class="l">bytes of your code ever transmitted</div></div>
@@ -140,7 +140,7 @@
     <!-- Registry preview: the ecosystem, ranked -->
     <section id="registry-preview" aria-labelledby="reg-h" style="padding-top:0">
       <div class="wrap">
-        <p class="eyebrow reveal">The registry · 50 servers, re-scanned weekly</p>
+        <p class="eyebrow reveal">The registry · 53 servers, re-scanned weekly</p>
         <h2 id="reg-h" class="reveal">Who's passing, who's not.</h2>
         <p class="lede reveal">Independently scanned snapshots — not self-reports. Full evidence behind every grade.</p>
         <div class="steps">
@@ -171,7 +171,7 @@
           <div class="step reveal">
             <div class="k">THE PATTERN</div>
             <h3>Scope predicts the grade.</h3>
-            <p>Every A-grade server pairs zero findings with minimal scope. All D/F servers are excessive-scope except two. <a href="methodology.html">How scoring works</a> · <a href="r/">Explore all 50 →</a></p>
+            <p>Every A-grade server pairs zero findings with minimal scope. All D/F servers are excessive-scope except two. <a href="methodology.html">How scoring works</a> · <a href="r/">Explore all 53 →</a></p>
           </div>
         </div>
       </div>
@@ -215,8 +215,8 @@ docker run --rm -v $(pwd):/workspace eulogik/opentrustbench scan .</pre>
               <div class="tab-meta"><button class="btn btn-ghost btn-sm" data-copy-target="#cmd-docker">Copy</button><a href="https://hub.docker.com/r/eulogik/opentrustbench">Docker Hub →</a></div>
             </div>
             <div role="tabpanel" id="panel-vscode" aria-labelledby="tab-vscode" data-panel="vscode" hidden>
-              <pre id="cmd-vscode">code --install-extension opentrustbench-0.1.1.vsix</pre>
-              <div class="tab-meta"><button class="btn btn-ghost btn-sm" data-copy-target="#cmd-vscode">Copy</button><span class="muted">Download the .vsix from <a href="https://github.com/eulogik/OpenTrustBench/releases/tag/v0.1.1">releases</a> · Marketplace listing soon</span></div>
+              <pre id="cmd-vscode">code --install-extension eulogik.opentrustbench</pre>
+              <div class="tab-meta"><button class="btn btn-ghost btn-sm" data-copy-target="#cmd-vscode">Copy</button><a href="https://marketplace.visualstudio.com/items?itemName=eulogik.opentrustbench">Marketplace →</a></div>
             </div>
             <div role="tabpanel" id="panel-action" aria-labelledby="tab-action" data-panel="action" hidden>
               <pre id="cmd-action">- uses: eulogik/opentrustbench-action@v0.1.1
@@ -286,7 +286,7 @@ docker run --rm -v $(pwd):/workspace eulogik/opentrustbench scan .</pre>
           </details>
           <details class="faq">
             <summary>What do the grades mean?</summary>
-            <div class="a"><p>A (90+) through F (below 40), weighted across security findings, permission scope, provenance, reliability and stability. Across 50 public MCP servers the average is 70.2 (C); 36% grade D or F. <a href="methodology.html">Full scoring methodology</a>.</p></div>
+            <div class="a"><p>A (90+) through F (below 40), weighted across security findings, permission scope, provenance, reliability and stability. Across 53 public MCP servers the average is 70.2 (C); 36% grade D or F. <a href="methodology.html">Full scoring methodology</a>.</p></div>
           </details>
           <details class="faq">
             <summary>Why does the OpenTrustBench repo itself grade F?</summary>
@@ -345,7 +345,7 @@ docker run --rm -v $(pwd):/workspace eulogik/opentrustbench scan .</pre>
         </div>
       </div>
       <div class="foot-base">
-        <span>© 2026 OpenTrustBench · Apache-2.0 · Refreshed weekly from 50 public scans · Built by <a href="https://eulogik.com">Eulogik</a></span>
+        <span>© 2026 OpenTrustBench · Apache-2.0 · Refreshed weekly from 53 public scans · Built by <a href="https://eulogik.com">Eulogik</a></span>
         <span>Static site · No cookies · No tracking</span>
       </div>
     </div>

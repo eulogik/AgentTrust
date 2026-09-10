@@ -61,8 +61,8 @@ npx @opentrustbench/cli eval ./tests/workflow.yaml
 | **PyPI** | `pip install opentrustbench` | v0.1.1 live ([package](https://pypi.org/project/opentrustbench/)) — requires Node 18+ and the npm CLI engine |
 | **Homebrew** | `brew tap eulogik/opentrustbench && brew install opentrustbench` | v0.1.1 live ([tap](https://github.com/eulogik/homebrew-opentrustbench)) |
 | **Docker** | `docker run --rm -v $(pwd):/workspace eulogik/opentrustbench scan .` | v0.1.1 + `latest` live ([Hub](https://hub.docker.com/r/eulogik/opentrustbench)) |
-| **VS Code** | Download `opentrustbench-0.1.1.vsix` from [releases](https://github.com/eulogik/OpenTrustBench/releases/tag/v0.1.1), then `code --install-extension opentrustbench-0.1.1.vsix` | Marketplace listing in progress |
-| **GitHub Action** | `- uses: eulogik/opentrustbench-action@v0.1.1` ([repo](https://github.com/eulogik/opentrustbench-action)) | Usable today; Marketplace listing in progress |
+| **VS Code** | `code --install-extension eulogik.opentrustbench` | v0.1.1 live ([Marketplace](https://marketplace.visualstudio.com/items?itemName=eulogik.opentrustbench)) |
+| **GitHub Action** | `- uses: eulogik/opentrustbench-action@v0.1.1` ([repo](https://github.com/eulogik/opentrustbench-action)) | v0.1.1 live ([Marketplace](https://github.com/marketplace/actions/opentrustbench)) |
 | **Source** | `git clone https://github.com/eulogik/OpenTrustBench.git && cd OpenTrustBench && npm install` | Always current |
 
 ## What You Get

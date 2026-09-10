@@ -1,11 +1,11 @@
 # OpenTrustBench Docker
 
-Run OpenTrustBench in a container. Replace `NS` with the Docker Hub namespace
-(`opentrustbench`, or your username).
+Run OpenTrustBench in a container.
 
-## From Docker Hub (once published)
+## From Docker Hub
 
 ```bash
+docker pull eulogik/opentrustbench
 docker run --rm -v $(pwd):/workspace eulogik/opentrustbench scan .
 docker run --rm -v $(pwd):/workspace eulogik/opentrustbench attack .
 ```

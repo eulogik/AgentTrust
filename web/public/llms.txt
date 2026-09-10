@@ -19,7 +19,7 @@ can I trust this, what is it allowed to do, and can I prove it.
 
 - Homepage: https://www.opentrustbench.com/
 - Methodology (rules, scoring, limits): https://www.opentrustbench.com/methodology.html
-- Registry of 50 scanned MCP servers: https://www.opentrustbench.com/r/
+- Registry of 53 scanned MCP servers: https://www.opentrustbench.com/r/
 - State of MCP Permissions report: https://github.com/eulogik/OpenTrustBench/blob/main/docs/STATE-OF-MCP-2026.md
 - FAQ: https://www.opentrustbench.com/#faq
 - Install: https://www.opentrustbench.com/#install
@@ -30,7 +30,7 @@ can I trust this, what is it allowed to do, and can I prove it.
 
 - 8 detection rules mapped to OWASP Agentic Top 10 (ASI) and OWASP LLM Top 10 2025.
 - Trust Card grades: A (90+), B (75+), C (60+), D (40+), F (below 40).
-- Across 50 public MCP servers (Sep 2026): average 70.2 (C); 36% grade D or F; 40% request excessive permission scope.
+- Across 53 public MCP servers (Sep 2026): average 70.2 (C); 36% grade D or F; 40% request excessive permission scope.
 - The shipped CLI self-scans at A (90/100) with 0 findings.
 - Attack analysis is static-heuristic (no payloads execute); workflow eval is simulated (nothing runs).
 - Trust Cards are evidence input, never a certification or compliance verdict.
