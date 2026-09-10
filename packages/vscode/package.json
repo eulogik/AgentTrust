@@ -5,6 +5,8 @@
   "version": "0.1.1",
   "publisher": "eulogik",
   "license": "Apache-2.0",
+  "homepage": "https://www.opentrustbench.com",
+  "repository": {"type": "git", "url": "https://github.com/eulogik/OpenTrustBench.git"},
   "engines": {"vscode": "^1.85.0"},
   "categories": ["Other", "Security"],
   "keywords": ["ai", "agent", "mcp", "security", "scanner", "trust"],
