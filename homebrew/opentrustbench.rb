@@ -11,11 +11,15 @@ class Opentrustbench < Formula
     # Full install (devDeps needed to compile TypeScript; root `prepare` hook builds core then cli)
     system "npm", "ci"
     # Prune dev dependencies, keep workspace symlinks + prod deps (reinstall without scripts so dist/ stays built)
-    rm_rf "node_modules"
+    rm_r "node_modules"
     system "npm", "ci", "--omit=dev", "--ignore-scripts"
     libexec.install Dir["packages", "node_modules"]
-    chmod 0o755, libexec/"packages/cli/dist/index.js"
-    (bin/"opentrustbench").write_exec_script libexec/"packages/cli/dist/index.js"
+    chmod 0755, libexec/"packages/cli/dist/index.js"
+    (bin/"opentrustbench").write <<~EOS
+      #!/bin/bash
+      exec "#{libexec}/packages/cli/dist/index.js" "$@"
+    EOS
+    chmod 0755, bin/"opentrustbench"
   end
 
   test do
