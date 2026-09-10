@@ -39,11 +39,11 @@ export function buildTrustCard(options: {
   return {
     schema: "opentrustbench/trust-card/v1",
     generatedAt: new Date().toISOString(),
-    opentrustbenchVersion: "0.1.2",
+    opentrustbenchVersion: "0.1.3",
     subject: {
       type: options.capabilityType,
       name: options.name,
-      version: options.version || "0.1.2",
+      version: options.version || "0.1.3",
       description: options.description || "",
       repository: options.repository,
       language: options.language

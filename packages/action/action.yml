@@ -42,7 +42,7 @@ runs:
     - name: Run OpenTrustBench scan
       shell: bash
       run: |
-        npx -y @opentrustbench/cli@0.1.2 scan \
+        npx -y @opentrustbench/cli@0.1.3 scan \
           "${{ inputs.target }}" \
           --format "${{ inputs.format }}" \
           --output-dir "${{ inputs.output-dir }}" \

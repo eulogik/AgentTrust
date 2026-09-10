@@ -41,7 +41,7 @@ function printBanner() {
  \\___/| .__/\\___|_||_|_||_|  \\_,_/__/\\__|___/\\___|_||_\\__|_||_|
       |_|
 `));
-  console.log(bold(magenta("  The Trust, Reliability, and Evidence Layer for Autonomous AI Agents")) + gray(" (v0.1.2)\n"));
+  console.log(bold(magenta("  The Trust, Reliability, and Evidence Layer for Autonomous AI Agents")) + gray(" (v0.1.3)\n"));
 }
 
 function parseArgs(argv: string[]): { target: string; flags: Record<string, string | boolean> } {

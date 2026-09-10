@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "opentrustbench"
-version = "0.1.2"
+version = "0.1.3"
 description = "Open-source AI agent and MCP server security scanner"
 readme = "README.md"
 license = "Apache-2.0"

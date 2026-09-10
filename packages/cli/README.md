@@ -67,7 +67,7 @@ opentrustbench eval ./tests/workflow.yaml
 
 ```yaml
 # .github/workflows/trust.yml
-- uses: eulogik/opentrustbench-action@v0.1.2
+- uses: eulogik/opentrustbench-action@v0.1.3
   with:
     target: .
     fail-on: high

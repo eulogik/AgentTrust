@@ -56,13 +56,13 @@ npx @opentrustbench/cli eval ./tests/workflow.yaml
 
 | Channel | Command | Status |
 |---------|---------|--------|
-| **npm** | `npm install -g @opentrustbench/cli` | v0.1.2 live ([package](https://www.npmjs.com/package/@opentrustbench/cli)) |
+| **npm** | `npm install -g @opentrustbench/cli` | v0.1.3 live ([package](https://www.npmjs.com/package/@opentrustbench/cli)) |
 | **npx** | `npx @opentrustbench/cli scan .` | No install needed |
-| **PyPI** | `pip install opentrustbench` | v0.1.2 live ([package](https://pypi.org/project/opentrustbench/)) — requires Node 18+ and the npm CLI engine |
-| **Homebrew** | `brew tap eulogik/opentrustbench && brew install opentrustbench` | v0.1.2 live ([tap](https://github.com/eulogik/homebrew-opentrustbench)) |
-| **Docker** | `docker run --rm -v $(pwd):/workspace eulogik/opentrustbench scan .` | v0.1.2 + `latest` live ([Hub](https://hub.docker.com/r/eulogik/opentrustbench)) |
-| **VS Code** | `code --install-extension eulogik.opentrustbench` | v0.1.2 live ([Marketplace](https://marketplace.visualstudio.com/items?itemName=eulogik.opentrustbench)) |
-| **GitHub Action** | `- uses: eulogik/opentrustbench-action@v0.1.2` ([repo](https://github.com/eulogik/opentrustbench-action)) | v0.1.2 live ([Marketplace](https://github.com/marketplace/actions/opentrustbench)) |
+| **PyPI** | `pip install opentrustbench` | v0.1.3 live ([package](https://pypi.org/project/opentrustbench/)) — requires Node 18+ and the npm CLI engine |
+| **Homebrew** | `brew tap eulogik/opentrustbench && brew install opentrustbench` | v0.1.3 live ([tap](https://github.com/eulogik/homebrew-opentrustbench)) |
+| **Docker** | `docker run --rm -v $(pwd):/workspace eulogik/opentrustbench scan .` | v0.1.3 + `latest` live ([Hub](https://hub.docker.com/r/eulogik/opentrustbench)) |
+| **VS Code** | `code --install-extension eulogik.opentrustbench` | v0.1.3 live ([Marketplace](https://marketplace.visualstudio.com/items?itemName=eulogik.opentrustbench)) |
+| **GitHub Action** | `- uses: eulogik/opentrustbench-action@v0.1.3` ([repo](https://github.com/eulogik/opentrustbench-action)) | v0.1.3 live ([Marketplace](https://github.com/marketplace/actions/opentrustbench)) |
 | **Source** | `git clone https://github.com/eulogik/OpenTrustBench.git && cd OpenTrustBench && npm install` | Always current |
 
 ## What You Get
