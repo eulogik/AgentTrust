@@ -1,20 +1,27 @@
 class Opentrustbench < Formula
   desc "Open-source AI agent and MCP server security scanner"
-  homepage "https://opentrustbench.com"
-  url "https://github.com/eulogik/OpenTrustBench/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "PLACEHOLDER_SHA256"
+  homepage "https://www.opentrustbench.com"
+  url "https://github.com/eulogik/OpenTrustBench/archive/refs/tags/v0.1.1.tar.gz"
+  sha256 "891653485a4bf0f0f0d305be97224d44cc96889296ba5b83887c1220a7b6ef15"
   license "Apache-2.0"
 
-  depends_on "node@20"
+  depends_on "node"
 
   def install
-    system "npm", "install", *std_npm_args
-    system "npm", "run", "build"
-    libexec.install Dir["packages/*"]
-    bin.install_symlink Dir["#{libexec}/packages/cli/dist/index.js"]
+    # Full install (devDeps needed to compile TypeScript; root `prepare` hook builds core then cli)
+    system "npm", "ci"
+    # Prune dev dependencies, keep workspace symlinks + prod deps (reinstall without scripts so dist/ stays built)
+    rm_rf "node_modules"
+    system "npm", "ci", "--omit=dev", "--ignore-scripts"
+    libexec.install Dir["packages", "node_modules"]
+    chmod 0o755, libexec/"packages/cli/dist/index.js"
+    (bin/"opentrustbench").write_exec_script libexec/"packages/cli/dist/index.js"
   end
 
   test do
-    assert_match "OpenTrustBench", shell_output("#{bin}/opentrustbench --version")
+    assert_match "opentrustbench", shell_output("#{bin}/opentrustbench --version")
+    (testpath/"probe.js").write("console.log('hi');\n")
+    output = shell_output("#{bin}/opentrustbench scan #{testpath} --no-banner --no-color")
+    assert_match "Trust Grade:", output
   end
 end
