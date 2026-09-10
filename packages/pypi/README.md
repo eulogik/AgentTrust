@@ -1,6 +1,39 @@
 # OpenTrustBench
 
-Open-source AI agent and MCP server security scanner. Graded trust cards (A–F) for AI agents and MCP tool servers.
+[![PyPI version](https://img.shields.io/pypi/v/opentrustbench.svg)](https://pypi.org/project/opentrustbench/)
+[![Python versions](https://img.shields.io/pypi/pyversions/opentrustbench.svg)](https://pypi.org/project/opentrustbench/)
+[![License](https://img.shields.io/github/license/eulogik/OpenTrustBench.svg)](https://github.com/eulogik/OpenTrustBench/blob/main/LICENSE)
+[![Rules](https://img.shields.io/badge/Rules-8%20OWASP--mapped-cyan.svg)](https://www.opentrustbench.com/methodology.html)
+[![Grades](https://img.shields.io/badge/Grades-A--F-blue.svg)](https://www.opentrustbench.com/r/)
+
+**The trust and evidence layer for AI agents and MCP servers.**
+Scan any agent, skill, or MCP tool server and get a graded **Trust Card (A–F)** — backed by static analysis, OWASP-mapped findings, and a machine-readable evidence trail.
+
+```bash
+pip install opentrustbench
+opentrustbench scan ./my-agent
+```
+
+```
+Trust Grade: F (33/100) | Findings: 5 (3 critical, 1 high) | Scope: excessive
+  [CRITICAL] Direct Prompt Concatenation (Injection Vulnerability) (server.ts:24) AT-SEC-001 LLM01
+  [CRITICAL] Hardcoded Credential or API Secret (server.ts:11) AT-SEC-002 LLM02
+  [CRITICAL] Unbounded Dynamic Shell Execution (server.ts:16) AT-SEC-003 ASI02
+  [HIGH] Unrestricted Recursive File Deletion / Modification (server.ts:31) AT-SEC-005 ASI02
+  [MEDIUM] Raw Secret Leakage in Debug Logging (server.ts:25) AT-SEC-007 LLM02
+```
+
+## Why OpenTrustBench
+
+AI agents run code, touch files, call APIs, and spend money. Before you install an MCP server or deploy an agent, you deserve to know what it can do and where it's fragile. OpenTrustBench answers that in seconds, with zero configuration:
+
+- **8 detection rules** (`AT-SEC-001`–`007` + `AT-COMP-001`), each mapped to the OWASP LLM Top 10 2025 and the OWASP Agentic Top 10 — prompt injection, hardcoded secrets, shell escape, excessive agency, destructive operations, secret leakage, and more.
+- **Trust Cards graded A–F** — a single score plus a full breakdown (security, permissions, provenance, reliability, stability) in `trust-card.json`.
+- **Permission manifests** — network, filesystem, shell, secrets, and capability scope (`minimal` → `excessive`) extracted automatically.
+- **Adversarial attack analysis** — OWASP-aligned heuristic checks (injection override, command execution, exfiltration, memory poisoning, destructive ops) with concrete fixes.
+- **SARIF + Markdown reports** — drop straight into GitHub code scanning or publish as docs.
+- **Shareable grade badges** — embed a live badge in any README (see the [public registry](https://www.opentrustbench.com/r/)).
+- **Honest by design** — static analysis only. No code is executed, no payloads fire, no invented narratives. Reports say exactly what was found and where.
 
 ## Installation
 
@@ -8,24 +41,87 @@ Open-source AI agent and MCP server security scanner. Graded trust cards (A–F)
 pip install opentrustbench
 ```
 
-**Prerequisites:** Node.js 18+ and npm must be installed. The npm `@opentrustbench/cli` package will be resolved at runtime.
-
-## Usage
+**Prerequisites:** Node.js 18+ and the OpenTrustBench CLI engine:
 
 ```bash
-# Scan an AI agent or MCP server
+npm install -g @opentrustbench/cli
+```
+
+This package installs the `opentrustbench` command and connects it to the scan engine.
+
+## Quickstart
+
+```bash
+# Scan a local agent, skill, or MCP server (writes trust-card.json + reports)
 opentrustbench scan ./my-agent
 
-# Generate a Trust Card
-opentrustbench trust ./my-agent
+# Scan a GitHub repo or npm package directly
+opentrustbench scan owner/repo --github
+opentrustbench scan express --npm
 
-# Attack surface analysis
+# Adversarial attack analysis (static-heuristic: nothing executes)
 opentrustbench attack ./my-agent
 
-# Dependency audit
-opentrustbench deps ./my-agent
+# Validate a workflow suite (simulation mode: steps are parsed, never run)
+opentrustbench eval ./workflow.yaml
+
+# Generate an embeddable README badge
+opentrustbench badge ./my-agent
+
+# Browse the public verified registry
+opentrustbench registry
 ```
+
+Gate CI on severity — fail the build when findings meet your bar:
+
+```bash
+opentrustbench scan . --fail-on high --quiet --format sarif --output-dir ./trust
+```
+
+```yaml
+# .github/workflows/trust.yml
+- run: pip install opentrustbench && npm install -g @opentrustbench/cli
+- run: opentrustbench scan . --fail-on high --format sarif --output-dir ./trust
+- uses: github/codeql-action/upload-sarif@v3
+  with:
+    sarif_file: trust/opentrustbench-report.sarif
+```
+
+## Command reference
+
+| Command | What it does |
+|---------|--------------|
+| `scan <path\|url\|repo>` | Scan a target, print graded findings, write `trust-card.json` + SARIF/Markdown reports |
+| `attack <path-or-repo>` | OWASP-aligned adversarial analysis with fix guidance (static-heuristic mode) |
+| `eval <workflow.yaml>` | Parse and validate a workflow suite (simulation mode — nothing executes) |
+| `badge <path>` | Print embeddable Markdown for the target's grade badge |
+| `init` | Scaffold an `opentrustbench.yaml` config |
+| `registry` | Browse the public registry of scanned servers |
+
+`scan` flags: `--github`, `--npm`, `--fail-on info|low|medium|high|critical`, `--format terminal|json|sarif|md`, `--output-dir <dir>`, `--quiet`, `--no-color`.
+
+## A Trust Card looks like this
+
+```json
+{
+  "schema": "opentrustbench/trust-card/v1",
+  "subject": { "type": "agent-skill", "name": "Secure Data Auditor Skill" },
+  "trustScore": {
+    "overall": 88,
+    "grade": "B",
+    "breakdown": { "security": 100, "permissions": 100, "provenance": 50 }
+  },
+  "compatibility": ["claude-code", "cursor", "codex"]
+}
+```
+
+## Links
+
+- **Site & registry:** [opentrustbench.com](https://www.opentrustbench.com) · [methodology](https://www.opentrustbench.com/methodology.html)
+- **Source:** [github.com/eulogik/OpenTrustBench](https://github.com/eulogik/OpenTrustBench)
+- **Issues:** [github.com/eulogik/OpenTrustBench/issues](https://github.com/eulogik/OpenTrustBench/issues/new)
+- **npm engine:** [@opentrustbench/cli](https://www.npmjs.com/package/@opentrustbench/cli) · [@opentrustbench/core](https://www.npmjs.com/package/@opentrustbench/core)
 
 ## License
 
-Apache-2.0
+Apache-2.0 — see [LICENSE](https://github.com/eulogik/OpenTrustBench/blob/main/LICENSE).
