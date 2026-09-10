@@ -1,13 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="40" viewBox="0 0 128 40">
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="40" viewBox="0 0 160 40">
   <defs>
     <linearGradient id="g-c" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0e7490"/>
       <stop offset="100%" stop-color="#164e63"/>
     </linearGradient>
   </defs>
-  <rect width="128" height="40" rx="6" fill="#0f172a" stroke="#1e293b"/>
-  <rect x="1" y="1" width="62" height="38" rx="5" fill="url(#g-c)"/>
-  <text x="32" y="14.5" text-anchor="middle" fill="#a5f3fc" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-size="8.5" font-weight="600" letter-spacing="0.5">AGENTTRUST</text>
-  <text x="32" y="28" text-anchor="middle" fill="#22d3ee" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-size="10.5" font-weight="700">GRADE</text>
-  <text x="97" y="28" text-anchor="middle" fill="#fbbf24" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-size="22" font-weight="800">C</text>
+  <rect width="160" height="40" rx="6" fill="#0f172a" stroke="#1e293b"/>
+  <rect x="1" y="1" width="94" height="38" rx="5" fill="url(#g-c)"/>
+  <text x="48" y="14.5" text-anchor="middle" fill="#a5f3fc" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-size="8" font-weight="600" letter-spacing="0.2" textLength="84" lengthAdjust="spacingAndGlyphs">OPENTRUSTBENCH</text>
+  <text x="48" y="28" text-anchor="middle" fill="#22d3ee" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-size="10.5" font-weight="700">GRADE</text>
+  <text x="128" y="28" text-anchor="middle" fill="#fbbf24" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif" font-size="22" font-weight="800">C</text>
 </svg>

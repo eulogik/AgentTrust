@@ -48,7 +48,7 @@ def main():
     d.text((86, 178), "A trust score", font=fb, fill=WHITE)
     d.text((86, 272), "for every AI agent.", font=sb, fill=WHITE)
 
-    d.text((90, 408), "Free CLI  ·  8 rules  ·  Trust Cards A–F  ·  50 servers graded",
+    d.text((90, 408), "Free CLI  ·  8 rules  ·  Trust Cards A–F  ·  53 servers graded",
            font=font(30), fill=MUTED)
     d.text((90, 540), "www.opentrustbench.com", font=font(30), fill=FAINT)
 
