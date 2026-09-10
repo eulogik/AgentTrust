@@ -48,7 +48,7 @@
     "ai-security",
     "llm-security"
   ],
-  "author": "Eulogik",
+  "author": {"name": "Eulogik", "url": "https://eulogik.com"},
   "license": "Apache-2.0",
   "engines": {
     "node": ">=18"

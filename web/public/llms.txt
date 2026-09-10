@@ -24,6 +24,7 @@ can I trust this, what is it allowed to do, and can I prove it.
 - FAQ: https://www.opentrustbench.com/#faq
 - Install: https://www.opentrustbench.com/#install
 - Source: https://github.com/eulogik/OpenTrustBench
+- Built by Eulogik: https://eulogik.com
 
 ## Key facts (quotable)
 

@@ -52,8 +52,20 @@ npx @opentrustbench/cli attack ./my-mcp-server
 npx @opentrustbench/cli eval ./tests/workflow.yaml
 ```
 
-## What You Get
+## Install
 
+| Channel | Command | Status |
+|---------|---------|--------|
+| **npm** | `npm install -g @opentrustbench/cli` | v0.1.1 live ([package](https://www.npmjs.com/package/@opentrustbench/cli)) |
+| **npx** | `npx @opentrustbench/cli scan .` | No install needed |
+| **PyPI** | `pip install opentrustbench` | v0.1.1 live ([package](https://pypi.org/project/opentrustbench/)) — requires Node 18+ and the npm CLI engine |
+| **Homebrew** | `brew tap eulogik/opentrustbench && brew install opentrustbench` | v0.1.1 live ([tap](https://github.com/eulogik/homebrew-opentrustbench)) |
+| **Docker** | `git clone https://github.com/eulogik/OpenTrustBench.git && docker build -t opentrustbench .` then `docker run --rm -v $(pwd):/workspace opentrustbench scan .` | Dockerfile in repo; Hub image coming soon |
+| **VS Code** | Download `opentrustbench-0.1.1.vsix` from [releases](https://github.com/eulogik/OpenTrustBench/releases/tag/v0.1.1), then `code --install-extension opentrustbench-0.1.1.vsix` | Marketplace listing in progress |
+| **GitHub Action** | `- uses: eulogik/opentrustbench-action@v0.1.1` ([repo](https://github.com/eulogik/opentrustbench-action)) | Usable today; Marketplace listing in progress |
+| **Source** | `git clone https://github.com/eulogik/OpenTrustBench.git && cd OpenTrustBench && npm install` | Always current |
+
+## What You Get
 | Output | Description |
 |--------|-------------|
 | **Trust Card** | Machine-readable credential (`opentrustbench/trust-card/v1`) with grade, score, findings, and permissions |
@@ -80,7 +92,7 @@ This tells buyers, auditors, and AI hosts that your agent has been verified.
 
 ## Features
 
-- **18 detection rules** across shell injection, secret leaks, prompt injection, tool exploitation, and more
+- **8 detection rules** across shell injection, secret leaks, prompt injection, tool exploitation, and more
 - **OWASP mapping** — Every finding tagged to OWASP Agentic Top 10 (ASI01–ASI10) and LLM Top 10 2025 (LLM01–LLM10)
 - **Permission manifest** — Automatic extraction and scoping of agent permissions
 - **Dependency audit** — `npm audit` integration for lockfile-based vulnerability detection
@@ -124,7 +136,7 @@ scripts/    — Verification and demo scripts
 
 ```bash
 npm install          # installs + builds via prepare
-npm test             # build + 14 unit tests
+npm test             # build + 28 unit tests
 node scripts/verify-demos.mjs  # end-to-end smoke checks
 ```
 
@@ -145,5 +157,8 @@ node scripts/verify-demos.mjs  # end-to-end smoke checks
   <a href="https://www.opentrustbench.com">Website</a> ·
   <a href="https://github.com/eulogik/OpenTrustBench">GitHub</a> ·
   <a href="https://www.npmjs.com/package/@opentrustbench/cli">npm</a> ·
+  <a href="https://pypi.org/project/opentrustbench/">PyPI</a> ·
+  <a href="https://github.com/eulogik/homebrew-opentrustbench">Homebrew</a> ·
+  <a href="https://eulogik.com">Eulogik</a> ·
   <a href="https://github.com/eulogik/OpenTrustBench/issues/new">Contact</a>
 </p>

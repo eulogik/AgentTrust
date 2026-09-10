@@ -42,6 +42,34 @@
     }
   });
 
+  /* Install tabs: [role="tablist"] > [role="tab"][data-tab], panels [role="tabpanel"][data-panel] */
+  document.querySelectorAll('[role="tablist"]').forEach(function (list) {
+    var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+    var scope = list.parentElement;
+    var select = function (tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute("aria-selected", on ? "true" : "false");
+        t.tabIndex = on ? 0 : -1;
+        if (focus && on) t.focus();
+      });
+      scope.querySelectorAll('[role="tabpanel"]').forEach(function (p) {
+        p.hidden = p.getAttribute("data-panel") !== tab.getAttribute("data-tab");
+      });
+    };
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener("click", function () { select(tab, false); });
+      tab.addEventListener("keydown", function (e) {
+        var j = null;
+        if (e.key === "ArrowRight") j = (i + 1) % tabs.length;
+        else if (e.key === "ArrowLeft") j = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === "Home") j = 0;
+        else if (e.key === "End") j = tabs.length - 1;
+        if (j !== null) { e.preventDefault(); select(tabs[j], true); }
+      });
+    });
+  });
+
   /* Scroll reveals */
   var revealEls = document.querySelectorAll(".reveal");
   if (reduced || !("IntersectionObserver" in window)) {

@@ -18,10 +18,10 @@
       <description>Average 70.2 (C); 36% grade D or F; permission scope predicts the grade. Full methodology and tables.</description>
     </item>
     <item>
-      <title>v0.1.0: Trust Cards for AI agents and MCP servers</title>
-      <link>https://github.com/eulogik/OpenTrustBench/releases/tag/v0.1.0</link>
-      <pubDate>Mon, 08 Sep 2026 00:00:00 GMT</pubDate>
-      <description>8-rule OWASP-mapped static suite, Trust Cards A–F, SARIF output, CI gate, GitHub Action, deterministic finding IDs.</description>
+      <title>v0.1.1: Trust Cards for AI agents and MCP servers</title>
+      <link>https://github.com/eulogik/OpenTrustBench/releases/tag/v0.1.1</link>
+      <pubDate>Wed, 10 Sep 2026 00:00:00 GMT</pubDate>
+      <description>8-rule OWASP-mapped static suite, Trust Cards A-F, SARIF output, CI gate, GitHub Action, Homebrew + PyPI + VS Code distribution.</description>
     </item>
   </channel>
 </rss>

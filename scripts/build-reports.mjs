@@ -127,7 +127,7 @@ ${findingsTable(card.security.findings)}
 <p>License: ${esc(card.provenance.license || "none detected")} · Lockfile: ${card.provenance.hasLockfile ? "yes" : "no"} · Security policy: ${card.provenance.hasSecurityPolicy ? "yes" : "no"} · Signals: ${card.provenance.isVerified ? "present (documentary, not a safety verdict)" : "unverified origin"}</p>
 <div class="callout"><p><strong>Independently scanned by the OpenTrustBench registry</strong> (not self-reported by the project). Static analysis only — no code executed, findings need human triage, counts may include test/example code. <strong>Static snapshot; re-scan before relying on it:</strong> <code>npx @opentrustbench/cli scan ${esc(repoUrl)}</code>. Scores move with every upstream commit; pages refresh weekly. <a href="../methodology.html">How scoring works</a>.</p></div>
 </div></main>
-<footer><div class="wrap"><div class="foot-base" style="border-top:none;padding-top:0"><span>© 2026 OpenTrustBench · Apache-2.0</span><span><a href="../">Home</a> · <a href="./">Registry</a></span></div></div></footer>
+<footer><div class="wrap"><div class="foot-base" style="border-top:none;padding-top:0"><span>© 2026 OpenTrustBench · Apache-2.0 · Built by <a href="https://eulogik.com">Eulogik</a></span><span><a href="../">Home</a> · <a href="./">Registry</a></span></div></div></footer>
 <script src="../assets/site.js" defer></script>
 </body></html>
 `;
@@ -199,7 +199,7 @@ function indexPage(rows) {
 ${adoptionLine()}
 <div class="callout"><p>Dated snapshot (${esc(SCAN_DATE)}), engine v${esc(CORE_PKG.version)}. Static analysis only — findings need triage. <a href="../methodology.html">How scoring works</a> · <a href="https://github.com/eulogik/OpenTrustBench/blob/main/docs/STATE-OF-MCP-2026.md">State of MCP report</a>.</p></div>
 </div></main>
-<footer><div class="wrap"><div class="foot-base" style="border-top:none;padding-top:0"><span>© 2026 OpenTrustBench · Apache-2.0</span><span><a href="../">Home</a> · <a href="../methodology.html">Methodology</a></span></div></div></footer>
+<footer><div class="wrap"><div class="foot-base" style="border-top:none;padding-top:0"><span>© 2026 OpenTrustBench · Apache-2.0 · Built by <a href="https://eulogik.com">Eulogik</a></span><span><a href="../">Home</a> · <a href="../methodology.html">Methodology</a></span></div></div></footer>
 <script src="../assets/site.js" defer></script>
 </body></html>
 `;

@@ -201,3 +201,8 @@ footer { border-top: 1px solid var(--border-soft); padding: 64px 0 40px; color: 
   .caret::after { animation: none; }
   .btn:hover, .step:hover { transform: none; }
 }
+/* Install tabs */
+.tabs { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 16px; }
+.chip[aria-selected="true"] { border-color: var(--accent); color: var(--accent); background: rgba(34, 211, 238, 0.08); }
+.tabpanels [role="tabpanel"][hidden] { display: none; }
+.tab-meta { display: flex; align-items: center; gap: 14px; margin: 12px 0 4px; flex-wrap: wrap; }
