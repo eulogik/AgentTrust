@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  scan:
+    build: .
+    volumes:
+      - .:/workspace
+    command: ["scan", "."]
+  
+  trust:
+    build: .
+    volumes:
+      - .:/workspace
+    command: ["trust", "."]
+  
+  attack:
+    build: .
+    volumes:
+      - .:/workspace
+    command: ["attack", "."]

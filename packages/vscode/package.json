@@ -1,0 +1,40 @@
+{
+  "name": "opentrustbench",
+  "displayName": "OpenTrustBench",
+  "description": "AI agent and MCP server security scanner for VS Code",
+  "version": "0.1.0",
+  "publisher": "eulogik",
+  "license": "Apache-2.0",
+  "engines": {"vscode": "^1.85.0"},
+  "categories": ["Other", "Security"],
+  "keywords": ["ai", "agent", "mcp", "security", "scanner", "trust"],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {"command": "opentrustbench.scan", "title": "OpenTrustBench: Scan Folder"},
+      {"command": "opentrustbench.trust", "title": "OpenTrustBench: Generate Trust Card"},
+      {"command": "opentrustbench.attack", "title": "OpenTrustBench: Attack Analysis"}
+    ],
+    "configuration": {
+      "title": "OpenTrustBench",
+      "properties": {
+        "opentrustbench.executablePath": {
+          "type": "string",
+          "default": "opentrustbench",
+          "description": "Path to opentrustbench binary"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  }
+}

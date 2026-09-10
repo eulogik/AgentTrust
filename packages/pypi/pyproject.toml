@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "opentrustbench"
+version = "0.1.0"
+description = "Open-source AI agent and MCP server security scanner"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.9"
+authors = [{name = "Eulogik", email = "dev@eulogik.com"}]
+keywords = ["ai", "agent", "mcp", "security", "scanner", "trust", "owasp"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+]
+dependencies = []
+
+[project.scripts]
+opentrustbench = "opentrustbench.cli:main"
+
+[project.urls]
+Homepage = "https://opentrustbench.com"
+Documentation = "https://opentrustbench.com"
+Repository = "https://github.com/eulogik/OpenTrustBench"

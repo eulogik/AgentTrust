@@ -1,0 +1,15 @@
+node_modules
+dist
+.git
+*.md
+!README.md
+web
+docs
+scripts
+examples
+badges
+.github
+*.sarif
+*.json
+!package.json
+!package-lock.json

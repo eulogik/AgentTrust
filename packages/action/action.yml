@@ -1,34 +1,59 @@
 name: "OpenTrustBench CI Scanner"
-description: "Automated Trust & Security Evaluation for AI Agents, Skills, and MCP Servers"
+description: >
+  Static security and trust evaluation for AI agents, skills, and MCP tool
+  servers. Scans local paths or directories, produces SARIF / JSON / Markdown
+  reports, and uploads results to GitHub Code Scanning.
 author: "OpenTrustBench"
 branding:
   icon: "shield"
   color: "blue"
 
 inputs:
-  path:
-    description: "Path to capability directory or repo (also accepts a GitHub URL)"
+  target:
+    description: "Path or directory to scan (defaults to repository root)"
+    required: false
+    default: "."
+  format:
+    description: "Report format: sarif, json, md, or terminal"
+    required: false
+    default: "sarif"
+  output-dir:
+    description: "Directory where reports are written"
     required: false
     default: "."
   fail-on:
-    description: "Minimum severity finding that fails CI: info|low|medium|high|critical"
+    description: "Minimum severity that fails CI: info, low, medium, high, critical"
     required: false
     default: "high"
 
 runs:
   using: "composite"
   steps:
-    - uses: actions/setup-node@v4
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
       with:
         node-version: 20
 
-    # Requires the published `@opentrustbench/cli` npm package.
-    - name: Run OpenTrustBench Scan
-      shell: bash
-      run: npx -y @opentrustbench/cli@0.1.0 scan "${{ inputs.path }}" --fail-on "${{ inputs.fail-on }}" --quiet --no-banner
+    - name: Cache npm dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.npm
+        key: opentrustbench-${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          opentrustbench-${{ runner.os }}-npm-
 
-    - name: Upload SARIF to GitHub Code Scanning
-      if: always()
+    - name: Run OpenTrustBench scan
+      shell: bash
+      run: |
+        npx -y @opentrustbench/cli@0.1.0 scan \
+          "${{ inputs.target }}" \
+          --format "${{ inputs.format }}" \
+          --output-dir "${{ inputs.output-dir }}" \
+          --fail-on "${{ inputs.fail-on }}" \
+          --quiet --no-banner
+
+    - name: Upload SARIF to Code Scanning
+      if: always() && inputs.format == 'sarif'
       uses: github/codeql-action/upload-sarif@v3
       with:
-        sarif_file: opentrustbench-report.sarif
+        sarif_file: ${{ inputs.output-dir }}/opentrustbench-report.sarif
