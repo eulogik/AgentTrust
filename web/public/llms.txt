@@ -17,13 +17,13 @@ can I trust this, what is it allowed to do, and can I prove it.
 
 ## Key pages
 
-- Homepage: https://www.opentrustbench.com/
-- Methodology (rules, scoring, limits): https://www.opentrustbench.com/methodology.html
-- Registry of 53 scanned MCP servers: https://www.opentrustbench.com/r/
+- Homepage: https://opentrustbench.com/
+- Methodology (rules, scoring, limits): https://opentrustbench.com/methodology.html
+- Registry of 53 scanned MCP servers: https://opentrustbench.com/r/
 - State of MCP Permissions report: https://github.com/eulogik/OpenTrustBench/blob/main/docs/STATE-OF-MCP-2026.md
-- FAQ: https://www.opentrustbench.com/#faq
-- Install: https://www.opentrustbench.com/#install
-- Live terminal demo (GIF, 7s): https://www.opentrustbench.com/assets/demo.gif
+- FAQ: https://opentrustbench.com/#faq
+- Install: https://opentrustbench.com/#install
+- Live terminal demo (GIF, 7s): https://opentrustbench.com/assets/demo.gif
 - Roadmap (v0.2.0/v0.3.0, researched): https://github.com/eulogik/OpenTrustBench/blob/main/docs/ROADMAP.md
 - Source: https://github.com/eulogik/OpenTrustBench
 - Built by Eulogik: https://eulogik.com
