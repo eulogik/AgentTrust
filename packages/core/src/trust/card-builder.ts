@@ -31,7 +31,7 @@ export function buildTrustCard(options: {
   if (options.permissions.canMakeHTTPRequests) tags.push("network-egress");
   if (options.permissions.canAccessBrowser) tags.push("browser-automation");
   if (options.permissions.humanApprovalRequired.length > 0) tags.push("human-in-loop");
-  if (options.trustScore.grade === "A") tags.push("gold-certified");
+  if (options.trustScore.grade === "A") tags.push("grade-a");
 
   const depList = options.dependencies ?? [];
   const vulnerableDeps = depList.filter(d => d.vulnerabilities.length > 0);

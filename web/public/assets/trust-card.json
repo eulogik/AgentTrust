@@ -1,0 +1,299 @@
+{
+  "schema": "opentrustbench/trust-card/v1",
+  "generatedAt": "2026-09-11T08:00:08.141Z",
+  "opentrustbenchVersion": "0.1.3",
+  "subject": {
+    "type": "generic-agent",
+    "name": "LexRAG",
+    "version": "0.1.3",
+    "description": "",
+    "language": "Python"
+  },
+  "provenance": {
+    "signed": false,
+    "buildReproducible": false,
+    "hasLockfile": false,
+    "hasSBOM": false,
+    "hasLicense": true,
+    "license": "MIT",
+    "hasSecurityPolicy": true,
+    "hasChangelog": false,
+    "isVerified": false
+  },
+  "permissions": {
+    "network": [
+      {
+        "type": "outbound",
+        "host": "www.contributor-covenant.org",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "github.com",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "evolucentai.com",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "eulogik.com",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "img.shields.io",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "pypi.org",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "huggingface.co",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "api.groq.com",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "openrouter.ai",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "api.openai.com",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "api.deepseek.com",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "api.mistral.ai",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "api.together.xyz",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "api.fireworks.ai",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "api.x.ai",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "fonts.googleapis.com",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "fonts.gstatic.com",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "elaws.moj.gov.ae",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "indiankanoon.org",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "api.indiankanoon.org",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "cbic-gst.gov.in",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "www.tax.gov.ae",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "uaelegislation.gov.ae",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "x.example",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "evil.example",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "example.com",
+        "protocol": "https"
+      },
+      {
+        "type": "outbound",
+        "host": "www.w3.org",
+        "protocol": "https"
+      }
+    ],
+    "filesystem": [],
+    "shell": false,
+    "shellCommands": [],
+    "secrets": [],
+    "envVars": [],
+    "externalServices": [
+      "www.contributor-covenant.org",
+      "github.com",
+      "evolucentai.com",
+      "eulogik.com",
+      "img.shields.io",
+      "pypi.org",
+      "huggingface.co",
+      "api.groq.com",
+      "openrouter.ai",
+      "api.openai.com",
+      "api.deepseek.com",
+      "api.mistral.ai",
+      "api.together.xyz",
+      "api.fireworks.ai",
+      "api.x.ai",
+      "fonts.googleapis.com",
+      "fonts.gstatic.com",
+      "elaws.moj.gov.ae",
+      "indiankanoon.org",
+      "api.indiankanoon.org",
+      "cbic-gst.gov.in",
+      "www.tax.gov.ae",
+      "uaelegislation.gov.ae",
+      "x.example",
+      "evil.example",
+      "example.com",
+      "www.w3.org"
+    ],
+    "humanApprovalRequired": [],
+    "canSpawnProcesses": false,
+    "canAccessDB": true,
+    "canSendEmail": false,
+    "canAccessBrowser": false,
+    "canModifyFiles": false,
+    "canDeleteFiles": false,
+    "canMakeHTTPRequests": true,
+    "estimatedScope": "moderate"
+  },
+  "security": {
+    "findings": [
+      {
+        "id": "AT-SEC-006-4126f7dc369b",
+        "title": "Unfiltered SSRF / Arbitrary Network Egress",
+        "description": "Network requests accept arbitrary external URLs from agent or user input without host allowlisting.",
+        "severity": "high",
+        "category": "permissions",
+        "file": "scrapers/india_scraper.py",
+        "line": 35,
+        "rule": "AT-SEC-006",
+        "remediation": "Define an explicit egress domain allowlist and block private IP ranges (127.0.0.1, 10.0.0.0/8, 169.254.169.254).",
+        "cwe": "CWE-918",
+        "owaspCode": "LLM06",
+        "evidence": "resp = requests.get(url, timeout=15, headers={\"User-Agent\": \"Mozilla/5.0\"})"
+      },
+      {
+        "id": "AT-SEC-006-133d00e2b5f6",
+        "title": "Unfiltered SSRF / Arbitrary Network Egress",
+        "description": "Network requests accept arbitrary external URLs from agent or user input without host allowlisting.",
+        "severity": "high",
+        "category": "permissions",
+        "file": "scrapers/uae_scraper.py",
+        "line": 28,
+        "rule": "AT-SEC-006",
+        "remediation": "Define an explicit egress domain allowlist and block private IP ranges (127.0.0.1, 10.0.0.0/8, 169.254.169.254).",
+        "cwe": "CWE-918",
+        "owaspCode": "LLM06",
+        "evidence": "resp = requests.get(url, timeout=15, headers={\"User-Agent\": \"Mozilla/5.0\"})"
+      },
+      {
+        "id": "AT-SEC-006-c96dff2e3242",
+        "title": "Unfiltered SSRF / Arbitrary Network Egress",
+        "description": "Network requests accept arbitrary external URLs from agent or user input without host allowlisting.",
+        "severity": "high",
+        "category": "permissions",
+        "file": "scrapers/uae_scraper.py",
+        "line": 58,
+        "rule": "AT-SEC-006",
+        "remediation": "Define an explicit egress domain allowlist and block private IP ranges (127.0.0.1, 10.0.0.0/8, 169.254.169.254).",
+        "cwe": "CWE-918",
+        "owaspCode": "LLM06",
+        "evidence": "resp = requests.get(url, timeout=15, headers={\"User-Agent\": \"Mozilla/5.0\"})"
+      },
+      {
+        "id": "AT-SEC-006-4bde7a30fee1",
+        "title": "Unfiltered SSRF / Arbitrary Network Egress",
+        "description": "Network requests accept arbitrary external URLs from agent or user input without host allowlisting.",
+        "severity": "high",
+        "category": "permissions",
+        "file": "ui/app.js",
+        "line": 55,
+        "rule": "AT-SEC-006",
+        "remediation": "Define an explicit egress domain allowlist and block private IP ranges (127.0.0.1, 10.0.0.0/8, 169.254.169.254).",
+        "cwe": "CWE-918",
+        "owaspCode": "LLM06",
+        "evidence": "const resp = await fetch(url, opts);"
+      }
+    ],
+    "findingsBySeverity": {
+      "critical": 0,
+      "high": 4,
+      "medium": 0,
+      "low": 0,
+      "info": 0
+    },
+    "totalFindings": 4,
+    "criticalCount": 0,
+    "highCount": 4
+  },
+  "dependencies": {
+    "total": 0,
+    "vulnerable": 0,
+    "critical": 0,
+    "list": []
+  },
+  "trustScore": {
+    "overall": 68,
+    "grade": "C",
+    "breakdown": {
+      "security": 40,
+      "permissions": 90,
+      "provenance": 75,
+      "reliability": 85,
+      "stability": 75
+    },
+    "confidence": "medium",
+    "rationale": "Score constrained by 0 critical and 4 high-severity findings."
+  },
+  "compatibility": [],
+  "tags": [
+    "generic-agent",
+    "network-egress"
+  ]
+}
