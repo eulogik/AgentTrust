@@ -130,6 +130,7 @@ web/        — Landing page and interactive demo
 badges/     — Shareable grade badge SVGs
 examples/   — Vulnerable and secure test fixtures
 scripts/    — Verification and demo scripts
+docs/       — Research, registry report, and versioned roadmap (ROADMAP.md)
 ```
 
 ## Build & Test
